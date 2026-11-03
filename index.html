@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Klasse 6e</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbfaf4;--grid:#dbe6f2;--ink:#1d2f6f;--text:#232733;--muted:#6a7080;--paper:#fff;--line:#c9d3e0;--hl:#fff176;--red:#d9534f;--ok:#2e8b57;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1d27;--grid:#252a38;--ink:#9db4ff;--text:#e6e8ef;--muted:#9aa0b0;--paper:#232838;--line:#3a4157;--hl:#6b5f12;--red:#ff7b76;--ok:#5fcf93;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1a1d27;--grid:#252a38;--ink:#9db4ff;--text:#e6e8ef;--muted:#9aa0b0;--paper:#232838;--line:#3a4157;--hl:#6b5f12;--red:#ff7b76;--ok:#5fcf93;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:70px}
+body{margin:0;font:17px/1.55 Nunito,system-ui,sans-serif;color:var(--text);background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:26px 26px}
+[hidden]{display:none!important}
+a{color:var(--ink)}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px}
+.hand{font-family:Caveat,"Comic Sans MS",cursive;color:var(--ink);font-weight:700}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:2px solid var(--ink);padding:8px 0}
+nav .wrap{display:flex;gap:4px;overflow-x:auto}
+nav a{font-weight:800;text-decoration:none;padding:6px 13px;border-radius:6px;white-space:nowrap;color:var(--text)}
+nav a.on{background:var(--hl)}
+nav a:hover{background:var(--hl)}
+main{padding:26px 0 40px}
+h1{font-size:clamp(64px,16vw,110px);line-height:.9;margin:0 0 4px 6px;transform:rotate(-2deg)}
+h2{font-size:46px;margin:0 0 4px;line-height:1.1}
+.lead{color:var(--muted);margin:0 0 16px}
+.empty{color:var(--muted);padding:18px;border:2px dashed var(--line);background:var(--paper)}
+.hello{font-weight:800;font-size:19px;margin:0 0 4px 8px}
+.meta{margin:0 0 18px 8px;color:var(--muted)}
+.note{background:var(--hl);padding:16px 20px;transform:rotate(-.7deg);box-shadow:3px 4px 0 rgba(0,0,0,.12);margin:0 0 24px;color:#232733}
+.note h3{margin:0 0 4px;font-size:32px;color:#1d2f6f}
+.note p,.note ul{margin:0}
+.note ul{padding-left:20px}
+.box{background:var(--paper);border:2px solid var(--ink);border-radius:4px 14px 6px 12px;padding:14px 18px;margin-bottom:24px}
+.box h3{margin:0 0 6px;font-size:32px}
+.box ol{margin:0;padding-left:24px}
+.box li small{color:var(--muted)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:10px;padding-top:10px;border-top:2px dotted var(--line)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tile{display:block;text-decoration:none;color:var(--text);background:var(--paper);border:2px solid var(--ink);padding:16px 18px;min-height:110px}
+.tile:nth-child(1){border-radius:4px 16px 4px 12px;transform:rotate(-.8deg)}
+.tile:nth-child(2){border-radius:14px 4px 12px 4px;transform:rotate(.6deg)}
+.tile:nth-child(3){border-radius:6px 12px 16px 4px;transform:rotate(.5deg)}
+.tile:nth-child(4){border-radius:12px 4px 4px 16px;transform:rotate(-.6deg)}
+.tile:hover{background:var(--hl)}
+.tile b{display:block;font-size:34px;line-height:1.1}
+.tile span{color:var(--muted);font-size:15px}
+@media(max-width:560px){.tiles{grid-template-columns:1fr}}
+.tablewrap{overflow-x:auto;background:var(--paper);border:2px solid var(--ink);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:540px;text-align:center}
+th,td{padding:9px 6px;border:1px solid var(--line)}
+th{background:var(--ink);color:var(--paper)}
+td.nr{font-weight:800;color:var(--muted);width:60px}
+td small{display:block;font-weight:400;font-size:12px}
+.now{box-shadow:inset 0 0 0 100px var(--hl);color:#232733}
+.hw,.dates,#alist{list-style:none;margin:0;padding:0}
+.hw li{display:flex;gap:12px;background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--ink);padding:11px 14px;margin-bottom:10px}
+.hw li.done{border-left-color:var(--ok)}
+.hw li.done .txt{text-decoration:line-through;color:var(--muted)}
+.hw input{width:22px;height:22px;margin-top:4px;accent-color:var(--ok);flex:none}
+.hw label{flex:1;cursor:pointer}
+.due{font-size:14px;color:var(--muted)}
+.due.soon{color:var(--red);font-weight:800}
+.filters{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.filters button{font:inherit;font-weight:800;background:var(--paper);color:var(--text);border:2px solid var(--ink);border-radius:20px;padding:4px 14px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.dates li{display:grid;grid-template-columns:78px 1fr auto;gap:14px;align-items:center;padding:12px 0;border-bottom:2px dotted var(--line)}
+.dates .d{font-family:Caveat,cursive;font-size:36px;line-height:1;color:var(--ink);text-align:center;font-weight:700}
+.dates .d span{display:block;font:800 13px Nunito,sans-serif;color:var(--muted)}
+.dates .t{font-weight:800}
+.dates .t small{display:block;font-weight:400;color:var(--muted)}
+.dates .in{font-size:14px;font-weight:800;background:var(--hl);color:#232733;padding:2px 10px;border-radius:4px}
+.dates li.past{opacity:.45}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+@media(max-width:700px){.two{grid-template-columns:1fr}}
+.gate{position:fixed;inset:0;z-index:50;background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:26px 26px;display:flex;align-items:center;justify-content:center;padding:20px}
+.gate form{background:var(--paper);border:2px solid var(--ink);border-radius:6px 16px 8px 14px;padding:26px 28px;max-width:360px;width:100%;transform:rotate(-1deg)}
+.gate h2{font-size:48px}
+input[type=text],input[type=date],textarea{font:inherit;width:100%;padding:9px 11px;border:2px solid var(--ink);border-radius:5px;background:var(--bg);color:var(--text);margin-bottom:10px}
+textarea{min-height:90px;resize:vertical}
+.btn{font:inherit;font-weight:800;background:var(--ink);color:var(--paper);border:0;border-radius:5px;padding:10px 20px;cursor:pointer}
+.lnk{font:inherit;font-size:14px;background:none;border:0;color:var(--ink);text-decoration:underline;cursor:pointer;padding:0 0 0 8px}
+.adm{background:var(--paper);border:2px dashed var(--red);padding:16px 18px;margin-bottom:18px}
+.adm h3{margin:0 0 8px;font-size:34px}
+.adm label{font-weight:800;font-size:14px;display:block;margin-bottom:2px}
+.pg{display:grid;grid-template-columns:44px repeat(5,1fr);gap:4px;min-width:480px}
+.pg b{text-align:center;font-size:14px;align-self:center}
+.pg input{margin:0;padding:6px 4px;text-align:center;font-size:14px;min-width:0}
+#alist li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dotted var(--line);font-size:15px}
+#alist button{font:inherit;font-size:13px;background:none;border:1px solid var(--red);color:var(--red);border-radius:4px;cursor:pointer;flex:none}
+#stat{font-weight:800;color:var(--ok);margin-left:10px}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="gate" id="gate" hidden><form id="gform"><h2 class="hand">Willkommen in der 6e!</h2><p>Wie heißt du? Dein Name erscheint oben auf der Startseite.</p><input type="text" id="gname" maxlength="30" autocomplete="given-name" required placeholder="Dein Vorname"><button class="btn" type="submit">Los geht’s</button></form></div>
+
+<nav><div class="wrap" id="nav">
+<a href="#start" data-p="start">Start</a><a href="#hausaufgaben" data-p="hausaufgaben">Hausaufgaben</a><a href="#stundenplan" data-p="stundenplan">Stundenplan</a><a href="#termine" data-p="termine">Termine</a><a href="#klasse" data-p="klasse">Klassenleben</a><a href="#admin" data-p="admin" id="navadmin" hidden>Admin</a>
+</div></nav>
+
+<main class="wrap">
+
+<section data-p="start">
+<h1 class="hand">Klasse 6e</h1>
+<p class="hello"><span id="hello"></span><button type="button" class="lnk" id="rename">Name ändern</button></p>
+<p class="meta" id="meta"></p>
+<div class="note" id="msg" hidden><h3 class="hand">Mitteilung</h3><p id="msgt"></p></div>
+<div class="box" id="today"></div>
+<div class="tiles" id="tiles"></div>
+</section>
+
+<section data-p="hausaufgaben" hidden>
+<h2 class="hand">Hausaufgaben</h2>
+<p class="lead">Hake ab, was du erledigt hast. Das merkt sich dein Browser.</p>
+<div class="filters" id="filters"></div>
+<ul class="hw" id="hw"></ul>
+</section>
+
+<section data-p="stundenplan" hidden>
+<h2 class="hand">Stundenplan</h2>
+<p class="lead">Der heutige Tag ist gelb markiert.</p>
+<div id="plan"></div>
+</section>
+
+<section data-p="termine" hidden>
+<h2 class="hand">Termine</h2>
+<p class="lead">Klassenarbeiten, Ausflüge und alles, was man nicht vergessen soll.</p>
+<ul class="dates" id="dates"></ul>
+</section>
+
+<section data-p="klasse" hidden>
+<h2 class="hand">Klassenleben</h2>
+<div class="two"><div id="regeln"></div><div id="dienste"></div></div>
+</section>
+
+<section data-p="admin" hidden>
+<h2 class="hand">Admin</h2>
+<p class="lead">Nur für dich sichtbar. Alles hier kannst du einfach ausfüllen, ohne Code.</p>
+
+<div class="adm"><h3 class="hand">Hausaufgabe hinzufügen</h3>
+<input type="text" id="hf" placeholder="Fach, zum Beispiel Mathe" maxlength="20">
+<input type="text" id="ht" placeholder="Was ist zu tun?" maxlength="140">
+<label for="hb">Abgabe bis</label><input type="date" id="hb">
+<button class="btn" type="button" id="hadd">Hausaufgabe speichern</button></div>
+
+<div class="adm"><h3 class="hand">Termin hinzufügen</h3>
+<input type="text" id="tt" placeholder="Titel, zum Beispiel Mathe-Arbeit" maxlength="60">
+<input type="text" id="ts" placeholder="Info (Uhrzeit, Ort, Mitbringen)" maxlength="100">
+<label for="td">Datum</label><input type="date" id="td">
+<button class="btn" type="button" id="tadd">Termin speichern</button></div>
+
+<div class="adm"><h3 class="hand">Eingetragen (zum Löschen)</h3><ul id="alist"></ul></div>
+
+<div class="adm"><h3 class="hand">Klasseninfos</h3>
+<label for="i1">Klassenlehrer oder Klassenlehrerin</label><input type="text" id="i1" maxlength="40">
+<label for="i2">Raum</label><input type="text" id="i2" maxlength="20">
+<label for="i3">Schuljahr</label><input type="text" id="i3" maxlength="20" placeholder="2026/27">
+<label for="i4">Mitteilung für die Startseite</label><textarea id="i4" maxlength="400"></textarea></div>
+
+<div class="adm"><h3 class="hand">Stundenplan</h3>
+<p class="lead">Fach in jedes Feld schreiben, leere Felder bleiben frei.</p>
+<div style="overflow-x:auto"><div class="pg" id="pg"></div></div></div>
+
+<div class="adm"><h3 class="hand">Klassenleben</h3>
+<label for="k1">Klassenregeln (eine pro Zeile)</label><textarea id="k1"></textarea>
+<label for="k2">Dienste (eine pro Zeile, zum Beispiel: Tafeldienst: Anna und Ben)</label><textarea id="k2"></textarea></div>
+
+<button class="btn" type="button" id="saveall">Infos, Stundenplan und Klassenleben speichern</button><span id="stat"></span>
+</section>
+
+</main>
+
+<script>
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return "&#"+c.charCodeAt(0)+";"})}
+var MON=["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"];
+var WT=["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
+var TAGE=["Mo","Di","Mi","Do","Fr"],ZEITEN=["7:55","8:40","9:45","10:30","11:35","12:20"];
+var D={info:{},hw:[],te:[],plan:[],regeln:"",dienste:""};
+var now=new Date(),start=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+function dt(s){var p=s.split("-");return new Date(+p[0],+p[1]-1,+p[2])}
+function diff(s){return Math.round((dt(s)-start)/864e5)}
+var wd=now.getDay(),col=(wd>=1&&wd<=5)?wd-1:-1;
+function cell(r,c){return (D.plan[r]&&D.plan[r][c])||""}
+function lines(t){return String(t||"").split("\n").map(function(x){return x.trim()}).filter(Boolean)}
+var state={};try{state=JSON.parse(localStorage.getItem("6e-hw")||"{}")}catch(e){}
+var NAME="";try{NAME=localStorage.getItem("6e-name")||""}catch(e){}
+var filter="Alle",isAdmin=false,dbDoc=null,filled=false;
+
+function offen(){return D.hw.filter(function(h){return diff(h.bis)>=0&&!state[h.id]}).length}
+function naechster(){var l=D.te.filter(function(t){return diff(t.d)>=0}).sort(function(a,b){return a.d<b.d?-1:1});return l[0]}
+function rel(n){return n===0?"heute":n===1?"morgen":"in "+n+" Tagen"}
+
+function renderStart(){
+ var i=D.info,m=[i.lehrer,i.raum&&"Raum "+i.raum,i.jahr&&"Schuljahr "+i.jahr].filter(Boolean);
+ $("meta").textContent=m.join(" · ");$("meta").hidden=!m.length;
+ $("msg").hidden=!i.msg;$("msgt").textContent=i.msg||"";
+ var ls=col>=0?ZEITEN.map(function(z,r){return cell(r,col)?"<li>"+esc(cell(r,col))+" <small>"+z+" Uhr</small></li>":""}).join(""):"";
+ var n=naechster(),o=offen();
+ $("today").innerHTML="<h3 class='hand'>"+WT[wd]+", "+now.getDate()+". "+MON[now.getMonth()]+"</h3>"+
+  (col<0?"<p style='margin:0'>Heute ist kein Schultag.</p>":ls?"<ol>"+ls+"</ol>":"<p style='margin:0;color:var(--muted)'>Noch kein Stundenplan eingetragen.</p>")+
+  "<div class='facts'><span>Offene Hausaufgaben: <b>"+o+"</b></span><span>Nächster Termin: <b>"+(n?esc(n.t)+" ("+rel(diff(n.d))+")":"keiner")+"</b></span></div>";
+ $("tiles").innerHTML=
+  "<a class='tile' href='#hausaufgaben'><b class='hand'>Hausaufgaben</b><span>"+(o?o+" offen":"nichts offen")+"</span></a>"+
+  "<a class='tile' href='#stundenplan'><b class='hand'>Stundenplan</b><span>Alle Stunden der Woche</span></a>"+
+  "<a class='tile' href='#termine'><b class='hand'>Termine</b><span>"+(n?"als Nächstes: "+esc(n.t):"nichts geplant")+"</span></a>"+
+  "<a class='tile' href='#klasse'><b class='hand'>Klassenleben</b><span>Regeln und Dienste</span></a>";
+}
+function renderHW(){
+ var fs=["Alle"];D.hw.forEach(function(x){if(fs.indexOf(x.fach)<0)fs.push(x.fach)});
+ if(fs.indexOf(filter)<0)filter="Alle";
+ $("filters").hidden=fs.length<3;
+ $("filters").innerHTML=fs.map(function(f){return "<button type='button' aria-pressed='"+(f===filter)+"' data-f='"+esc(f)+"'>"+esc(f)+"</button>"}).join("");
+ var l=D.hw.filter(function(x){return filter==="Alle"||x.fach===filter}).sort(function(a,b){return a.bis<b.bis?-1:1});
+ $("hw").innerHTML=l.map(function(x){
+  var n=diff(x.bis),d=dt(x.bis);
+  var due=n<0?"war fällig am "+d.getDate()+". "+MON[d.getMonth()]:n<2?rel(n)+" fällig":"bis "+d.getDate()+". "+MON[d.getMonth()];
+  return "<li class='"+(state[x.id]?"done":"")+"'><input type='checkbox' id='"+esc(x.id)+"'"+(state[x.id]?" checked":"")+"><label for='"+esc(x.id)+"'><b>"+esc(x.fach)+"</b> <span class='txt'>"+esc(x.text)+"</span><br><span class='due"+(n<2&&!state[x.id]?" soon":"")+"'>"+due+"</span></label></li>";
+ }).join("")||"<li class='empty'>Noch keine Hausaufgaben eingetragen.</li>";
+}
+function renderPlan(){
+ var any=false;for(var r=0;r<6;r++)for(var c=0;c<5;c++)if(cell(r,c))any=true;
+ if(!any){$("plan").innerHTML="<div class='empty'>Noch kein Stundenplan eingetragen.</div>";return}
+ var h="<div class='tablewrap'><table><tr><th></th>"+TAGE.map(function(t,i){return "<th"+(i===col?" class='now'":"")+">"+t+"</th>"}).join("")+"</tr>";
+ for(r=0;r<6;r++){h+="<tr><td class='nr'>"+(r+1)+"<small>"+ZEITEN[r]+"</small></td>";for(c=0;c<5;c++)h+="<td"+(c===col?" class='now'":"")+">"+esc(cell(r,c))+"</td>";h+="</tr>"}
+ $("plan").innerHTML=h+"</table></div>";
+}
+function renderTE(){
+ var l=D.te.slice().sort(function(a,b){return a.d<b.d?-1:1});
+ $("dates").innerHTML=l.map(function(x){
+  var n=diff(x.d),d=dt(x.d);
+  return "<li class='"+(n<0?"past":"")+"'><div class='d'>"+d.getDate()+"<span>"+MON[d.getMonth()]+"</span></div><div class='t'>"+esc(x.t)+(x.s?"<small>"+esc(x.s)+"</small>":"")+"</div>"+(n>=0?"<div class='in'>"+rel(n)+"</div>":"")+"</li>";
+ }).join("")||"<li class='empty'>Noch keine Termine eingetragen.</li>";
+}
+function renderKL(){
+ var r=lines(D.regeln),d=lines(D.dienste);
+ $("regeln").innerHTML=r.length?"<div class='note'><h3 class='hand'>Unsere Klassenregeln</h3><ul>"+r.map(function(x){return "<li>"+esc(x)+"</li>"}).join("")+"</ul></div>":"<div class='empty'>Noch keine Klassenregeln eingetragen.</div>";
+ $("dienste").innerHTML=d.length?"<div class='box'><h3 class='hand'>Dienste</h3><ul style='margin:0;padding-left:20px'>"+d.map(function(x){return "<li>"+esc(x)+"</li>"}).join("")+"</ul></div>":"<div class='empty'>Noch keine Dienste eingetragen.</div>";
+}
+function renderAdmin(){
+ $("navadmin").hidden=!isAdmin;
+ if(!isAdmin)return;
+ $("alist").innerHTML=D.hw.map(function(x,i){return "<li><span>"+esc(x.fach)+": "+esc(x.text)+"</span><button type='button' data-k='hw' data-i='"+i+"'>Löschen</button></li>"}).join("")+D.te.map(function(x,i){return "<li><span>"+esc(x.d)+": "+esc(x.t)+"</span><button type='button' data-k='te' data-i='"+i+"'>Löschen</button></li>"}).join("")||"<li style='color:var(--muted)'>Noch nichts eingetragen.</li>";
+ if(!filled){
+  filled=true;var i=D.info;
+  $("i1").value=i.lehrer||"";$("i2").value=i.raum||"";$("i3").value=i.jahr||"";$("i4").value=i.msg||"";
+  $("k1").value=D.regeln||"";$("k2").value=D.dienste||"";
+  var h="<span></span>"+TAGE.map(function(t){return "<b>"+t+"</b>"}).join("");
+  for(var r=0;r<6;r++){h+="<b>"+(r+1)+".</b>";for(var c=0;c<5;c++)h+="<input type='text' maxlength='20' id='p"+r+c+"' value='"+esc(cell(r,c))+"' aria-label='"+TAGE[c]+" "+(r+1)+". Stunde'>"}
+  $("pg").innerHTML=h;
+ }
+}
+function R(){renderStart();renderHW();renderPlan();renderTE();renderKL();renderAdmin();route()}
+
+function route(){
+ var p=location.hash.slice(1)||"start";
+ var ok=["start","hausaufgaben","stundenplan","termine","klasse","admin"];
+ if(ok.indexOf(p)<0||(p==="admin"&&!isAdmin))p="start";
+ document.querySelectorAll("main section").forEach(function(s){s.hidden=s.getAttribute("data-p")!==p});
+ document.querySelectorAll("#nav a").forEach(function(a){a.classList.toggle("on",a.getAttribute("data-p")===p)});
+}
+window.addEventListener("hashchange",function(){route();window.scrollTo(0,0)});
+
+function persist(){
+ if(!dbDoc){return}
+ $("stat").textContent="";
+ dbDoc.set(D).then(function(){$("stat").textContent="Gespeichert.";setTimeout(function(){$("stat").textContent=""},2500)}).catch(function(){alert("Speichern hat nicht geklappt. Versuch es noch einmal.")});
+}
+$("hadd").addEventListener("click",function(){
+ var f=$("hf").value.trim(),t=$("ht").value.trim(),b=$("hb").value;
+ if(!f||!t||!b){alert("Bitte Fach, Aufgabe und Datum ausfüllen.");return}
+ D.hw.push({id:"h"+Date.now(),fach:f,text:t,bis:b});
+ $("hf").value=$("ht").value="";persist();R();
+});
+$("tadd").addEventListener("click",function(){
+ var t=$("tt").value.trim(),s=$("ts").value.trim(),d=$("td").value;
+ if(!t||!d){alert("Bitte Titel und Datum ausfüllen.");return}
+ D.te.push({d:d,t:t,s:s});
+ $("tt").value=$("ts").value="";persist();R();
+});
+$("alist").addEventListener("click",function(e){
+ var k=e.target.getAttribute("data-k");if(!k)return;
+ D[k].splice(+e.target.getAttribute("data-i"),1);persist();R();
+});
+$("saveall").addEventListener("click",function(){
+ D.info={lehrer:$("i1").value.trim(),raum:$("i2").value.trim(),jahr:$("i3").value.trim(),msg:$("i4").value.trim()};
+ D.regeln=$("k1").value;D.dienste=$("k2").value;
+ D.plan=[];for(var r=0;r<6;r++){D.plan.push([]);for(var c=0;c<5;c++)D.plan[r].push($("p"+r+c).value.trim())}
+ persist();R();
+});
+$("filters").addEventListener("click",function(e){var f=e.target.getAttribute("data-f");if(f){filter=f;renderHW()}});
+$("hw").addEventListener("change",function(e){state[e.target.id]=e.target.checked;try{localStorage.setItem("6e-hw",JSON.stringify(state))}catch(x){}renderHW();renderStart()});
+
+/* Name */
+function hello(){$("hello").textContent=NAME?"Hallo, "+NAME+"!":""}
+hello();$("gate").hidden=!!NAME;
+$("gform").addEventListener("submit",function(e){e.preventDefault();var v=$("gname").value.trim();if(!v)return;NAME=v;try{localStorage.setItem("6e-name",v)}catch(x){}$("gate").hidden=true;hello()});
+$("rename").addEventListener("click",function(){$("gname").value=NAME;$("gate").hidden=false;$("gname").focus()});
+
+R();
+(async function(){
+ try{
+  var u=await claude.use("user"),db=await claude.use("db");
+  if(!db)return;
+  dbDoc=db.doc("klasse/daten");
+  isAdmin=u?!!(await u.canEdit()):false;
+  dbDoc.onSnapshot(function(s){
+   var d=s.exists?s.data():null;
+   if(d){D.info=d.info||{};D.hw=d.hw||[];D.te=d.te||[];D.plan=d.plan||[];D.regeln=d.regeln||"";D.dienste=d.dienste||""}
+   R();
+  },function(){R()});
+  R();
+ }catch(e){}
+})();
+</script>
+</body>
+</html>
