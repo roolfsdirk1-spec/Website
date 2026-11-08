@@ -129,7 +129,7 @@ main section:not([hidden]){animation:up .45s ease both}
 </div></nav>
 
 <main class="wrap">
-<div class="err" id="nodb" hidden>⚠️ Keine Verbindung zum gemeinsamen Speicher. Melde dich bei claude.ai an und öffne den Link dort, sonst siehst du keine Änderungen von anderen Geräten und deine Änderungen werden nicht geteilt.</div>
+<div class="err" id="nodb" hidden></div>
 
 <section data-p="start">
 <h1 class="hand">Klasse 6e</h1>
@@ -202,6 +202,7 @@ main section:not([hidden]){animation:up .45s ease both}
 
 </main>
 
+<script type="application/json" id="seed">{"info":{"jahr":"","lehrer":"","msg":"","raum":""},"hw":[],"te":[],"plan":[["Deutsch","","","",""],["","","","",""],["","","","",""],["","","","",""],["","","","",""],["","","","",""]],"regeln":"","dienste":""}</script>
 <script>
 var $=function(i){return document.getElementById(i)};
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return "&#"+c.charCodeAt(0)+";"})}
@@ -209,6 +210,7 @@ var MON=["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez
 var WT=["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
 var TAGE=["Mo","Di","Mi","Do","Fr"],ZEITEN=["7:55","8:40","9:45","10:30","11:35","12:20"];
 var D={info:{},hw:[],te:[],plan:[],regeln:"",dienste:""};
+try{var sd=JSON.parse($("seed").textContent);for(var sk in sd)D[sk]=sd[sk]}catch(e){}
 var now=new Date(),start=new Date(now.getFullYear(),now.getMonth(),now.getDate());
 function dt(s){var p=s.split("-");return new Date(+p[0],+p[1]-1,+p[2])}
 function diff(s){return Math.round((dt(s)-start)/864e5)}
@@ -299,7 +301,7 @@ function route(){
 window.addEventListener("hashchange",function(){route();window.scrollTo(0,0)});
 
 function persist(){
- if(!dbDoc){return}
+ if(!dbDoc){alert("Speichern nicht möglich.");return}
  $("stat").textContent="";
  dbDoc.set(D).then(function(){$("stat").textContent="Gespeichert.";setTimeout(function(){$("stat").textContent=""},2500)}).catch(function(){alert("Speichern hat nicht geklappt. Versuch es noch einmal.")});
 }
@@ -390,28 +392,60 @@ $("hw").addEventListener("change",function(e){if(e.target.checked&&e.target.type
 
 R();
 setInterval(function(){register();renderUsers()},30000);
-(async function(){
- try{
-  var u=await claude.use("user"),db=await claude.use("db");
-  uid=(u&&await u.id())||"";
-  if(!uid){try{uid=localStorage.getItem("6e-uid")||"g"+Math.random().toString(36).slice(2,10);localStorage.setItem("6e-uid",uid)}catch(x){uid="g"+Date.now()}}
-  try{room=await claude.use("room");if(room){room.onPeers(function(c){live=c.peers.slice();renderUsers()},function(){});pres()}}catch(x){}
-  if(!db){dbReady=true;$("nodb").hidden=false;R();return}
-  dbDoc=db.doc("klasse/daten");usersCol=db.collection("users");
-  usersCol.onSnapshot(function(s){
-   users={};s.docs.forEach(function(d){if(d.exists)users[d.id]=d.data()});
-   loaded=true;
-   if(users[uid])wasIn=true;
-   else if(wasIn&&!isAdmin){wasIn=false;NAME="";store("6e-name",null);hello();$("gmsg").textContent="Der Admin hat dich entfernt. Du kannst dich neu anmelden.";$("gate").hidden=false}
-   else if(NAME&&!wasIn){register()}
-   R();
-  },fail);
-  dbDoc.onSnapshot(function(s){
-   var d=s.exists?s.data():null;
-   if(d){D.info=d.info||{};D.hw=d.hw||[];D.te=d.te||[];D.plan=d.plan||[];D.regeln=d.regeln||"";D.dienste=d.dienste||""}
-   dbReady=true;R();
-  },function(){dbReady=true;$("nodb").hidden=false;R()});
- }catch(e){dbReady=true;$("nodb").hidden=false;R()}
+/* ===== Speicher ohne claude.ai =====
+   FB_URL leer  -> Daten nur auf diesem Gerät (localStorage)
+   FB_URL gesetzt -> Firebase Realtime Database, alle Geräte sehen dasselbe */
+var FB_URL="https://e-website-22aa4-default-rtdb.europe-west1.firebasedatabase.app";   // <- hier die Firebase-URL eintragen, z.B. "https://dein-projekt-default-rtdb.europe-west1.firebasedatabase.app"
+var lastW=0,cache={daten:null,users:{}},subs={d:[],u:[]},timer=null;
+function emit(){
+ var ds={exists:!!cache.daten,data:function(){return cache.daten}};
+ var us={docs:Object.keys(cache.users).map(function(k){return {id:k,exists:true,data:function(){return cache.users[k]}}})};
+ subs.d.forEach(function(f){f(ds)});subs.u.forEach(function(f){f(us)});
+}
+function clone(x){return JSON.parse(JSON.stringify(x))}
+function makeBackend(){
+ var base=FB_URL.replace(/\/+$/,""),remote=!!base;
+ function req(m,p,body){return fetch(base+"/"+p+".json",{method:m,headers:{"Content-Type":"application/json"},body:body===undefined?undefined:JSON.stringify(body)}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()})}
+ function saveLocal(){try{localStorage.setItem("6e-local",JSON.stringify(cache))}catch(e){}}
+ function done(p){return remote?p:(saveLocal(),Promise.resolve())}
+ return {
+  remote:remote,
+  start:function(err){
+   if(!remote){try{var c=JSON.parse(localStorage.getItem("6e-local")||"null");if(c){cache.daten=c.daten||null;cache.users=c.users||{}}}catch(e){}
+    window.addEventListener("storage",function(e){if(e.key==="6e-local"){try{var c=JSON.parse(e.newValue||"null");if(c){cache.daten=c.daten||null;cache.users=c.users||{};emit()}}catch(x){}}});
+    emit();return}
+   function poll(){req("GET","").then(function(r){
+     r=r||{};cache.daten=r.daten&&r.daten.j?JSON.parse(r.daten.j):null;cache.users=r.users||{};emit();
+    }).catch(function(e){if(err)err(e)})}
+   poll();timer=setInterval(poll,4000);
+  },
+  setD:function(d){cache.daten=clone(d);emit();return done(remote?req("PUT","daten",{j:JSON.stringify(d)}):0)},
+  uSet:function(id,x){lastW=Date.now();cache.users[id]=clone(x);emit();return done(remote?req("PUT","users/"+encodeURIComponent(id),x):0)},
+  uUpd:function(id,x){lastW=Date.now();var o=cache.users[id]||{};for(var k in x)o[k]=x[k];cache.users[id]=o;emit();return done(remote?req("PATCH","users/"+encodeURIComponent(id),x):0)},
+  uDel:function(id){delete cache.users[id];emit();return done(remote?req("DELETE","users/"+encodeURIComponent(id)):0)}
+ };
+}
+(function(){
+ try{uid=localStorage.getItem("6e-uid")||"u"+Math.random().toString(36).slice(2,12);localStorage.setItem("6e-uid",uid)}catch(x){uid="u"+Date.now()}
+ var B=makeBackend();
+ dbDoc={set:function(d){return B.setD(d)}};
+ usersCol={doc:function(id){return {set:function(x){return B.uSet(id,x)},update:function(x){return B.uUpd(id,x)},delete:function(){return B.uDel(id)}}}};
+ var nb=$("nodb");
+ if(!B.remote){nb.textContent="📱 Lokaler Modus: Die Daten bleiben nur auf diesem Gerät. Damit alle Geräte dasselbe sehen, trage oben in der Datei die Firebase-URL ein (Anleitung steht dabei).";nb.hidden=false}
+ subs.u.push(function(s){
+  users={};s.docs.forEach(function(d){if(d.exists)users[d.id]=d.data()});
+  loaded=true;
+  if(users[uid])wasIn=true;
+  else if(wasIn&&!isAdmin&&Date.now()-lastW>12000){wasIn=false;NAME="";store("6e-name",null);hello();$("gmsg").textContent="Der Admin hat dich entfernt. Du kannst dich neu anmelden.";$("gate").hidden=false}
+  else if(NAME&&!wasIn){register()}
+  R();
+ });
+ subs.d.push(function(s){
+  var d=s.exists?s.data():null;
+  if(d){D.info=d.info||{};D.hw=d.hw||[];D.te=d.te||[];D.plan=d.plan||[];D.regeln=d.regeln||"";D.dienste=d.dienste||""}
+  dbReady=true;R();
+ });
+ B.start(function(e){fail(e);nb.textContent="⚠️ Keine Verbindung zur Datenbank. Prüfe die Firebase-URL und die Regeln.";nb.hidden=false});
 })();
 </script>
 </body>
