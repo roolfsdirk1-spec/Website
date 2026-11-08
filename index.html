@@ -118,14 +118,39 @@ main section:not([hidden]){animation:up .45s ease both}
 .err{background:var(--hl);border-radius:12px;padding:8px 12px;margin-bottom:10px;font-size:14px}
 .conf{position:fixed;top:-20px;width:10px;height:14px;z-index:90;pointer-events:none;animation:drop 1.8s ease-in forwards}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+select{font:inherit;width:100%;padding:10px 13px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--text);margin-bottom:10px}
+.ahead{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#1e1b4b,#4f46e5 60%,#ec4899);color:#fff;border-radius:24px;padding:22px 26px;box-shadow:var(--sh);margin-bottom:16px}
+.ahead h2{color:#fff;margin:0}.ahead p{margin:0;opacity:.85}
+.astats{display:flex;gap:10px;flex-wrap:wrap}.astats span{background:rgba(255,255,255,.18);border-radius:14px;padding:6px 14px;text-align:center;font-size:13px}.astats b{display:block;font-size:22px;font-family:Fredoka,sans-serif}
+.atabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:16px;padding-bottom:4px}
+.atabs button{font:inherit;font-weight:800;border:2px solid var(--line);background:var(--paper);color:var(--text);border-radius:99px;padding:6px 18px;cursor:pointer;white-space:nowrap;transition:transform .15s}
+.atabs button:hover{transform:translateY(-2px)}
+.atabs button[aria-pressed="true"]{background:linear-gradient(90deg,var(--ink),var(--ink2));color:#fff;border-color:transparent}
+.tg{font:800 12px Nunito,sans-serif;border-radius:99px;padding:2px 10px;color:#fff;white-space:nowrap}
+.tg.ka{background:var(--red)}.tg.au{background:var(--ok)}.tg.so{background:var(--ink)}
+.mini{list-style:none;margin:0;padding:0}.mini li{padding:7px 0;border-bottom:1px dotted var(--line)}.mini small{color:var(--muted);margin-left:6px}
+.bnext{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,var(--ink),var(--ink2));color:#fff;border-radius:24px;padding:20px 24px;box-shadow:var(--sh);margin-bottom:26px}
+.bnext .big{font-size:56px;animation:float 2.2s ease infinite}.bnext h3{margin:0;font-size:28px;color:#fff;font-family:Fredoka,sans-serif}.bnext p{margin:0;opacity:.9}
+.chain{position:relative;padding-left:34px}
+.chain::before{content:"";position:absolute;left:16px;top:10px;bottom:10px;width:5px;border-radius:5px;background:repeating-linear-gradient(var(--ink) 0 12px,var(--ink2) 12px 24px)}
+.link{position:relative;display:flex;align-items:center;gap:12px;background:var(--paper);border-radius:16px;box-shadow:var(--sh);padding:10px 16px;margin-bottom:14px;animation:up .4s ease both;animation-delay:calc(var(--i,0)*50ms)}
+.link::before{content:attr(data-e);position:absolute;left:-34px;width:38px;height:38px;border-radius:50%;background:var(--paper);border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:18px}
+.link.me{outline:2px solid var(--ink2)}.link b{flex:1}.link small{display:block;color:var(--muted);font-weight:400}
+.pg{min-width:760px!important}.pg input{font-size:13px!important}
+.pc{font:inherit;font-size:13px;border:2px dashed var(--line);background:var(--bg);color:var(--text);border-radius:10px;padding:6px 4px;min-height:50px;cursor:pointer;transition:transform .15s,border-color .15s,background .15s;min-width:0}
+.pc:hover{border-color:var(--ink);background:var(--hl);transform:translateY(-2px)}.pc small{display:block;color:var(--muted);font-size:11px}
+.peditor{background:var(--bg);border:2px solid var(--ink);border-radius:16px;padding:14px 16px;margin-top:14px;animation:up .3s ease both}
+.peditor h4{margin:0 0 8px;font-size:20px;font-family:Fredoka,sans-serif}
+.prow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pg{min-width:560px!important}
 </style>
 </head>
 <body>
-<div class="gate" id="gate" hidden><form id="gform"><h2 class="hand">Willkommen in der 6e!</h2><p id="gmsg">Wie heißt du? Dein Name erscheint oben auf der Startseite.</p><input type="text" id="gname" maxlength="30" autocomplete="given-name" required placeholder="Dein Vorname"><button class="btn" type="submit">Los geht’s</button><div style="margin-top:14px"><button type="button" class="lnk" id="gadm" style="padding:0">Admin-Login</button></div><div id="gadmbox" hidden><input type="password" id="gcode" inputmode="numeric" placeholder="Admin-Code" autocomplete="off"><button class="btn" type="button" id="gcodeok">Als Admin anmelden</button></div></form></div>
+<div class="gate" id="gate" hidden><form id="gform"><h2 class="hand">Willkommen in der 6e!</h2><p id="gmsg">Wie heißt du und wann hast du Geburtstag? Beides erscheint im Geburtstagskalender der Klasse.</p><input type="text" id="gname" maxlength="30" autocomplete="given-name" required placeholder="Dein Vorname"><label for="gbd" style="font-weight:800;font-size:14px">Dein Geburtstag</label><input type="date" id="gbd" required><button class="btn" type="submit">Los geht’s</button><div style="margin-top:14px"><button type="button" class="lnk" id="gadm" style="padding:0">Admin-Login</button></div><div id="gadmbox" hidden><input type="password" id="gcode" inputmode="numeric" placeholder="Admin-Code" autocomplete="off"><button class="btn" type="button" id="gcodeok">Als Admin anmelden</button></div></form></div>
 <div class="gate" id="ban" hidden style="z-index:60"><div class="box" style="max-width:360px;text-align:center"><h2 class="hand">Gesperrt</h2><p>Der Admin hat dich gesperrt. Du kannst die Seite gerade nicht nutzen.</p></div></div>
 
 <nav><div class="wrap" id="nav">
-<a href="#start" data-p="start">🏠 Start</a><a href="#hausaufgaben" data-p="hausaufgaben">📝 Hausaufgaben</a><a href="#stundenplan" data-p="stundenplan">🕗 Stundenplan</a><a href="#termine" data-p="termine">📅 Termine</a><a href="#klasse" data-p="klasse">🎒 Klassenleben</a><a href="#admin" data-p="admin" id="navadmin" hidden>🛡️ Admin</a>
+<a href="#start" data-p="start">🏠 Start</a><a href="#hausaufgaben" data-p="hausaufgaben">📝 Hausaufgaben</a><a href="#stundenplan" data-p="stundenplan">🕗 Stundenplan</a><a href="#termine" data-p="termine">📅 Termine</a><a href="#klasse" data-p="klasse">🎒 Klassenleben</a><a href="#geburtstage" data-p="geburtstage">🎂 Geburtstage</a><a href="#profil" data-p="profil">👤 Profil</a><a href="#admin" data-p="admin" id="navadmin" hidden>🛡️ Admin</a>
 </div></nav>
 
 <main class="wrap">
@@ -133,10 +158,11 @@ main section:not([hidden]){animation:up .45s ease both}
 
 <section data-p="start">
 <h1 class="hand">Klasse 6e</h1>
-<p class="hello"><span id="hello"></span><span class="bd" id="role" hidden></span><span class="chip" id="onl" hidden></span><button type="button" class="lnk" id="rename">Name ändern</button><button type="button" class="lnk" id="adminout" hidden>Admin abmelden</button></p>
+<p class="hello"><span id="hello"></span><span class="bd" id="role" hidden></span><span class="chip" id="onl" hidden></span><button type="button" class="lnk" id="rename">Mein Profil</button><button type="button" class="lnk" id="adminout" hidden>Admin abmelden</button></p>
 <p class="meta" id="meta"></p>
 <div class="note" id="msg" hidden><h3 class="hand">Mitteilung</h3><p id="msgt"></p></div>
 <div class="box" id="today"></div>
+<div id="soon"></div>
 <div class="tiles" id="tiles"></div>
 </section>
 
@@ -161,8 +187,13 @@ main section:not([hidden]){animation:up .45s ease both}
 <section data-p="termine" hidden>
 <h2 class="hand">Termine</h2>
 <p class="lead">Klassenarbeiten, Ausflüge und alles, was man nicht vergessen soll.</p>
+<div class="filters" id="tfilters"></div>
 <ul class="dates" id="dates"></ul>
 </section>
+
+<section data-p="geburtstage" hidden><h2 class="hand">🎂 Geburtstage</h2><p class="lead">Wer als Nächstes feiert, und die ganze Klasse als Kette.</p><div id="bdnext"></div><div class="chain" id="bdchain"></div></section>
+
+<section data-p="profil" hidden><h2 class="hand">👤 Mein Profil</h2><p class="lead">So sehen dich die anderen im Geburtstagskalender.</p><div class="adm"><label for="pn">Name</label><input type="text" id="pn" maxlength="30"><label for="pb">Geburtstag</label><input type="date" id="pb"><label for="pe">Lieblings-Emoji (optional)</label><input type="text" id="pe" maxlength="8" placeholder="🙂"><button class="btn" type="button" id="psave">Profil speichern</button><span id="pstat" style="margin-left:10px;font-weight:800;color:var(--ok)"></span></div></section>
 
 <section data-p="klasse" hidden>
 <h2 class="hand">Klassenleben</h2>
@@ -170,30 +201,36 @@ main section:not([hidden]){animation:up .45s ease both}
 </section>
 
 <section data-p="admin" hidden>
-<h2 class="hand">Admin</h2>
-<p class="lead">Nur für dich sichtbar. Alles hier kannst du einfach ausfüllen, ohne Code.</p>
+<div class="ahead"><div><h2 class="hand">🛡️ Admin-Zentrale</h2><p>Hier steuerst du die ganze Klassenseite.</p></div><div class="astats" id="astats"></div></div>
+<div class="atabs" id="atabs"><button type="button" data-t="nutzer">👥 Nutzer</button><button type="button" data-t="termine">📅 Termine</button><button type="button" data-t="plan">🕗 Stundenplan</button><button type="button" data-t="klasse">🎒 Klasse</button></div>
 
-<div class="adm"><h3 class="hand">Nutzer</h3><p class="lead" id="ucount"></p><ul id="ulist"></ul></div>
+<div class="adm" data-at="nutzer"><h3 class="hand">👥 Nutzer</h3><p class="lead" id="ucount"></p><ul id="ulist"></ul></div>
 
-<div class="adm"><h3 class="hand">Termin hinzufügen</h3>
+<div class="adm" data-at="termine"><h3 class="hand">📅 Termin hinzufügen</h3>
 <input type="text" id="tt" placeholder="Titel, zum Beispiel Mathe-Arbeit" maxlength="60">
 <input type="text" id="ts" placeholder="Info (Uhrzeit, Ort, Mitbringen)" maxlength="100">
-<label for="td">Datum</label><input type="date" id="td">
+<label for="tk">Art</label><select id="tk"><option>Klassenarbeit</option><option>Ausflug</option><option>Sonstiges</option></select><label for="td">Datum</label><input type="date" id="td">
 <button class="btn" type="button" id="tadd">Termin speichern</button></div>
 
-<div class="adm"><h3 class="hand">Eingetragen (zum Löschen)</h3><ul id="alist"></ul></div>
+<div class="adm" data-at="termine"><h3 class="hand">Eingetragen (ändern / löschen)</h3><ul id="alist"></ul></div>
 
-<div class="adm"><h3 class="hand">Klasseninfos</h3>
+<div class="adm" data-at="klasse"><h3 class="hand">Klasseninfos</h3>
 <label for="i1">Klassenlehrer oder Klassenlehrerin</label><input type="text" id="i1" maxlength="40">
 <label for="i2">Raum</label><input type="text" id="i2" maxlength="20">
 <label for="i3">Schuljahr</label><input type="text" id="i3" maxlength="20" placeholder="2026/27">
-<label for="i4">Mitteilung für die Startseite</label><textarea id="i4" maxlength="400"></textarea></div>
+<label for="i4">Mitteilung für die Startseite</label><textarea id="i4" maxlength="400"></textarea>
+<label for="i5">Hinweis zum Stundenplan (z. B. Sportzeug, Raumwechsel)</label><textarea id="i5" maxlength="300"></textarea></div>
 
-<div class="adm"><h3 class="hand">Stundenplan</h3>
-<p class="lead">Fach in jedes Feld schreiben, leere Felder bleiben frei.</p>
-<div style="overflow-x:auto"><div class="pg" id="pg"></div></div></div>
+<div class="adm" data-at="plan"><h3 class="hand">Stundenplan</h3>
+<p class="lead">Tippe auf ein Feld, dann trägst du Fach, Raum und Lehrer/in ein.</p>
+<div style="overflow-x:auto"><div class="pg" id="pg"></div></div>
+<div class="peditor" id="pe2" hidden><h4 id="pt"></h4>
+<label for="pf">Fach</label><input type="text" id="pf" list="fl" maxlength="25" placeholder="zum Beispiel Mathe"><datalist id="fl"></datalist>
+<label for="pr">Raum</label><input type="text" id="pr" maxlength="15" placeholder="zum Beispiel R204">
+<label for="pl">Lehrer oder Lehrerin</label><input type="text" id="pl" maxlength="30" placeholder="zum Beispiel Fr. Müller">
+<div class="prow"><button class="btn" type="button" id="pok">Übernehmen</button><button class="sm red" type="button" id="pclr">Feld leeren</button><button class="sm" type="button" id="pcan">Abbrechen</button></div></div></div>
 
-<div class="adm"><h3 class="hand">Klassenleben</h3>
+<div class="adm" data-at="klasse"><h3 class="hand">Klassenleben</h3>
 <label for="k1">Klassenregeln (eine pro Zeile)</label><textarea id="k1"></textarea>
 <label for="k2">Dienste (eine pro Zeile, zum Beispiel: Tafeldienst: Anna und Ben)</label><textarea id="k2"></textarea></div>
 
@@ -219,9 +256,12 @@ function cell(r,c){return (D.plan[r]&&D.plan[r][c])||""}
 function lines(t){return String(t||"").split("\n").map(function(x){return x.trim()}).filter(Boolean)}
 var state={};try{state=JSON.parse(localStorage.getItem("6e-hw")||"{}")}catch(e){}
 var NAME="";try{NAME=localStorage.getItem("6e-name")||""}catch(e){}
+var BDAY="";try{BDAY=localStorage.getItem("6e-bday")||""}catch(e){}
 var filter="Alle",dbDoc=null,filled=false,dbReady=false,usersCol=null,users={},uid="",loaded=false,wasIn=false;
 var isAdmin=false;try{isAdmin=localStorage.getItem("6e-admin")==="1"}catch(e){}
-var live=[],room=null,dberr="";
+var live=[],room=null,dberr="",atab="nutzer",tfil="Alle",pfilled=false;
+var TK={"Klassenarbeit":["📝","ka"],"Ausflug":["🚌","au"],"Sonstiges":["📌","so"]};
+var MONF=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
 function me(){return users[uid]||{}}
 function canHW(){return isAdmin||!!me().hw}
 function burst(){for(var i=0;i<28;i++){var c=document.createElement("i");c.className="conf";c.style.left=Math.random()*100+"vw";c.style.background=["#fff176","#d9534f","#2e8b57","#9db4ff","#ff9f43"][i%5];c.style.animationDelay=Math.random()*.4+"s";document.body.appendChild(c);setTimeout(function(x){x.remove()},2400,c)}}
@@ -234,7 +274,7 @@ function renderStart(){
  var i=D.info,m=[i.lehrer,i.raum&&"Raum "+i.raum,i.jahr&&"Schuljahr "+i.jahr].filter(Boolean);
  $("meta").textContent=m.join(" · ");$("meta").hidden=!m.length;
  $("msg").hidden=!i.msg;$("msgt").textContent=i.msg||"";
- var ls=col>=0?ZEITEN.map(function(z,r){return cell(r,col)?"<li>"+esc(cell(r,col))+" <small>"+z+" Uhr</small></li>":""}).join(""):"";
+ var ls=col>=0?ZEITEN.map(function(z,r){return cell(r,col)?"<li>"+esc(cp(cell(r,col)).f||cell(r,col))+(cp(cell(r,col)).r?" · Raum "+esc(cp(cell(r,col)).r):"")+(cp(cell(r,col)).l?" · "+esc(cp(cell(r,col)).l):"")+" <small>"+z+" Uhr</small></li>":""}).join(""):"";
  var n=naechster(),o=offen();
  $("today").innerHTML="<h3 class='hand'>"+WT[wd]+", "+now.getDate()+". "+MON[now.getMonth()]+"</h3>"+
   (col<0?"<p style='margin:0'>Heute ist kein Schultag.</p>":ls?"<ol>"+ls+"</ol>":"<p style='margin:0;color:var(--muted)'>Noch kein Stundenplan eingetragen.</p>")+
@@ -243,7 +283,9 @@ function renderStart(){
   "<a class='tile' href='#hausaufgaben'><i class='ic'>📝</i><b class='hand'>Hausaufgaben</b><span>"+(o?o+" offen":"nichts offen")+"</span></a>"+
   "<a class='tile' href='#stundenplan'><i class='ic'>🕗</i><b class='hand'>Stundenplan</b><span>Alle Stunden der Woche</span></a>"+
   "<a class='tile' href='#termine'><i class='ic'>📅</i><b class='hand'>Termine</b><span>"+(n?"als Nächstes: "+esc(n.t):"nichts geplant")+"</span></a>"+
-  "<a class='tile' href='#klasse'><i class='ic'>🎒</i><b class='hand'>Klassenleben</b><span>Regeln und Dienste</span></a>";
+  "<a class='tile' href='#klasse'><i class='ic'>🎒</i><b class='hand'>Klassenleben</b><span>Regeln und Dienste</span></a>"+
+  "<a class='tile' href='#geburtstage'><i class='ic'>🎂</i><b class='hand'>Geburtstage</b><span>"+(bdList()[0]?"als Nächstes: "+esc(bdList()[0].name):"noch keine eingetragen")+"</span></a>"+
+  "<a class='tile' href='#profil'><i class='ic'>👤</i><b class='hand'>Mein Profil</b><span>Name und Geburtstag ändern</span></a>";
 }
 function renderHW(){
  var fs=["Alle"];D.hw.forEach(function(x){if(fs.indexOf(x.fach)<0)fs.push(x.fach)});
@@ -257,20 +299,48 @@ function renderHW(){
   return "<li style='--i:"+i+"' class='"+(state[x.id]?"done":"")+"'><input type='checkbox' id='"+esc(x.id)+"'"+(state[x.id]?" checked":"")+"><label for='"+esc(x.id)+"'><b>"+esc(x.fach)+"</b> <span class='txt'>"+esc(x.text)+"</span><br><span class='due"+(n<2&&!state[x.id]?" soon":"")+"'>"+due+"</span></label>"+(canHW()?"<span class='acts'><button type='button' class='sm' data-e='"+esc(x.id)+"' aria-label='Bearbeiten'>✎</button><button type='button' class='sm red' data-x='"+esc(x.id)+"' aria-label='Löschen'>✕</button></span>":"")+"</li>";
  }).join("")||"<li class='empty'>Noch keine Hausaufgaben eingetragen.</li>";
 }
+function cp(t){var q=String(t||"").split(";").map(function(x){return x.trim()});return {f:q[0]||"",r:q[1]||"",l:q[2]||""}}
+function pcLabel(v){var o=cp(v);return o.f||o.r||o.l?"<b>"+esc(o.f||"?")+"</b>"+(o.r||o.l?"<small>"+esc([o.r,o.l].filter(Boolean).join(" · "))+"</small>":""):"+"}
+function cellHTML(r,c){var o=cp(cell(r,c));if(!o.f&&!o.r&&!o.l)return "";return "<b>"+esc(o.f)+"</b>"+(o.r||o.l?"<small>"+esc([o.r,o.l].filter(Boolean).join(" · "))+"</small>":"")}
 function renderPlan(){
- var any=false;for(var r=0;r<6;r++)for(var c=0;c<5;c++)if(cell(r,c))any=true;
- if(!any){$("plan").innerHTML="<div class='empty'>Noch kein Stundenplan eingetragen.</div>";return}
- var h="<div class='tablewrap'><table><tr><th></th>"+TAGE.map(function(t,i){return "<th"+(i===col?" class='now'":"")+">"+t+"</th>"}).join("")+"</tr>";
- for(r=0;r<6;r++){h+="<tr><td class='nr'>"+(r+1)+"<small>"+ZEITEN[r]+"</small></td>";for(c=0;c<5;c++)h+="<td"+(c===col?" class='now'":"")+">"+esc(cell(r,c))+"</td>";h+="</tr>"}
- $("plan").innerHTML=h+"</table></div>";
+ var any=false,r,c;for(r=0;r<6;r++)for(c=0;c<5;c++)if(cell(r,c))any=true;
+ var hint=D.info&&D.info.planhint?"<div class='note' style='padding:12px 18px'><p>ℹ️ "+esc(D.info.planhint)+"</p></div>":"";
+ if(!any){$("plan").innerHTML=hint+"<div class='empty'>Noch kein Stundenplan eingetragen.</div>";return}
+ var h=hint+"<div class='tablewrap'><table><tr><th></th>"+TAGE.map(function(t,i){return "<th"+(i===col?" class='now'":"")+">"+t+"</th>"}).join("")+"</tr>";
+ for(r=0;r<6;r++){h+="<tr><td class='nr'>"+(r+1)+"<small>"+ZEITEN[r]+"</small></td>";for(c=0;c<5;c++)h+="<td"+(c===col?" class='now'":"")+">"+cellHTML(r,c)+"</td>";h+="</tr>"}
+ h+="</table></div>";
+ var m={};for(r=0;r<6;r++)for(c=0;c<5;c++){var o=cp(cell(r,c));if(o.f){m[o.f]=m[o.f]||{r:"",l:""};if(o.r&&!m[o.f].r)m[o.f].r=o.r;if(o.l&&!m[o.f].l)m[o.f].l=o.l}}
+ var ks=Object.keys(m).filter(function(k){return m[k].r||m[k].l}).sort();
+ if(ks.length)h+="<div class='box' style='margin-top:20px'><h3 class='hand'>Fächer, Räume und Lehrer</h3><ul class='mini'>"+ks.map(function(k){return "<li><b>"+esc(k)+"</b><small>"+esc([m[k].r&&"Raum "+m[k].r,m[k].l].filter(Boolean).join(" · "))+"</small></li>"}).join("")+"</ul></div>";
+ $("plan").innerHTML=h;
 }
+function tag(k){var t=TK[k]||TK.Sonstiges;return "<span class='tg "+t[1]+"'>"+t[0]+" "+esc(TK[k]?k:"Sonstiges")+"</span>"}
 function renderTE(){
- var l=D.te.slice().sort(function(a,b){return a.d<b.d?-1:1});
- $("dates").innerHTML=l.map(function(x,i){
+ var fs=["Alle"].concat(Object.keys(TK));
+ $("tfilters").innerHTML=fs.map(function(f){return "<button type='button' aria-pressed='"+(f===tfil)+"' data-f='"+f+"'>"+f+"</button>"}).join("");
+ var l=D.te.filter(function(x){return tfil==="Alle"||(x.k||"Sonstiges")===tfil});
+ var up=l.filter(function(x){return diff(x.d)>=0}).sort(function(a,b){return a.d<b.d?-1:1}),pa=l.filter(function(x){return diff(x.d)<0}).sort(function(a,b){return a.d<b.d?1:-1});
+ $("dates").innerHTML=up.concat(pa).map(function(x,i){
   var n=diff(x.d),d=dt(x.d);
-  return "<li style='--i:"+i+"' class='"+(n<0?"past":"")+"'><div class='d'>"+d.getDate()+"<span>"+MON[d.getMonth()]+"</span></div><div class='t'>"+esc(x.t)+(x.s?"<small>"+esc(x.s)+"</small>":"")+"</div>"+(n>=0?"<div class='in'>"+rel(n)+"</div>":"")+"</li>";
- }).join("")||"<li class='empty'>Noch keine Termine eingetragen.</li>";
+  return "<li style='--i:"+i+"' class='"+(n<0?"past":"")+"'><div class='d'>"+d.getDate()+"<span>"+MON[d.getMonth()]+"</span></div><div class='t'>"+tag(x.k)+" "+esc(x.t)+(x.s?"<small>"+esc(x.s)+"</small>":"")+"</div>"+(n>=0?"<div class='in'>"+rel(n)+"</div>":"")+"</li>";
+ }).join("")||"<li class='empty'>Keine Termine in dieser Auswahl.</li>";
 }
+function nextBd(b){var q=b.split("-"),y=start.getFullYear(),d=new Date(y,+q[1]-1,+q[2]);if(d<start)d=new Date(y+1,+q[1]-1,+q[2]);return {n:Math.round((d-start)/864e5),d:d,age:d.getFullYear()-(+q[0])}}
+function bdList(){return Object.keys(users).map(function(k){return {k:k,name:users[k].name,b:users[k].bday}}).filter(function(x){return x.b&&/^\d{4}-\d{2}-\d{2}$/.test(x.b)}).map(function(x){var o=nextBd(x.b);x.n=o.n;x.age=o.age;x.date=o.d;return x}).sort(function(a,b){return a.n-b.n})}
+function fmtD(b){var q=b.split("-");return +q[2]+". "+MONF[+q[1]-1]+" "+q[0]}
+function renderBd(){
+ var l=bdList();
+ if(!l.length){$("bdnext").innerHTML="";$("bdchain").innerHTML="<div class='empty'>Noch keine Geburtstage eingetragen. Jeder trägt seinen im Profil ein.</div>";return}
+ var f=l[0];
+ $("bdnext").innerHTML="<div class='bnext'><span class='big'>"+esc(users[f.k].emo||"🎂")+"</span><div><h3>"+(f.n===0?"Heute hat "+esc(f.name)+" Geburtstag! 🎉":"Als Nächstes: "+esc(f.name))+"</h3><p>"+(f.n===0?"Wird "+f.age+".":rel(f.n)+", am "+f.date.getDate()+". "+MONF[f.date.getMonth()]+" · wird "+f.age)+"</p></div></div>";
+ $("bdchain").innerHTML=l.map(function(x,i){return "<div class='link"+(x.k===uid?" me":"")+"' data-e='"+esc(users[x.k].emo||"🎂")+"' style='--i:"+i+"'><b>"+esc(x.name)+(x.k===uid?" <span class='tg so'>du</span>":"")+"<small>"+fmtD(x.b)+"</small></b><span class='tg "+(x.n===0?"ka":"so")+"'>"+(x.n===0?"heute 🎉":rel(x.n))+"</span></div>"}).join("");
+}
+function renderSoon(){
+ var l=D.te.filter(function(t){return diff(t.d)>=0}).sort(function(a,b){return a.d<b.d?-1:1}).slice(0,4),b=bdList()[0];
+ $("soon").innerHTML="<div class='box'><h3 class='hand'>📅 Das steht an</h3>"+(l.length?"<ul class='mini'>"+l.map(function(x){var d=dt(x.d);return "<li>"+tag(x.k)+" <b>"+esc(x.t)+"</b><small>"+d.getDate()+". "+MON[d.getMonth()]+" · "+rel(diff(x.d))+"</small></li>"}).join("")+"</ul>":"<p class='lead' style='margin:0'>Im Moment ist nichts geplant.</p>")+(b?"<div class='facts'><span>🎂 Nächster Geburtstag: <b>"+esc(b.name)+"</b> ("+rel(b.n)+")</span></div>":"")+"</div>";
+}
+function renderProfile(){if(!pfilled&&loaded){pfilled=true;$("pn").value=NAME;$("pb").value=BDAY;$("pe").value=me().emo||""}}
+function setTab(t){atab=t;document.querySelectorAll("[data-at]").forEach(function(e){e.hidden=e.getAttribute("data-at")!==t});document.querySelectorAll("#atabs button").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-t")===t)});$("saveall").hidden=!(t==="plan"||t==="klasse")}
 function renderKL(){
  var r=lines(D.regeln),d=lines(D.dienste);
  $("regeln").innerHTML=r.length?"<div class='note'><h3 class='hand'>Unsere Klassenregeln</h3><ul>"+r.map(function(x){return "<li>"+esc(x)+"</li>"}).join("")+"</ul></div>":"<div class='empty'>Noch keine Klassenregeln eingetragen.</div>";
@@ -279,21 +349,21 @@ function renderKL(){
 function renderAdmin(){
  $("navadmin").hidden=!isAdmin;
  if(!isAdmin)return;
- $("alist").innerHTML=D.hw.map(function(x,i){return "<li><span>"+esc(x.fach)+": "+esc(x.text)+"</span><button type='button' data-k='hw' data-i='"+i+"'>Löschen</button></li>"}).join("")+D.te.map(function(x,i){return "<li><span>"+esc(x.d)+": "+esc(x.t)+"</span><button type='button' data-k='te' data-i='"+i+"'>Löschen</button></li>"}).join("")||"<li style='color:var(--muted)'>Noch nichts eingetragen.</li>";
+ $("alist").innerHTML=D.hw.map(function(x,i){return "<li><span>"+esc(x.fach)+": "+esc(x.text)+"</span><button type='button' data-k='hw' data-i='"+i+"'>Löschen</button></li>"}).join("")+D.te.map(function(x,i){return "<li><span>"+esc(x.d)+": "+esc(x.t)+" <small>("+esc(x.k||"Sonstiges")+")</small></span><span><button type='button' data-k='te' data-ed='1' data-i='"+i+"' style='color:var(--ink);border-color:var(--ink)'>Ändern</button> <button type='button' data-k='te' data-i='"+i+"'>Löschen</button></span></li>"}).join("")||"<li style='color:var(--muted)'>Noch nichts eingetragen.</li>";
  if(!filled&&dbReady){
   filled=true;var i=D.info;
-  $("i1").value=i.lehrer||"";$("i2").value=i.raum||"";$("i3").value=i.jahr||"";$("i4").value=i.msg||"";
+  $("i1").value=i.lehrer||"";$("i2").value=i.raum||"";$("i3").value=i.jahr||"";$("i4").value=i.msg||"";$("i5").value=i.planhint||"";
   $("k1").value=D.regeln||"";$("k2").value=D.dienste||"";
   var h="<span></span>"+TAGE.map(function(t){return "<b>"+t+"</b>"}).join("");
-  for(var r=0;r<6;r++){h+="<b>"+(r+1)+".</b>";for(var c=0;c<5;c++)h+="<input type='text' maxlength='20' id='p"+r+c+"' value='"+esc(cell(r,c))+"' aria-label='"+TAGE[c]+" "+(r+1)+". Stunde'>"}
+  for(var r=0;r<6;r++){h+="<b>"+(r+1)+".</b>";for(var c=0;c<5;c++)h+="<input type='hidden' id='p"+r+c+"' value='"+esc(cell(r,c))+"'><button type='button' class='pc' id='b"+r+c+"' data-r='"+r+"' data-c='"+c+"' aria-label='"+TAGE[c]+" "+(r+1)+". Stunde'>"+pcLabel(cell(r,c))+"</button>"}
   $("pg").innerHTML=h;
  }
 }
-function R(){$("hwpanel").hidden=!canHW();renderRole();renderUsers();renderStart();renderHW();renderPlan();renderTE();renderKL();renderAdmin();route()}
+function R(){setTab(atab);renderSoon();renderBd();renderProfile();$("hwpanel").hidden=!canHW();renderRole();renderUsers();renderStart();renderHW();renderPlan();renderTE();renderKL();renderAdmin();route()}
 
 function route(){
  var p=location.hash.slice(1)||"start";
- var ok=["start","hausaufgaben","stundenplan","termine","klasse","admin"];
+ var ok=["start","hausaufgaben","stundenplan","termine","geburtstage","profil","klasse","admin"];
  if(ok.indexOf(p)<0||(p==="admin"&&!isAdmin))p="start";
  document.querySelectorAll("main section").forEach(function(s){s.hidden=s.getAttribute("data-p")!==p});
  document.querySelectorAll("#nav a").forEach(function(a){a.classList.toggle("on",a.getAttribute("data-p")===p)});
@@ -314,21 +384,23 @@ $("hadd").addEventListener("click",function(){
 $("tadd").addEventListener("click",function(){
  var t=$("tt").value.trim(),s=$("ts").value.trim(),d=$("td").value;
  if(!t||!d){alert("Bitte Titel und Datum ausfüllen.");return}
- D.te.push({d:d,t:t,s:s});
+ D.te.push({d:d,t:t,s:s,k:$("tk").value});
  $("tt").value=$("ts").value="";persist();R();
 });
 $("alist").addEventListener("click",function(e){
  var k=e.target.getAttribute("data-k");if(!k)return;
- D[k].splice(+e.target.getAttribute("data-i"),1);persist();R();
+ var ix=+e.target.getAttribute("data-i");
+ if(e.target.getAttribute("data-ed")){var o=D.te[ix],t=prompt("Titel:",o.t);if(t===null)return;var d2=prompt("Datum (JJJJ-MM-TT):",o.d);if(d2===null)return;if(!/^\d{4}-\d{2}-\d{2}$/.test(d2)){alert("Bitte so: 2026-12-24");return}var k2=prompt("Art (Klassenarbeit, Ausflug oder Sonstiges):",o.k||"Sonstiges");if(k2===null)return;o.t=t.trim()||o.t;o.d=d2;o.k=TK[k2.trim()]?k2.trim():"Sonstiges";persist();R();return}
+ D[k].splice(ix,1);persist();R();
 });
 function saveAll(){
- D.info={lehrer:$("i1").value.trim(),raum:$("i2").value.trim(),jahr:$("i3").value.trim(),msg:$("i4").value.trim()};
+ D.info={lehrer:$("i1").value.trim(),raum:$("i2").value.trim(),jahr:$("i3").value.trim(),msg:$("i4").value.trim(),planhint:$("i5").value.trim()};
  D.regeln=$("k1").value;D.dienste=$("k2").value;
  D.plan=[];for(var r=0;r<6;r++){D.plan.push([]);for(var c=0;c<5;c++)D.plan[r].push($("p"+r+c).value.trim())}
  persist();R();
 }
 $("saveall").addEventListener("click",saveAll);
-var atm;document.querySelector('section[data-p="admin"]').addEventListener("input",function(e){if(!/^(i[1-4]|k[12]|p\d\d)$/.test(e.target.id))return;$("stat").textContent="Speichert …";clearTimeout(atm);atm=setTimeout(saveAll,900)});
+var atm;document.querySelector('section[data-p="admin"]').addEventListener("input",function(e){if(!/^(i[1-5]|k[12]|p\d\d)$/.test(e.target.id))return;$("stat").textContent="Speichert …";clearTimeout(atm);atm=setTimeout(saveAll,900)});
 $("filters").addEventListener("click",function(e){var f=e.target.getAttribute("data-f");if(f){filter=f;renderHW()}});
 $("hw").addEventListener("change",function(e){state[e.target.id]=e.target.checked;try{localStorage.setItem("6e-hw",JSON.stringify(state))}catch(x){}renderHW();renderStart()});
 
@@ -339,7 +411,7 @@ function pres(){if(room&&uid&&NAME)room.presence({u:uid,n:NAME}).catch(function(
 function fail(x){dberr="Datenbank: "+((x&&(x.message||x.code))||"Fehler")+".";renderUsers()}
 function register(){
  hello();pres();if(!usersCol||!uid||!NAME)return;
- var q=users[uid]?usersCol.doc(uid).update({name:NAME,last:Date.now(),admin:isAdmin}):usersCol.doc(uid).set({name:NAME,last:Date.now(),banned:false,hw:false,admin:isAdmin});
+ var q=users[uid]?usersCol.doc(uid).update({name:NAME,last:Date.now(),admin:isAdmin,bday:BDAY||(users[uid]&&users[uid].bday)||""}):usersCol.doc(uid).set({name:NAME,last:Date.now(),banned:false,hw:false,admin:isAdmin,bday:BDAY||""});
  q.then(function(){if(dberr){dberr="";renderUsers()}}).catch(fail);
 }
 function renderUsers(){
@@ -353,17 +425,30 @@ function renderUsers(){
  var c=ids.filter(on).length;
  $("onl").textContent=c+" online";$("onl").hidden=!c;
  if(!isAdmin)return;
- $("ucount").innerHTML=(dberr?"<div class='err'>"+esc(dberr)+"</div>":"")+c+" online, "+ids.length+" angemeldet insgesamt.";
+ $("astats").innerHTML="<span><b>"+c+"</b>online</span><span><b>"+ids.length+"</b>Nutzer</span><span><b>"+D.hw.length+"</b>Aufgaben</span><span><b>"+D.te.length+"</b>Termine</span>";$("ucount").innerHTML=(dberr?"<div class='err'>"+esc(dberr)+"</div>":"")+c+" online, "+ids.length+" angemeldet insgesamt.";
  $("ulist").innerHTML=ids.map(function(k){
   var u=all[k],k2=esc(k),self=k===uid;
-  return "<li><span class='dot"+(on(k)?" on":"")+"' title='"+(on(k)?"online":"offline")+"'></span><span class='nm'>"+esc(u.name||"?")+(u.admin?"<span class='bd'>Admin</span>":"")+(u.hw?"<span class='bd'>Dienst</span>":"")+(u.banned?"<span class='bd' style='background:var(--red)'>gesperrt</span>":"")+"</span>"+
-  (self?"<small style='color:var(--muted)'>du</small>":u.ghost?"<small style='color:var(--muted)'>noch nicht gespeichert</small>":"<button type='button' class='sm' data-u='"+k2+"' data-a='hw'>"+(u.hw?"Dienst beenden":"Hausaufgaben-Dienst")+"</button><button type='button' class='sm' data-u='"+k2+"' data-a='ban'>"+(u.banned?"Entsperren":"Sperren")+"</button><button type='button' class='sm red' data-u='"+k2+"' data-a='del'>Löschen</button>")+"</li>";
+  return "<li><span class='dot"+(on(k)?" on":"")+"' title='"+(on(k)?"online":"offline")+"'></span><span class='nm'>"+esc(u.name||"?")+(u.bday?" <small style='color:var(--muted);font-weight:400'>🎂 "+esc(u.bday.split("-").reverse().join("."))+"</small>":"")+(u.admin?"<span class='bd'>Admin</span>":"")+(u.hw?"<span class='bd'>Dienst</span>":"")+(u.banned?"<span class='bd' style='background:var(--red)'>gesperrt</span>":"")+"</span>"+
+  (self?"<small style='color:var(--muted)'>du</small>":u.ghost?"<small style='color:var(--muted)'>noch nicht gespeichert</small>":"<button type='button' class='sm' data-u='"+k2+"' data-a='edit'>✎ Profil</button><button type='button' class='sm' data-u='"+k2+"' data-a='hw'>"+(u.hw?"Dienst beenden":"Hausaufgaben-Dienst")+"</button><button type='button' class='sm' data-u='"+k2+"' data-a='ban'>"+(u.banned?"Entsperren":"Sperren")+"</button><button type='button' class='sm red' data-u='"+k2+"' data-a='del'>Löschen</button>")+"</li>";
  }).join("")||"<li style='color:var(--muted)'>Noch niemand angemeldet.</li>";
 }
 function renderRole(){var t=isAdmin?"Admin":me().hw?"Hausaufgaben-Dienst":"";$("role").hidden=!t;$("role").textContent=t;$("adminout").hidden=!isAdmin}
-hello();$("gate").hidden=!!NAME;
-$("gform").addEventListener("submit",function(e){e.preventDefault();var v=$("gname").value.trim();if(!v)return;NAME=v;store("6e-name",v);$("gate").hidden=true;register();R()});
-$("rename").addEventListener("click",function(){$("gmsg").textContent="Wie heißt du? Dein Name erscheint oben auf der Startseite.";$("gname").value=NAME;$("gate").hidden=false;$("gname").focus()});
+hello();$("gname").value=NAME;$("gbd").value=BDAY;$("gbd").max=new Date().toISOString().slice(0,10);$("gate").hidden=!!(NAME&&(BDAY||isAdmin));
+$("gform").addEventListener("submit",function(e){e.preventDefault();var v=$("gname").value.trim(),b=$("gbd").value;if(!v||!/^\d{4}-\d{2}-\d{2}$/.test(b))return;NAME=v;BDAY=b;store("6e-name",v);store("6e-bday",b);$("gate").hidden=true;register();R();location.hash="#start"});
+$("rename").addEventListener("click",function(){location.hash="#profil"});
+$("psave").addEventListener("click",function(){var v=$("pn").value.trim(),b=$("pb").value;if(!v||!/^\d{4}-\d{2}-\d{2}$/.test(b)){alert("Bitte Name und Geburtstag eintragen.");return}NAME=v;BDAY=b;store("6e-name",v);store("6e-bday",b);register();var em=$("pe").value.trim();if(users[uid])usersCol.doc(uid).update({emo:em});$("pstat").textContent="Gespeichert ✓";setTimeout(function(){$("pstat").textContent=""},2500);R()});
+var pcur=null;
+$("pg").addEventListener("click",function(e){var b=e.target.closest(".pc");if(!b)return;var r=+b.getAttribute("data-r"),c=+b.getAttribute("data-c"),o=cp($("p"+r+c).value),fs={};pcur=[r,c];
+ $("pt").textContent=["Montag","Dienstag","Mittwoch","Donnerstag","Freitag"][c]+", "+(r+1)+". Stunde";$("pf").value=o.f;$("pr").value=o.r;$("pl").value=o.l;
+ for(var i=0;i<6;i++)for(var j=0;j<5;j++){var f=cp($("p"+i+j).value).f;if(f)fs[f]=1}
+ $("fl").innerHTML=Object.keys(fs).map(function(f){return "<option value='"+esc(f)+"'>"}).join("");$("pe2").hidden=false;$("pf").focus()});
+$("pf").addEventListener("change",function(){var v=$("pf").value.trim().toLowerCase();if(!v)return;for(var i=0;i<6;i++)for(var j=0;j<5;j++){var o=cp($("p"+i+j).value);if(o.f.toLowerCase()===v){if(!$("pr").value)$("pr").value=o.r;if(!$("pl").value)$("pl").value=o.l;return}}});
+function pset(v){if(!pcur)return;var r=pcur[0],c=pcur[1];$("p"+r+c).value=v;$("b"+r+c).innerHTML=pcLabel(v);$("pe2").hidden=true;saveAll()}
+$("pok").addEventListener("click",function(){var a=[$("pf").value,$("pr").value,$("pl").value].map(function(x){return x.replace(/;/g,",").trim()});while(a.length&&!a[a.length-1])a.pop();pset(a.join("; "))});
+$("pclr").addEventListener("click",function(){pset("")});
+$("pcan").addEventListener("click",function(){$("pe2").hidden=true});
+$("tfilters").addEventListener("click",function(e){var f=e.target.getAttribute("data-f");if(f){tfil=f;renderTE()}});
+$("atabs").addEventListener("click",function(e){var t=e.target.getAttribute("data-t");if(t)setTab(t)});
 $("gadm").addEventListener("click",function(){$("gadmbox").hidden=!$("gadmbox").hidden;if(!$("gadmbox").hidden)$("gcode").focus()});
 function tryCode(){
  if($("gcode").value.trim()==="1234"){
@@ -378,6 +463,7 @@ $("ulist").addEventListener("click",function(e){
  var b=e.target.closest("button");if(!b||!usersCol)return;
  var k=b.getAttribute("data-u"),a=b.getAttribute("data-a"),u=users[k];if(!u)return;
  if(a==="del"){if(confirm(u.name+" wirklich löschen? Die Person muss sich dann neu anmelden."))usersCol.doc(k).delete().catch(function(){alert("Das hat nicht geklappt.")})}
+ else if(a==="edit"){var nn=prompt("Name:",u.name||"");if(nn===null)return;nn=nn.trim()||u.name;var bb=prompt("Geburtstag (JJJJ-MM-TT):",u.bday||"");if(bb===null)bb=u.bday||"";if(bb&&!/^\d{4}-\d{2}-\d{2}$/.test(bb)){alert("Bitte so: 2014-03-27");return}usersCol.doc(k).update({name:nn,bday:bb}).catch(function(){alert("Das hat nicht geklappt.")})}
  else if(a==="ban")usersCol.doc(k).update({banned:!u.banned}).catch(function(){alert("Das hat nicht geklappt.")});
  else if(a==="hw")usersCol.doc(k).update({hw:!u.hw}).catch(function(){alert("Das hat nicht geklappt.")});
 });
@@ -435,6 +521,7 @@ function makeBackend(){
  subs.u.push(function(s){
   users={};s.docs.forEach(function(d){if(d.exists)users[d.id]=d.data()});
   loaded=true;
+  var mm=users[uid];if(mm&&Date.now()-lastW>8000){if(mm.name&&mm.name!==NAME){NAME=mm.name;store("6e-name",NAME);hello();pfilled=false}if(mm.bday&&mm.bday!==BDAY){BDAY=mm.bday;store("6e-bday",BDAY);pfilled=false}}
   if(users[uid])wasIn=true;
   else if(wasIn&&!isAdmin&&Date.now()-lastW>12000){wasIn=false;NAME="";store("6e-name",null);hello();$("gmsg").textContent="Der Admin hat dich entfernt. Du kannst dich neu anmelden.";$("gate").hidden=false}
   else if(NAME&&!wasIn){register()}
