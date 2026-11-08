@@ -91,10 +91,43 @@ textarea{min-height:90px;resize:vertical}
 #alist button{font:inherit;font-size:13px;background:none;border:1px solid var(--red);color:var(--red);border-radius:4px;cursor:pointer;flex:none}
 #stat{font-weight:800;color:var(--ok);margin-left:10px}
 :focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.4)}100%{transform:scale(1)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(46,139,87,.7)}100%{box-shadow:0 0 0 9px rgba(46,139,87,0)}}
+@keyframes shake{0%,100%{transform:rotate(-1deg)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+@keyframes drop{to{transform:translateY(105vh) rotate(720deg);opacity:0}}
+@keyframes bounce{0%{transform:scale(.6) rotate(-6deg);opacity:0}70%{transform:scale(1.05) rotate(1deg);opacity:1}100%{transform:scale(1) rotate(-1deg);opacity:1}}
+main section:not([hidden]){animation:up .45s ease both}
+.hw li{animation:up .4s ease both;animation-delay:calc(var(--i,0)*50ms)}
+.dates li{animation:up .4s ease both;animation-delay:calc(var(--i,0)*50ms)}
+.tile{animation:fade .6s ease both;transition:transform .2s,background .2s,box-shadow .2s}
+.tile:hover{transform:translateY(-5px) rotate(0);box-shadow:0 8px 0 rgba(0,0,0,.12)}
+.gate:not([hidden]){animation:fade .3s ease both}
+.gate:not([hidden]) form,.gate:not([hidden]) .box{animation:bounce .55s cubic-bezier(.3,1.4,.5,1) both}
+.gate form.shake{animation:shake .45s ease}
+.hw li input:checked{animation:pop .35s ease}
+.btn{transition:transform .15s,filter .15s}.btn:hover{transform:translateY(-2px);filter:brightness(1.15)}.btn:active{transform:scale(.96)}
+input[type=password]{font:inherit;width:100%;padding:9px 11px;border:2px solid var(--ink);border-radius:5px;background:var(--bg);color:var(--text);margin:10px 0}
+.dot{width:11px;height:11px;border-radius:50%;background:var(--line);display:inline-block;flex:none}
+.dot.on{background:var(--ok);animation:pulse 1.6s infinite}
+.bd{display:inline-block;font:800 12px Nunito,sans-serif;background:var(--ink);color:var(--paper);border-radius:10px;padding:1px 9px;margin-left:8px;vertical-align:middle;animation:pop .5s ease}
+#ulist{list-style:none;margin:0;padding:0}
+#ulist li{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 0;border-bottom:1px dotted var(--line)}
+#ulist .nm{flex:1;min-width:110px;font-weight:800}
+#ulist .nm small{font-weight:400;color:var(--muted)}
+.sm{font:inherit;font-size:13px;font-weight:800;background:var(--paper);color:var(--text);border:1px solid var(--ink);border-radius:4px;padding:2px 9px;cursor:pointer;transition:transform .15s,background .15s}
+.sm:hover{background:var(--hl);transform:translateY(-2px)}
+.sm.red{border-color:var(--red);color:var(--red)}
+.acts{display:flex;gap:6px;flex:none;align-items:flex-start}
+.conf{position:fixed;top:-20px;width:10px;height:14px;z-index:90;pointer-events:none;animation:drop 1.8s ease-in forwards}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div class="gate" id="gate" hidden><form id="gform"><h2 class="hand">Willkommen in der 6e!</h2><p>Wie heißt du? Dein Name erscheint oben auf der Startseite.</p><input type="text" id="gname" maxlength="30" autocomplete="given-name" required placeholder="Dein Vorname"><button class="btn" type="submit">Los geht’s</button></form></div>
+<div class="gate" id="gate" hidden><form id="gform"><h2 class="hand">Willkommen in der 6e!</h2><p id="gmsg">Wie heißt du? Dein Name erscheint oben auf der Startseite.</p><input type="text" id="gname" maxlength="30" autocomplete="given-name" required placeholder="Dein Vorname"><button class="btn" type="submit">Los geht’s</button><div style="margin-top:14px"><button type="button" class="lnk" id="gadm" style="padding:0">Admin-Login</button></div><div id="gadmbox" hidden><input type="password" id="gcode" inputmode="numeric" placeholder="Admin-Code" autocomplete="off"><button class="btn" type="button" id="gcodeok">Als Admin anmelden</button></div></form></div>
+<div class="gate" id="ban" hidden style="z-index:60"><div class="box" style="max-width:360px;text-align:center"><h2 class="hand">Gesperrt</h2><p>Der Admin hat dich gesperrt. Du kannst die Seite gerade nicht nutzen.</p></div></div>
 
 <nav><div class="wrap" id="nav">
 <a href="#start" data-p="start">Start</a><a href="#hausaufgaben" data-p="hausaufgaben">Hausaufgaben</a><a href="#stundenplan" data-p="stundenplan">Stundenplan</a><a href="#termine" data-p="termine">Termine</a><a href="#klasse" data-p="klasse">Klassenleben</a><a href="#admin" data-p="admin" id="navadmin" hidden>Admin</a>
@@ -104,7 +137,7 @@ textarea{min-height:90px;resize:vertical}
 
 <section data-p="start">
 <h1 class="hand">Klasse 6e</h1>
-<p class="hello"><span id="hello"></span><button type="button" class="lnk" id="rename">Name ändern</button></p>
+<p class="hello"><span id="hello"></span><span class="bd" id="role" hidden></span><button type="button" class="lnk" id="rename">Name ändern</button><button type="button" class="lnk" id="adminout" hidden>Admin abmelden</button></p>
 <p class="meta" id="meta"></p>
 <div class="note" id="msg" hidden><h3 class="hand">Mitteilung</h3><p id="msgt"></p></div>
 <div class="box" id="today"></div>
@@ -114,6 +147,11 @@ textarea{min-height:90px;resize:vertical}
 <section data-p="hausaufgaben" hidden>
 <h2 class="hand">Hausaufgaben</h2>
 <p class="lead">Hake ab, was du erledigt hast. Das merkt sich dein Browser.</p>
+<div class="adm" id="hwpanel" hidden><h3 class="hand">Hausaufgabe eintragen</h3>
+<input type="text" id="hf" placeholder="Fach, zum Beispiel Mathe" maxlength="20">
+<input type="text" id="ht" placeholder="Was ist zu tun?" maxlength="140">
+<label for="hb">Abgabe bis</label><input type="date" id="hb">
+<button class="btn" type="button" id="hadd">Hausaufgabe speichern</button><p class="lead" style="margin:8px 0 0">Mit ✎ und ✕ bei den Aufgaben kannst du sie ändern oder löschen.</p></div>
 <div class="filters" id="filters"></div>
 <ul class="hw" id="hw"></ul>
 </section>
@@ -139,11 +177,7 @@ textarea{min-height:90px;resize:vertical}
 <h2 class="hand">Admin</h2>
 <p class="lead">Nur für dich sichtbar. Alles hier kannst du einfach ausfüllen, ohne Code.</p>
 
-<div class="adm"><h3 class="hand">Hausaufgabe hinzufügen</h3>
-<input type="text" id="hf" placeholder="Fach, zum Beispiel Mathe" maxlength="20">
-<input type="text" id="ht" placeholder="Was ist zu tun?" maxlength="140">
-<label for="hb">Abgabe bis</label><input type="date" id="hb">
-<button class="btn" type="button" id="hadd">Hausaufgabe speichern</button></div>
+<div class="adm"><h3 class="hand">Nutzer</h3><p class="lead" id="ucount"></p><ul id="ulist"></ul></div>
 
 <div class="adm"><h3 class="hand">Termin hinzufügen</h3>
 <input type="text" id="tt" placeholder="Titel, zum Beispiel Mathe-Arbeit" maxlength="60">
@@ -187,7 +221,11 @@ function cell(r,c){return (D.plan[r]&&D.plan[r][c])||""}
 function lines(t){return String(t||"").split("\n").map(function(x){return x.trim()}).filter(Boolean)}
 var state={};try{state=JSON.parse(localStorage.getItem("6e-hw")||"{}")}catch(e){}
 var NAME="";try{NAME=localStorage.getItem("6e-name")||""}catch(e){}
-var filter="Alle",isAdmin=false,dbDoc=null,filled=false;
+var filter="Alle",dbDoc=null,filled=false,usersCol=null,users={},uid="",loaded=false,wasIn=false;
+var isAdmin=false;try{isAdmin=localStorage.getItem("6e-admin")==="1"}catch(e){}
+function me(){return users[uid]||{}}
+function canHW(){return isAdmin||!!me().hw}
+function burst(){for(var i=0;i<28;i++){var c=document.createElement("i");c.className="conf";c.style.left=Math.random()*100+"vw";c.style.background=["#fff176","#d9534f","#2e8b57","#9db4ff","#ff9f43"][i%5];c.style.animationDelay=Math.random()*.4+"s";document.body.appendChild(c);setTimeout(function(x){x.remove()},2400,c)}}
 
 function offen(){return D.hw.filter(function(h){return diff(h.bis)>=0&&!state[h.id]}).length}
 function naechster(){var l=D.te.filter(function(t){return diff(t.d)>=0}).sort(function(a,b){return a.d<b.d?-1:1});return l[0]}
@@ -214,10 +252,10 @@ function renderHW(){
  $("filters").hidden=fs.length<3;
  $("filters").innerHTML=fs.map(function(f){return "<button type='button' aria-pressed='"+(f===filter)+"' data-f='"+esc(f)+"'>"+esc(f)+"</button>"}).join("");
  var l=D.hw.filter(function(x){return filter==="Alle"||x.fach===filter}).sort(function(a,b){return a.bis<b.bis?-1:1});
- $("hw").innerHTML=l.map(function(x){
+ $("hw").innerHTML=l.map(function(x,i){
   var n=diff(x.bis),d=dt(x.bis);
   var due=n<0?"war fällig am "+d.getDate()+". "+MON[d.getMonth()]:n<2?rel(n)+" fällig":"bis "+d.getDate()+". "+MON[d.getMonth()];
-  return "<li class='"+(state[x.id]?"done":"")+"'><input type='checkbox' id='"+esc(x.id)+"'"+(state[x.id]?" checked":"")+"><label for='"+esc(x.id)+"'><b>"+esc(x.fach)+"</b> <span class='txt'>"+esc(x.text)+"</span><br><span class='due"+(n<2&&!state[x.id]?" soon":"")+"'>"+due+"</span></label></li>";
+  return "<li style='--i:"+i+"' class='"+(state[x.id]?"done":"")+"'><input type='checkbox' id='"+esc(x.id)+"'"+(state[x.id]?" checked":"")+"><label for='"+esc(x.id)+"'><b>"+esc(x.fach)+"</b> <span class='txt'>"+esc(x.text)+"</span><br><span class='due"+(n<2&&!state[x.id]?" soon":"")+"'>"+due+"</span></label>"+(canHW()?"<span class='acts'><button type='button' class='sm' data-e='"+esc(x.id)+"' aria-label='Bearbeiten'>✎</button><button type='button' class='sm red' data-x='"+esc(x.id)+"' aria-label='Löschen'>✕</button></span>":"")+"</li>";
  }).join("")||"<li class='empty'>Noch keine Hausaufgaben eingetragen.</li>";
 }
 function renderPlan(){
@@ -229,9 +267,9 @@ function renderPlan(){
 }
 function renderTE(){
  var l=D.te.slice().sort(function(a,b){return a.d<b.d?-1:1});
- $("dates").innerHTML=l.map(function(x){
+ $("dates").innerHTML=l.map(function(x,i){
   var n=diff(x.d),d=dt(x.d);
-  return "<li class='"+(n<0?"past":"")+"'><div class='d'>"+d.getDate()+"<span>"+MON[d.getMonth()]+"</span></div><div class='t'>"+esc(x.t)+(x.s?"<small>"+esc(x.s)+"</small>":"")+"</div>"+(n>=0?"<div class='in'>"+rel(n)+"</div>":"")+"</li>";
+  return "<li style='--i:"+i+"' class='"+(n<0?"past":"")+"'><div class='d'>"+d.getDate()+"<span>"+MON[d.getMonth()]+"</span></div><div class='t'>"+esc(x.t)+(x.s?"<small>"+esc(x.s)+"</small>":"")+"</div>"+(n>=0?"<div class='in'>"+rel(n)+"</div>":"")+"</li>";
  }).join("")||"<li class='empty'>Noch keine Termine eingetragen.</li>";
 }
 function renderKL(){
@@ -252,7 +290,7 @@ function renderAdmin(){
   $("pg").innerHTML=h;
  }
 }
-function R(){renderStart();renderHW();renderPlan();renderTE();renderKL();renderAdmin();route()}
+function R(){$("hwpanel").hidden=!canHW();renderRole();renderUsers();renderStart();renderHW();renderPlan();renderTE();renderKL();renderAdmin();route()}
 
 function route(){
  var p=location.hash.slice(1)||"start";
@@ -293,25 +331,81 @@ $("saveall").addEventListener("click",function(){
 $("filters").addEventListener("click",function(e){var f=e.target.getAttribute("data-f");if(f){filter=f;renderHW()}});
 $("hw").addEventListener("change",function(e){state[e.target.id]=e.target.checked;try{localStorage.setItem("6e-hw",JSON.stringify(state))}catch(x){}renderHW();renderStart()});
 
-/* Name */
+/* Name, Rollen, Nutzer */
 function hello(){$("hello").textContent=NAME?"Hallo, "+NAME+"!":""}
+function renderRole(){var t=isAdmin?"Admin":me().hw?"Hausaufgaben-Dienst":"";$("role").hidden=!t;$("role").textContent=t;$("adminout").hidden=!isAdmin}
+function store(k,v){try{v===null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(x){}}
+function register(){
+ hello();if(!usersCol||!uid||!NAME)return;
+ var m=me();
+ if(users[uid])usersCol.doc(uid).update({name:NAME,last:Date.now(),admin:isAdmin}).catch(function(){});
+ else usersCol.doc(uid).set({name:NAME,last:Date.now(),banned:false,hw:false,admin:isAdmin}).catch(function(){});
+}
+function renderUsers(){
+ var b=!!(loaded&&me().banned&&!isAdmin);$("ban").hidden=!b;
+ if(!isAdmin)return;
+ var ids=Object.keys(users),t=Date.now();
+ function on(k){return t-(users[k].last||0)<75000}
+ ids.sort(function(a,b){return (on(b)-on(a))||String(users[a].name).localeCompare(String(users[b].name))});
+ var c=ids.filter(on).length;
+ $("ucount").textContent=c+" online, "+ids.length+" angemeldet insgesamt.";
+ $("ulist").innerHTML=ids.map(function(k){
+  var u=users[k],k2=esc(k),self=k===uid;
+  return "<li><span class='dot"+(on(k)?" on":"")+"' title='"+(on(k)?"online":"offline")+"'></span><span class='nm'>"+esc(u.name||"?")+(u.admin?"<span class='bd'>Admin</span>":"")+(u.hw?"<span class='bd'>Dienst</span>":"")+(u.banned?"<span class='bd' style='background:var(--red)'>gesperrt</span>":"")+"</span>"+
+  (self?"<small style='color:var(--muted)'>du</small>":"<button type='button' class='sm' data-u='"+k2+"' data-a='hw'>"+(u.hw?"Dienst beenden":"Hausaufgaben-Dienst")+"</button><button type='button' class='sm' data-u='"+k2+"' data-a='ban'>"+(u.banned?"Entsperren":"Sperren")+"</button><button type='button' class='sm red' data-u='"+k2+"' data-a='del'>Löschen</button>")+"</li>";
+ }).join("")||"<li style='color:var(--muted)'>Noch niemand angemeldet.</li>";
+}
 hello();$("gate").hidden=!!NAME;
-$("gform").addEventListener("submit",function(e){e.preventDefault();var v=$("gname").value.trim();if(!v)return;NAME=v;try{localStorage.setItem("6e-name",v)}catch(x){}$("gate").hidden=true;hello()});
-$("rename").addEventListener("click",function(){$("gname").value=NAME;$("gate").hidden=false;$("gname").focus()});
+$("gform").addEventListener("submit",function(e){e.preventDefault();var v=$("gname").value.trim();if(!v)return;NAME=v;store("6e-name",v);$("gate").hidden=true;register();R()});
+$("rename").addEventListener("click",function(){$("gmsg").textContent="Wie heißt du? Dein Name erscheint oben auf der Startseite.";$("gname").value=NAME;$("gate").hidden=false;$("gname").focus()});
+$("gadm").addEventListener("click",function(){$("gadmbox").hidden=!$("gadmbox").hidden;if(!$("gadmbox").hidden)$("gcode").focus()});
+function tryCode(){
+ if($("gcode").value.trim()==="1234"){
+  isAdmin=true;store("6e-admin","1");if(!NAME){NAME="Admin";store("6e-name",NAME)}
+  $("gcode").value="";$("gadmbox").hidden=true;$("gate").hidden=true;register();R();location.hash="#admin";burst();
+ }else{var f=$("gform");f.classList.remove("shake");void f.offsetWidth;f.classList.add("shake");$("gcode").value="";$("gcode").placeholder="Falscher Code"}
+}
+$("gcodeok").addEventListener("click",tryCode);
+$("gcode").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();tryCode()}});
+$("adminout").addEventListener("click",function(){isAdmin=false;store("6e-admin",null);location.hash="#start";R()});
+$("ulist").addEventListener("click",function(e){
+ var b=e.target.closest("button");if(!b||!usersCol)return;
+ var k=b.getAttribute("data-u"),a=b.getAttribute("data-a"),u=users[k];if(!u)return;
+ if(a==="del"){if(confirm(u.name+" wirklich löschen? Die Person muss sich dann neu anmelden."))usersCol.doc(k).delete().catch(function(){alert("Das hat nicht geklappt.")})}
+ else if(a==="ban")usersCol.doc(k).update({banned:!u.banned}).catch(function(){alert("Das hat nicht geklappt.")});
+ else if(a==="hw")usersCol.doc(k).update({hw:!u.hw}).catch(function(){alert("Das hat nicht geklappt.")});
+});
+$("hw").addEventListener("click",function(e){
+ var b=e.target.closest("button");if(!b||!canHW())return;
+ var ed=b.getAttribute("data-e"),del=b.getAttribute("data-x"),id=ed||del;if(!id)return;
+ var i=D.hw.findIndex(function(x){return x.id===id});if(i<0)return;
+ if(del){if(confirm("Diese Hausaufgabe löschen?")){D.hw.splice(i,1);persist();R()}}
+ else{var t=prompt("Aufgabe ändern:",D.hw[i].text);if(t&&t.trim()){D.hw[i].text=t.trim();var d=prompt("Abgabe bis (JJJJ-MM-TT):",D.hw[i].bis);if(d&&/^\d{4}-\d{2}-\d{2}$/.test(d))D.hw[i].bis=d;persist();R()}}
+});
+$("hw").addEventListener("change",function(e){if(e.target.checked&&e.target.type==="checkbox")burst()});
 
 R();
+setInterval(function(){register();renderUsers()},30000);
 (async function(){
  try{
   var u=await claude.use("user"),db=await claude.use("db");
+  uid=(u&&await u.id())||"";
+  if(!uid){try{uid=localStorage.getItem("6e-uid")||"g"+Math.random().toString(36).slice(2,10);localStorage.setItem("6e-uid",uid)}catch(x){uid="g"+Date.now()}}
   if(!db)return;
-  dbDoc=db.doc("klasse/daten");
-  isAdmin=u?!!(await u.canEdit()):false;
+  dbDoc=db.doc("klasse/daten");usersCol=db.collection("users");
+  usersCol.onSnapshot(function(s){
+   users={};s.docs.forEach(function(d){if(d.exists)users[d.id]=d.data()});
+   loaded=true;
+   if(users[uid])wasIn=true;
+   else if(wasIn&&!isAdmin){wasIn=false;NAME="";store("6e-name",null);hello();$("gmsg").textContent="Der Admin hat dich entfernt. Du kannst dich neu anmelden.";$("gate").hidden=false}
+   else if(NAME&&!wasIn){register()}
+   R();
+  },function(){});
   dbDoc.onSnapshot(function(s){
    var d=s.exists?s.data():null;
    if(d){D.info=d.info||{};D.hw=d.hw||[];D.te=d.te||[];D.plan=d.plan||[];D.regeln=d.regeln||"";D.dienste=d.dienste||""}
    R();
   },function(){R()});
-  R();
  }catch(e){}
 })();
 </script>
