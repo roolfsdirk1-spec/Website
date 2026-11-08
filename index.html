@@ -129,6 +129,7 @@ main section:not([hidden]){animation:up .45s ease both}
 </div></nav>
 
 <main class="wrap">
+<div class="err" id="nodb" hidden>⚠️ Keine Verbindung zum gemeinsamen Speicher. Melde dich bei claude.ai an und öffne den Link dort, sonst siehst du keine Änderungen von anderen Geräten und deine Änderungen werden nicht geteilt.</div>
 
 <section data-p="start">
 <h1 class="hand">Klasse 6e</h1>
@@ -216,7 +217,7 @@ function cell(r,c){return (D.plan[r]&&D.plan[r][c])||""}
 function lines(t){return String(t||"").split("\n").map(function(x){return x.trim()}).filter(Boolean)}
 var state={};try{state=JSON.parse(localStorage.getItem("6e-hw")||"{}")}catch(e){}
 var NAME="";try{NAME=localStorage.getItem("6e-name")||""}catch(e){}
-var filter="Alle",dbDoc=null,filled=false,usersCol=null,users={},uid="",loaded=false,wasIn=false;
+var filter="Alle",dbDoc=null,filled=false,dbReady=false,usersCol=null,users={},uid="",loaded=false,wasIn=false;
 var isAdmin=false;try{isAdmin=localStorage.getItem("6e-admin")==="1"}catch(e){}
 var live=[],room=null,dberr="";
 function me(){return users[uid]||{}}
@@ -277,7 +278,7 @@ function renderAdmin(){
  $("navadmin").hidden=!isAdmin;
  if(!isAdmin)return;
  $("alist").innerHTML=D.hw.map(function(x,i){return "<li><span>"+esc(x.fach)+": "+esc(x.text)+"</span><button type='button' data-k='hw' data-i='"+i+"'>Löschen</button></li>"}).join("")+D.te.map(function(x,i){return "<li><span>"+esc(x.d)+": "+esc(x.t)+"</span><button type='button' data-k='te' data-i='"+i+"'>Löschen</button></li>"}).join("")||"<li style='color:var(--muted)'>Noch nichts eingetragen.</li>";
- if(!filled){
+ if(!filled&&dbReady){
   filled=true;var i=D.info;
   $("i1").value=i.lehrer||"";$("i2").value=i.raum||"";$("i3").value=i.jahr||"";$("i4").value=i.msg||"";
   $("k1").value=D.regeln||"";$("k2").value=D.dienste||"";
@@ -318,12 +319,14 @@ $("alist").addEventListener("click",function(e){
  var k=e.target.getAttribute("data-k");if(!k)return;
  D[k].splice(+e.target.getAttribute("data-i"),1);persist();R();
 });
-$("saveall").addEventListener("click",function(){
+function saveAll(){
  D.info={lehrer:$("i1").value.trim(),raum:$("i2").value.trim(),jahr:$("i3").value.trim(),msg:$("i4").value.trim()};
  D.regeln=$("k1").value;D.dienste=$("k2").value;
  D.plan=[];for(var r=0;r<6;r++){D.plan.push([]);for(var c=0;c<5;c++)D.plan[r].push($("p"+r+c).value.trim())}
  persist();R();
-});
+}
+$("saveall").addEventListener("click",saveAll);
+var atm;document.querySelector('section[data-p="admin"]').addEventListener("input",function(e){if(!/^(i[1-4]|k[12]|p\d\d)$/.test(e.target.id))return;$("stat").textContent="Speichert …";clearTimeout(atm);atm=setTimeout(saveAll,900)});
 $("filters").addEventListener("click",function(e){var f=e.target.getAttribute("data-f");if(f){filter=f;renderHW()}});
 $("hw").addEventListener("change",function(e){state[e.target.id]=e.target.checked;try{localStorage.setItem("6e-hw",JSON.stringify(state))}catch(x){}renderHW();renderStart()});
 
@@ -393,7 +396,7 @@ setInterval(function(){register();renderUsers()},30000);
   uid=(u&&await u.id())||"";
   if(!uid){try{uid=localStorage.getItem("6e-uid")||"g"+Math.random().toString(36).slice(2,10);localStorage.setItem("6e-uid",uid)}catch(x){uid="g"+Date.now()}}
   try{room=await claude.use("room");if(room){room.onPeers(function(c){live=c.peers.slice();renderUsers()},function(){});pres()}}catch(x){}
-  if(!db)return;
+  if(!db){dbReady=true;$("nodb").hidden=false;R();return}
   dbDoc=db.doc("klasse/daten");usersCol=db.collection("users");
   usersCol.onSnapshot(function(s){
    users={};s.docs.forEach(function(d){if(d.exists)users[d.id]=d.data()});
@@ -406,9 +409,9 @@ setInterval(function(){register();renderUsers()},30000);
   dbDoc.onSnapshot(function(s){
    var d=s.exists?s.data():null;
    if(d){D.info=d.info||{};D.hw=d.hw||[];D.te=d.te||[];D.plan=d.plan||[];D.regeln=d.regeln||"";D.dienste=d.dienste||""}
-   R();
-  },function(){R()});
- }catch(e){}
+   dbReady=true;R();
+  },function(){dbReady=true;$("nodb").hidden=false;R()});
+ }catch(e){dbReady=true;$("nodb").hidden=false;R()}
 })();
 </script>
 </body>
