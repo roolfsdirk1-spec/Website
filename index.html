@@ -143,6 +143,66 @@ select{font:inherit;width:100%;padding:10px 13px;border:2px solid var(--line);bo
 .peditor h4{margin:0 0 8px;font-size:20px;font-family:Fredoka,sans-serif}
 .prow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .pg{min-width:560px!important}
+
+/* ===== Update 1: Design, Hero, Chat ===== */
+nav{backdrop-filter:blur(12px);background:color-mix(in srgb,var(--paper) 86%,transparent)}
+main section:not([hidden]){animation:fadeUp .45s ease both}
+.tile{transition:transform .25s,box-shadow .25s}.tile:hover{transform:translateY(-6px) rotate(-1deg);box-shadow:0 14px 30px rgba(79,70,229,.25)}
+.box,.adm{border-radius:22px}
+.hero{position:relative;overflow:hidden;border-radius:26px;padding:24px 22px;margin:0 0 18px;color:#fff;background:linear-gradient(135deg,var(--ink),var(--ink2));box-shadow:var(--sh);animation:heroIn .9s cubic-bezier(.2,1.4,.4,1) both}
+.hero::after{content:"";position:absolute;inset:-60%;background:conic-gradient(from 0deg,transparent,rgba(255,255,255,.22),transparent 25%);animation:spin 7s linear infinite}
+.hero>*{position:relative;z-index:1;margin:0}
+.hero .hand{color:#fff;font-size:clamp(28px,7vw,44px);line-height:1.1}
+.hero small{font-weight:800;letter-spacing:.04em;opacity:.9}
+.hero .big{display:flex;align-items:baseline;gap:12px}
+.hero .big b{font:600 clamp(84px,27vw,160px)/1 Fredoka,sans-serif;animation:pulse 2s ease-in-out infinite}
+.hero .big span{font-size:24px;font-weight:800}
+@keyframes heroIn{from{opacity:0;transform:translateY(40px) scale(.85) rotate(-2deg)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{transform:scale(1.06)}}
+@keyframes pop{from{opacity:0;transform:scale(.85)}}
+.rooms{display:flex;gap:6px;overflow-x:auto;margin:0 0 10px;padding-bottom:4px}
+.rb{border:0;border-radius:99px;padding:7px 14px;font:800 15px Nunito,sans-serif;background:var(--paper);color:var(--text);cursor:pointer;white-space:nowrap}
+.rb.on{background:linear-gradient(90deg,var(--ink),var(--ink2));color:#fff}
+.cbox{height:min(52vh,460px);overflow-y:auto;background:var(--paper);border-radius:20px;padding:12px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:8px}
+.cm{max-width:80%;padding:8px 12px;border-radius:16px 16px 16px 4px;background:var(--line);align-self:flex-start;animation:pop .25s both;word-break:break-word}
+.cm.me{align-self:flex-end;background:linear-gradient(90deg,var(--ink),var(--ink2));color:#fff;border-radius:16px 16px 4px 16px}
+.cm small{display:block;opacity:.75;font-weight:800}
+.cm .x{border:0;background:none;color:inherit;cursor:pointer;opacity:.7}
+.crow{display:flex;gap:8px;margin:10px 0}.crow input{flex:1}
+.gm label{display:inline-flex;gap:6px;margin:4px 12px 4px 0;align-items:center}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+/* ===== Update 2: Themen und Quizze ===== */
+.th{background:var(--paper);border-radius:20px;padding:14px 16px;margin:0 0 12px;box-shadow:var(--sh);animation:fadeUp .4s both}
+.th h3{margin:4px 0}.th p{margin:4px 0;white-space:pre-line}
+.qc{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;background:var(--paper);border-radius:18px;padding:12px 16px;margin:0 0 10px;box-shadow:var(--sh);animation:fadeUp .4s both}
+.qa{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 14px;border:2px solid var(--line);border-radius:14px;background:var(--paper);color:var(--text);font:800 17px Nunito,sans-serif;cursor:pointer;transition:transform .15s}
+.qa:hover{transform:translateX(4px)}.qa.ok{background:var(--ok);color:#fff;border-color:var(--ok)}.qa.no{background:var(--red);color:#fff;border-color:var(--red);animation:shake .3s}
+.qbar{height:8px;border-radius:9px;background:var(--line);overflow:hidden;margin:0 0 12px}.qbar i{display:block;height:100%;background:linear-gradient(90deg,var(--ink),var(--ink2));transition:width .4s}
+.qres{text-align:center}.qres b{display:block;font:600 72px/1 Fredoka,sans-serif;color:var(--ink)}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* ===== Update 3: Neue Navigation (ohne Scrollen) ===== */
+nav{display:none!important}
+body{padding-bottom:calc(86px + env(safe-area-inset-bottom,0px))}
+main{padding-top:18px}
+#bnav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;gap:4px;padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(14px);box-shadow:0 -6px 24px rgba(79,70,229,.16);border-radius:22px 22px 0 0}
+#bnav button{flex:1;border:0;background:none;color:var(--muted);font:800 12px Nunito,sans-serif;padding:6px 2px;border-radius:16px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;transition:transform .2s,background .2s}
+#bnav button i{font-style:normal;font-size:24px;line-height:1.1;transition:transform .25s}
+#bnav button.on{color:#fff;background:linear-gradient(135deg,var(--ink),var(--ink2))}
+#bnav button.on i{transform:translateY(-2px) scale(1.15)}
+#sheet{position:fixed;inset:0;z-index:30;background:rgba(10,12,40,.5);display:flex;align-items:flex-end;animation:fadeIn .2s both}
+#sheet>div{width:100%;max-width:640px;margin:0 auto;background:var(--paper);border-radius:28px 28px 0 0;padding:18px 16px calc(24px + env(safe-area-inset-bottom,0px));animation:slideUp .3s cubic-bezier(.2,1.2,.4,1) both}
+#sheet h3{margin:0 0 12px;text-align:center}
+#sheet .g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+#sheet a{display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 4px;border-radius:18px;background:var(--bg);color:var(--text);text-decoration:none;font-weight:800;font-size:14px;text-align:center;transition:transform .15s}
+#sheet a:active{transform:scale(.94)}
+#sheet a i{font-style:normal;font-size:30px}
+#sheet a.on{outline:3px solid var(--ink)}
+@keyframes fadeIn{from{opacity:0}}
+@keyframes slideUp{from{transform:translateY(100%)}}
 </style>
 </head>
 <body>
@@ -151,7 +211,7 @@ select{font:inherit;width:100%;padding:10px 13px;border:2px solid var(--line);bo
 
 <nav><div class="wrap" id="nav">
 <a href="#start" data-p="start">🏠 Start</a><a href="#hausaufgaben" data-p="hausaufgaben">📝 Hausaufgaben</a><a href="#stundenplan" data-p="stundenplan">🕗 Stundenplan</a><a href="#termine" data-p="termine">📅 Termine</a><a href="#klasse" data-p="klasse">🎒 Klassenleben</a><a href="#geburtstage" data-p="geburtstage">🎂 Geburtstage</a><a href="#profil" data-p="profil">👤 Profil</a><a href="#admin" data-p="admin" id="navadmin" hidden>🛡️ Admin</a>
-</div></nav>
+<a href="#chat" data-p="chat">💬 Chat</a><a href="#themen" data-p="themen">📚 Themen</a><a href="#quiz" data-p="quiz">🧠 Quiz</a></div></nav>
 
 <main class="wrap">
 <div class="err" id="nodb" hidden></div>
@@ -161,7 +221,7 @@ select{font:inherit;width:100%;padding:10px 13px;border:2px solid var(--line);bo
 <p class="hello"><span id="hello"></span><span class="bd" id="role" hidden></span><span class="chip" id="onl" hidden></span><button type="button" class="lnk" id="rename">Mein Profil</button><button type="button" class="lnk" id="adminout" hidden>Admin abmelden</button></p>
 <p class="meta" id="meta"></p>
 <div class="note" id="msg" hidden><h3 class="hand">Mitteilung</h3><p id="msgt"></p></div>
-<div class="box" id="today"></div>
+<div id="hero"></div><div class="box" id="today"></div>
 <div id="soon"></div>
 <div class="tiles" id="tiles"></div>
 </section>
@@ -237,7 +297,22 @@ select{font:inherit;width:100%;padding:10px 13px;border:2px solid var(--line);bo
 <button class="btn" type="button" id="saveall">Infos, Stundenplan und Klassenleben speichern</button><span id="stat"></span>
 </section>
 
+<section data-p="chat" hidden><h2 class="hand">💬 Chat</h2><p class="lead">Klassenchat für alle, dazu eigene Gruppen mit ausgewählten Leuten.</p>
+<div class="rooms" id="rooms"></div><div class="cbox" id="cmsgs"></div>
+<div class="crow"><input type="text" id="cin" maxlength="300" placeholder="Nachricht schreiben …" autocomplete="off"><button class="btn" type="button" id="csend">Senden</button></div>
+<details class="adm" id="gdet"><summary class="hand">＋ Neue Gruppe</summary><input type="text" id="gn" maxlength="30" placeholder="Gruppenname"><p class="lead" style="margin:6px 0">Wer darf rein?</p><div class="gm" id="gmem"></div><button class="btn" type="button" id="gmk">Gruppe erstellen</button></details></section>
+
+<section data-p="themen" hidden><h2 class="hand">📚 Unterrichtsthemen</h2><p class="lead">Was gerade im Unterricht dran ist.</p>
+<div class="adm" id="thpanel" hidden><h3 class="hand">Thema eintragen</h3><input type="text" id="thf" maxlength="20" placeholder="Fach"><input type="text" id="tht" maxlength="60" placeholder="Thema, zum Beispiel Bruchrechnung"><textarea id="thx" maxlength="600" placeholder="Worum geht es? Stichpunkte, einer pro Zeile"></textarea><button class="btn" type="button" id="thsave">Speichern</button></div>
+<div id="thlist"></div></section>
+
+<section data-p="quiz" hidden><h2 class="hand">🧠 Übungsquizze</h2><p class="lead">Teste dich vor der Klausur.</p>
+<div class="adm" id="qpanel" hidden><h3 class="hand">Quiz erstellen</h3><input type="text" id="qt" maxlength="50" placeholder="Titel, zum Beispiel Mathe Brüche"><input type="text" id="qf" maxlength="20" placeholder="Fach"><textarea id="qx" rows="10" maxlength="6000"></textarea><p class="lead">So geht's: Erste Zeile ist die Frage, darunter 2 bis 4 Antworten, die richtige mit * davor. Fragen trennst du mit einer Leerzeile.</p><button class="btn" type="button" id="qsave">Quiz speichern</button> <button class="sm" type="button" id="qcancel" hidden>Abbrechen</button></div>
+<div id="qlist"></div><div class="box" id="qplay" hidden></div></section>
+
 </main>
+<div id="bnav"></div><div id="sheet" hidden></div>
+
 
 <script type="application/json" id="seed">{"info":{"jahr":"","lehrer":"","msg":"","raum":""},"hw":[],"te":[],"plan":[["Deutsch","","","",""],["","","","",""],["","","","",""],["","","","",""],["","","","",""],["","","","",""]],"regeln":"","dienste":""}</script>
 <script>
@@ -363,7 +438,7 @@ function R(){setTab(atab);renderSoon();renderBd();renderProfile();$("hwpanel").h
 
 function route(){
  var p=location.hash.slice(1)||"start";
- var ok=["start","hausaufgaben","stundenplan","termine","geburtstage","profil","klasse","admin"];
+ var ok=["start","hausaufgaben","stundenplan","termine","geburtstage","profil","klasse","admin","chat","themen","quiz"];
  if(ok.indexOf(p)<0||(p==="admin"&&!isAdmin))p="start";
  document.querySelectorAll("main section").forEach(function(s){s.hidden=s.getAttribute("data-p")!==p});
  document.querySelectorAll("#nav a").forEach(function(a){a.classList.toggle("on",a.getAttribute("data-p")===p)});
@@ -529,11 +604,153 @@ function makeBackend(){
  });
  subs.d.push(function(s){
   var d=s.exists?s.data():null;
-  if(d){D.info=d.info||{};D.hw=d.hw||[];D.te=d.te||[];D.plan=d.plan||[];D.regeln=d.regeln||"";D.dienste=d.dienste||""}
+  if(d){D.info=d.info||{};D.hw=d.hw||[];D.te=d.te||[];D.plan=d.plan||[];D.regeln=d.regeln||"";D.dienste=d.dienste||"";D.themen=d.themen||[];D.quiz=d.quiz||[]}
   dbReady=true;R();
  });
  B.start(function(e){fail(e);nb.textContent="⚠️ Keine Verbindung zur Datenbank. Prüfe die Firebase-URL und die Regeln.";nb.hidden=false});
 })();
+</script>
+<script>
+/* ===== Update 1: Hero + Chat ===== */
+var _R=R;R=function(){_R.apply(this,arguments);try{renderHero()}catch(e){}};
+function renderHero(){
+ var el=$("hero");if(!el)return;
+ var l=D.te.filter(function(t){return t.k==="Klassenarbeit"&&diff(t.d)>=0}).sort(function(a,b){return a.d<b.d?-1:1}),n=l[0];
+ if(!n){el.innerHTML="";el.setAttribute("data-k","");return}
+ var d=diff(n.d),key=n.t+n.d+n.s+d;if(el.getAttribute("data-k")===key)return;el.setAttribute("data-k",key);
+ el.innerHTML="<div class='hero'><small>📝 NÄCHSTE KLASSENARBEIT</small><h3 class='hand'>"+esc(n.t)+"</h3><div class='big'><b id='hn'>"+(d?0:"HEUTE")+"</b><span>"+(d===0?"":d===1?"Tag noch":"Tage noch")+"</span></div><p>"+esc(fmtD(n.d))+(n.s?" · "+esc(n.s):"")+"</p></div>";
+ if(d>0){var c=0,iv=setInterval(function(){c++;var h=$("hn");if(!h){clearInterval(iv);return}h.textContent=c;if(c>=d)clearInterval(iv)},Math.max(35,700/d))}
+}
+var CR="klasse",CRS={},lastK="",tick=0,lastSend=0;
+function fb(m,p,b){return fetch(FB_URL.replace(/\/+$/,"")+"/"+p,{method:m,headers:{"Content-Type":"application/json"},body:b===undefined?undefined:JSON.stringify(b)}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()})}
+function chatOn(){return location.hash==="#chat"}
+function drawRooms(){
+ var h="<button type='button' class='rb"+(CR==="klasse"?" on":"")+"' data-r='klasse'>🏫 Klassenchat</button>";
+ Object.keys(CRS).forEach(function(k){var o=CRS[k];if(o&&o.members&&o.members[uid])h+="<button type='button' class='rb"+(CR===k?" on":"")+"' data-r='"+k+"'>👥 "+esc(o.name)+"</button>"});
+ $("rooms").innerHTML=h;
+}
+function loadRooms(){if(!FB_URL)return;fb("GET","rooms.json").then(function(r){CRS=r||{};drawRooms()}).catch(function(){})}
+function loadMsgs(){
+ if(!FB_URL){$("cmsgs").innerHTML="<p class='empty'>Der Chat braucht die Firebase-Datenbank.</p>";return}
+ var room=CR;
+ fb("GET","chat/"+room+".json?orderBy="+encodeURIComponent('"$key"')+"&limitToLast=60").then(function(r){
+  if(room!==CR)return;r=r||{};var ks=Object.keys(r).sort(),k=room+ks.join(",");if(k===lastK)return;lastK=k;
+  var box=$("cmsgs"),near=box.scrollHeight-box.scrollTop-box.clientHeight<80;
+  box.innerHTML=ks.length?ks.map(function(id){var m=r[id];return "<div class='cm"+(m.u===uid?" me":"")+"'><small>"+esc(m.n||"?")+(isAdmin?" <button type='button' class='x' data-d='"+id+"'>✕</button>":"")+"</small>"+esc(m.m)+"</div>"}).join(""):"<p class='empty'>Noch keine Nachrichten. Schreib die erste!</p>";
+  if(near||ks.length)box.scrollTop=box.scrollHeight;
+ }).catch(function(){});
+}
+function openRoom(k){CR=k;lastK="";drawRooms();loadMsgs()}
+function sendMsg(){
+ var i=$("cin"),t=i.value.trim();if(!t||!NAME||Date.now()-lastSend<700)return;lastSend=Date.now();i.value="";
+ fb("POST","chat/"+CR+".json",{u:uid,n:NAME,m:t.slice(0,300),t:Date.now()}).then(function(){lastK="";loadMsgs()}).catch(function(){alert("Senden hat nicht geklappt.")});
+}
+$("csend").addEventListener("click",sendMsg);
+$("cin").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();sendMsg()}});
+$("rooms").addEventListener("click",function(e){var r=e.target.getAttribute("data-r");if(r)openRoom(r)});
+$("cmsgs").addEventListener("click",function(e){var d=e.target.getAttribute("data-d");if(d&&confirm("Nachricht löschen?"))fb("DELETE","chat/"+CR+"/"+d+".json").then(function(){lastK="";loadMsgs()})});
+$("gdet").addEventListener("toggle",function(){
+ if(!this.open)return;
+ $("gmem").innerHTML=Object.keys(users).filter(function(k){return k!==uid&&users[k].name}).map(function(k){return "<label><input type='checkbox' value='"+esc(k)+"'> "+esc(users[k].name)+"</label>"}).join("")||"<span class='lead'>Noch niemand da.</span>";
+});
+$("gmk").addEventListener("click",function(){
+ var n=$("gn").value.trim(),mem={};mem[uid]=true;
+ document.querySelectorAll("#gmem input:checked").forEach(function(c){mem[c.value]=true});
+ if(!n||Object.keys(mem).length<2){alert("Gib einen Namen ein und wähle mindestens eine Person aus.");return}
+ fb("POST","rooms.json",{name:n,by:uid,members:mem}).then(function(r){$("gn").value="";$("gdet").open=false;CRS[r.name]={name:n,by:uid,members:mem};openRoom(r.name)}).catch(function(){alert("Gruppe erstellen hat nicht geklappt.")});
+});
+window.addEventListener("hashchange",function(){if(chatOn()){loadRooms();loadMsgs()}});
+setInterval(function(){if(chatOn()&&!document.hidden){loadMsgs();if(tick++%4===0)loadRooms()}},3000);
+if(chatOn()){loadRooms();loadMsgs()}
+drawRooms();
+try{renderHero()}catch(e){}
+</script>
+<script>
+/* ===== Update 2: Themen + Quizze ===== */
+D.themen=D.themen||[];D.quiz=D.quiz||[];
+var _R2=R;R=function(){_R2.apply(this,arguments);try{drawTh();drawQL()}catch(e){}};
+var thEd=null,qEd=null,qp=null;
+function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function drawTh(){
+ $("thpanel").hidden=!canHW();var l=D.themen||[];
+ $("thlist").innerHTML=l.length?l.slice().reverse().map(function(t){return "<div class='th'><span class='tg so'>"+esc(t.fach)+"</span><h3 class='hand'>"+esc(t.titel)+"</h3><p>"+esc(t.text)+"</p>"+(canHW()?"<button type='button' class='sm' data-e='"+t.id+"'>✎</button> <button type='button' class='sm red' data-x='"+t.id+"'>✕</button>":"")+"</div>"}).join(""):"<p class='empty'>Noch keine Themen eingetragen.</p>";
+}
+$("thsave").addEventListener("click",function(){
+ var f=$("thf").value.trim(),t=$("tht").value.trim(),x=$("thx").value.trim();
+ if(!f||!t){alert("Bitte Fach und Thema ausfüllen.");return}
+ var o=thEd&&D.themen.filter(function(a){return a.id===thEd})[0];
+ if(o){o.fach=f;o.titel=t;o.text=x}else D.themen.push({id:"t"+Date.now(),fach:f,titel:t,text:x});
+ thEd=null;$("thf").value=$("tht").value=$("thx").value="";persist();R();
+});
+$("thlist").addEventListener("click",function(e){
+ var ed=e.target.getAttribute("data-e"),dx=e.target.getAttribute("data-x");
+ if(ed){var o=D.themen.filter(function(a){return a.id===ed})[0];if(!o)return;thEd=ed;$("thf").value=o.fach;$("tht").value=o.titel;$("thx").value=o.text;window.scrollTo(0,0)}
+ if(dx&&confirm("Thema löschen?")){D.themen=D.themen.filter(function(a){return a.id!==dx});persist();R()}
+});
+function parseQ(x){return x.split(/\n\s*\n/).map(function(b){var ls=b.split("\n").map(function(l){return l.trim()}).filter(Boolean);if(ls.length<3)return null;var a=[],r=-1;ls.slice(1,5).forEach(function(l){if(l[0]==="*"){r=a.length;l=l.slice(1).trim()}a.push(l)});return r<0?null:{q:ls[0],a:a,r:r}}).filter(Boolean)}
+function serQ(f){return f.map(function(o){return o.q+"\n"+o.a.map(function(a,i){return (i===o.r?"*":"")+a}).join("\n")}).join("\n\n")}
+function qBest(id){try{return localStorage.getItem("6e-qb-"+id)}catch(e){return null}}
+function drawQL(){
+ $("qpanel").hidden=!isAdmin||!!qp;$("qlist").hidden=!!qp;if(qp)return;var l=D.quiz||[];
+ $("qlist").innerHTML=l.length?l.map(function(q){var b=qBest(q.id);return "<div class='qc'><div><b>"+esc(q.titel)+"</b> <span class='tg so'>"+esc(q.fach||"Quiz")+"</span><br><small>"+q.fragen.length+" Fragen"+(b?" · Bestwert: "+esc(b):"")+"</small></div><div><button type='button' class='btn' data-s='"+q.id+"'>▶ Starten</button>"+(isAdmin?" <button type='button' class='sm' data-e='"+q.id+"'>✎</button> <button type='button' class='sm red' data-x='"+q.id+"'>✕</button>":"")+"</div></div>"}).join(""):"<p class='empty'>Noch keine Quizze. Bald geht's los!</p>";
+}
+$("qsave").addEventListener("click",function(){
+ var t=$("qt").value.trim(),f=$("qf").value.trim(),fr=parseQ($("qx").value);
+ if(!t||!fr.length){alert("Titel fehlt oder keine gültige Frage gefunden. Jede Frage braucht mindestens 2 Antworten und eine richtige mit * davor.");return}
+ var o=qEd&&D.quiz.filter(function(a){return a.id===qEd})[0];
+ if(o){o.titel=t;o.fach=f;o.fragen=fr}else D.quiz.push({id:"q"+Date.now(),titel:t,fach:f,fragen:fr});
+ alert(fr.length+" Fragen gespeichert.");qEd=null;$("qcancel").hidden=true;$("qt").value=$("qf").value=$("qx").value="";persist();R();
+});
+$("qcancel").addEventListener("click",function(){qEd=null;this.hidden=true;$("qt").value=$("qf").value=$("qx").value=""});
+function qStart(id){var q=D.quiz.filter(function(a){return a.id===id})[0];if(!q)return;qp={q:q,fr:sh(q.fragen),i:0,s:0,lock:false,cur:null};drawQL();$("qplay").hidden=false;drawQP()}
+function drawQP(){
+ var b=$("qplay");
+ if(qp.i>=qp.fr.length){var n=qp.fr.length,pc=Math.round(qp.s/n*100),best=qBest(qp.q.id);
+  try{if(!best||pc>parseInt(best,10))localStorage.setItem("6e-qb-"+qp.q.id,pc+" %")}catch(e){}
+  if(pc>=80)burst();
+  b.innerHTML="<div class='qres'><h3 class='hand'>"+(pc>=80?"Stark! 🎉":pc>=50?"Gar nicht schlecht 👍":"Üb noch ein bisschen 💪")+"</h3><b>"+qp.s+" / "+n+"</b><p>"+pc+" % richtig</p><button type='button' class='btn' id='qagain'>Nochmal</button> <button type='button' class='sm' id='qback'>Zurück</button></div>";return}
+ var f=qp.fr[qp.i];qp.cur=sh(f.a.map(function(t,i){return {t:t,ok:i===f.r}}));qp.lock=false;
+ b.innerHTML="<div class='qbar'><i style='width:"+Math.round(qp.i/qp.fr.length*100)+"%'></i></div><small>Frage "+(qp.i+1)+" von "+qp.fr.length+"</small><h3 class='hand'>"+esc(f.q)+"</h3>"+qp.cur.map(function(o,i){return "<button type='button' class='qa' data-o='"+i+"'>"+esc(o.t)+"</button>"}).join("");
+}
+$("qplay").addEventListener("click",function(e){
+ var t=e.target;
+ if(t.id==="qagain"){qStart(qp.q.id);return}
+ if(t.id==="qback"){qp=null;$("qplay").hidden=true;drawQL();return}
+ var o=t.getAttribute("data-o");if(o===null||!qp||qp.lock)return;
+ qp.lock=true;var ok=qp.cur[+o].ok;if(ok)qp.s++;
+ var bs=$("qplay").querySelectorAll(".qa");bs.forEach(function(x,i){if(qp.cur[i].ok)x.classList.add("ok");else if(i===+o)x.classList.add("no")});
+ setTimeout(function(){if(qp){qp.i++;drawQP()}},ok?700:1300);
+});
+$("qlist").addEventListener("click",function(e){
+ var s0=e.target.getAttribute("data-s"),ed=e.target.getAttribute("data-e"),dx=e.target.getAttribute("data-x");
+ if(s0)qStart(s0);
+ if(ed){var q=D.quiz.filter(function(a){return a.id===ed})[0];if(!q)return;qEd=ed;$("qt").value=q.titel;$("qf").value=q.fach||"";$("qx").value=serQ(q.fragen);$("qcancel").hidden=false;window.scrollTo(0,0)}
+ if(dx&&confirm("Quiz löschen?")){D.quiz=D.quiz.filter(function(a){return a.id!==dx});persist();R()}
+});
+try{drawTh();drawQL()}catch(e){}
+</script>
+<script>
+/* ===== Update 3: Navigation ===== */
+var NV=[["start","🏠","Start"],["hausaufgaben","📝","Hausaufgaben"],["stundenplan","🕗","Stundenplan"],["termine","📅","Termine"],["themen","📚","Themen"],["quiz","🧠","Quiz"],["chat","💬","Chat"],["geburtstage","🎂","Geburtstage"],["klasse","🎒","Klassenleben"],["profil","👤","Profil"],["admin","🛡️","Admin"]];
+var MAIN=["start","hausaufgaben","chat","quiz"];
+function curP(){return location.hash.slice(1)||"start"}
+function drawNav(){
+ var c=curP(),h=MAIN.map(function(k){var n=NV.filter(function(x){return x[0]===k})[0];return "<button type='button' data-g='"+k+"' class='"+(c===k?"on":"")+"'><i>"+n[1]+"</i>"+n[2].replace("Hausaufgaben","Aufgaben")+"</button>"}).join("");
+ h+="<button type='button' data-m='1' class='"+(MAIN.indexOf(c)<0?"on":"")+"'><i>"+(MAIN.indexOf(c)<0?(NV.filter(function(x){return x[0]===c})[0]||["","⋯"])[1]:"⋯")+"</i>Mehr</button>";
+ $("bnav").innerHTML=h;
+}
+function openSheet(){
+ var c=curP();
+ $("sheet").innerHTML="<div><h3 class='hand'>Wohin?</h3><div class='g'>"+NV.filter(function(x){return x[0]!=="admin"||isAdmin}).map(function(x){return "<a href='#"+x[0]+"' class='"+(c===x[0]?"on":"")+"'><i>"+x[1]+"</i>"+x[2]+"</a>"}).join("")+"</div></div>";
+ $("sheet").hidden=false;
+}
+$("bnav").addEventListener("click",function(e){
+ var b=e.target.closest("button");if(!b)return;
+ if(b.getAttribute("data-m"))openSheet();else location.hash="#"+b.getAttribute("data-g");
+});
+$("sheet").addEventListener("click",function(e){if(e.target===this||e.target.closest("a"))this.hidden=true});
+var _rt=route;route=function(){_rt();drawNav()};
+drawNav();
 </script>
 </body>
 </html>
