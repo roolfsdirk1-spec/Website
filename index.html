@@ -203,6 +203,28 @@ main{padding-top:18px}
 #sheet a.on{outline:3px solid var(--ink)}
 @keyframes fadeIn{from{opacity:0}}
 @keyframes slideUp{from{transform:translateY(100%)}}
+
+/* ===== Update 4: XP, Millionaer, Spiele, Rangliste ===== */
+.ov{position:fixed;inset:0;z-index:40;background:rgba(10,12,40,.6);display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s both}
+.ov>div{background:var(--paper);border-radius:28px;padding:28px 24px;text-align:center;max-width:380px;animation:heroIn .6s cubic-bezier(.2,1.4,.4,1) both}
+.ov b{display:block;font:600 64px/1.1 Fredoka,sans-serif;color:var(--ink)}
+.xpt{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:45;background:linear-gradient(90deg,var(--ink),var(--ink2));color:#fff;font-weight:800;padding:8px 18px;border-radius:99px;animation:fadeUp .4s both}
+.xbar{height:14px;border-radius:9px;background:var(--line);overflow:hidden;margin:8px 0}.xbar i{display:block;height:100%;background:linear-gradient(90deg,var(--ink),var(--ink2));transition:width .6s}
+.qa.sel{border-color:var(--ink);background:var(--line)}.qa:disabled{opacity:.35}
+.wl{font-weight:800;margin:0 0 8px}.wl b{color:var(--ink);font-size:1.25em}
+.gg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:260px;margin:12px auto}
+.gg button{aspect-ratio:1;font:600 36px Fredoka,sans-serif;border:0;border-radius:14px;background:var(--line);color:var(--ink);cursor:pointer}
+.rz{height:180px;border-radius:20px;display:flex;align-items:center;justify-content:center;font:600 26px Fredoka,sans-serif;color:#fff;background:var(--ink);cursor:pointer;user-select:none;margin:10px 0}
+.rz.w{background:var(--red)}.rz.g{background:var(--ok)}
+.rk{display:flex;gap:10px;align-items:center;padding:8px 12px;border-radius:14px;background:var(--paper);margin:0 0 6px}.rk b:first-child{width:32px}.rk span{margin-left:auto}
+
+/* ===== Update 5: Quiz-Editor, Duelle ===== */
+#qpanel{display:none!important}
+.qe .ar{display:flex;gap:10px;align-items:center;margin:6px 0}.qe .ar input[type=text]{flex:1;margin:0}
+.qe input[type=radio]{width:24px;height:24px;accent-color:var(--ok);flex:none}
+.qeq{background:var(--bg);border-radius:14px;padding:8px 12px;margin:6px 0;display:flex;gap:8px;align-items:center;justify-content:space-between}
+.qexp{background:var(--line);border-radius:12px;padding:8px 12px;margin-top:10px}
+#dbox select{padding:10px;border-radius:12px;border:2px solid var(--line);background:var(--paper);color:var(--text);font:800 15px Nunito,sans-serif;margin:4px 0}
 </style>
 </head>
 <body>
@@ -308,7 +330,21 @@ main{padding-top:18px}
 
 <section data-p="quiz" hidden><h2 class="hand">🧠 Übungsquizze</h2><p class="lead">Teste dich vor der Klausur.</p>
 <div class="adm" id="qpanel" hidden><h3 class="hand">Quiz erstellen</h3><input type="text" id="qt" maxlength="50" placeholder="Titel, zum Beispiel Mathe Brüche"><input type="text" id="qf" maxlength="20" placeholder="Fach"><textarea id="qx" rows="10" maxlength="6000"></textarea><p class="lead">So geht's: Erste Zeile ist die Frage, darunter 2 bis 4 Antworten, die richtige mit * davor. Fragen trennst du mit einer Leerzeile.</p><button class="btn" type="button" id="qsave">Quiz speichern</button> <button class="sm" type="button" id="qcancel" hidden>Abbrechen</button></div>
+<div class="adm qe" id="qed" hidden><h3 class="hand">Quiz erstellen</h3><input type="text" id="qe_t" maxlength="50" placeholder="Quiz-Titel"><input type="text" id="qe_f" maxlength="20" placeholder="Fach oder Thema">
+<h4 class="hand" style="margin:12px 0 4px" id="qe_h">Frage 1</h4><input type="text" id="qe_q" maxlength="200" placeholder="Deine Frage">
+<div class="ar"><input type="radio" name="qr" value="0"><input type="text" id="qe_a0" maxlength="100" placeholder="Antwort A"></div><div class="ar"><input type="radio" name="qr" value="1"><input type="text" id="qe_a1" maxlength="100" placeholder="Antwort B"></div><div class="ar"><input type="radio" name="qr" value="2"><input type="text" id="qe_a2" maxlength="100" placeholder="Antwort C"></div><div class="ar"><input type="radio" name="qr" value="3"><input type="text" id="qe_a3" maxlength="100" placeholder="Antwort D"></div><p class="lead">Wähle mit dem Kreis die richtige Antwort aus. Leere Antworten werden ignoriert.</p>
+<input type="text" id="qe_e" maxlength="200" placeholder="Beschreibung oder Erklärung (optional)"><button class="btn" type="button" id="qe_add">➕ Frage hinzufügen</button>
+<div id="qe_list"></div><button class="btn" type="button" id="qe_pub">✅ Quiz veröffentlichen</button> <button class="sm" type="button" id="qe_x">Neu anfangen</button></div>
 <div id="qlist"></div><div class="box" id="qplay" hidden></div></section>
+
+<section data-p="rang" hidden><h2 class="hand">🏆 Level und Rangliste</h2><div class="box" id="mecard"></div><div id="rlist"></div></section>
+
+<section data-p="spiele" hidden><h2 class="hand">🎮 Minispiele</h2><p class="lead">Für jedes Spiel gibt es XP, aber nur 3 Mal pro Tag.</p>
+<div class="rooms"><button type="button" class="rb on" data-g="guess">🔢 Zahlenraten</button><button type="button" class="rb" data-g="react">⚡ Reaktion</button><button type="button" class="rb" data-g="ttt">❌ Tic-Tac-Toe</button></div><div class="box" id="gbox"></div></section>
+
+<section data-p="wwm" hidden><h2 class="hand">💰 Wer wird Millionär?</h2><p class="lead">Die Fragen kommen aus den Quizzen der Klasse.</p><div class="box" id="wbox"></div></section>
+
+<section data-p="duell" hidden><h2 class="hand">⚔️ Duell</h2><p class="lead">Raum erstellen, Code an Freunde schicken und gegeneinander spielen.</p><div class="box" id="dbox"></div></section>
 
 </main>
 <div id="bnav"></div><div id="sheet" hidden></div>
@@ -438,7 +474,7 @@ function R(){setTab(atab);renderSoon();renderBd();renderProfile();$("hwpanel").h
 
 function route(){
  var p=location.hash.slice(1)||"start";
- var ok=["start","hausaufgaben","stundenplan","termine","geburtstage","profil","klasse","admin","chat","themen","quiz"];
+ var ok=["start","hausaufgaben","stundenplan","termine","geburtstage","profil","klasse","admin","chat","themen","quiz","spiele","wwm","rang","duell"];
  if(ok.indexOf(p)<0||(p==="admin"&&!isAdmin))p="start";
  document.querySelectorAll("main section").forEach(function(s){s.hidden=s.getAttribute("data-p")!==p});
  document.querySelectorAll("#nav a").forEach(function(a){a.classList.toggle("on",a.getAttribute("data-p")===p)});
@@ -719,7 +755,7 @@ $("qplay").addEventListener("click",function(e){
  var o=t.getAttribute("data-o");if(o===null||!qp||qp.lock)return;
  qp.lock=true;var ok=qp.cur[+o].ok;if(ok)qp.s++;
  var bs=$("qplay").querySelectorAll(".qa");bs.forEach(function(x,i){if(qp.cur[i].ok)x.classList.add("ok");else if(i===+o)x.classList.add("no")});
- setTimeout(function(){if(qp){qp.i++;drawQP()}},ok?700:1300);
+ setTimeout(function(){if(qp){qp.i++;drawQP()}},(qp.fr[qp.i].e?2600:0)+(ok?700:1300));
 });
 $("qlist").addEventListener("click",function(e){
  var s0=e.target.getAttribute("data-s"),ed=e.target.getAttribute("data-e"),dx=e.target.getAttribute("data-x");
@@ -731,7 +767,7 @@ try{drawTh();drawQL()}catch(e){}
 </script>
 <script>
 /* ===== Update 3: Navigation ===== */
-var NV=[["start","🏠","Start"],["hausaufgaben","📝","Hausaufgaben"],["stundenplan","🕗","Stundenplan"],["termine","📅","Termine"],["themen","📚","Themen"],["quiz","🧠","Quiz"],["chat","💬","Chat"],["geburtstage","🎂","Geburtstage"],["klasse","🎒","Klassenleben"],["profil","👤","Profil"],["admin","🛡️","Admin"]];
+var NV=[["start","🏠","Start"],["hausaufgaben","📝","Hausaufgaben"],["stundenplan","🕗","Stundenplan"],["termine","📅","Termine"],["themen","📚","Themen"],["quiz","🧠","Quiz"],["chat","💬","Chat"],["geburtstage","🎂","Geburtstage"],["klasse","🎒","Klassenleben"],["spiele","🎮","Minispiele"],["wwm","💰","Millionär"],["duell","⚔️","Duell"],["rang","🏆","Rangliste"],["profil","👤","Profil"],["admin","🛡️","Admin"]];
 var MAIN=["start","hausaufgaben","chat","quiz"];
 function curP(){return location.hash.slice(1)||"start"}
 function drawNav(){
@@ -751,6 +787,217 @@ $("bnav").addEventListener("click",function(e){
 $("sheet").addEventListener("click",function(e){if(e.target===this||e.target.closest("a"))this.hidden=true});
 var _rt=route;route=function(){_rt();drawNav()};
 drawNav();
+</script>
+<script>
+/* ===== Update 4: XP-System ===== */
+var ME={xp:0,d:"",k:{},c:0,b:{}},AC=null;
+function today(){return new Date().toISOString().slice(0,10)}
+function lvOf(x){return Math.min(100,Math.floor(Math.sqrt(x/50))+1)}
+function lvStart(l){return 50*(l-1)*(l-1)}
+function saveME(){ME.n=NAME;if(FB_URL&&uid)fb("PUT","xp/"+uid+".json",ME).catch(function(){})}
+function loadME(){if(FB_URL&&uid)fb("GET","xp/"+uid+".json").then(function(r){if(r){ME=r;ME.k=ME.k||{};ME.b=ME.b||{};ME.c=ME.c||0}drawMe()}).catch(function(){})}
+function tone(f,d,t){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();var o=AC.createOscillator(),g=AC.createGain();o.frequency.value=f;o.type=t||"sine";g.gain.value=.08;o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+d)}catch(e){}}
+function overlay(h){var o=document.createElement("div");o.className="ov";o.innerHTML="<div>"+h+"</div>";o.onclick=function(){o.remove()};document.body.appendChild(o);setTimeout(function(){o.remove()},5000)}
+function addXP(a,key,max){
+ if(ME.d!==today()){ME.d=today();ME.k={}}
+ var n=ME.k[key]||0;if(n>=max){return 0}
+ ME.k[key]=n+1;var l0=lvOf(ME.xp);ME.xp+=a;var l1=lvOf(ME.xp);saveME();
+ var t=document.createElement("div");t.className="xpt";t.textContent="+"+a+" XP";document.body.appendChild(t);setTimeout(function(){t.remove()},2200);
+ if(l1>l0){burst();overlay("<small>LEVEL-AUFSTIEG</small><b>Level "+l1+"</b><p>Stark, weiter so! 🚀</p>")}
+ return a;
+}
+function quizDone(s,n,key){
+ var pc=Math.round(s/n*100),xp=20+s*5+(pc>=80?30:0),first=!ME.c;ME.c++;
+ var got=addXP(xp,key,1);if(!got)saveME();
+ if(first)setTimeout(function(){burst();overlay("<small>GLÜCKWUNSCH!</small><b>🎉</b><p>Du hast dein erstes Quiz abgeschlossen!</p><p>"+(got?"+"+got+" XP":"")+"</p>")},400);
+}
+var _dq=drawQP;drawQP=function(){var done=qp.i>=qp.fr.length&&!qp.paid;_dq();if(done){qp.paid=1;quizDone(qp.s,qp.fr.length,"quiz:"+qp.q.id)}};
+function drawMe(){
+ var l=lvOf(ME.xp),a=lvStart(l),b=lvStart(l+1),pc=l>=100?100:Math.round((ME.xp-a)/(b-a)*100);
+ $("mecard").innerHTML="<b class='hand' style='font-size:22px'>"+esc(NAME||"Du")+" · Level "+l+"</b><div class='xbar'><i style='width:"+pc+"%'></i></div><small>"+ME.xp+" XP"+(l<100?" · noch "+(b-ME.xp)+" bis Level "+(l+1):"")+" · "+(ME.c||0)+" Quizze gespielt</small>";
+}
+function drawRang(){
+ drawMe();if(!FB_URL){$("rlist").innerHTML="";return}
+ fb("GET","xp.json").then(function(r){r=r||{};var a=Object.keys(r).map(function(k){return r[k]}).filter(function(o){return o&&o.n}).sort(function(x,y){return y.xp-x.xp});
+  $("rlist").innerHTML=a.length?a.slice(0,30).map(function(o,i){return "<div class='rk'><b>"+(i<3?["🥇","🥈","🥉"][i]:i+1+".")+"</b>"+esc(o.n)+"<span>Lv "+lvOf(o.xp)+" · "+o.xp+" XP</span></div>"}).join(""):"<p class='empty'>Noch niemand in der Rangliste.</p>"}).catch(function(){})
+}
+window.addEventListener("hashchange",function(){if(location.hash==="#rang")drawRang();if(location.hash==="#wwm"&&!(W&&W.duel&&!W.end))wStart()});
+/* ===== Wer wird Millionaer ===== */
+var LAD=[50,100,200,300,500,1000,2000,4000,8000,16000,32000,64000,125000,500000,1000000],W=null;
+function eur(n){return n.toLocaleString("de-DE")+" €"}
+function wStart(){
+ var pool=[],seen={};(D.quiz||[]).forEach(function(q){q.fragen.forEach(function(f){if(!seen[f.q]){seen[f.q]=1;pool.push(f)}})});
+ if(pool.length<5){$("wbox").innerHTML="<p class='empty'>Für Wer wird Millionär braucht es mindestens 5 Quiz-Fragen. Erstelle zuerst Quizze!</p>";W=null;return}
+ var n=Math.min(15,pool.length);W={fr:sh(pool).slice(0,n),lad:LAD.slice(15-n),i:0,sel:-1,lock:false,j:false,hide:[],end:false,win:0,ok:0};wQ();
+}
+function wQ(){var f=W.fr[W.i];W.o=sh(f.a.map(function(t,i){return {t:t,ok:i===f.r}}));W.sel=-1;W.lock=false;W.hide=[];wDraw()}
+function wSafe(i){var s=0;for(var j=0;j<i;j++)if(W.lad[j]===500||W.lad[j]===16000)s=W.lad[j];return s}
+function wDraw(){
+ var b=$("wbox");if(!W){return}
+ if(W.end){var xp=20+W.ok*8+(W.ok===W.fr.length?100:0);var g=addXP(xp,"wwm",2);
+  b.innerHTML="<div class='qres'><h3 class='hand'>"+(W.ok===W.fr.length?"MILLIONÄR! 🎉":"Spiel vorbei")+"</h3><b>"+eur(W.win)+"</b><p>"+W.ok+" von "+W.fr.length+" richtig"+(g?" · +"+g+" XP":"")+"</p><button type='button' class='btn' data-w='new'>Nochmal</button></div>";if(W.ok===W.fr.length)burst();return}
+ var f=W.fr[W.i];
+ b.innerHTML="<p class='wl'>Frage "+(W.i+1)+" von "+W.fr.length+" · es geht um <b>"+eur(W.lad[W.i])+"</b></p><h3 class='hand'>"+esc(f.q)+"</h3>"+W.o.map(function(o,i){var c=W.lock?(o.ok?" ok":(i===W.sel?" no":"")):(i===W.sel?" sel":"");return "<button type='button' class='qa"+c+"' data-a='"+i+"'"+(W.hide.indexOf(i)>=0?" disabled":"")+">"+String.fromCharCode(65+i)+": "+esc(o.t)+"</button>"}).join("")+
+ (W.lock?"":"<div style='margin-top:10px;display:flex;gap:8px;flex-wrap:wrap'>"+(W.sel>=0?"<button type='button' class='btn' data-w='fin'>Final? ✔</button>":"")+(!W.j&&W.o.length>2?"<button type='button' class='sm' data-w='j'>50:50</button>":"")+(W.i>0?"<button type='button' class='sm' data-w='quit'>Aufhören ("+eur(W.lad[W.i-1])+")</button>":"")+"</div>");
+}
+$("wbox").addEventListener("click",function(e){
+ var t=e.target;if(!W){if(t.getAttribute("data-w")==="new")wStart();return}
+ var a=t.getAttribute("data-a"),w=t.getAttribute("data-w");
+ if(w==="new"){wStart();return}
+ if(W.end||W.lock)return;
+ if(a!==null){W.sel=+a;tone(440,.08);wDraw()}
+ if(w==="j"){W.j=true;var wr=[];W.o.forEach(function(o,i){if(!o.ok)wr.push(i)});W.hide=sh(wr).slice(0,Math.max(1,W.o.length-2));if(W.hide.indexOf(W.sel)>=0)W.sel=-1;wDraw()}
+ if(w==="quit"){W.win=W.lad[W.i-1];W.end=true;wDraw()}
+ if(w==="fin"){W.lock=true;wDraw();var ok=W.o[W.sel].ok;
+  setTimeout(function(){
+   if(ok){tone(660,.15);setTimeout(function(){tone(880,.25)},150);W.ok++;W.win=W.lad[W.i];
+    setTimeout(function(){if(W.i>=W.fr.length-1)W.end=true;else{W.i++;wQ();return}wDraw()},900)}
+   else{tone(200,.6,"sawtooth");W.win=wSafe(W.i);var bs=$("wbox").querySelectorAll(".qa");bs.forEach(function(x,i){if(W.o[i].ok)x.classList.add("ok")});setTimeout(function(){W.end=true;wDraw()},1800)}
+  },900)}
+});
+/* ===== Minispiele ===== */
+var GM="guess",G={};
+function gDraw(){
+ var b=$("gbox"),g=GM;
+ if(g==="guess"){if(!G.t){G.t=1+Math.floor(Math.random()*100);G.n=0;G.m=""}
+  b.innerHTML="<h3 class='hand'>Ich denke an eine Zahl von 1 bis 100</h3><p>"+esc(G.m)+"</p><input type='number' id='gi' min='1' max='100' placeholder='Dein Tipp'> <button type='button' class='btn' id='gb'>Raten</button><p class='lead'>Bestwert: "+(ME.b.guess?ME.b.guess+" Versuche":"noch keiner")+"</p>";
+  $("gb").onclick=function(){var v=parseInt($("gi").value,10);if(!v)return;G.n++;
+   if(v===G.t){var n=G.n;if(!ME.b.guess||n<ME.b.guess)ME.b.guess=n;var x=addXP(Math.max(5,25-n*2),"guess",3);if(!x)saveME();burst();G.m="Richtig in "+n+" Versuchen! 🎉 +"+x+" XP";G.t=0;gDraw();b.querySelector("p").textContent=G.m;return}
+   G.m=(v<G.t?"Höher":"Tiefer")+"! ("+G.n+". Versuch)";gDraw()}}
+ if(g==="react"){
+  b.innerHTML="<h3 class='hand'>Klick, sobald es grün wird</h3><div class='rz' id='rz'>Start</div><p class='lead'>Bestzeit: "+(ME.b.react?ME.b.react+" ms":"noch keine")+"</p>";
+  var z=$("rz"),st=0,tm=0,state=0;
+  z.onclick=function(){
+   if(state===0){state=1;z.className="rz w";z.textContent="Warte …";tm=setTimeout(function(){state=2;st=Date.now();z.className="rz g";z.textContent="JETZT!"},1000+Math.random()*2500)}
+   else if(state===1){clearTimeout(tm);state=0;z.className="rz";z.textContent="Zu früh! Nochmal"}
+   else{var ms=Date.now()-st;state=0;z.className="rz";z.textContent=ms+" ms – nochmal?";if(!ME.b.react||ms<ME.b.react)ME.b.react=ms;var x=addXP(ms<300?20:10,"react",3);if(!x)saveME()}}}
+ if(g==="ttt"){if(!G.b)G.b=[0,0,0,0,0,0,0,0,0];tDraw()}
+}
+function tWin(b){var L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];for(var i=0;i<8;i++){var l=L[i];if(b[l[0]]&&b[l[0]]===b[l[1]]&&b[l[1]]===b[l[2]])return b[l[0]]}return b.indexOf(0)<0?3:0}
+function tAI(b){var i,j,c;for(var p=2;p>=1;p--)for(i=0;i<9;i++)if(!b[i]){c=b.slice();c[i]=p;if(tWin(c)===p)return i}
+ if(!b[4])return 4;var f=[];for(i=0;i<9;i++)if(!b[i])f.push(i);return f[Math.floor(Math.random()*f.length)]}
+function tDraw(){
+ var r=tWin(G.b),m=r===1?"Du hast gewonnen! 🎉":r===2?"Der Computer gewinnt.":r===3?"Unentschieden.":"Du bist X, du fängst an.";
+ $("gbox").innerHTML="<h3 class='hand'>"+m+"</h3><div class='gg'>"+G.b.map(function(v,i){return "<button type='button' data-c='"+i+"'>"+(v===1?"X":v===2?"O":"")+"</button>"}).join("")+"</div>"+(r?"<button type='button' class='btn' data-c='new'>Nochmal</button>":"");
+}
+$("gbox").addEventListener("click",function(e){
+ var c=e.target.getAttribute("data-c");if(c===null||GM!=="ttt")return;
+ if(c==="new"){G.b=[0,0,0,0,0,0,0,0,0];tDraw();return}
+ c=+c;if(G.b[c]||tWin(G.b))return;G.b[c]=1;
+ if(!tWin(G.b))G.b[tAI(G.b)]=2;
+ var r=tWin(G.b);if(r){var x=addXP(r===1?25:r===3?10:5,"ttt",3);if(!x)saveME();if(r===1)burst()}
+ tDraw();
+});
+document.querySelector("[data-p=spiele] .rooms").addEventListener("click",function(e){
+ var g=e.target.getAttribute("data-g");if(!g)return;GM=g;G={};this.querySelectorAll(".rb").forEach(function(x){x.classList.toggle("on",x===e.target)});gDraw();
+});
+gDraw();loadME();if(location.hash==="#rang")drawRang();if(location.hash==="#wwm"&&!(W&&W.duel&&!W.end))wStart();
+</script>
+<script>
+/* ===== Update 5: Quiz-Editor ===== */
+var QE={f:[],ed:null};
+var _R5=R;R=function(){_R5.apply(this,arguments);try{qeDraw()}catch(e){}};
+function qeDraw(){
+ $("qed").hidden=!canHW()||!!qp;$("qe_h").textContent="Frage "+(QE.f.length+1);
+ $("qe_list").innerHTML=QE.f.map(function(o,i){return "<div class='qeq'><span>"+(i+1)+". "+esc(o.q)+" <small>✔ "+esc(o.a[o.r])+"</small></span><span><button type='button' class='sm' data-ee='"+i+"'>✎</button> <button type='button' class='sm red' data-ex='"+i+"'>✕</button></span></div>"}).join("");
+}
+function qeClear(){["qe_q","qe_e","qe_a0","qe_a1","qe_a2","qe_a3"].forEach(function(k){$(k).value=""});document.querySelectorAll("#qed input[type=radio]").forEach(function(r){r.checked=false})}
+$("qe_add").addEventListener("click",function(){
+ var q=$("qe_q").value.trim(),a=[],r=-1,ch=document.querySelector("#qed input[type=radio]:checked");
+ for(var i=0;i<4;i++){var v=$("qe_a"+i).value.trim();if(!v)continue;if(ch&&+ch.value===i)r=a.length;a.push(v)}
+ if(!q){alert("Bitte gib eine Frage ein.");return}
+ if(a.length<2){alert("Schreib mindestens 2 Antworten.");return}
+ if(r<0){alert("Wähle mit dem Kreis aus, welche Antwort richtig ist.");return}
+ QE.f.push({q:q,a:a,r:r,e:$("qe_e").value.trim()});qeClear();qeDraw();$("qe_q").focus();
+});
+$("qe_list").addEventListener("click",function(e){
+ var ee=e.target.getAttribute("data-ee"),ex=e.target.getAttribute("data-ex");
+ if(ex!==null)QE.f.splice(+ex,1);
+ if(ee!==null){var o=QE.f.splice(+ee,1)[0];qeClear();$("qe_q").value=o.q;$("qe_e").value=o.e||"";o.a.forEach(function(t,i){$("qe_a"+i).value=t});document.querySelectorAll("#qed input[type=radio]")[o.r].checked=true}
+ qeDraw();
+});
+$("qe_pub").addEventListener("click",function(){
+ var t=$("qe_t").value.trim();if(!t||!QE.f.length){alert("Gib einen Titel ein und füge mindestens eine Frage hinzu.");return}
+ var o=QE.ed&&D.quiz.filter(function(a){return a.id===QE.ed})[0];
+ if(o){o.titel=t;o.fach=$("qe_f").value.trim();o.fragen=QE.f}else D.quiz.push({id:"q"+Date.now(),titel:t,fach:$("qe_f").value.trim(),fragen:QE.f});
+ alert("Quiz veröffentlicht mit "+QE.f.length+" Fragen!");QE={f:[],ed:null};$("qe_t").value=$("qe_f").value="";qeClear();persist();R();
+});
+$("qe_x").addEventListener("click",function(){QE={f:[],ed:null};$("qe_t").value=$("qe_f").value="";qeClear();qeDraw()});
+$("qlist").addEventListener("click",function(e){
+ var ed=e.target.getAttribute("data-e");if(!ed)return;var q=D.quiz.filter(function(a){return a.id===ed})[0];if(!q)return;
+ QE={f:JSON.parse(JSON.stringify(q.fragen)),ed:ed};$("qe_t").value=q.titel;$("qe_f").value=q.fach||"";qeDraw();
+});
+$("qplay").addEventListener("click",function(e){
+ if(e.target.getAttribute("data-o")===null||!qp||!qp.lock||this.querySelector(".qexp"))return;
+ var f=qp.fr[qp.i];if(f&&f.e)this.insertAdjacentHTML("beforeend","<p class='qexp'>💡 "+esc(f.e)+"</p>");
+});
+/* ===== Update 5: Duelle ===== */
+var DC=null,DR=null,DL={};
+try{DC=localStorage.getItem("6e-room")}catch(e){}
+function dPool(src){var pool=[],seen={};(D.quiz||[]).forEach(function(q){if(src!=="all"&&q.id!==src)return;q.fragen.forEach(function(f){if(!seen[f.q]){seen[f.q]=1;pool.push(f)}})});return pool}
+function dCreate(){
+ var m=$("dmode").value,pool=dPool($("dsrc").value),need=m==="wwm"?5:3;
+ if(pool.length<need){alert("Zu wenige Fragen. Es braucht mindestens "+need+" Quiz-Fragen.");return}
+ var n=Math.min(m==="wwm"?15:10,pool.length),a="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",c="",pl={};
+ for(var i=0;i<4;i++)c+=a[Math.floor(Math.random()*a.length)];
+ var q=sh(pool).slice(0,n).map(function(f){var o=sh(f.a.map(function(t,i){return {t:t,ok:i===f.r}}));return {q:f.q,o:o.map(function(x){return x.t}),r:o.map(function(x){return x.ok}).indexOf(true),e:f.e||""}});
+ pl[uid]={n:NAME,s:0,i:0,t:0,d:0};
+ fb("PUT","duel/"+c+".json",{m:m,h:uid,hn:NAME,st:"wait",q:q,pl:pl,c:Date.now()}).then(function(){dEnter(c)}).catch(function(){alert("Raum erstellen hat nicht geklappt.")});
+}
+function dEnter(c){DC=c;DR=null;DL={};try{localStorage.setItem("6e-room",c)}catch(e){}dPoll()}
+function dJoin(){
+ var c=$("dcode").value.trim().toUpperCase();if(!c)return;
+ fb("GET","duel/"+c+".json").then(function(r){
+  if(!r){alert("Diesen Raum gibt es nicht.");return}
+  if(r.pl&&r.pl[uid]){dEnter(c);return}
+  if(r.st!=="wait"){alert("Das Spiel läuft schon.");return}
+  return fb("PUT","duel/"+c+"/pl/"+uid+".json",{n:NAME,s:0,i:0,t:0,d:0}).then(function(){dEnter(c)})}).catch(function(){alert("Beitreten hat nicht geklappt.")});
+}
+function dLeave(){DC=null;DR=null;DL={};try{localStorage.removeItem("6e-room")}catch(e){}drawDuel()}
+function dPoll(){if(!DC||!FB_URL){drawDuel();return}fb("GET","duel/"+DC+".json").then(function(r){if(!r){dLeave();return}DR=r;if(!DL.lock)drawDuel()}).catch(function(){})}
+function drawDuel(){
+ var b=$("dbox");
+ if(!FB_URL){b.innerHTML="<p class='empty'>Duelle brauchen die Firebase-Datenbank.</p>";return}
+ if(!DC||!DR){
+  b.innerHTML="<h3 class='hand'>Neuer Raum</h3><select id='dmode'><option value='quiz'>⚔️ Quiz-Duell (10 Fragen)</option><option value='wwm'>💰 Millionär-Duell (15 Fragen)</option></select> <select id='dsrc'><option value='all'>Alle Fragen gemischt</option>"+(D.quiz||[]).map(function(q){return "<option value='"+q.id+"'>"+esc(q.titel)+"</option>"}).join("")+"</select> <button class='btn' type='button' id='dnew'>Raum erstellen</button><hr><h3 class='hand'>Raum beitreten</h3><input type='text' id='dcode' maxlength='4' placeholder='Raumcode' style='text-transform:uppercase'> <button class='btn' type='button' id='djoin'>Beitreten</button>";
+  $("dnew").onclick=dCreate;$("djoin").onclick=dJoin;return}
+ var r=DR,ids=Object.keys(r.pl||{}),me=r.pl[uid],n=r.q.length,all=ids.every(function(k){return r.pl[k].d});
+ var h="<p class='lead' style='margin:0'>Raumcode</p><b style='font:600 54px Fredoka,sans-serif;letter-spacing:.1em;color:var(--ink)'>"+esc(DC)+"</b><p class='lead'>"+(r.m==="wwm"?"💰 Millionär-Duell":"⚔️ Quiz-Duell")+" · "+n+" Fragen · alle bekommen dieselben Fragen</p>";
+ var so=ids.slice().sort(function(a,b){var x=r.pl[a],y=r.pl[b];return y.s-x.s||x.t-y.t});
+ var board=so.map(function(k,i){var o=r.pl[k];return "<div class='rk'><b>"+(all?(["🥇","🥈","🥉"][i]||i+1+"."):"👤")+"</b>"+esc(o.n)+(k===uid?" (du)":"")+"<span>"+(r.m==="wwm"?(o.d?eur(o.s):(r.st==="play"?"spielt …":"bereit")):o.s+" Punkte"+(r.st==="play"&&!o.d?" · Frage "+(o.i+1)+"/"+n:""))+(o.d?" ✔":"")+"</span></div>"}).join("");
+ if(r.st==="wait"){
+  b.innerHTML=h+board+(r.h===uid?"<button class='btn' type='button' id='dgo'"+(ids.length<2?" disabled":"")+">▶ Spiel starten"+(ids.length<2?" (warte auf Mitspieler)":"")+"</button>":"<p class='lead'>Warte, bis "+esc(r.hn||"der Gastgeber")+" startet …</p>")+" <button class='sm' type='button' id='dleave'>Verlassen</button>";
+  if($("dgo"))$("dgo").onclick=function(){fb("PATCH","duel/"+DC+".json",{st:"play",t0:Date.now()}).then(dPoll)};$("dleave").onclick=dLeave;return}
+ if(all){
+  var w=so[0];if(!DL.paid){DL.paid=1;var g=addXP(w===uid?40:15,"duel",3);if(!g)saveME();if(w===uid)burst()}
+  b.innerHTML=h+"<h3 class='hand'>"+esc(r.pl[w].n)+" gewinnt! 🏆</h3>"+board+"<button class='btn' type='button' id='dleave'>Neues Duell</button>";$("dleave").onclick=dLeave;return}
+ if(me.d){b.innerHTML=h+board+"<p class='lead'>Du bist fertig. Warte auf die anderen …</p>";return}
+ if(r.m==="wwm"){b.innerHTML=h+board+"<button class='btn' type='button' id='dw'>💰 Meine Runde starten</button>";$("dw").onclick=function(){wDuel(r.q)};return}
+ var f=r.q[me.i];
+ b.innerHTML=h+board+"<hr><h3 class='hand'>"+(me.i+1)+". "+esc(f.q)+"</h3>"+f.o.map(function(t,i){return "<button type='button' class='qa' data-da='"+i+"'>"+String.fromCharCode(65+i)+": "+esc(t)+"</button>"}).join("");
+}
+$("dbox").addEventListener("click",function(e){
+ var a=e.target.getAttribute("data-da");if(a===null||DL.lock||!DR)return;
+ DL.lock=true;var me=DR.pl[uid],f=DR.q[me.i],ok=+a===f.r;tone(ok?660:200,.25,ok?"sine":"sawtooth");
+ this.querySelectorAll(".qa").forEach(function(x,i){if(i===f.r)x.classList.add("ok");else if(i===+a)x.classList.add("no")});
+ if(f.e)this.insertAdjacentHTML("beforeend","<p class='qexp'>💡 "+esc(f.e)+"</p>");
+ setTimeout(function(){
+  var o={s:me.s+(ok?10:0),i:me.i+1,t:Date.now()-(DR.t0||Date.now()),d:me.i+1>=DR.q.length?1:0};
+  for(var k in o)me[k]=o[k];fb("PATCH","duel/"+DC+"/pl/"+uid+".json",o).catch(function(){});DL.lock=false;drawDuel();
+ },(f.e?2200:0)+(ok?800:1400));
+});
+function wDuel(q){
+ var fr=q.map(function(f){return {q:f.q,a:f.o,r:f.r,e:f.e}}),n=fr.length;
+ W={fr:fr,lad:LAD.slice(15-n),i:0,sel:-1,lock:false,j:false,hide:[],end:false,win:0,ok:0,duel:1};wQ();location.hash="#wwm";
+}
+var _wd=wDraw;wDraw=function(){
+ var e=W&&W.end&&!W.rep;_wd();
+ if(e&&W.duel){W.rep=1;fb("PATCH","duel/"+DC+"/pl/"+uid+".json",{s:W.win,i:W.ok,d:1,t:Date.now()-((DR&&DR.t0)||Date.now())}).catch(function(){})}
+ if(W&&W.duel&&W.end)$("wbox").insertAdjacentHTML("beforeend","<p><a class='btn' href='#duell'>Zum Duell-Ergebnis ➜</a></p>");
+};
+window.addEventListener("hashchange",function(){if(location.hash==="#duell")dPoll()});
+setInterval(function(){if(location.hash==="#duell"&&DC&&!document.hidden)dPoll()},2000);
+try{qeDraw();drawDuel();if(location.hash==="#duell")dPoll()}catch(e){}
 </script>
 </body>
 </html>
