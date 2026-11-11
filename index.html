@@ -291,6 +291,8 @@ main{padding-top:18px}
 .wheel{position:relative;width:220px;height:220px;border-radius:50%;border:6px solid var(--paper);box-shadow:0 0 0 4px var(--ink),0 10px 30px rgba(0,0,0,.3);transition:transform 3.3s cubic-bezier(.12,.7,.1,1)}
 .wheel span{position:absolute;left:50%;top:50%;font:800 18px Nunito,sans-serif;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5)}
 .dash .dq{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.ub{font:inherit;text-align:left;border:0;border-bottom:5px solid var(--ink);cursor:pointer;width:100%}.ub:nth-child(even){border-bottom-color:var(--ink2)}.ubs{display:block;margin-top:6px;font-weight:800}
+.ubq h3{margin:4px 0 8px}.ubq .qa{font-size:18px;padding:14px 16px}.ubx{margin:12px 0;padding:12px 14px;border-radius:14px;background:var(--bg);border-left:6px solid var(--ink)}.ubx.g{border-left-color:var(--ok)}.ubx.r{border-left-color:var(--red)}
 </style>
 </head>
 <body>
@@ -299,7 +301,7 @@ main{padding-top:18px}
 
 <nav><div class="wrap" id="nav">
 <a href="#start" data-p="start">🏠 Start</a><a href="#hausaufgaben" data-p="hausaufgaben">📝 Hausaufgaben</a><a href="#stundenplan" data-p="stundenplan">🕗 Stundenplan</a><a href="#termine" data-p="termine">📅 Termine</a><a href="#klasse" data-p="klasse">🎒 Klassenleben</a><a href="#geburtstage" data-p="geburtstage">🎂 Geburtstage</a><a href="#profil" data-p="profil">👤 Profil</a><a href="#admin" data-p="admin" id="navadmin" hidden>🛡️ Admin</a>
-<a href="#chat" data-p="chat">💬 Chat</a><a href="#themen" data-p="themen">📚 Themen</a><a href="#quiz" data-p="quiz">🧠 Quiz</a></div></nav>
+<a href="#ueben" data-p="ueben">🎵 Üben</a><a href="#chat" data-p="chat">💬 Chat</a><a href="#themen" data-p="themen">📚 Themen</a><a href="#quiz" data-p="quiz">🧠 Quiz</a></div></nav>
 
 <main class="wrap">
 <div class="err" id="nodb" hidden></div>
@@ -415,6 +417,7 @@ main{padding-top:18px}
 <section data-p="duell" hidden><h2 class="hand">⚔️ Duell</h2><p class="lead">Raum erstellen, Code an Freunde schicken und gegeneinander spielen.</p><div class="box" id="dbox"></div></section>
 
 <section data-p="umfragen" hidden><h2 class="hand">📊 Umfragen</h2><div id="pllist"></div></section>
+<section data-p="ueben" hidden><h2 class="hand">🎵 Musik üben</h2><p class="lead">Klasse 6 · Wähle ein Thema. Nach jeder Antwort bekommst du eine Erklärung, falsche Fragen kommen am Ende noch einmal.</p><div id="ubox"></div></section>
 </main>
 <div id="pollbar" hidden></div>
 <div id="bnav"></div><div id="sheet" hidden></div>
@@ -466,6 +469,7 @@ function renderStart(){
   "<a class='tile' href='#termine'><i class='ic'>📅</i><b class='hand'>Termine</b><span>"+(n?"als Nächstes: "+esc(n.t):"nichts geplant")+"</span></a>"+
   "<a class='tile' href='#klasse'><i class='ic'>🎒</i><b class='hand'>Klassenleben</b><span>Regeln und Dienste</span></a>"+
   "<a class='tile' href='#geburtstage'><i class='ic'>🎂</i><b class='hand'>Geburtstage</b><span>"+(bdList()[0]?"als Nächstes: "+esc(bdList()[0].name):"noch keine eingetragen")+"</span></a>"+
+  "<a class='tile' href='#ueben'><i class='ic'>🎵</i><b class='hand'>Musik üben</b><span>Töne, Tonleiter, Karneval der Tiere</span></a>"+
   "<a class='tile' href='#profil'><i class='ic'>👤</i><b class='hand'>Mein Profil</b><span>Name und Geburtstag ändern</span></a>";
 }
 function renderHW(){
@@ -544,7 +548,7 @@ function R(){setTab(atab);renderSoon();renderBd();renderProfile();$("hwpanel").h
 
 function route(){
  var p=location.hash.slice(1)||"start";
- var ok=["start","hausaufgaben","stundenplan","termine","geburtstage","profil","klasse","admin","chat","themen","quiz","spiele","wwm","rang","duell","umfragen"];
+ var ok=["start","hausaufgaben","stundenplan","termine","geburtstage","profil","klasse","admin","chat","themen","quiz","spiele","wwm","rang","duell","umfragen","ueben"];
  if(ok.indexOf(p)<0||(p==="admin"&&!isAdmin))p="start";
  document.querySelectorAll("main section").forEach(function(s){s.hidden=s.getAttribute("data-p")!==p});
  document.querySelectorAll("#nav a").forEach(function(a){a.classList.toggle("on",a.getAttribute("data-p")===p)});
@@ -837,7 +841,7 @@ try{drawTh();drawQL()}catch(e){}
 </script>
 <script>
 /* ===== Update 3: Navigation ===== */
-var NV=[["start","🏠","Start"],["hausaufgaben","📝","Hausaufgaben"],["stundenplan","🕗","Stundenplan"],["termine","📅","Termine"],["themen","📚","Themen"],["quiz","🧠","Quiz"],["chat","💬","Chat"],["geburtstage","🎂","Geburtstage"],["klasse","🎒","Klassenleben"],["spiele","🎮","Minispiele"],["wwm","💰","Millionär"],["umfragen","📊","Umfragen"],["duell","⚔️","Duell"],["rang","🏆","Rangliste"],["profil","👤","Profil"],["admin","🛡️","Admin"]];
+var NV=[["ueben","🎵","Üben"],["start","🏠","Start"],["hausaufgaben","📝","Hausaufgaben"],["stundenplan","🕗","Stundenplan"],["termine","📅","Termine"],["themen","📚","Themen"],["quiz","🧠","Quiz"],["chat","💬","Chat"],["geburtstage","🎂","Geburtstage"],["klasse","🎒","Klassenleben"],["spiele","🎮","Minispiele"],["wwm","💰","Millionär"],["umfragen","📊","Umfragen"],["duell","⚔️","Duell"],["rang","🏆","Rangliste"],["profil","👤","Profil"],["admin","🛡️","Admin"]];
 var MAIN=["start","hausaufgaben","chat","quiz"];
 function curP(){return location.hash.slice(1)||"start"}
 function drawNav(){
@@ -1503,6 +1507,96 @@ function gTip(){
 var _gd9=gDraw;gDraw=function(){if(GM==="hang"){stopG();gHang()}else if(GM==="tip"){stopG();gTip();gLB()}else _gd9()};
 var st=document.createElement("style");st.textContent=".hk{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px}.hk button{width:40px;height:44px;border:0;border-radius:10px;background:var(--line);color:var(--text);font:800 18px Nunito,sans-serif;cursor:pointer}.hk button:disabled{opacity:.3}";document.head.appendChild(st);
 drawDash();
+</script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)},K="6e-ueben",P={};
+try{P=JSON.parse(localStorage.getItem(K)||"{}")}catch(e){}
+function sv(){try{localStorage.setItem(K,JSON.stringify(P))}catch(e){}}
+var rnd=function(n){return Math.floor(Math.random()*n)};
+function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(i+1),t=a[i];a[i]=a[j];a[j]=t}return a}
+function mk(q,r,w,e,s){var o=shuf([r].concat(w));return{q:q,o:o,r:o.indexOf(r),e:e,s:s}}
+function T(arr){return shuf(arr).map(function(x){return mk(x[0],x[1],x[2],x[3])})}
+/* Noten */
+var LT="cdefgah",SUP=["","¹","²","³"],TW={cis:"des",dis:"es",fis:"ges",gis:"as",ais:"b",des:"cis",es:"dis",ges:"fis",as:"gis",b:"ais"},NN=["c","d","e","f","g","a","h","cis","dis","fis","gis","ais","des","es","ges","as","b"];
+function nm(d,a){var i=d%7,l=LT[i];return a==="#"?l+"is":a==="b"?(i===6?"b":i===2?"es":i===5?"as":l+"es"):l}
+function ny(d){return 70-(d-30)*5}
+function nt(x,d,a){var y=ny(d),s="",l;
+ if(y>=80)for(l=80;l<=y;l+=10)s+="<path d='M"+(x-10)+" "+l+"h20' fill='none'/>";
+ if(y<=20)for(l=20;l>=y;l-=10)s+="<path d='M"+(x-10)+" "+l+"h20' fill='none'/>";
+ s+="<ellipse cx='"+x+"' cy='"+y+"' rx='6.5' ry='4.6' transform='rotate(-18 "+x+" "+y+")' stroke='none'/>";
+ s+=y>50?"<path d='M"+(x+6)+" "+y+"V"+(y-30)+"' fill='none' stroke-width='1.6'/>":"<path d='M"+(x-6)+" "+y+"V"+(y+30)+"' fill='none' stroke-width='1.6'/>";
+ if(a)s+="<text x='"+(x-21)+"' y='"+(y+6)+"' font-size='19' stroke='none'>"+(a==="#"?"♯":"♭")+"</text>";
+ return s}
+function staff(inner,lab){var s="<svg viewBox='0 0 150 100' width='270' role='img' aria-label='"+lab+"' style='display:block;margin:6px auto;max-width:100%' stroke='currentColor' fill='currentColor' stroke-width='1'>";
+ for(var i=0;i<5;i++)s+="<path d='M8 "+(30+i*10)+"H142' fill='none'/>";
+ return s+"<text x='12' y='72' font-size='50' stroke='none'>𝄞</text>"+inner+"</svg>"}
+function genNote(){var d,i,a,al;
+ d=28+rnd(15);i=d%7;al=[""];
+ if([0,1,3,4,5].indexOf(i)>=0&&d<42)al.push("#");
+ if([1,2,4,5,6].indexOf(i)>=0)al.push("b");
+ a=S(al);return{d:d,a:a,n:nm(d,a),o:Math.floor(d/7)-3}}
+function S(a){return a[rnd(a.length)]}
+function noteQ(){var x=genNote(),w=shuf(NN.filter(function(n){return n!==x.n&&n!==TW[x.n]})).slice(0,3),sg=x.a==="#"?"Kreuz (♯) erhöht um einen Halbton.":x.a==="b"?"Das ♭ erniedrigt um einen Halbton.":"Ein Ton ohne Vorzeichen.";
+ return mk("Wie heißt dieser Ton?",x.n,w,"Das ist "+x.n+SUP[x.o]+". "+sg,staff(nt(95,x.d,x.a),"Note"))}
+function octQ(){var x=genNote(),O=["kleine Oktave","eingestrichene Oktave (¹)","zweigestrichene Oktave (²)","dreigestrichene Oktave (³)"];
+ return mk("In welcher Oktave liegt dieser Ton?",O[x.o],O.filter(function(o){return o!==O[x.o]}),"Es ist "+x.n+SUP[x.o]+". c¹ liegt auf der Hilfslinie unter dem System, c² im dritten Zwischenraum, c³ auf der zweiten Hilfslinie darüber.",staff(nt(95,x.d,x.a),"Note"))}
+var NS=[["Das c auf der ersten Hilfslinie unter dem Notensystem (Violinschlüssel) heißt …","c¹",["c²","c³","c"],"Das eingestrichene c¹ ist das „mittlere C“."],
+["Was bewirkt das Kreuz ♯ vor einer Note?","Der Ton wird einen Halbton höher",["Der Ton wird einen Halbton tiefer","Der Ton wird einen ganzen Ton höher","Der Ton wird eine Oktave höher"],"♯ erhöht um einen Halbton, ♭ erniedrigt um einen Halbton."],
+["Was ist das deutsche „b“?","h mit ♭, also einen Halbton unter h",["dasselbe wie h","einen Halbton über h","c mit ♯"],"Der Ton, der englisch B heißt, heißt bei uns h. Das erniedrigte h ist b."],
+["Cis und des sind …","derselbe Ton auf dem Klavier",["zwei Oktaven auseinander","ein ganzer Ton auseinander","ein Halbton auseinander"],"Gleich klingende Töne mit verschiedenem Namen nennt man enharmonisch verwechselt."],
+["Wie nennt man fis und ges, die gleich klingen, aber anders heißen?","Enharmonische Verwechslung",["Chromatik","Transposition","Oktavierung"],"Es ist dieselbe schwarze Taste."]];
+var CH=[["Wie viele Halbtonschritte hat die chromatische Tonleiter von c bis zum nächsten c?","12",["7","8","10"],"12 Halbtöne ergeben eine Oktave."],
+["Woraus besteht die chromatische Tonleiter?","Nur aus Halbtonschritten",["Nur aus ganzen Tönen","Nur aus weißen Tasten","Aus 7 Tönen"],"Alle weißen und schwarzen Tasten nacheinander."],
+["Wo liegt von Natur aus ein Halbton (ohne Vorzeichen)?","e–f und h–c",["c–d und f–g","d–e und a–h","g–a und c–d"],"Dort liegt keine schwarze Taste dazwischen."],
+["Ergänze: c – cis – d – ? – e","dis",["d","e","f"],"Aufwärts: c cis d dis e f fis g gis a ais h c."],
+["Mit welchem Vorzeichen schreibt man die chromatische Tonleiter abwärts meist?","♭ (Be)",["♯ (Kreuz)","Ohne Vorzeichen","♮ (Auflösung)"],"Abwärts: c h b a as g ges f e es d des c."],
+["Wie viele schwarze Tasten hat eine Oktave auf dem Klavier?","5",["7","12","3"],"5 schwarze und 7 weiße Tasten ergeben 12 Töne."],
+["Wie viele Halbtonschritte ergeben einen ganzen Ton?","2",["1","3","4"],"c–d ist ein ganzer Ton: c, cis, d."],
+["Welcher Ton liegt einen Halbton über f?","fis (oder ges)",["g","e","f"],"Eine schwarze Taste zwischen f und g."],
+["Welcher Ton folgt aufwärts auf a?","ais (b)",["h","as","g"],"a – ais – h"]];
+var AR=[["staccato","kurz und abgesetzt","<circle cx='95' cy='36' r='2.6' stroke='none'/>"],["tenuto","ausgehalten, voller Notenwert","<path d='M88 36h14' stroke-width='3'/>"],["Akzent","betont","<path d='M87 31l16 5l-16 5' fill='none' stroke-width='2'/>"],["Marcato","stark betont","<path d='M89 41l6-12l6 12' fill='none' stroke-width='2'/>"],["staccatissimo","sehr kurz","<path d='M92 30h6l-3 11z' stroke='none'/>"],["legato","gebunden","L"]];
+function artQ(a){var inner,all=AR.map(function(x){return x[0]});
+ if(a[2]==="L")inner=nt(70,50,"")+nt(110,55,"")+"<path d='M70 40Q90 26 110 45' fill='none' stroke-width='1.8'/>";else inner=nt(95,50,"")+a[2];
+ return mk("Wie heißt dieses Zeichen?",a[0],shuf(all.filter(function(n){return n!==a[0]})).slice(0,3),a[0]+" bedeutet: "+a[1]+".",staff(inner,"Artikulationszeichen"))}
+var AS=[["Was bedeutet legato?","gebunden",["kurz","betont","laut"],"Die Töne gehen ohne Pause ineinander über."],["Was bedeutet staccato?","abgesetzt, kurz",["gebunden","sehr laut","langsamer"],"Italienisch für „abgetrennt“."],["Wie nennt man einen Bogen zwischen zwei Noten gleicher Tonhöhe?","Haltebogen",["Legatobogen","Staccatobogen","Akzent"],"Bei verschiedenen Tonhöhen heißt er Legatobogen."],["Wie wird eine Note mit tenuto-Strich gespielt?","ausgehalten, in voller Länge",["ganz kurz","sehr leise","springend"],"tenuto heißt „gehalten“."],["Artikulation sagt dir …","wie du einen Ton spielst oder singst",["wie hoch ein Ton ist","wie schnell das Stück ist","wie laut das Stück ist"],"Hoch/tief, Tempo und Lautstärke sind etwas anderes."]];
+var KA=[["Wer komponierte den „Karneval der Tiere“?","Camille Saint-Saëns",["Hector Berlioz","Claude Debussy","Jacques Offenbach"],"Der Franzose Camille Saint-Saëns (1835–1921)."],
+["Aus welchem Land stammte Saint-Saëns?","Frankreich",["Österreich","Italien","Deutschland"],"Er wurde in Paris geboren."],
+["Wie nannte er das Werk?","Große zoologische Fantasie",["Tierische Sinfonie","Ballett für Kinder","Märchensuite"],"Grande fantaisie zoologique."],
+["Wie viele Sätze hat der Karneval der Tiere?","14",["10","12","8"],"Von der Introduktion mit dem Löwen bis zum Finale."],
+["Welche Besetzung spielt „Der Schwan“?","Solo-Cello mit Klavier",["Solo-Violine","Solo-Flöte","Kontrabass"],"Das Cello singt die ruhige, gleitende Melodie, das Klavier plätschert wie Wasser."],
+["Welches Instrument spielt „Der Elefant“?","Kontrabass",["Tuba","Fagott","Posaune"],"Tief, schwerfällig und als Walzer. Das wirkt witzig."],
+["Wie klingt die Musik zum Elefanten?","tief und schwerfällig, wie ein Walzer",["hoch und flatterig","laut wie ein Marsch","ganz leise"],"Ein großes Tier tanzt Walzer."],
+["Welcher Satz wurde zu Lebzeiten des Komponisten als einziger veröffentlicht?","Der Schwan",["Der Elefant","Kuckuck","Finale"],"Der Rest erschien erst 1922 nach seinem Tod."],
+["Welche bekannte Melodie spielen die „Schildkröten“ ganz langsam?","den Cancan von Offenbach",["Für Elise","Ode an die Freude","Alle meine Entchen"],"Ein schneller Tanz, extrem verlangsamt."],
+["Welches Instrument ruft den Kuckuck?","Klarinette",["Flöte","Oboe","Horn"],"Sie spielt zwei Kuckucks-Töne."],
+["Welches Instrument stellt die Vögel in der „Voliere“ dar?","Flöte",["Fagott","Tuba","Posaune"],"Hohe, flatternde Flötenklänge."],
+["Was machen die „Pianisten“ im Stück?","Sie üben Tonleitern, absichtlich holprig",["Sie spielen Jazz","Sie spielen einen Walzer","Sie spielen Orgel"],"Ein Scherz auf Klavierschüler."],
+["Welches Instrument klingt bei den „Fossilien“ wie klappernde Knochen?","Xylophon",["Harfe","Triangel","Orgel"],"Dort kommt auch Saint-Saëns’ eigener „Danse macabre“ vor."],
+["Wofür schrieb er das Stück 1886?","Für ein Faschingskonzert im Freundeskreis",["Für eine Kirchenmesse","Für eine Oper","Für den König"],"Karneval ist Fasching, das Stück ist scherzhaft gemeint."],
+["Als was galt Saint-Saëns schon als Kind?","Wunderkind am Klavier",["Schlagzeuger","Trompeter","Sänger"],"Mit 10 Jahren gab er sein erstes öffentliches Konzert."],
+["Welches andere Werk stammt von Saint-Saëns?","Danse macabre (Totentanz)",["Die Moldau","Bolero","Die Zauberflöte"],"Skelette tanzen um Mitternacht."]];
+var TP=[{id:"noten",t:"Töne c¹ bis c³",ic:"🎼",s:"Noten lesen, ♯ und ♭",g:function(){var a=[],i;for(i=0;i<6;i++)a.push(noteQ());a.push(octQ(),octQ());return a.concat(T(NS).slice(0,2))}},
+{id:"chrom",t:"Chromatische Tonleiter",ic:"🎹",s:"Halbtöne, ♯ aufwärts, ♭ abwärts",g:function(){return T(CH).slice(0,9)}},
+{id:"artik",t:"Artikulationszeichen",ic:"🎯",s:"staccato, legato, tenuto …",g:function(){return shuf(AR).map(artQ).concat(T(AS).slice(0,4))}},
+{id:"karneval",t:"Karneval der Tiere",ic:"🐘",s:"Saint-Saëns, Schwan, Elefant",g:function(){return T(KA).slice(0,10)}}];
+var Q,N,I,OK,A,TT;
+function stars(p){return p>=100?3:p>=80?2:p>=60?1:0}
+function home(){var h="<div class='tiles'>"+TP.map(function(t){var b=P[t.id]||{},n=stars(b.best||0);return "<button type='button' class='tile ub' data-t='"+t.id+"'><i class='ic'>"+t.ic+"</i><b class='hand'>"+t.t+"</b><span>"+t.s+"</span><span class='ubs'>"+"★".repeat(n)+"☆".repeat(3-n)+(b.best!=null?" · Bestwert "+b.best+" %":" · noch nicht geübt")+"</span></button>"}).join("")+"</div>";$("ubox").innerHTML=h}
+function start(id){TT=TP.filter(function(t){return t.id===id})[0];Q=TT.g();N=Q.length;I=0;OK=0;A=false;ask()}
+function ask(){var q=Q[I];if(!q){return end()}A=false;
+ $("ubox").innerHTML="<div class='box ubq'><p class='lead'><button type='button' class='lnk' data-x='h' style='padding:0'>← Alle Themen</button> · "+TT.t+"</p><div class='xbar'><i style='width:"+Math.round(Math.min(I,N)/N*100)+"%'></i></div><p class='lead'>Frage "+Math.min(I+1,N)+" von "+N+(q.rep?" · Wiederholung":"")+"</p><h3 class='hand' style='font-size:24px'>"+esc(q.q)+"</h3>"+(q.s||"")+q.o.map(function(o,i){return "<button type='button' class='qa' data-a='"+i+"'>"+esc(o)+"</button>"}).join("")+"<div id='ubf' aria-live='polite'></div></div>"}
+function pick(i){if(A)return;A=true;var q=Q[I],ok=i===q.r,b=$("ubox").querySelectorAll(".qa");
+ b[i].classList.add(ok?"ok":"no");b[q.r].classList.add("ok");
+ if(ok){if(!q.rep)OK++}else if(!q.rep){var c=JSON.parse(JSON.stringify(q));c.rep=1;Q.push(c)}
+ $("ubf").innerHTML="<div class='ubx "+(ok?"g":"r")+"'><b>"+(ok?"Richtig!":"Nicht ganz.")+"</b> "+esc(q.e)+"</div><button type='button' class='btn' data-x='n'>Weiter ➜</button>"}
+function end(){var p=Math.round(OK/N*100),b=P[TT.id]||{},n=stars(p);P[TT.id]={best:Math.max(b.best||0,p),n:(b.n||0)+1};sv();
+ $("ubox").innerHTML="<div class='box' style='text-align:center'><h3 class='hand' style='font-size:34px'>"+"★".repeat(n)+"☆".repeat(3-n)+"</h3><p style='font-size:20px'><b>"+OK+" von "+N+"</b> beim ersten Versuch richtig ("+p+" %).</p><p class='lead'>"+(p>=100?"Perfekt!":p>=80?"Sehr gut, fast geschafft.":p>=60?"Gut. Mit den Erklärungen wird es noch besser.":"Übe das Thema noch einmal, die Fragen sind jedes Mal etwas anders.")+"</p><button type='button' class='btn' data-x='r'>Nochmal</button> <button type='button' class='sm' data-x='h'>Alle Themen</button></div>";if(p>=100&&window.burst)burst()}
+$("ubox").addEventListener("click",function(e){var t=e.target.closest("[data-t],[data-a],[data-x]");if(!t)return;
+ if(t.dataset.t)start(t.dataset.t);else if(t.dataset.a!==undefined)pick(+t.dataset.a);
+ else if(t.dataset.x==="n"){I++;ask()}else if(t.dataset.x==="r")start(TT.id);else home()});
+home();
+})();
 </script>
 </body>
 </html>
