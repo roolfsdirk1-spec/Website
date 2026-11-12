@@ -270,7 +270,7 @@ main{padding-top:18px}
 /* ===== Update 8: Rangliste, XP-Vergabe, Minispiele ===== */
 [data-p=spiele] .rooms{flex-wrap:wrap}
 .mec{display:flex;gap:14px;align-items:center}.mec>div:last-child{flex:1}
-.lvc{flex:none;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:600 30px Fredoka,sans-serif;color:#fff;background:linear-gradient(135deg,var(--ink),var(--ink2));box-shadow:0 0 0 4px var(--paper),0 0 0 7px var(--ink)}
+ .lvc{box-sizing:border-box;flex:none;width:52px;height:52px;min-width:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0;margin:0;font:700 23px/1 Fredoka,sans-serif;color:#fff;background:linear-gradient(135deg,var(--ink),var(--ink2));box-shadow:0 0 0 2px var(--paper);border:2px solid var(--ink);text-align:center;white-space:nowrap;overflow:hidden}
 .pod{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin:16px 0}
 .pod>div{flex:1;max-width:130px;text-align:center;animation:rise .7s both}
 .pod .av{font-size:36px;line-height:1.1}.pod .pn{font-weight:800;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -464,8 +464,29 @@ main{padding-top:18px}
 :root[data-theme="dark"] .exam-answer.bad{background:#7f1d1d;color:#fee2e2}
 
 
+/* Klassen-Avatare in Mehr */
+.class-avatars{margin:18px 0 22px}
+.class-avatar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:12px;margin-top:14px}
+.class-avatar-card{min-width:0;text-align:center;padding:14px 10px;border:1px solid var(--line);border-radius:18px;background:var(--bg)}
+.class-avatar-card.me{border:2px solid var(--ink2);background:color-mix(in srgb,var(--ink2) 7%,var(--bg))}
+ .class-avatar-face{width:92px;height:132px;margin:0 auto 9px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#dbeafe,#fce7f3);border-radius:18px;overflow:hidden}
+.skin-svg{display:block;width:100%;height:100%;max-width:120px}
+.profile-avatar{width:132px!important;height:178px!important;border-radius:18px!important;display:flex!important;align-items:center;justify-content:center;background:linear-gradient(145deg,#dbeafe,#fce7f3)!important;overflow:hidden}
+.shop-skin{width:104px;height:150px;flex:none;border-radius:16px;overflow:hidden;background:linear-gradient(145deg,#dbeafe,#fce7f3)}
+.class-avatar-card b{display:block;overflow-wrap:anywhere;font-size:15px}
+.class-avatar-card small{display:block;margin-top:4px;color:var(--muted);font-weight:800;overflow-wrap:anywhere}
+.class-avatar-you{display:inline-block;margin-left:4px;padding:2px 6px;border-radius:99px;background:var(--ink2);color:#fff;font-size:10px}
+@media(max-width:420px){.class-avatar-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* Profil-Editor */
 .profile-maker{max-width:620px}.profile-preview{display:flex;flex-direction:column;align-items:center;gap:5px;padding:18px;margin-bottom:18px;border-radius:20px;background:linear-gradient(135deg,#e0e7ff,#fce7f3);color:#29245c}.profile-avatar{width:100px;height:100px;border-radius:28px;display:grid;place-items:center;background:#fff;font-size:62px;box-shadow:0 8px 22px #4338ca25}.profile-preview b{font-size:20px}.profile-preview small{font-weight:800}.profile-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.profile-actions button{min-height:44px}
+.bdh{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;background:linear-gradient(135deg,var(--ink),var(--ink2));color:#fff;border-radius:24px;padding:20px 22px;box-shadow:var(--sh)}.bdh.heute{outline:4px solid var(--ok)}
+.bde{font-size:52px;line-height:1}.bdt h3{margin:0;font:600 26px Fredoka,sans-serif;color:#fff}.bdt p{margin:4px 0 0;opacity:.92}
+.bdc2{text-align:center;background:rgba(255,255,255,.18);border-radius:18px;padding:8px 14px;min-width:78px}.bdc2 b{display:block;font:600 32px/1.1 Fredoka,sans-serif}.bdc2 span{font-size:13px;font-weight:800}
+.bdsum{color:var(--muted);margin:10px 4px 22px}.bdg{margin-bottom:22px}.bdg h3{display:flex;align-items:baseline;gap:10px;margin:0 0 10px;font-size:22px}.bdg h3 small{color:var(--muted);font:800 14px Nunito,sans-serif}
+.bdc{display:grid;grid-template-columns:56px 1fr auto;gap:14px;align-items:center;background:var(--paper);border-radius:16px;box-shadow:var(--sh);padding:10px 14px;margin-bottom:10px;border:2px solid transparent}.bdc.me{border-color:var(--ink2)}.bdc.bald .bdd{background:var(--ink2)}.bdc.heute{border-color:var(--ok)}.bdc.heute .bdd{background:var(--ok);color:#fff}
+.bdd{background:var(--ink);color:var(--paper);border-radius:12px;text-align:center;padding:6px 0}.bdd b{display:block;font:600 24px/1 Fredoka,sans-serif}.bdd span{font-size:12px;font-weight:800}.bdn small{display:block;color:var(--muted)}
+.gdup{margin:10px 0;padding:12px 14px;border-radius:14px;background:var(--bg);border-left:6px solid var(--ink2)}.gdup p{margin:4px 0 10px}
+@media(max-width:480px){.bdh{grid-template-columns:auto 1fr}.bdc2{grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -516,7 +537,7 @@ main{padding-top:18px}
 
 <section data-p="geburtstage" hidden><h2 class="hand">🎂 Geburtstage</h2><p class="lead">Wer als Nächstes feiert, und die ganze Klasse als Kette.</p><div id="bdnext"></div><div class="chain" id="bdchain"></div></section>
 
-<section data-p="profil" hidden><h2 class="hand">👤 Mein Profil</h2><p class="lead">Erstelle deinen eigenen Charakter. Du kannst Name, Aussehen und Outfit jederzeit ändern.</p><div class="adm profile-maker"><div class="profile-preview"><div id="profileAvatar" class="profile-avatar">🙂</div><b id="profilePreviewName">Dein Charakter</b><small id="profilePreviewOutfit">Noch kein Outfit gewählt</small></div><label for="pn">Dein Name</label><input type="text" id="pn" maxlength="30" placeholder="Wie sollen dich alle nennen?"><label for="pb">Geburtstag (optional)</label><input type="date" id="pb"><label for="pe">Gesicht / Emoji</label><select id="pe"><option>🙂</option><option>😎</option><option>🤩</option><option>😇</option><option>🥳</option><option>🐱</option><option>🐼</option><option>🦊</option><option>🐸</option><option>🐯</option><option>👾</option><option>🤖</option></select><label for="poutfit">Outfit auswählen</label><select id="poutfit"><option value="👕 T-Shirt">👕 T-Shirt</option><option value="🧥 Hoodie">🧥 Hoodie</option><option value="👔 Schick">👔 Schick</option><option value="🥼 Sportlich">🥼 Sportlich</option><option value="🦸 Superheld">🦸 Superheld</option><option value="👗 Party-Look">👗 Party-Look</option><option value="🧢 Streetstyle">🧢 Streetstyle</option><option value="🎮 Gamer-Look">🎮 Gamer-Look</option></select><label for="pbio">Über mich (optional)</label><textarea id="pbio" maxlength="120" rows="2" placeholder="Das mag ich besonders …"></textarea><div class="profile-actions"><button class="btn" type="button" id="psave">💾 Profil speichern</button><button class="sm red" type="button" id="pdelete">🗑️ Mein Profil löschen</button></div><p id="pstat" aria-live="polite" style="font-weight:800;color:var(--ok)"></p><small class="lead">Beim Löschen wird dein Klassenprofil entfernt. Du kannst danach ein neues Profil anlegen.</small></div></section>
+<section data-p="profil" hidden><h2 class="hand">👤 Mein Profil</h2><p class="lead">Erstelle deinen eigenen Charakter – mit Gesicht und Outfit. Dein gespeicherter Avatar erscheint auch in „Mehr“ bei den Avataren der Klasse.</p><div class="adm profile-maker"><div class="profile-preview"><div id="profileAvatar" class="profile-avatar">🙂</div><b id="profilePreviewName">Dein Charakter</b><small id="profilePreviewOutfit">Noch kein Outfit gewählt</small></div><label for="pn">Dein Name</label><input type="text" id="pn" maxlength="30" placeholder="Wie sollen dich alle nennen?"><label for="pb">Geburtstag (optional)</label><input type="date" id="pb"><label for="pe">Gesicht / Emoji</label><select id="pe"><option>🙂</option><option>😎</option><option>🤩</option><option>😇</option><option>🥳</option><option>🐱</option><option>🐼</option><option>🦊</option><option>🐸</option><option>🐯</option><option>👾</option><option>🤖</option></select><label for="poutfit">Outfit auswählen</label><select id="poutfit"><option value="👕 T-Shirt">👕 T-Shirt</option><option value="🧥 Hoodie">🧥 Hoodie</option><option value="👔 Schick">👔 Schick</option><option value="🥼 Sportlich">🥼 Sportlich</option><option value="🦸 Superheld">🦸 Superheld</option><option value="👗 Party-Look">👗 Party-Look</option><option value="🧢 Streetstyle">🧢 Streetstyle</option><option value="🎮 Gamer-Look">🎮 Gamer-Look</option></select><label for="pbio">Über mich (optional)</label><textarea id="pbio" maxlength="120" rows="2" placeholder="Das mag ich besonders …"></textarea><div class="profile-actions"><button class="btn" type="button" id="psave">💾 Profil speichern</button><button class="sm red" type="button" id="pdelete">🗑️ Mein Profil löschen</button></div><p id="pstat" aria-live="polite" style="font-weight:800;color:var(--ok)"></p><small class="lead">Beim Löschen wird dein Klassenprofil entfernt. Du kannst danach ein neues Profil anlegen.</small></div></section>
 
 <section data-p="klasse" hidden>
 <h2 class="hand">Klassenleben</h2>
@@ -586,8 +607,17 @@ main{padding-top:18px}
 <div class="rooms"><button type="button" class="rb on" data-g="guess">🔢 Zahlenraten</button><button type="button" class="rb" data-g="react">⚡ Reaktion</button><button type="button" class="rb" data-g="ttt">❌ Tic-Tac-Toe</button><button type="button" class="rb" data-g="snake">🐍 Snake</button><button type="button" class="rb" data-g="mem">🧩 Memory</button><button type="button" class="rb" data-g="calc">➕ Kopfrechnen</button><button type="button" class="rb" data-g="hang">🔤 Galgenmännchen</button><button type="button" class="rb" data-g="tip">⌨️ Tipp-Test</button></div><div class="box" id="gbox"></div></section>
 
 
+<section data-p="avatars" hidden>
+ <h2 class="hand">👥 Avatare der Klasse 6e</h2>
+ <p class="lead">Hier kannst du die Charaktere deiner Mitschülerinnen und Mitschüler sehen. Deinen eigenen Avatar gestaltest du unter „Profil“.</p>
+ <article class="ex-card class-avatars" id="classAvatars">
+  <div class="shop-top"><div><span class="ex-kicker">👥 UNSERE KLASSE</span><h3>Deine Klasse als Avatare</h3><p>Hier siehst du die Charaktere, die deine Mitschülerinnen und Mitschüler in ihrem Profil erstellt haben.</p></div><div class="ex-spark" aria-hidden="true">🌟</div></div>
+  <div id="classAvatarGrid" class="class-avatar-grid"><p class="empty">Avatare werden geladen …</p></div>
+ </article>
+</section>
+
 <section data-p="extras" hidden>
- <div class="ex-hero"><div><span class="ex-kicker">KLASSE 6E · EXTRA-SPASS</span><h2 class="hand">✨ Deine Spiel- & Lernwelt · UPDATE</h2><p>Belohnungen sammeln, für Klassenarbeiten üben und Spaß haben!</p></div><div class="ex-spark">🌈</div></div>
+ <div class="ex-hero"><div><span class="ex-kicker">KLASSE 6E · EXTRA-SPASS</span><h2 class="hand">✨ Shop & Geometry Dash</h2><p>Belohnungen sammeln, für Klassenarbeiten üben und Spaß haben!</p></div><div class="ex-spark">🌈</div></div>
  <div class="ex-grid">
   <article class="ex-card reward-card"><div class="ex-icon">🎁</div><h3>Tagesbelohnung</h3><p id="dailyText">Deine Überraschung wartet!</p><button class="ex-btn" id="dailyBtn">Überraschung öffnen</button></article>
   <article class="ex-card pet-card"><div class="ex-icon" id="petFace">🐾</div><h3>Dein Klassen-Maskottchen</h3><p id="petText">Dein Maskottchen freut sich auf dich!</p><div class="pet-xp"><span id="petBar"></span></div><button class="ex-btn" id="petFeed">Maskottchen füttern 🍎</button></article>
@@ -599,6 +629,21 @@ main{padding-top:18px}
  <div id="examPlay" class="exam-play"><p>Wähle ein Fach und starte deine Übungs-Klassenarbeit.</p></div></article>
 </section>
 
+<section data-p="einstellungen" hidden>
+<h2 class="hand">⚙️ Einstellungen</h2><p class="lead">Mach die Seite zu deiner eigenen. Alles wird auf diesem Gerät gespeichert.</p>
+<div class="adm"><h3 class="hand">🎨 Akzentfarbe</h3><div class="swatches" id="stSw"></div>
+<div class="st-row"><label for="stC1">Farbe 1</label><input type="color" id="stC1"><label for="stC2">Farbe 2</label><input type="color" id="stC2"></div></div>
+<div class="adm"><h3 class="hand">🌗 Design</h3>
+<label for="stTheme">Modus</label><select id="stTheme"><option value="auto">Automatisch (wie dein Gerät)</option><option value="light">Hell</option><option value="dark">Dunkel</option></select>
+<label for="stBg">Hintergrund</label><select id="stBg"><option value="grad">Farbverlauf</option><option value="flat">Einfarbig</option><option value="dots">Punkte-Muster</option></select>
+<label for="stFont">Schriftart</label><select id="stFont"><option value="nunito">Standard (Nunito)</option><option value="fredoka">Rund (Fredoka)</option><option value="system">System</option><option value="serif">Serif</option><option value="mono">Schreibmaschine</option></select>
+<label for="stSize">Schriftgröße: <span id="stSizeV"></span></label><input type="range" id="stSize" min="14" max="22" step="1">
+<label for="stRad">Eckenrundung: <span id="stRadV"></span></label><input type="range" id="stRad" min="0" max="32" step="2">
+<label class="pr"><input type="checkbox" id="stAnim"> ✨ Animationen aktiv</label>
+<label class="pr"><input type="checkbox" id="stCompact"> 📏 Kompakter Abstand</label>
+<button class="sm" type="button" id="stReset">↺ Alles zurücksetzen</button></div>
+<div class="adm"><h3 class="hand">👤 Mein Konto</h3><p class="lead">Du kannst dein Konto jederzeit löschen. Dein Name, Geburtstag, Profil und deine XP werden entfernt.</p><button class="sm red" type="button" id="stDel">🗑️ Mein Konto löschen</button></div>
+</section>
 <section data-p="wwm" hidden><h2 class="hand">💰 Wer wird Millionär?</h2><p class="lead">Die Fragen kommen aus den Quizzen der Klasse.</p><div class="box" id="wbox"></div></section>
 
 <section data-p="duell" hidden><h2 class="hand">⚔️ Duell</h2><p class="lead">Raum erstellen, Code an Freunde schicken und gegeneinander spielen.</p><div class="box" id="dbox"></div></section>
@@ -739,7 +784,7 @@ function R(){setTab(atab);renderSoon();renderBd();renderProfile();$("hwpanel").h
 
 function route(){
  var p=location.hash.slice(1)||"start";
- var ok=["start","hausaufgaben","stundenplan","termine","geburtstage","profil","klasse","admin","chat","themen","quiz","spiele","wwm","rang","duell","umfragen","ueben","extras"];
+ var ok=["start","hausaufgaben","stundenplan","termine","geburtstage","profil","klasse","admin","chat","themen","quiz","spiele","wwm","rang","duell","umfragen","ueben","extras","avatars","einstellungen"];
  if(ok.indexOf(p)<0||(p==="admin"&&!isAdmin))p="start";
  document.querySelectorAll("main section").forEach(function(s){s.hidden=s.getAttribute("data-p")!==p});
  document.querySelectorAll("#nav a").forEach(function(a){a.classList.toggle("on",a.getAttribute("data-p")===p)});
@@ -790,21 +835,35 @@ function register(){
  var q=users[uid]?usersCol.doc(uid).update({name:NAME,last:Date.now(),admin:isAdmin,bday:BDAY||(users[uid]&&users[uid].bday)||""}):usersCol.doc(uid).set({name:NAME,last:Date.now(),banned:false,hw:false,admin:isAdmin,bday:BDAY||""});
  q.then(function(){if(dberr){dberr="";renderUsers()}}).catch(fail);
 }
+function renderClassAvatars(){
+ var host=$("classAvatarGrid");if(!host)return;
+ var ids=Object.keys(users).filter(function(k){return users[k]&&!users[k].banned&&String(users[k].name||"").trim()});
+ ids.sort(function(a,b){
+  if(a===uid)return -1;if(b===uid)return 1;
+  return String(users[a].name).localeCompare(String(users[b].name),"de");
+ });
+ if(!ids.length){host.innerHTML="<p class='empty'>Noch keine Klassen-Avatare vorhanden. Erstelle zuerst dein Profil! 🙂</p>";return}
+ host.innerHTML=ids.map(function(k){
+  var u=users[k],mine=k===uid,skin=skinSvg(u.emo||"🙂",u.outfit||"👕 T-Shirt"),name=esc(u.name||"Klassenmitglied"),outfit=esc(u.outfit||"Noch kein Outfit");
+  return "<div class='class-avatar-card"+(mine?" me":"")+"'><div class='class-avatar-face'>"+skin+"</div><b>"+name+(mine?" <span class='class-avatar-you'>DU</span>":"")+"</b><small>"+outfit+"</small></div>";
+ }).join("");
+}
 function renderUsers(){
  $("ban").hidden=!(loaded&&me().banned&&!isAdmin);
+ renderClassAvatars();
  var o={},nm={},t=Date.now(),all={};
  live.forEach(function(p){var u=p.presence||{};if(u.u){o[u.u]=1;nm[u.u]=u.n}});
  Object.keys(users).forEach(function(k){all[k]=users[k]});
  Object.keys(o).forEach(function(k){if(!all[k])all[k]={name:nm[k],ghost:1}});
  function on(k){return !!o[k]||t-(all[k].last||0)<75000}
  var ids=Object.keys(all).sort(function(a,b){return (on(b)-on(a))||String(all[a].name).localeCompare(String(all[b].name))});
- var c=ids.filter(on).length;
+ var c=ids.filter(on).length,dn={};ids.forEach(function(k){var n=String(all[k].name||"").trim().toLowerCase();if(n)dn[n]=(dn[n]||0)+1});
  $("onl").textContent=c+" online";$("onl").hidden=!c;
  if(!isAdmin)return;
  $("astats").innerHTML="<span><b>"+c+"</b>online</span><span><b>"+ids.length+"</b>Nutzer</span><span><b>"+D.hw.length+"</b>Aufgaben</span><span><b>"+D.te.length+"</b>Termine</span>";$("ucount").innerHTML=(dberr?"<div class='err'>"+esc(dberr)+"</div>":"")+c+" online, "+ids.length+" angemeldet insgesamt.";
  $("ulist").innerHTML=ids.map(function(k){
   var u=all[k],k2=esc(k),self=k===uid;
-  return "<li><span class='dot"+(on(k)?" on":"")+"' title='"+(on(k)?"online":"offline")+"'></span><span class='nm'>"+esc(u.name||"?")+(u.bday?" <small style='color:var(--muted);font-weight:400'>🎂 "+esc(u.bday.split("-").reverse().join("."))+"</small>":"")+(u.admin?"<span class='bd'>Admin</span>":"")+(u.hw?"<span class='bd'>Dienst</span>":"")+(u.banned?"<span class='bd' style='background:var(--red)'>gesperrt</span>":"")+"</span>"+
+  return "<li><span class='dot"+(on(k)?" on":"")+"' title='"+(on(k)?"online":"offline")+"'></span><span class='nm'>"+esc(u.name||"?")+(dn[String(u.name||"").trim().toLowerCase()]>1?"<span class='bd' style='background:#f59e0b'>doppelt?</span>":"")+(u.bday?" <small style='color:var(--muted);font-weight:400'>🎂 "+esc(u.bday.split("-").reverse().join("."))+"</small>":"")+(u.admin?"<span class='bd'>Admin</span>":"")+(u.hw?"<span class='bd'>Dienst</span>":"")+(u.banned?"<span class='bd' style='background:var(--red)'>gesperrt</span>":"")+"</span>"+
   (self?"<small style='color:var(--muted)'>du</small>":u.ghost?"<small style='color:var(--muted)'>noch nicht gespeichert</small>":"<button type='button' class='sm' data-u='"+k2+"' data-a='edit'>✎ Profil</button><button type='button' class='sm' data-u='"+k2+"' data-a='hw'>"+(u.hw?"Dienst beenden":"Hausaufgaben-Dienst")+"</button><button type='button' class='sm' data-u='"+k2+"' data-a='ban'>"+(u.banned?"Entsperren":"Sperren")+"</button><button type='button' class='sm red' data-u='"+k2+"' data-a='del'>Löschen</button>")+"</li>";
  }).join("")||"<li style='color:var(--muted)'>Noch niemand angemeldet.</li>";
 }
@@ -812,9 +871,28 @@ function renderRole(){var t=isAdmin?"Admin":me().hw?"Hausaufgaben-Dienst":"";$("
 hello();$("gname").value=NAME;$("gbd").value=BDAY;$("gbd").max=new Date().toISOString().slice(0,10);$("gate").hidden=!!(NAME&&(BDAY||isAdmin));
 $("gform").addEventListener("submit",function(e){e.preventDefault();var v=$("gname").value.trim(),b=$("gbd").value;if(!v||!/^\d{4}-\d{2}-\d{2}$/.test(b))return;NAME=v;BDAY=b;store("6e-name",v);store("6e-bday",b);$("gate").hidden=true;register();R();location.hash="#start"});
 $("rename").addEventListener("click",function(){location.hash="#profil"});
-function profilePreview(){var n=$("pn").value.trim()||"Dein Charakter",em=$("pe").value||"🙂",out=$("poutfit").value||"👕 T-Shirt";$("profileAvatar").textContent=em;$("profilePreviewName").textContent=n;$("profilePreviewOutfit").textContent=out}
+function skinSvg(face,outfit,gear){
+ var o=String(outfit||"").toLowerCase(),shirt="#38bdf8",pants="#334155",hair="#4b2e22";
+ if(o.indexOf("hoodie")>=0){shirt="#8b5cf6";pants="#1e293b"}
+ else if(o.indexOf("schick")>=0||o.indexOf("party")>=0){shirt="#ec4899";pants="#475569"}
+ else if(o.indexOf("sport")>=0){shirt="#22c55e";pants="#1d4ed8"}
+ else if(o.indexOf("superheld")>=0){shirt="#ef4444";pants="#1e40af"}
+ else if(o.indexOf("street")>=0||o.indexOf("gamer")>=0){shirt="#f59e0b";pants="#292524"}
+ else if(o.indexOf("quiz")>=0||o.indexOf("brain")>=0){shirt="#7c3aed";pants="#312e81"}
+ else if(o.indexOf("eulen")>=0){shirt="#a16207"}
+ else if(o.indexOf("musik")>=0){shirt="#db2777"}
+ else if(o.indexOf("level")>=0){shirt="#ca8a04"}
+ var hat=gear&&gear.hat||"",hairItem=gear&&gear.hair||"",acc=gear&&gear.accessory||"";
+ var hatMark=hat.indexOf("Zauber")>=0?"🧙":hat.indexOf("Krone")>=0?"👑":hat?"🧢":"";
+ var hairMark=hairItem.indexOf("Pink")>=0?"💗":hairItem.indexOf("Blau")>=0?"💙":hairItem?"🦔":"";
+ var accMark=acc.indexOf("Brille")>=0?"🕶️":acc.indexOf("Kopfhörer")>=0?"🎧":acc.indexOf("Rucksack")>=0?"🎒":acc.indexOf("Stern")>=0?"⭐":acc.indexOf("Flügel")>=0?"🪽":"";
+ var chest=o.indexOf("quiz")>=0||o.indexOf("brain")>=0?"🧠":o.indexOf("eulen")>=0?"🦉":o.indexOf("musik")>=0?"🎵":o.indexOf("level")>=0?"⭐":"";
+ var faceMark=String(face||"🙂");
+ return "<svg class='skin-svg' viewBox='0 0 120 180' role='img' aria-label='Ganzkörper-Avatar mit ausgerüsteten Gegenständen' xmlns='http://www.w3.org/2000/svg'><ellipse cx='60' cy='169' rx='34' ry='7' fill='#0f172a' opacity='.13'/><path d='M43 126 L38 158 Q37 165 44 165 L52 165 L60 132 L68 165 L78 165 Q84 164 82 157 L77 126Z' fill='"+pants+"'/><path d='M39 158 Q34 165 40 169 L54 169 L55 163 L49 158Z M67 163 L69 169 L84 169 Q89 165 81 158Z' fill='#1f2937'/><path d='M35 76 Q27 78 24 91 L17 119 Q16 125 23 127 L31 126 L43 96 L44 130 Q60 139 77 130 L78 96 L89 126 L97 127 Q104 124 101 117 L94 90 Q91 78 82 76 L72 72 L48 72Z' fill='"+shirt+"' stroke='#0f172a' stroke-opacity='.12' stroke-width='2'/><path d='M47 74 Q60 83 73 74 L69 91 L60 97 L51 91Z' fill='#ffffff' opacity='.22'/><path d='M45 39 Q42 17 60 16 Q79 17 76 40 L73 61 Q70 75 60 75 Q49 74 46 61Z' fill='#f2c6a0'/><path d='M43 42 Q37 15 60 12 Q84 14 78 43 L74 34 Q61 27 47 37Z' fill='"+hair+"'/><path d='M46 48 Q49 45 53 48 M66 48 Q70 45 74 48' stroke='#3b2418' stroke-width='2.5' fill='none' stroke-linecap='round'/><path d='M55 59 Q60 64 66 59' stroke='#9a4d45' stroke-width='2' fill='none' stroke-linecap='round'/><path d='M47 72 L43 80 M73 72 L78 80' stroke='#f2c6a0' stroke-width='7' stroke-linecap='round'/><text x='60' y='115' text-anchor='middle' font-size='17'>"+chest+"</text>"+(hatMark?"<text x='60' y='19' text-anchor='middle' font-size='25'>"+hatMark+"</text>":"")+(hairMark?"<text x='60' y='31' text-anchor='middle' font-size='17'>"+hairMark+"</text>":"")+(accMark?"<text x='91' y='63' text-anchor='middle' font-size='20'>"+accMark+"</text>":"")+"</svg>";
+}
+function profilePreview(){var n=$("pn").value.trim()||"Dein Charakter",em=$("pe").value||"🙂",out=$("poutfit").value||"👕 T-Shirt";$("profileAvatar").innerHTML=skinSvg(em,out);$("profilePreviewName").textContent=n;$("profilePreviewOutfit").textContent=out}
 ["pn","pe","poutfit"].forEach(function(id){$(id).addEventListener("input",profilePreview);$(id).addEventListener("change",profilePreview)});
-$("psave").addEventListener("click",function(){var v=$("pn").value.trim(),b=$("pb").value,em=$("pe").value||"🙂",out=$("poutfit").value,bio=$("pbio").value.trim();if(!v){alert("Bitte gib deinen Namen ein.");$("pn").focus();return}NAME=v;BDAY=b;store("6e-name",v);store("6e-bday",b);var data={name:v,bday:b,emo:em,outfit:out,bio:bio};if(!usersCol||!uid){alert("Das Profil kann gerade nicht gespeichert werden.");return}(users[uid]?usersCol.doc(uid).update(data):usersCol.doc(uid).set({name:v,last:Date.now(),banned:false,hw:false,admin:isAdmin,bday:b,emo:em,outfit:out,bio:bio})).then(function(){$("pstat").textContent="Profil gespeichert! 🎉";pfilled=false;R()}).catch(function(){alert("Speichern fehlgeschlagen. Bitte prüfe die Verbindung und versuche es erneut.")})});
+$("psave").addEventListener("click",function(){var v=$("pn").value.trim(),b=$("pb").value,em=$("pe").value||"🙂",out=$("poutfit").value,bio=$("pbio").value.trim();if(!v){alert("Bitte gib deinen Namen ein.");$("pn").focus();return}NAME=v;BDAY=b;store("6e-name",v);store("6e-bday",b);var data={name:v,bday:b,emo:em,outfit:out,bio:bio};if(!usersCol||!uid){alert("Das Profil kann gerade nicht gespeichert werden.");return}(users[uid]?usersCol.doc(uid).update(data):usersCol.doc(uid).set({name:v,last:Date.now(),banned:false,hw:false,admin:isAdmin,bday:b,emo:em,outfit:out,bio:bio})).then(function(){$("pstat").textContent="Profil gespeichert! 🎉";pfilled=false;R();renderClassAvatars()}).catch(function(){alert("Speichern fehlgeschlagen. Bitte prüfe die Verbindung und versuche es erneut.")})});
 $("pdelete").addEventListener("click",function(){if(!confirm("Möchtest du dein Profil wirklich endgültig löschen? Dein Name und deine Profildaten werden entfernt."))return;if(!usersCol||!uid){alert("Das Profil kann gerade nicht gelöscht werden.");return}usersCol.doc(uid).delete().then(function(){NAME="";BDAY="";try{localStorage.removeItem("6e-name");localStorage.removeItem("6e-bday");localStorage.removeItem("6e-player-"+(uid||"local"))}catch(e){}alert("Dein Profil wurde gelöscht. Die Seite wird neu geladen.");location.reload()}).catch(function(){alert("Löschen fehlgeschlagen. Bitte prüfe die Verbindung und versuche es erneut.")})});
 var pcur=null;
 $("pg").addEventListener("click",function(e){var b=e.target.closest(".pc");if(!b)return;var r=+b.getAttribute("data-r"),c=+b.getAttribute("data-c"),o=cp($("p"+r+c).value),fs={};pcur=[r,c];
@@ -830,7 +908,7 @@ $("tfilters").addEventListener("click",function(e){var f=e.target.getAttribute("
 $("atabs").addEventListener("click",function(e){var t=e.target.getAttribute("data-t");if(t)setTab(t)});
 $("gadm").addEventListener("click",function(){$("gadmbox").hidden=!$("gadmbox").hidden;if(!$("gadmbox").hidden)$("gcode").focus()});
 function tryCode(){
- if($("gcode").value.trim()==="1234"){
+ if($("gcode").value.trim()==="7878"){
   isAdmin=true;store("6e-admin","1");if(!NAME){NAME="Admin";store("6e-name",NAME)}
   $("gcode").value="";$("gadmbox").hidden=true;$("gate").hidden=true;register();R();location.hash="#admin";burst();
  }else{var f=$("gform");f.classList.remove("shake");void f.offsetWidth;f.classList.add("shake");$("gcode").value="";$("gcode").placeholder="Falscher Code"}
@@ -900,7 +978,7 @@ function makeBackend(){
  subs.u.push(function(s){
   users={};s.docs.forEach(function(d){if(d.exists)users[d.id]=d.data()});
   loaded=true;
-  var mm=users[uid];if(mm&&Date.now()-lastW>8000){if(mm.name&&mm.name!==NAME){NAME=mm.name;store("6e-name",NAME);hello();pfilled=false}if(mm.bday&&mm.bday!==BDAY){BDAY=mm.bday;store("6e-bday",BDAY);pfilled=false}}
+  var mm=users[uid];if(mm&&Date.now()-lastW>8000){if(mm.name&&mm.name!==NAME){$("gate").hidden=!(mm.bday||isAdmin);NAME=mm.name;store("6e-name",NAME);hello();pfilled=false}if(mm.bday&&mm.bday!==BDAY){BDAY=mm.bday;store("6e-bday",BDAY);pfilled=false}}
   if(users[uid])wasIn=true;
   else if(wasIn&&!isAdmin&&Date.now()-lastW>12000){wasIn=false;NAME="";store("6e-name",null);hello();$("gmsg").textContent="Der Admin hat dich entfernt. Du kannst dich neu anmelden.";$("gate").hidden=false}
   else if(NAME&&!wasIn){register()}
@@ -1035,7 +1113,7 @@ try{drawTh();drawQL()}catch(e){}
 </script>
 <script>
 /* ===== Update 3: Navigation ===== */
-var NV=[["ueben","🎵","Üben"],["start","🏠","Start"],["hausaufgaben","📝","Hausaufgaben"],["stundenplan","🕗","Stundenplan"],["termine","📅","Termine"],["themen","📚","Themen"],["quiz","🧠","Quiz"],["chat","💬","Chat"],["geburtstage","🎂","Geburtstage"],["klasse","🎒","Klassenleben"],["spiele","🎮","Minispiele"],["wwm","💰","Millionär"],["umfragen","📊","Umfragen"],["duell","⚔️","Duell"],["rang","🏆","Rangliste"],["profil","👤","Profil"],["admin","🛡️","Admin"]];
+var NV=[["ueben","🎵","Üben"],["start","🏠","Start"],["hausaufgaben","📝","Hausaufgaben"],["stundenplan","🕗","Stundenplan"],["termine","📅","Termine"],["themen","📚","Themen"],["quiz","🧠","Quiz"],["chat","💬","Chat"],["geburtstage","🎂","Geburtstage"],["klasse","🎒","Klassenleben"],["spiele","🎮","Minispiele"],["extras","🛍️","Shop & Geometry Dash"],["avatars","👥","Avatare der Klasse"],["wwm","💰","Millionär"],["umfragen","📊","Umfragen"],["duell","⚔️","Duell"],["rang","🏆","Rangliste"],["profil","👤","Profil"],["einstellungen","⚙️","Einstellungen"],["admin","🛡️","Admin"]];
 var MAIN=["start","hausaufgaben","chat","quiz"];
 function curP(){return location.hash.slice(1)||"start"}
 function drawNav(){
@@ -1796,12 +1874,15 @@ home();
 </script>
 <script>
 (function(){
-var V="2026-11-12",KS="6e-seen",seen=null,ret=false,i=0,ov=null,prev=null;
+var V="2026-11-12c",KS="6e-seen",seen=null,ret=false,i=0,ov=null,prev=null;
 try{seen=localStorage.getItem(KS);ret=seen!==null||localStorage.length>0}catch(e){}
 var ST=[{h:"Hey, schön, dass du wieder da bist!",t:"Auf der Klassenseite hat sich etwas getan. Ich zeige dir kurz, was neu ist."},
 {h:"🎵 Musik üben",t:"Neuer Tab „Üben“ mit vier Themen: Töne c¹ bis c³, chromatische Tonleiter, Artikulationszeichen und Karneval der Tiere.",go:"#ueben"},
 {h:"🔁 Fehler kommen nochmal",t:"Nach jeder Antwort bekommst du eine Erklärung. Was du falsch hattest, kommt am Ende der Runde noch einmal.",go:"#ueben"},
 {h:"⭐ Sterne und Bestwert",t:"Pro Thema siehst du 0 bis 3 Sterne und deinen Bestwert. Das wird nur in deinem Browser gespeichert.",go:"#ueben"},
+{h:"🛍️ Neuer Shop",t:"T-Shirts und Accessoires kaufst du mit XP. Münzen aus Cube Dash gibt es für Würfel, Spuren und Effekte.",go:"#extras"},
+{h:"🎂 Neuer Geburtstagskalender",t:"Der nächste Geburtstag steht groß oben, darunter alle nach Monaten sortiert.",go:"#geburtstage"},
+{h:"🔒 Ein Account pro Person",t:"Wenn es dich schon gibt, erkennt dich die Seite wieder. Du musst keinen zweiten Account anlegen.",go:"#start"},
 {h:"Das war’s!",t:"Wenn du das noch einmal lesen willst: Auf der Startseite gibt es den Knopf „Was ist neu?“."}];
 var MAS="<svg viewBox='0 0 200 262' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='100' cy='102' r='48'/><path d='M66 52L82 24H118L134 52Z'/><path d='M58 52H142'/><path d='M94 38H108' stroke-width='6'/><ellipse cx='58' cy='96' rx='20' ry='28'/><ellipse cx='60' cy='98' rx='11' ry='20' fill='currentColor'/><ellipse cx='142' cy='96' rx='20' ry='28'/><ellipse cx='140' cy='98' rx='11' ry='20' fill='currentColor'/><path d='M84 126Q96 142 112 128'/><path d='M106 118H116' stroke-width='4'/><ellipse cx='100' cy='182' rx='26' ry='32'/><path d='M88 212V250H72M112 212V250H132'/><path d='M76 188L54 202M42 194L58 202M46 210L58 200'/><g class='nww'><path d='M124 172L146 150M134 128L160 150M158 126L142 146'/></g></svg>";
 function done(){try{localStorage.setItem(KS,V)}catch(e){}if(ov){ov.remove();ov=null;document.removeEventListener("keydown",key)}if(prev&&prev.focus)prev.focus()}
@@ -1927,83 +2008,278 @@ if(localStorage.getItem(key)!==ver){
 #cubeCanvas{display:block;width:100%;max-width:650px;height:220px;background:linear-gradient(#172554,#312e81);border-radius:18px;touch-action:manipulation}
 .currency{font-weight:1000;color:#d97706}.shop-top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
 </style>
+<style>
+.wal{display:flex;gap:8px;flex-wrap:wrap;font-weight:900}.wal span{background:var(--bg);border:2px solid var(--line);border-radius:99px;padding:4px 12px}
+.shop-look{display:flex;gap:16px;align-items:center;min-width:0;background:var(--bg);border-radius:18px;padding:12px 16px;margin:12px 0}.shop-look p{margin:2px 0;color:var(--muted);font-size:14px}
+.lk{text-align:center;line-height:1.1;min-width:84px}.lk .lf{font-size:38px}.lk .lo{font-size:34px}.lk div:first-child{font-size:26px;min-height:28px}
+.shop-tabs,.shop-cats{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.shop-tabs button,.shop-cats button{border:2px solid var(--line);background:var(--paper);color:var(--text);border-radius:99px;padding:8px 14px;font:800 14px Nunito,sans-serif;cursor:pointer}
+.shop-tabs button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}.shop-cats button.on{border-color:var(--ink);color:var(--ink)}
+.shop-msg{min-height:22px;margin:4px 0;font-weight:800;color:var(--ink)}
+.si{background:var(--bg);border:2px solid var(--line);border-radius:17px;padding:12px;text-align:center;display:flex;flex-direction:column;gap:4px}.si.eq{border-color:var(--ok);background:var(--paper)}.si .pr{font-weight:900;color:#d97706}.si .pr.no{color:var(--red)}.si.own .pr{color:var(--ok)}.si button{margin-top:auto}
+</style>
 <script>
 (function(){
-var shop=[
-{id:"hoodie",name:"Neon-Hoodie",icon:"🧥",cost:35,type:"outfit"},
-{id:"ninja",name:"Ninja-Look",icon:"🥷",cost:60,type:"outfit"},
-{id:"space",name:"Space-Anzug",icon:"🚀",cost:90,type:"outfit"},
-{id:"crown",name:"Königs-Outfit",icon:"👑",cost:130,type:"outfit"},
-{id:"red",name:"Rubin-Würfel",icon:"🟥",cost:45,type:"cube"},
-{id:"gold",name:"Gold-Würfel",icon:"🟨",cost:100,type:"cube"},
-{id:"rainbow",name:"Regenbogen-Würfel",icon:"🌈",cost:160,type:"cube"},
-{id:"fire",name:"Feuerspur",icon:"🔥",cost:55,type:"trail"},
-{id:"stars",name:"Sternenspur",icon:"✨",cost:80,type:"trail"},
-{id:"pixel",name:"Pixelspur",icon:"💠",cost:110,type:"trail"},
-{id:"hair-blue",name:"Blaue Frisur",icon:"💙💇",cost:45,type:"hair"},
-{id:"hair-pink",name:"Pinkes Haar",icon:"💗💇",cost:65,type:"hair"},
-{id:"hair-spikes",name:"Stachelfrisur",icon:"🦔",cost:75,type:"hair"},
-{id:"hat-cap",name:"Basecap",icon:"🧢",cost:35,type:"hat"},
-{id:"hat-crown",name:"Krone",icon:"👑",cost:95,type:"hat"},
-{id:"hat-wizard",name:"Zauberhut",icon:"🧙",cost:80,type:"hat"},
-{id:"access-glasses",name:"Sonnenbrille",icon:"🕶️",cost:40,type:"accessory"},
-{id:"access-wings",name:"Flügel",icon:"🪽",cost:100,type:"accessory"},
-{id:"access-star",name:"Sternen-Amulett",icon:"⭐",cost:55,type:"accessory"},
-{id:"jump-spark",name:"Funken-Sprung",icon:"✨",cost:70,type:"jump"},
-{id:"jump-cloud",name:"Wolken-Sprung",icon:"☁️",cost:85,type:"jump"},
-{id:"move-neon",name:"Neon-Bewegung",icon:"🌈",cost:90,type:"movement"},
-{id:"move-shadow",name:"Schatten-Bewegung",icon:"🌑",cost:100,type:"movement"}
-];
+var SH=[["tee-owl","Eulen-Shirt","🦉",40,"outfit"],["tee-streak","Streak-Shirt","🔥",70,"outfit"],["tee-music","Musik-Shirt","🎵",90,"outfit"],["tee-brain","Quiz-Shirt","🧠",110,"outfit"],["tee-star","Level-Shirt","⭐",150,"outfit"],["hoodie","Neon-Hoodie","🧥",70,"outfit"],["ninja","Ninja-Look","🥷",120,"outfit"],["space","Space-Anzug","🚀",180,"outfit"],["crown","Königs-Outfit","👑",260,"outfit"],
+["hat-cap","Basecap","🧢",70,"hat"],["hat-wizard","Zauberhut","🧙",160,"hat"],["hat-crown","Krone","👑",190,"hat"],
+["hair-blue","Blaue Frisur","💙💇",90,"hair"],["hair-pink","Pinkes Haar","💗💇",130,"hair"],["hair-spikes","Stachelfrisur","🦔",150,"hair"],
+["access-glasses","Sonnenbrille","🕶️",80,"accessory"],["access-phones","Kopfhörer","🎧",100,"accessory"],["access-bag","Rucksack","🎒",90,"accessory"],["access-star","Sternen-Amulett","⭐",110,"accessory"],["access-wings","Flügel","🪽",200,"accessory"],
+["lime","Lime-Würfel","🟩",50,"cube","#4ade80"],["red","Rubin-Würfel","🟥",45,"cube","#fb7185"],["ice","Eis-Würfel","🧊",70,"cube","#bae6fd"],["gold","Gold-Würfel","🟨",100,"cube","#facc15"],["ghost","Geister-Würfel","👻",120,"cube","#f8fafc"],["lava","Lava-Würfel","🌋",140,"cube","#f97316"],["rainbow","Regenbogen-Würfel","🌈",160,"cube","rb"],
+["fire","Feuerspur","🔥",55,"trail","#fb923c"],["trail-ice","Eisspur","❄️",70,"trail","#7dd3fc"],["stars","Sternenspur","✨",80,"trail","#fde047"],["pixel","Pixelspur","💠",110,"trail","#a78bfa"],["trail-rain","Regenbogenspur","🌈",150,"trail","rb"],
+["jump-spark","Funken-Sprung","✨",70,"jump","#fbbf24"],["jump-cloud","Wolken-Sprung","☁️",85,"jump","#e0f2fe"],
+["move-neon","Neon-Bewegung","🌈",90,"movement","#e879f9"],["move-shadow","Schatten-Bewegung","🌑",100,"movement","#64748b"]].map(function(a){return{id:a[0],n:a[1],i:a[2],p:a[3],t:a[4],c:a[5]}});
+var XT={outfit:1,hat:1,hair:1,accessory:1},TB={xp:["👕 Kleidung · XP",[["","Alle"],["outfit","T-Shirts"],["hat","Hüte"],["hair","Frisuren"],["accessory","Accessoires"]]],co:["🟪 Cube Dash · Münzen",[["","Alle"],["cube","Würfel"],["trail","Spuren"],["jump","Sprung"],["movement","Bewegung"]]]};
+var tab="xp",cat="",msgT="";
+function by(n,t){return SH.filter(function(x){return x.t===t&&x.n===n})[0]}
+function norm(){ME.coins=Number(ME.coins)||0;ME.sx=Number(ME.sx)||0;ME.items=ME.items||[];var q=ME.equip=ME.equip||{};q.outfit=q.outfit||"👕 T-Shirt";q.cube=q.cube||"🙂";["trail","hair","hat","accessory","jump","movement"].forEach(function(k){q[k]=q[k]||""})}
+function av(){return Math.max(0,(ME.xp||0)-ME.sx)}
+function sec(){return document.querySelector('section[data-p="extras"]')}
 function init(){
- if(!window.ME)return setTimeout(init,300);
- ME.coins=Number(ME.coins)||0;ME.items=ME.items||[];ME.equip=ME.equip||{outfit:"👕 T-Shirt",cube:"🙂",trail:""};ME.equip.hair=ME.equip.hair||"";ME.equip.hat=ME.equip.hat||"";ME.equip.accessory=ME.equip.accessory||"";ME.equip.jump=ME.equip.jump||"";ME.equip.movement=ME.equip.movement||"";
- var old=window.addXP;
- window.addXP=function(a,key,max){var got=old.apply(this,arguments);if(got){ME.coins+=Math.max(1,Math.floor(got/5));saveME();shopDraw()}return got};
- var sec=document.querySelector('section[data-p="extras"]');if(!sec)return;
- var shopHTML='<article class="ex-card" style="margin:16px 0"><div class="shop-top"><div><span class="ex-kicker">DEIN AVATAR & DEIN INVENTAR</span><h3>🛍️ Avatar-Shop</h3><p>Kaufe Outfits, Frisuren, Hüte, Accessoires, Würfel-Skins, Sprung-Effekte und Bewegungsspuren mit Spielmünzen.</p></div><div class="currency" id="coinCount">🪙 0 Münzen</div></div><p><small>Dein Fortschritt, deine Münzen und gekaufte Gegenstände werden auf diesem Gerät gespeichert.</small></p><div id="shopInventory"></div><div class="shop-grid" id="shopItems"></div></article>'+
- '<article class="ex-card" style="margin:16px 0"><h3>🟪 Cube Dash – Münzen sammeln & Hindernisse überspringen</h3><p>Springe über Hindernisse, sammle Münzen und kaufe damit neue Würfel und Spuren. Tippe auf das Spielfeld oder drücke Leertaste zum Springen.</p><canvas id="cubeCanvas" width="650" height="220"></canvas><p id="cubeScore">Münzen im Lauf: 0 · Bestleistung: 0</p><button class="ex-btn" id="cubeStart">▶️ Spiel starten</button></article>';
- sec.insertAdjacentHTML("beforeend",shopHTML);
- function shopDraw(){
-  $("coinCount").textContent="🪙 "+ME.coins+" Münzen";
-  $("shopInventory").innerHTML="<b>Ausgerüstet:</b> "+esc(ME.equip.outfit)+" · Würfel "+esc(ME.equip.cube)+" · Spur "+esc(ME.equip.trail||"Keine")+" · Frisur "+esc(ME.equip.hair||"Keine")+" · Hut "+esc(ME.equip.hat||"Keiner")+" · Accessoire "+esc(ME.equip.accessory||"Keines")+" · Sprung "+esc(ME.equip.jump||"Standard")+" · Bewegung "+esc(ME.equip.movement||"Standard")+"<p><small>Besitz: "+(ME.items.length?ME.items.map(function(id){var x=shop.find(function(a){return a.id===id});return x?x.icon+" "+x.name:""}).join(" · "):"Noch keine Extras")+"</small></p>";
-  $("shopItems").innerHTML=shop.map(function(x){var own=ME.items.indexOf(x.id)>=0,eq=ME.equip[x.type]===x.name;return '<div class="shop-item"><div class="look">'+x.icon+'</div><b>'+x.name+'</b><p class="currency">🪙 '+x.cost+'</p><button class="ex-btn" data-buy="'+x.id+'">'+(eq?"Ausgerüstet":own?"Anziehen":"Kaufen")+'</button></div>'}).join("");
- }
- $("shopItems").addEventListener("click",function(e){var b=e.target.closest("[data-buy]");if(!b)return;var x=shop.find(function(a){return a.id===b.dataset.buy});if(!x)return;
-  if(ME.items.indexOf(x.id)<0){if(ME.coins<x.cost){alert("Du brauchst noch "+(x.cost-ME.coins)+" Münzen.");return}ME.coins-=x.cost;ME.items.push(x.id)}
-  ME.equip[x.type]=x.name;if(x.type==="outfit"){$("poutfit").value=x.icon+" "+x.name;profilePreview()}
-  saveME();shopDraw();
- });
- shopDraw();
- var c=$("cubeCanvas"),ctx=c.getContext("2d"),run=false,frame=0,score=0,best=Number(localStorage.getItem("6e-cubebest")||0),y=166,vy=0,obs=[],coins=[];
- function jump(){if(run&&y>=165)vy=-11}
- function paint(){ctx.clearRect(0,0,650,220);ctx.fillStyle="#818cf8";ctx.fillRect(0,188,650,32);ctx.fillStyle="#c4b5fd";for(var z=0;z<650;z+=32)ctx.fillRect(z,188,2,32);
- ctx.fillStyle="#fff";ctx.font="14px Nunito";ctx.fillText("CUBE DASH",14,24);
- var cube=ME.equip.cube==="Gold-Würfel"?"#facc15":ME.equip.cube==="Rubin-Würfel"?"#fb7185":ME.equip.cube==="Regenbogen-Würfel"?"#c084fc":"#22d3ee";
- 
- // Ausgerüstete Bewegungsspur und Bewegungseffekt
- var trail=ME.equip.trail||"";
- if(trail){ctx.globalAlpha=.75;ctx.fillStyle=trail==="Feuerspur"?"#fb923c":trail==="Sternenspur"?"#fde047":trail==="Pixelspur"?"#a78bfa":"#67e8f9";for(var ti=0;ti<4;ti++)ctx.fillRect(58-ti*9,y+5+(ti%2)*9,6,6);ctx.globalAlpha=1}
- if(ME.equip.movement){ctx.shadowColor=ME.equip.movement==="Neon-Bewegung"?"#e879f9":"#64748b";ctx.shadowBlur=14}else{ctx.shadowBlur=0}
- ctx.fillStyle=cube;ctx.fillRect(65,y,24,24);ctx.shadowBlur=0;ctx.fillStyle="#172554";ctx.fillRect(71,y+6,4,4);ctx.fillRect(80,y+6,4,4);
- if(y<166&&ME.equip.jump){ctx.globalAlpha=.7;ctx.fillStyle=ME.equip.jump==="Funken-Sprung"?"#fbbf24":"#e0f2fe";ctx.beginPath();ctx.arc(77,y+30,7+(frame%3),0,Math.PI*2);ctx.fill();ctx.globalAlpha=1}
- obs.forEach(function(o){ctx.fillStyle="#fb7185";ctx.fillRect(o.x,164,20,24)});
- coins.forEach(function(o){ctx.fillStyle="#facc15";ctx.beginPath();ctx.arc(o.x,o.y,7,0,7);ctx.fill()});
- if(!run){ctx.fillStyle="#fff";ctx.font="bold 20px Nunito";ctx.fillText("Tippe auf „Spiel starten“",205,112)}
- }
- function tick(){if(!run)return;frame++;vy+=.55;y=Math.min(166,y+vy);if(y>=166)vy=0;
- if(frame%85===0)obs.push({x:660});if(frame%105===0)coins.push({x:660,y:135-Math.random()*45});
- obs.forEach(function(o){o.x-=5});coins.forEach(function(o){o.x-=5});
- obs=obs.filter(function(o){if(o.x<85&&o.x>48&&y>140){run=false;best=Math.max(best,score);localStorage.setItem("6e-cubebest",best);$("cubeStart").textContent="↻ Nochmal";return false}return o.x>-30});
- coins=coins.filter(function(o){if(o.x<90&&o.x>50&&Math.abs(o.y-(y+10))<35){score++;ME.coins++;saveME();shopDraw();return false}return o.x>-20});
- $("cubeScore").textContent="Münzen im Lauf: "+score+" · Bestleistung: "+best;paint();if(run)requestAnimationFrame(tick)
- }
- $("cubeStart").onclick=function(){if(run)return;run=true;frame=0;score=0;y=166;vy=0;obs=[];coins=[];tick()};
- c.addEventListener("pointerdown",jump);window.addEventListener("keydown",function(e){if(e.code==="Space"&&location.hash==="#extras"){e.preventDefault();jump()}});
- paint();
+ if(!window.ME||!sec())return setTimeout(init,300);
+ var s=sec();
+ s.insertAdjacentHTML("beforeend","<article class='ex-card' id='shopC'><div class='shop-top'><div><span class='ex-kicker'>SHOP</span><h3>🛍️ Dein Shop</h3><p>Kleidung kaufst du mit XP, Spiel-Extras mit Münzen aus Cube Dash.</p></div><div class='wal'><span id='wXP'></span><span id='wCo'></span></div></div><div id='shopLook' class='shop-look'></div><div class='shop-tabs' id='shopTabs' role='tablist'></div><div class='shop-cats' id='shopCats'></div><p id='shopMsg' class='shop-msg' aria-live='polite'></p><div class='shop-grid' id='shopItems'></div></article><article class='ex-card' id='cubeC'><h3>🟪 Cube Dash</h3><p>Tippe oder halte Leertaste zum Springen. Weiche den Spitzen aus, sammle Münzen und erreiche 100 %. Für das Ziel gibt es 10 Bonus-Münzen.</p><canvas id='cubeCanvas' width='650' height='220' aria-label='Cube Dash Spielfeld'></canvas><p id='cubeScore'>Bereit</p><button type='button' class='ex-btn' id='cubeStart'>▶️ Spiel starten</button></article>");
+ $("shopC").addEventListener("click",function(e){var t=e.target.closest("[data-tab],[data-cat],[data-buy]");if(!t)return;
+  if(t.dataset.tab){tab=t.dataset.tab;cat=""}else if(t.dataset.cat!==undefined){cat=t.dataset.cat}else buy(t.dataset.buy);draw()});
+ draw();game();
 }
+function msg(t){msgT=t}
+function buy(id){var x=SH.filter(function(a){return a.id===id})[0];if(!x)return;norm();msg("");
+ if(ME.items.indexOf(x.id)<0){
+  if(XT[x.t]){if(av()<x.p){msg("Dir fehlen noch "+(x.p-av())+" XP.");return}ME.sx+=x.p}
+  else{if(ME.coins<x.p){msg("Dir fehlen noch "+(x.p-ME.coins)+" Münzen. Spiel Cube Dash!");return}ME.coins-=x.p}
+  ME.items.push(x.id);ME.equip[x.t]=x.n;msg(x.i+" "+x.n+" gekauft und angezogen!")}
+ else if(ME.equip[x.t]===x.n&&x.t!=="outfit"&&x.t!=="cube"){ME.equip[x.t]=""}
+ else ME.equip[x.t]=x.n;
+ if(x.t==="outfit"&&ME.equip.outfit===x.n){var po=$("poutfit");if(po){var ov=x.i+" "+x.n;if(![].some.call(po.options,function(o){return o.value===ov}))po.add(new Option(ov,ov));po.value=ov;if(window.profilePreview)profilePreview()}}
+ saveME()}
+function draw(){norm();var q=ME.equip,g=function(t){return q[t]?by(q[t],t):null},o=g("outfit"),h=g("hat"),ha=g("hair"),ac=g("accessory");
+ $("wXP").textContent="⭐ "+av()+" XP";$("wCo").textContent="🪙 "+ME.coins;
+ $("shopLook").innerHTML="<div class='shop-skin'>"+skinSvg("🙂",q.outfit,{hat:q.hat,hair:q.hair,accessory:q.accessory})+"</div><div><b>Dein Look</b><p>"+[q.outfit,q.hat,q.hair,q.accessory].filter(Boolean).map(esc).join(" · ")+"</p><p>Würfel: "+esc(q.cube==="🙂"?"Standard":q.cube)+" · Spur: "+esc(q.trail||"keine")+" · Sprung: "+esc(q.jump||"Standard")+" · Bewegung: "+esc(q.movement||"Standard")+"</p></div>";
+ $("shopTabs").innerHTML=Object.keys(TB).map(function(k){return "<button type='button' role='tab' aria-selected='"+(k===tab)+"' class='"+(k===tab?"on":"")+"' data-tab='"+k+"'>"+TB[k][0]+"</button>"}).join("");
+ $("shopCats").innerHTML=TB[tab][1].map(function(c){return "<button type='button' class='"+(c[0]===cat?"on":"")+"' data-cat='"+c[0]+"'>"+c[1]+"</button>"}).join("");
+ $("shopMsg").textContent=msgT;
+ $("shopItems").innerHTML=SH.filter(function(x){return (tab==="xp")===!!XT[x.t]&&(!cat||x.t===cat)}).map(function(x){var own=ME.items.indexOf(x.id)>=0,eq=ME.equip[x.t]===x.n,xp=!!XT[x.t],can=xp?av()>=x.p:ME.coins>=x.p;
+  return "<div class='si"+(eq?" eq":"")+(own?" own":"")+"'><div class='look'>"+x.i+"</div><b>"+x.n+"</b><span class='pr"+(!own&&!can?" no":"")+"'>"+(own?"Gehört dir":xp?"⭐ "+x.p+" XP":"🪙 "+x.p)+"</span><button type='button' class='ex-btn' data-buy='"+x.id+"'>"+(eq?(x.t==="outfit"||x.t==="cube"?"Ausgerüstet":"Ablegen"):own?"Anziehen":"Kaufen")+"</button></div>"}).join("")}
+function game(){
+ var c=$("cubeCanvas"),X=c.getContext("2d"),GY=188,S=24,CX=70,L=2800,H=Math.PI/2,run=false,hold=false,air=false,dist,v,y,vy,rot,ob,co,pt,nx,cn,fr,out="",best=Number(localStorage.getItem("6e-cubepct")||0),last=0,acc=0;
+ function col(n,t){var k=by(n,t);return k&&k.c==="rb"?"hsl("+(fr*6%360)+",90%,60%)":k&&k.c||null}
+ function jmp(){vy=-10.6;air=true;var j=ME.equip.jump,cl=j&&col(j,"jump");if(cl)for(var k=0;k<7;k++)pt.push({x:CX+12,y:GY-2,a:1,vx:(k-3)*.7,vy:-Math.random()*2,e:cl})}
+ function reset(){dist=0;v=4.6;y=GY-S;vy=0;rot=0;ob=[];co=[];pt=[];nx=420;cn=0;fr=0;out="";air=false}
+ function rnd(n){return Math.floor(Math.random()*n)}
+ function stop(t){run=false;out=t;best=Math.max(best,Math.min(100,Math.floor(dist/L*100)));try{localStorage.setItem("6e-cubepct",best)}catch(e){}saveME();$("cubeStart").textContent="↻ Nochmal";draw()}
+ function step(){norm();fr++;v=4.6+dist/L*2;dist+=v;
+  if(hold&&!air&&y>=GY-S)jmp();
+  vy+=.62;y+=vy;if(y>=GY-S){y=GY-S;vy=0;if(air){air=false;rot=Math.round(rot/H)*H}}else{air=true;rot+=.115}
+  if(dist>=nx){var n=1+rnd(3),w=22*n;ob.push({x:700,w:w});if(Math.random()<.65)co.push({x:700+w/2,y:GY-70-rnd(30)});nx=dist+240+rnd(170)+v*10}
+  var tr=ME.equip.trail&&col(ME.equip.trail,"trail");if(tr&&fr%2===0)pt.push({x:CX,y:y+6+rnd(12),a:1,vx:0,vy:0,t:tr});
+  ob.forEach(function(o){o.x-=v});co.forEach(function(o){o.x-=v});pt.forEach(function(p){p.x-=v;p.x+=p.vx||0;p.y+=p.vy||0;p.a-=.045});
+  pt=pt.filter(function(p){return p.a>0});ob=ob.filter(function(o){return o.x>-80});
+  for(var i=0;i<ob.length;i++){var o=ob[i];if(CX+S-3>o.x+4&&CX+3<o.x+o.w-4&&y+S-3>GY-16){stop("💥 Crash bei "+Math.floor(dist/L*100)+" %");return}}
+  co=co.filter(function(o){if(Math.abs(o.x-(CX+12))<18&&Math.abs(o.y-(y+12))<20){cn++;ME.coins++;$("wCo").textContent="🪙 "+ME.coins;return false}return o.x>-20});
+  if(dist>=L){ME.coins+=10;stop("🏁 Geschafft! +10 Münzen");best=100;return}
+  $("cubeScore").textContent="Fortschritt "+Math.floor(dist/L*100)+" % · Münzen im Lauf: "+cn+" · Bestleistung: "+best+" %"}
+ function paint(){var pr=Math.min(1,dist/L),g=X.createLinearGradient(0,0,0,220);g.addColorStop(0,"#172554");g.addColorStop(1,"#4c1d95");X.fillStyle=g;X.fillRect(0,0,650,220);
+  X.fillStyle="rgba(255,255,255,.07)";for(var i=0;i<6;i++)X.fillRect(((i*140-dist*.4)%840+840)%840-100,40+(i%3)*38,70,70);
+  X.fillStyle="#818cf8";X.fillRect(0,GY,650,32);X.fillStyle="#c4b5fd";for(var z=-((dist%32));z<650;z+=32)X.fillRect(z,GY,2,32);
+  X.fillStyle="#34d399";X.fillRect(0,0,650*pr,5);
+  ob.forEach(function(o){for(var k=0;k<o.w/22;k++){X.fillStyle="#fb7185";X.beginPath();X.moveTo(o.x+k*22,GY);X.lineTo(o.x+k*22+11,GY-22);X.lineTo(o.x+k*22+22,GY);X.fill()}});
+  co.forEach(function(o){X.fillStyle="#facc15";X.beginPath();X.arc(o.x,o.y,8,0,7);X.fill();X.fillStyle="#fde68a";X.beginPath();X.arc(o.x,o.y,4,0,7);X.fill()});
+  pt.forEach(function(p){X.globalAlpha=Math.max(0,p.a)*.8;X.fillStyle=p.t||p.e;X.fillRect(p.x,p.y,p.e?6:7,p.e?6:7)});X.globalAlpha=1;
+  var sk=by(ME.equip.cube,"cube"),cc=sk?col(sk.n,"cube"):"#22d3ee",mv=ME.equip.movement&&col(ME.equip.movement,"movement");
+  X.save();X.translate(CX+12,y+12);X.rotate(rot);if(mv){X.shadowColor=mv;X.shadowBlur=16}if(sk&&sk.id==="ghost")X.globalAlpha=.6;
+  X.fillStyle=cc;X.fillRect(-12,-12,S,S);X.shadowBlur=0;X.strokeStyle="#0f172a";X.lineWidth=2;X.strokeRect(-12,-12,S,S);X.fillStyle="#0f172a";X.fillRect(-6,-6,4,5);X.fillRect(3,-6,4,5);X.fillRect(-6,4,13,3);X.restore();X.globalAlpha=1;
+  if(!run){X.fillStyle="rgba(0,0,0,.45)";X.fillRect(0,80,650,60);X.fillStyle="#fff";X.font="bold 22px Nunito,sans-serif";X.textAlign="center";X.fillText(out||"Tippen oder Leertaste zum Starten",325,118);X.textAlign="left"}}
+ function loop(t){if(!run){paint();return}acc+=Math.min(50,t-last);last=t;while(acc>=16.67&&run){step();acc-=16.67}paint();if(run)requestAnimationFrame(loop)}
+ function start(){if(run)return;reset();run=true;$("cubeStart").textContent="…läuft";last=performance.now();acc=0;requestAnimationFrame(loop)}
+ c.addEventListener("pointerdown",function(e){e.preventDefault();if(!run)start();hold=true});window.addEventListener("pointerup",function(){hold=false});
+ window.addEventListener("keydown",function(e){if((e.code==="Space"||e.code==="ArrowUp")&&location.hash==="#extras"){e.preventDefault();if(!run)start();hold=true}});
+ window.addEventListener("keyup",function(e){if(e.code==="Space"||e.code==="ArrowUp")hold=false});
+ window.addEventListener("hashchange",function(){hold=false;if(run)stop("⏸ Pause")});
+ $("cubeStart").onclick=start;reset();paint()}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();
 </script>
 
+<style>
+/* Einstellungen */
+body{font-family:var(--bf,Nunito,system-ui,sans-serif)!important;font-size:var(--fs,17px)!important}
+.box,.adm,.tile,.ex-card,.note,.hero,.qc,.th,.bd-person{border-radius:var(--rad,20px)!important}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:10px;margin-bottom:12px}
+.swatches button{height:54px;border:3px solid var(--line);border-radius:16px;cursor:pointer;padding:0}
+.swatches button.on{border-color:var(--text);transform:scale(1.06)}
+.st-row{display:grid;grid-template-columns:auto 60px auto 60px;gap:8px;align-items:center}
+.st-row input[type=color]{width:60px;height:40px;padding:0;border:2px solid var(--line);border-radius:10px;background:none;margin:0}
+[data-p=einstellungen] input[type=range]{width:100%;accent-color:var(--ink);margin:4px 0 12px}
+[data-p=einstellungen] label{font-weight:800;display:block;margin:6px 0 2px}
+[data-p=einstellungen] label.pr{display:block}
+body.st-flat{background:var(--bg)!important}
+body.st-dots{background:radial-gradient(var(--line) 1.5px,transparent 1.5px) 0 0/22px 22px,var(--bg)!important}
+body.st-noanim *,body.st-noanim *::before,body.st-noanim *::after{animation:none!important;transition:none!important}
+body.st-compact main{padding-top:8px}body.st-compact .box,body.st-compact .adm,body.st-compact .note{padding:12px 16px;margin-bottom:14px}
+</style>
+<script>
+/* ===== Einstellungen & Konto löschen ===== */
+(function(){
+var K="6e-settings",PR=[["#4f46e5","#ec4899"],["#0ea5e9","#14b8a6"],["#16a34a","#84cc16"],["#f97316","#ef4444"],["#8b5cf6","#d946ef"],["#e11d48","#fb923c"],["#0f766e","#22d3ee"],["#475569","#94a3b8"],["#ca8a04","#f59e0b"],["#be185d","#7c3aed"]];
+var DEF={c1:"#4f46e5",c2:"#ec4899",theme:"auto",bg:"grad",font:"nunito",size:17,rad:20,anim:true,compact:false};
+var FONTS={nunito:"Nunito,system-ui,sans-serif",fredoka:"Fredoka,'Trebuchet MS',sans-serif",system:"system-ui,-apple-system,Segoe UI,sans-serif",serif:"Georgia,'Times New Roman',serif",mono:"'Courier New',monospace"};
+var S=Object.assign({},DEF);
+try{var raw=JSON.parse(localStorage.getItem(K)||"null");if(raw)Object.assign(S,raw)}catch(e){}
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
+function customized(){return S.c1!==DEF.c1||S.c2!==DEF.c2}
+function apply(){
+ var r=document.documentElement,b=document.body;
+ if(customized()){r.style.setProperty("--ink",S.c1);r.style.setProperty("--ink2",S.c2)}else{r.style.removeProperty("--ink");r.style.removeProperty("--ink2")}
+ r.style.setProperty("--bf",FONTS[S.font]||FONTS.nunito);r.style.setProperty("--fs",S.size+"px");r.style.setProperty("--rad",S.rad+"px");
+ if(S.theme==="auto"){r.removeAttribute("data-theme");try{localStorage.removeItem("6e-theme")}catch(e){}}
+ else{r.setAttribute("data-theme",S.theme);try{localStorage.setItem("6e-theme",S.theme)}catch(e){}}
+ b.classList.toggle("st-flat",S.bg==="flat");b.classList.toggle("st-dots",S.bg==="dots");
+ b.classList.toggle("st-noanim",!S.anim);b.classList.toggle("st-compact",!!S.compact);
+}
+function ui(){
+ var q=function(i){return document.getElementById(i)};
+ q("stSw").innerHTML=PR.map(function(p,i){var on=S.c1===p[0]&&S.c2===p[1];return "<button type='button' class='"+(on?"on":"")+"' data-i='"+i+"' aria-label='Farbpaar "+(i+1)+"' style='background:linear-gradient(135deg,"+p[0]+","+p[1]+")'></button>"}).join("");
+ q("stC1").value=S.c1;q("stC2").value=S.c2;q("stTheme").value=S.theme;q("stBg").value=S.bg;q("stFont").value=S.font;
+ q("stSize").value=S.size;q("stSizeV").textContent=S.size+" px";q("stRad").value=S.rad;q("stRadV").textContent=S.rad+" px";
+ q("stAnim").checked=!!S.anim;q("stCompact").checked=!!S.compact;
+}
+function set(k,v){S[k]=v;save();apply();ui()}
+var q=function(i){return document.getElementById(i)};
+q("stSw").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var p=PR[+b.dataset.i];S.c1=p[0];S.c2=p[1];save();apply();ui()});
+q("stC1").addEventListener("input",function(){set("c1",this.value)});
+q("stC2").addEventListener("input",function(){set("c2",this.value)});
+q("stTheme").addEventListener("change",function(){set("theme",this.value)});
+q("stBg").addEventListener("change",function(){set("bg",this.value)});
+q("stFont").addEventListener("change",function(){set("font",this.value)});
+q("stSize").addEventListener("input",function(){set("size",+this.value)});
+q("stRad").addEventListener("input",function(){set("rad",+this.value)});
+q("stAnim").addEventListener("change",function(){set("anim",this.checked)});
+q("stCompact").addEventListener("change",function(){set("compact",this.checked)});
+q("stReset").addEventListener("click",function(){S=Object.assign({},DEF);save();apply();ui()});
+q("stDel").addEventListener("click",function(){
+ if(!confirm("Möchtest du dein Konto wirklich endgültig löschen? Name, Geburtstag, Profil und XP werden entfernt."))return;
+ var done=function(){try{["6e-name","6e-bday","6e-player-"+(uid||"local"),"6e-uid"].forEach(function(k){localStorage.removeItem(k)})}catch(e){}alert("Dein Konto wurde gelöscht.");location.hash="#start";location.reload()};
+ if(!usersCol||!uid){done();return}
+ usersCol.doc(uid).delete().then(function(){if(FB_URL)fb("DELETE","xp/"+uid+".json").catch(function(){});setTimeout(done,300)}).catch(function(){alert("Löschen fehlgeschlagen. Bitte prüfe die Verbindung.")});
+});
+apply();ui();
+})();
+</script>
+
+
+<!-- Neues Design: Midnight / Violet -->
+<style id="redesign-2026">
+:root{
+ --bg:#0b1020;--paper:#151d33;--ink:#8b7cff;--ink2:#32d6d0;--text:#f2f4ff;--muted:#a4aecb;
+ --line:#2a3655;--hl:#26304d;--red:#ff718b;--ok:#5de0a0;
+ --sh:0 16px 42px rgba(0,0,0,.28);color-scheme:dark;
+}
+html{scroll-padding-top:100px}
+body{
+ background:radial-gradient(900px 500px at 0% -10%,rgba(113,91,255,.26),transparent 65%),
+ radial-gradient(850px 520px at 100% 0%,rgba(36,211,202,.13),transparent 62%),
+ linear-gradient(180deg,#0b1020 0%,#10182b 55%,#0b1020 100%);
+ background-attachment:fixed;color:var(--text);font-size:16px;
+}
+.wrap{max-width:1120px;padding-left:22px;padding-right:22px}
+nav{background:rgba(13,20,39,.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(145,159,205,.15);box-shadow:0 10px 30px rgba(0,0,0,.22);padding:12px 0}
+nav .wrap{gap:8px;scrollbar-width:thin}
+nav a{color:#cbd4f1;padding:9px 15px;border:1px solid transparent;font-size:14px;transition:all .2s ease}
+nav a:hover{background:#202b49;border-color:#354366;transform:translateY(-1px);color:#fff}
+nav a.on{background:linear-gradient(110deg,#7564f6,#397eea);border-color:rgba(255,255,255,.16);color:white;box-shadow:0 7px 22px rgba(105,91,244,.28)}
+main{padding:36px 0 64px}
+h1{font-size:clamp(52px,9vw,88px);letter-spacing:-2px;line-height:1.02;background:linear-gradient(100deg,#a99cff 5%,#5cbbff 55%,#51e4d4 100%);-webkit-background-clip:text;background-clip:text}
+h2{font-size:clamp(30px,5vw,42px);letter-spacing:-.7px;color:#f5f6ff}
+.hand{color:#a99cff}
+.lead,.meta,.due,.dates .t small,.tile span{color:var(--muted)}
+.hello{color:#f4f5ff;font-size:18px}
+.box,.adm,.gate form,.tablewrap,.tile,.hw li,.dates li{
+ background:linear-gradient(145deg,rgba(25,35,60,.96),rgba(18,27,48,.96));
+ border:1px solid rgba(147,164,211,.16);box-shadow:0 14px 36px rgba(0,0,0,.22);
+}
+.box{border-radius:22px;padding:22px 24px;margin-bottom:22px}
+.box h3,.adm h3{color:#f4f5ff}
+.note{background:linear-gradient(115deg,#6655e9,#397fe9 58%,#1eb8b4);border:1px solid rgba(255,255,255,.2);border-radius:22px;box-shadow:0 18px 42px rgba(74,93,224,.24);padding:22px 24px}
+.note h3{color:white}
+.tiles{gap:18px}
+.tile{position:relative;overflow:hidden;min-height:145px;padding:22px 23px;border-radius:22px;border-bottom:1px solid rgba(147,164,211,.16);transition:transform .2s,border-color .2s,box-shadow .2s}
+.tile:before{content:"";position:absolute;width:150px;height:150px;right:-60px;top:-70px;border-radius:50%;background:radial-gradient(circle,rgba(132,112,255,.22),transparent 70%);pointer-events:none}
+.tile:nth-child(even):before{background:radial-gradient(circle,rgba(41,212,205,.18),transparent 70%)}
+.tile:hover{transform:translateY(-4px);border-color:rgba(139,124,255,.55);box-shadow:0 20px 44px rgba(0,0,0,.3)}
+.tile b{font-size:25px;color:#f5f6ff;position:relative}
+.tile span{position:relative}
+.ic{font-size:31px;filter:drop-shadow(0 5px 12px rgba(100,110,255,.25))}
+.empty{background:rgba(21,29,51,.75);border-color:#394666;color:var(--muted)}
+.hw li{border-left:4px solid #897aff;border-radius:16px;padding:14px 17px}
+.hw li.done{border-left-color:var(--ok)}
+.dates li{border-radius:17px;padding:15px 17px}
+.dates .d{color:#a99cff}
+.dates .in{background:#273451;color:#dce5ff}
+.tablewrap{border-radius:18px;overflow-x:auto}
+table{color:#e8ecff}
+th{background:linear-gradient(100deg,#6655e9,#397fe9);color:white}
+th.now{background:#168f9a}
+td.now{background:rgba(50,214,208,.13)}
+th,td{border-bottom:1px solid rgba(147,164,211,.14)}
+.btn{background:linear-gradient(105deg,#7564f6,#3d83ed);box-shadow:0 8px 22px rgba(91,102,232,.24);border:1px solid rgba(255,255,255,.13)}
+.btn:hover{filter:brightness(1.12);box-shadow:0 12px 28px rgba(91,102,232,.32)}
+.lnk{color:#a99cff}
+input[type=text],input[type=date],input[type=password],textarea,select,input[type=number],input[type=email]{background:#0e172b!important;color:#f2f4ff!important;border:1px solid #344261!important;border-radius:12px!important}
+input:focus,textarea:focus,select:focus{border-color:#8b7cff!important;box-shadow:0 0 0 3px rgba(139,124,255,.16);outline:none}
+.gate{background:radial-gradient(800px 500px at 10% 0%,rgba(113,91,255,.28),transparent),radial-gradient(700px 500px at 100% 100%,rgba(36,211,202,.16),transparent),#0b1020}
+.gate form{border-radius:25px;padding:30px}
+.gate h2{color:#a99cff}
+.adm{border-top:3px solid #32d6d0;border-radius:20px}
+.filters button{background:#151d33;color:#dce3ff;border-color:#344261}
+.filters button[aria-pressed="true"]{background:#7564f6;border-color:#7564f6}
+#alist li{border-color:#344261}
+#alist button{border-radius:9px}
+:focus-visible{outline:3px solid #32d6d0;outline-offset:3px}
+@media(max-width:600px){
+ .wrap{padding-left:15px;padding-right:15px}
+ main{padding-top:25px}
+ .box{padding:18px}
+ nav .wrap{padding-left:15px;padding-right:15px}
+ .tile{min-height:125px;padding:18px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+
+<script>
+(function(){
+function ck(){var m=document.cookie.match(/(?:^|; )6e-uid=([^;]+)/);return m?decodeURIComponent(m[1]):""}
+function sc(v){try{document.cookie="6e-uid="+encodeURIComponent(v)+";max-age=31536000;path=/;SameSite=Lax"}catch(e){}}
+var c=ck();
+if(c&&c!==uid&&!NAME&&/^u[a-z0-9]+$/i.test(c)){uid=c;store("6e-uid",c)}
+sc(uid);
+var gf=$("gform"),hit=null;
+function nk(s){return String(s||"").trim().toLowerCase().replace(/\s+/g," ")}
+document.addEventListener("submit",function(e){
+ if(e.target!==gf)return;
+ var v=$("gname").value.trim(),b=$("gbd").value;if(!v||!/^\d{4}-\d{2}-\d{2}$/.test(b))return;
+ hit=Object.keys(users).filter(function(k){var u=users[k];return k!==uid&&u.name&&nk(u.name)===nk(v)&&u.bday===b})[0];
+ if(!hit)return;
+ e.preventDefault();e.stopImmediatePropagation();
+ var bx=$("gdup");if(!bx){bx=document.createElement("div");bx.id="gdup";bx.className="gdup";bx.setAttribute("role","alert");$("gmsg").insertAdjacentElement("afterend",bx)}
+ bx.innerHTML="<b>Gibt es dich schon?</b><p>Es gibt schon einen Account „"+esc(users[hit].name)+"“ mit diesem Geburtstag. Bist du das?</p><button type='button' class='btn' data-dup='y'>Ja, das bin ich</button> <button type='button' class='sm' data-dup='n'>Nein</button>";
+},true);
+document.addEventListener("click",function(e){var t=e.target.closest("[data-dup]");if(!t||!hit)return;
+ if(t.dataset.dup==="y"){var v=$("gname").value.trim(),b=$("gbd").value;uid=hit;store("6e-uid",hit);sc(hit);NAME=v;BDAY=b;store("6e-name",v);store("6e-bday",b);$("gdup").remove();$("gate").hidden=true;register();R();location.hash="#start"}
+ else{$("gdup").innerHTML="<p>Dann nimm bitte einen Namen, der dich eindeutig macht, zum Beispiel mit dem Anfangsbuchstaben vom Nachnamen (Lena K.).</p>";hit=null;$("gname").focus()}});
+/* Geburtstagskalender */
+var WD=["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
+function card(x){var d=x.date;return "<div class='bdc"+(x.k===uid?" me":"")+(x.n===0?" heute":x.n<=7?" bald":"")+"'><div class='bdd'><b>"+d.getDate()+"</b><span>"+MON[d.getMonth()]+"</span></div><div class='bdn'><b>"+esc(users[x.k].emo||"🎂")+" "+esc(x.name)+(x.k===uid?" <span class='tg so'>du</span>":"")+"</b><small>"+WD[d.getDay()]+" · wird "+x.age+"</small></div><span class='tg "+(x.n===0?"ka":"so")+"'>"+(x.n===0?"heute 🎉":rel(x.n))+"</span></div>"}
+renderBd=function(){
+ var l=bdList(),h=$("bdnext"),g=$("bdchain");g.className="bdm";
+ if(!l.length){h.innerHTML="";g.innerHTML="<div class='empty'>Noch keine Geburtstage eingetragen. Jeder trägt seinen im Profil ein.</div>";return}
+ var f=l[0],same=l.filter(function(x){return x.n===f.n}),nms=same.map(function(x){return esc(x.name)}).join(" und "),soon=l.filter(function(x){return x.n<=30}).length,d=f.date;
+ var cnt=f.n===0?"<b>🎉</b>":f.n===1?"<b>morgen</b>":"<b>"+f.n+"</b><span>Tage</span>";
+ h.innerHTML="<div class='bdh"+(f.n===0?" heute":"")+"'><span class='bde'>"+esc(users[f.k].emo||"🎂")+"</span><div class='bdt'><h3>"+(f.n===0?"Heute hat "+nms+" Geburtstag!":nms)+"</h3><p>"+WD[d.getDay()]+", "+d.getDate()+". "+MONF[d.getMonth()]+" · "+(same.length>1?"werden "+same.map(function(x){return x.age}).join(" und "):"wird "+f.age)+"</p></div><div class='bdc2'>"+cnt+"</div></div><p class='bdsum'>"+l.length+" Geburtstage in der Klasse"+(soon?" · "+soon+" in den nächsten 30 Tagen":"")+"</p>";
+ var gr=[],cur=null;
+ l.forEach(function(x){var k=x.date.getFullYear()+"-"+x.date.getMonth();if(!cur||cur.k!==k){cur={k:k,m:x.date.getMonth(),y:x.date.getFullYear(),a:[]};gr.push(cur)}cur.a.push(x)});
+ g.innerHTML=gr.map(function(m){return "<section class='bdg'><h3 class='hand'>"+MONF[m.m]+(m.y!==start.getFullYear()?" "+m.y:"")+"<small>"+m.a.length+(m.a.length===1?" Geburtstag":" Geburtstage")+"</small></h3>"+m.a.map(card).join("")+"</section>"}).join("");
+};
+renderBd();
+})();
+</script>
 </body>
 </html>
