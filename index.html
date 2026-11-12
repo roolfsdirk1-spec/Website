@@ -293,6 +293,179 @@ main{padding-top:18px}
 .dash .dq{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .ub{font:inherit;text-align:left;border:0;border-bottom:5px solid var(--ink);cursor:pointer;width:100%}.ub:nth-child(even){border-bottom-color:var(--ink2)}.ubs{display:block;margin-top:6px;font-weight:800}
 .ubq h3{margin:4px 0 8px}.ubq .qa{font-size:18px;padding:14px 16px}.ubx{margin:12px 0;padding:12px 14px;border-radius:14px;background:var(--bg);border-left:6px solid var(--ink)}.ubx.g{border-left-color:var(--ok)}.ubx.r{border-left-color:var(--red)}
+#nw{position:fixed;inset:0;z-index:99990;display:flex;align-items:flex-end;justify-content:center;background:rgba(20,22,50,.55);padding:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+.nwc{position:relative;background:var(--paper);color:var(--text);border:2px solid var(--line);border-radius:22px;max-width:460px;width:100%;padding:16px;display:grid;grid-template-columns:96px 1fr;gap:10px 14px;align-items:center}
+.nwm svg{width:96px;height:auto;display:block;color:var(--ink)}.nww{transform-origin:124px 172px;animation:nww 1s ease-in-out infinite alternate}@keyframes nww{to{transform:rotate(-14deg)}}
+.nwb{position:relative;background:var(--bg);border-radius:16px;padding:12px 14px}.nwb::before{content:"";position:absolute;left:-8px;top:30px;border:8px solid transparent;border-left:0;border-right-color:var(--bg)}
+.nwb b{font-size:21px;display:block;margin-bottom:4px}.nwb p{margin:0;line-height:1.45}
+.nwd{grid-column:1/-1;display:flex;gap:6px;justify-content:center}.nwd span{width:9px;height:9px;border-radius:50%;background:var(--line)}.nwd span.on{background:var(--ink)}
+.nwa{grid-column:1/-1;display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}.nwx{position:absolute;top:6px;right:8px;border:0;background:none;color:var(--text);font-size:18px;cursor:pointer;padding:6px}
+@media(min-width:600px){#nw{align-items:center}}@media(prefers-reduced-motion:reduce){.nww{animation:none}}
+
+/* ===== Frisches Geburtstags- & Minispiele-Design ===== */
+[data-p="geburtstage"]>h2{font-size:clamp(34px,8vw,48px);letter-spacing:-1px}
+[data-p="geburtstage"]>.lead{font-size:16px;margin-bottom:22px}
+.bd-hero{position:relative;isolation:isolate;overflow:hidden;margin:0 0 28px;padding:24px clamp(18px,4vw,32px);border-radius:28px;color:#fff;background:radial-gradient(circle at 90% 10%,rgba(255,255,255,.24),transparent 28%),linear-gradient(135deg,#5145d9 0%,#8b5cf6 52%,#ec4899 100%);box-shadow:0 18px 42px rgba(91,70,210,.25)}
+.bd-hero:before,.bd-hero:after{content:"✦";position:absolute;color:rgba(255,255,255,.35);font-size:70px;z-index:-1}
+.bd-hero:before{right:8%;top:15%}.bd-hero:after{right:28%;bottom:-28px;font-size:110px}
+.bd-spark{position:absolute;right:18px;top:8px;color:rgba(255,255,255,.65);font-size:20px;letter-spacing:8px}
+.bd-hero-top,.bd-hero-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.bd-kicker{font-size:11px;font-weight:900;letter-spacing:.13em;opacity:.82}
+.bd-count{font-size:12px;font-weight:900;padding:6px 11px;border-radius:99px;background:rgba(255,255,255,.2);backdrop-filter:blur(8px)}
+.bd-feature{display:flex;align-items:center;gap:20px;padding:24px 0 20px}
+.bd-avatar{width:94px;height:94px;flex:none;display:grid;place-items:center;border-radius:28px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);font-size:55px;box-shadow:inset 0 1px 10px rgba(255,255,255,.15);animation:float 3s ease-in-out infinite}
+.bd-feature-copy small{font-size:11px;font-weight:900;letter-spacing:.13em;opacity:.8}
+.bd-feature-copy h3{font:600 clamp(27px,6vw,38px)/1.1 Fredoka,sans-serif;color:#fff;margin:6px 0}
+.bd-feature-copy p{margin:0;font-weight:700;opacity:.9}
+.bd-hero-foot{border-top:1px solid rgba(255,255,255,.24);padding-top:13px;font-size:12px;font-weight:800;opacity:.9}
+.bd-list-head{display:flex;align-items:end;justify-content:space-between;margin:0 0 14px;gap:10px}
+.bd-list-head h3{font-size:25px;margin:3px 0 0}
+.bd-list-head .bd-kicker{color:var(--ink)}
+.bd-total{background:var(--hl);color:var(--text);padding:7px 13px;border-radius:99px;font-weight:900;font-size:13px}
+.bd-person{display:flex;align-items:center;gap:12px;padding:12px 14px;margin:0 0 10px;border:1px solid var(--line);border-radius:19px;background:var(--paper);box-shadow:0 5px 18px rgba(79,70,229,.07);animation:fadeUp .4s both;animation-delay:calc(var(--i,0)*45ms);transition:transform .2s,border-color .2s,box-shadow .2s}
+.bd-person:hover{transform:translateY(-3px);border-color:var(--ink);box-shadow:var(--sh)}
+.bd-person.me{border:2px solid var(--ink);background:linear-gradient(110deg,var(--paper),color-mix(in srgb,var(--ink) 8%,var(--paper)))}
+.bd-datebox{width:51px;height:55px;flex:none;border-radius:15px;background:linear-gradient(145deg,var(--ink),var(--ink2));color:white;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.bd-datebox b{font:600 25px/1 Fredoka,sans-serif}.bd-datebox small{font-size:10px;font-weight:900;text-transform:uppercase;opacity:.85}
+.bd-person-emoji{font-size:27px;flex:none}
+.bd-person-info{flex:1;min-width:0}.bd-person-info>b{font-size:16px}.bd-person-info>small{display:block;color:var(--muted);font-size:12px}
+.bd-you{font-size:9px;letter-spacing:.06em;background:var(--ink);color:#fff;padding:3px 7px;border-radius:99px;vertical-align:middle}
+.bd-when{font-size:11px;font-weight:900;white-space:nowrap;padding:7px 10px;border-radius:99px;background:var(--line);color:var(--muted)}
+.bd-when.today{background:#dcfce7;color:#166534}
+.bd-empty-hero{display:flex;align-items:center;gap:16px;padding:24px;border-radius:24px;color:white;background:linear-gradient(130deg,#5145d9,#ec4899);margin-bottom:18px}
+.bd-empty-hero>span{font-size:48px}.bd-empty-hero b,.bd-empty-hero small{display:block}.bd-empty-hero b{font:600 25px Fredoka}.bd-empty-hero small{opacity:.9}
+[data-p="spiele"]>h2{font-size:clamp(36px,8vw,50px);letter-spacing:-1px}
+[data-p="spiele"]>.lead{margin-bottom:20px}
+[data-p="spiele"] .rooms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 18px;padding:0;overflow:visible}
+[data-p="spiele"] .rb{position:relative;min-height:94px;padding:12px 8px;border:1px solid var(--line);border-radius:19px;background:var(--paper);box-shadow:0 5px 16px rgba(79,70,229,.07);font-size:12px;white-space:normal;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;transition:transform .2s,border-color .2s,box-shadow .2s}
+[data-p="spiele"] .rb:before{content:"";display:block;width:35px;height:3px;border-radius:9px;background:linear-gradient(90deg,var(--ink),var(--ink2));opacity:.35}
+[data-p="spiele"] .rb:hover{transform:translateY(-4px);border-color:var(--ink);box-shadow:var(--sh)}
+[data-p="spiele"] .rb.on{color:var(--ink);background:linear-gradient(145deg,color-mix(in srgb,var(--ink) 11%,var(--paper)),var(--paper));border:2px solid var(--ink);box-shadow:0 8px 22px rgba(79,70,229,.16)}
+[data-p="spiele"] .rb.on:before{opacity:1}
+#gbox{position:relative;overflow:hidden;min-height:250px;padding:clamp(18px,4vw,28px);border:1px solid var(--line);border-radius:26px;background:radial-gradient(circle at 100% 0%,color-mix(in srgb,var(--ink2) 10%,transparent),transparent 35%),var(--paper);box-shadow:0 12px 30px rgba(79,70,229,.1)}
+#gbox:before{content:"🎮  SPIELBEREICH";display:inline-block;font-size:10px;letter-spacing:.13em;font-weight:900;color:var(--ink);background:color-mix(in srgb,var(--ink) 10%,var(--paper));padding:6px 10px;border-radius:99px;margin-bottom:12px}
+#gbox h3{font-size:clamp(23px,5vw,30px);margin:0 0 12px;line-height:1.2}
+#gbox p{line-height:1.5}
+#gbox input[type=text],#gbox input[type=number]{max-width:360px;background:var(--bg);border-radius:14px}
+#gbox .btn{box-shadow:0 7px 18px rgba(79,70,229,.2)}
+#gbox .gg{max-width:330px;gap:10px}
+#gbox .gg button{border:1px solid var(--line);background:linear-gradient(145deg,var(--bg),var(--line));box-shadow:0 4px 10px rgba(30,33,64,.06);font-size:38px;transition:transform .15s,background .15s}
+#gbox .gg button:hover{transform:scale(1.05);background:var(--hl)}
+#gbox .rz{height:190px;border-radius:22px;font-size:30px;font-weight:900;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);transition:background .2s,transform .2s}
+#gbox .rz:active{transform:scale(.985)}
+#gbox .mg{max-width:360px;gap:10px}
+#gbox .mg button{border:1px solid var(--line);background:linear-gradient(145deg,var(--bg),var(--line));box-shadow:0 4px 10px rgba(30,33,64,.06);border-radius:17px;transition:transform .15s,background .15s}
+#gbox .mg button:hover{transform:translateY(-2px)}
+#gbox .mg button.okc{background:#dcfce7;border-color:#86efac}
+#gbox .pc,#gbox .qa{border-radius:15px}
+#gbox .hk{gap:8px}
+#gbox .hk button{border-radius:12px;border:1px solid var(--line);background:var(--bg);padding:9px 12px;font-weight:900;color:var(--text)}
+#gbox .hk button:disabled{opacity:.35}
+@media(max-width:560px){
+ [data-p="spiele"] .rooms{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ [data-p="spiele"] .rb{min-height:82px;font-size:12px}
+ .bd-feature{gap:13px}.bd-avatar{width:70px;height:70px;font-size:42px;border-radius:22px}
+ .bd-person{gap:8px;padding:10px}.bd-datebox{width:44px;height:50px}.bd-person-emoji{font-size:23px}
+ .bd-when{font-size:10px;padding:6px 8px}
+}
+
+
+/* ===== Update 11: Handy-Menü, Update-Assistent ===== */
+#sheet{align-items:flex-end;overflow:hidden}
+#sheet>div{
+  max-height: min(88dvh, 760px);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  padding-top:12px;
+}
+#sheet>div:before{
+  content:"";
+  display:block;
+  flex:none;
+  width:42px;height:5px;border-radius:99px;
+  background:var(--line);
+  margin:0 auto 12px;
+}
+#sheet h3{flex:none;position:sticky;top:0;background:var(--paper);padding:4px 0 12px;margin:0}
+#sheet .g{
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  padding:4px 3px calc(20px + env(safe-area-inset-bottom,0px));
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+#sheet a{min-width:0;min-height:82px;overflow-wrap:anywhere}
+@media(max-height:650px){
+  #sheet>div{max-height:94dvh;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+  #sheet .g{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  #sheet a{min-height:68px;padding:8px 4px}
+  #sheet a i{font-size:25px}
+}
+@media(max-width:360px){
+  #sheet .g{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+#updateHelper{
+  position:fixed;inset:0;z-index:1000;background:rgba(15,18,50,.58);
+  display:flex;align-items:center;justify-content:center;padding:18px;
+  animation:fadeIn .2s both;
+}
+#updateHelper .uh-card{
+  width:min(100%,390px);background:var(--paper);color:var(--text);
+  border-radius:26px;padding:22px;text-align:center;
+  box-shadow:0 22px 70px rgba(0,0,0,.3);animation:slideUp .28s both;
+}
+#updateHelper .uh-man{
+  width:76px;height:76px;margin:0 auto 10px;border-radius:24px;
+  display:grid;place-items:center;font-size:44px;
+  background:linear-gradient(135deg,#dbeafe,#fce7f3);
+}
+#updateHelper h3{font:600 27px Fredoka,sans-serif;color:var(--ink);margin:4px 0}
+#updateHelper p{margin:8px 0 16px;color:var(--muted)}
+#updateHelper button{border:0;border-radius:99px;padding:12px 22px;
+  background:linear-gradient(100deg,var(--ink),var(--ink2));color:white;
+  font:800 16px Nunito,sans-serif;cursor:pointer;width:100%}
+
+
+/* UPDATE 12 – Lernwelt & Extras */
+[data-p="extras"]{padding-bottom:30px}
+.ex-hero{border-radius:26px;padding:24px;margin:8px 0 18px;color:white;background:linear-gradient(120deg,#5145d9,#a855f7 55%,#ec4899);display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 14px 35px #8b5cf633}
+.ex-hero h2{color:white;font-size:clamp(26px,5vw,38px);margin:4px 0}
+.ex-hero p{margin:0;opacity:.92}
+.ex-kicker{font-size:11px;font-weight:1000;letter-spacing:1.4px;opacity:.8}
+.ex-spark{font-size:64px;filter:drop-shadow(0 8px 10px #3335)}
+.ex-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:16px}
+.ex-card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--sh);min-width:0}
+.ex-card h3{font:600 22px Fredoka,sans-serif;color:var(--text);margin:5px 0}
+.ex-card p{color:var(--muted);margin:4px 0 14px}
+.ex-icon{font-size:39px;line-height:1.25}
+.ex-btn{border:0;border-radius:14px;padding:11px 15px;background:linear-gradient(100deg,var(--ink),var(--ink2));color:#fff;font:900 15px Nunito,sans-serif;cursor:pointer;max-width:100%}
+.ex-btn:disabled{opacity:.55;cursor:not-allowed}
+.pet-xp{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:10px 0 14px}
+.pet-xp span{display:block;height:100%;width:0;background:linear-gradient(90deg,#22c55e,#a3e635);border-radius:99px;transition:width .3s}
+.wheel{display:inline-block;transform-origin:center}
+.wheel.spin{animation:wheelspin 1.1s cubic-bezier(.15,.7,.2,1)}
+@keyframes wheelspin{to{transform:rotate(1440deg)}}
+.exam-card{padding:22px}
+.exam-head{display:flex;justify-content:space-between;gap:12px}
+.exam-head h3{font-size:27px}
+.exam-controls{display:flex;flex-wrap:wrap;align-items:end;gap:9px;margin:14px 0}
+.exam-controls label{font-size:13px;font-weight:900;color:var(--muted);width:100%;margin-bottom:-7px}
+.exam-controls select{padding:11px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--text);font:700 15px Nunito,sans-serif}
+.exam-play{border-radius:18px;background:var(--bg);padding:16px;min-height:90px}
+.exam-q{font-size:19px;font-weight:900;color:var(--text);margin:4px 0 14px}
+.exam-answer{display:block;width:100%;text-align:left;padding:12px 14px;margin:8px 0;border:1px solid var(--line);border-radius:13px;background:var(--paper);color:var(--text);font:800 15px Nunito,sans-serif;cursor:pointer}
+.exam-answer.good{border-color:#16a34a;background:#dcfce7;color:#14532d}
+.exam-answer.bad{border-color:#ef4444;background:#fee2e2;color:#7f1d1d}
+.exam-feedback{font-weight:900;margin:12px 0}
+@media(max-width:600px){.ex-grid{grid-template-columns:1fr}.ex-hero{padding:19px}.ex-spark{font-size:48px}.exam-head h3{font-size:23px}}
+:root[data-theme="dark"] .exam-answer.good{background:#14532d;color:#dcfce7}
+:root[data-theme="dark"] .exam-answer.bad{background:#7f1d1d;color:#fee2e2}
+
+
+/* Profil-Editor */
+.profile-maker{max-width:620px}.profile-preview{display:flex;flex-direction:column;align-items:center;gap:5px;padding:18px;margin-bottom:18px;border-radius:20px;background:linear-gradient(135deg,#e0e7ff,#fce7f3);color:#29245c}.profile-avatar{width:100px;height:100px;border-radius:28px;display:grid;place-items:center;background:#fff;font-size:62px;box-shadow:0 8px 22px #4338ca25}.profile-preview b{font-size:20px}.profile-preview small{font-weight:800}.profile-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.profile-actions button{min-height:44px}
 </style>
 </head>
 <body>
@@ -301,12 +474,12 @@ main{padding-top:18px}
 
 <nav><div class="wrap" id="nav">
 <a href="#start" data-p="start">🏠 Start</a><a href="#hausaufgaben" data-p="hausaufgaben">📝 Hausaufgaben</a><a href="#stundenplan" data-p="stundenplan">🕗 Stundenplan</a><a href="#termine" data-p="termine">📅 Termine</a><a href="#klasse" data-p="klasse">🎒 Klassenleben</a><a href="#geburtstage" data-p="geburtstage">🎂 Geburtstage</a><a href="#profil" data-p="profil">👤 Profil</a><a href="#admin" data-p="admin" id="navadmin" hidden>🛡️ Admin</a>
-<a href="#ueben" data-p="ueben">🎵 Üben</a><a href="#chat" data-p="chat">💬 Chat</a><a href="#themen" data-p="themen">📚 Themen</a><a href="#quiz" data-p="quiz">🧠 Quiz</a></div></nav>
+<a href="#ueben" data-p="ueben">🎵 Üben</a><a href="#chat" data-p="chat">💬 Chat</a><a href="#themen" data-p="themen">📚 Themen</a><a href="#quiz" data-p="quiz">🧠 Quiz</a><a href="#extras" data-p="extras">🛍️ Shop & Spiel</a></div></nav>
 
 <main class="wrap">
 <div class="err" id="nodb" hidden></div>
 
-<section data-p="start">
+<section data-p="start" class="home-hero">
 <h1 class="hand">Klasse 6e</h1>
 <p class="hello"><span id="hello"></span><span class="bd" id="role" hidden></span><span class="chip" id="onl" hidden></span><button type="button" class="lnk" id="rename">Mein Profil</button><button type="button" class="lnk" id="adminout" hidden>Admin abmelden</button></p>
 <p class="meta" id="meta"></p>
@@ -343,7 +516,7 @@ main{padding-top:18px}
 
 <section data-p="geburtstage" hidden><h2 class="hand">🎂 Geburtstage</h2><p class="lead">Wer als Nächstes feiert, und die ganze Klasse als Kette.</p><div id="bdnext"></div><div class="chain" id="bdchain"></div></section>
 
-<section data-p="profil" hidden><h2 class="hand">👤 Mein Profil</h2><p class="lead">So sehen dich die anderen im Geburtstagskalender.</p><div class="adm"><label for="pn">Name</label><input type="text" id="pn" maxlength="30"><label for="pb">Geburtstag</label><input type="date" id="pb"><label for="pe">Lieblings-Emoji (optional)</label><input type="text" id="pe" maxlength="8" placeholder="🙂"><button class="btn" type="button" id="psave">Profil speichern</button><span id="pstat" style="margin-left:10px;font-weight:800;color:var(--ok)"></span></div></section>
+<section data-p="profil" hidden><h2 class="hand">👤 Mein Profil</h2><p class="lead">Erstelle deinen eigenen Charakter. Du kannst Name, Aussehen und Outfit jederzeit ändern.</p><div class="adm profile-maker"><div class="profile-preview"><div id="profileAvatar" class="profile-avatar">🙂</div><b id="profilePreviewName">Dein Charakter</b><small id="profilePreviewOutfit">Noch kein Outfit gewählt</small></div><label for="pn">Dein Name</label><input type="text" id="pn" maxlength="30" placeholder="Wie sollen dich alle nennen?"><label for="pb">Geburtstag (optional)</label><input type="date" id="pb"><label for="pe">Gesicht / Emoji</label><select id="pe"><option>🙂</option><option>😎</option><option>🤩</option><option>😇</option><option>🥳</option><option>🐱</option><option>🐼</option><option>🦊</option><option>🐸</option><option>🐯</option><option>👾</option><option>🤖</option></select><label for="poutfit">Outfit auswählen</label><select id="poutfit"><option value="👕 T-Shirt">👕 T-Shirt</option><option value="🧥 Hoodie">🧥 Hoodie</option><option value="👔 Schick">👔 Schick</option><option value="🥼 Sportlich">🥼 Sportlich</option><option value="🦸 Superheld">🦸 Superheld</option><option value="👗 Party-Look">👗 Party-Look</option><option value="🧢 Streetstyle">🧢 Streetstyle</option><option value="🎮 Gamer-Look">🎮 Gamer-Look</option></select><label for="pbio">Über mich (optional)</label><textarea id="pbio" maxlength="120" rows="2" placeholder="Das mag ich besonders …"></textarea><div class="profile-actions"><button class="btn" type="button" id="psave">💾 Profil speichern</button><button class="sm red" type="button" id="pdelete">🗑️ Mein Profil löschen</button></div><p id="pstat" aria-live="polite" style="font-weight:800;color:var(--ok)"></p><small class="lead">Beim Löschen wird dein Klassenprofil entfernt. Du kannst danach ein neues Profil anlegen.</small></div></section>
 
 <section data-p="klasse" hidden>
 <h2 class="hand">Klassenleben</h2>
@@ -411,6 +584,20 @@ main{padding-top:18px}
 
 <section data-p="spiele" hidden><h2 class="hand">🎮 Minispiele</h2><p class="lead">Für jedes Spiel gibt es XP, aber nur 3 Mal pro Tag.</p>
 <div class="rooms"><button type="button" class="rb on" data-g="guess">🔢 Zahlenraten</button><button type="button" class="rb" data-g="react">⚡ Reaktion</button><button type="button" class="rb" data-g="ttt">❌ Tic-Tac-Toe</button><button type="button" class="rb" data-g="snake">🐍 Snake</button><button type="button" class="rb" data-g="mem">🧩 Memory</button><button type="button" class="rb" data-g="calc">➕ Kopfrechnen</button><button type="button" class="rb" data-g="hang">🔤 Galgenmännchen</button><button type="button" class="rb" data-g="tip">⌨️ Tipp-Test</button></div><div class="box" id="gbox"></div></section>
+
+
+<section data-p="extras" hidden>
+ <div class="ex-hero"><div><span class="ex-kicker">KLASSE 6E · EXTRA-SPASS</span><h2 class="hand">✨ Deine Spiel- & Lernwelt · UPDATE</h2><p>Belohnungen sammeln, für Klassenarbeiten üben und Spaß haben!</p></div><div class="ex-spark">🌈</div></div>
+ <div class="ex-grid">
+  <article class="ex-card reward-card"><div class="ex-icon">🎁</div><h3>Tagesbelohnung</h3><p id="dailyText">Deine Überraschung wartet!</p><button class="ex-btn" id="dailyBtn">Überraschung öffnen</button></article>
+  <article class="ex-card pet-card"><div class="ex-icon" id="petFace">🐾</div><h3>Dein Klassen-Maskottchen</h3><p id="petText">Dein Maskottchen freut sich auf dich!</p><div class="pet-xp"><span id="petBar"></span></div><button class="ex-btn" id="petFeed">Maskottchen füttern 🍎</button></article>
+  <article class="ex-card wheel-card"><div class="ex-icon wheel" id="wheelFace">🎡</div><h3>Das Glücksrad</h3><p id="wheelText">Dreh am Rad und entdecke eine Überraschung.</p><button class="ex-btn" id="wheelBtn">Jetzt drehen!</button></article>
+  <article class="ex-card dark-card"><div class="ex-icon">🌙</div><h3>Dark Mode</h3><p>Wähle dein Lieblings-Design für die Klassenseite.</p><button class="ex-btn" id="themeBtn">🌙 Dunkelmodus einschalten</button></article>
+ </div>
+ <article class="ex-card exam-card"><div class="exam-head"><div><span class="ex-kicker">FIT FÜR DIE ARBEIT</span><h3>🧠 Klassenarbeits-Trainer</h3><p>Übe mit Fragen aus verschiedenen Fächern. Du bekommst sofort Rückmeldung.</p></div><div class="ex-icon">📚</div></div>
+ <div class="exam-controls"><label for="examSubject">Fach auswählen</label><select id="examSubject"><option value="Alle">Alle Fächer</option><option>Mathe</option><option>Deutsch</option><option>Englisch</option><option>Erdkunde</option><option>Biologie</option></select><label for="examCount">Anzahl der Fragen</label><select id="examCount"><option value="10">10 Fragen</option><option value="15">15 Fragen</option><option value="20">20 Fragen</option></select><button class="ex-btn" id="examStart">Klassenarbeit starten 🚀</button></div>
+ <div id="examPlay" class="exam-play"><p>Wähle ein Fach und starte deine Übungs-Klassenarbeit.</p></div></article>
+</section>
 
 <section data-p="wwm" hidden><h2 class="hand">💰 Wer wird Millionär?</h2><p class="lead">Die Fragen kommen aus den Quizzen der Klasse.</p><div class="box" id="wbox"></div></section>
 
@@ -515,16 +702,20 @@ function bdList(){return Object.keys(users).map(function(k){return {k:k,name:use
 function fmtD(b){var q=b.split("-");return +q[2]+". "+MONF[+q[1]-1]+" "+q[0]}
 function renderBd(){
  var l=bdList();
- if(!l.length){$("bdnext").innerHTML="";$("bdchain").innerHTML="<div class='empty'>Noch keine Geburtstage eingetragen. Jeder trägt seinen im Profil ein.</div>";return}
- var f=l[0];
- $("bdnext").innerHTML="<div class='bnext'><span class='big'>"+esc(users[f.k].emo||"🎂")+"</span><div><h3>"+(f.n===0?"Heute hat "+esc(f.name)+" Geburtstag! 🎉":"Als Nächstes: "+esc(f.name))+"</h3><p>"+(f.n===0?"Wird "+f.age+".":rel(f.n)+", am "+f.date.getDate()+". "+MONF[f.date.getMonth()]+" · wird "+f.age)+"</p></div></div>";
- $("bdchain").innerHTML=l.map(function(x,i){return "<div class='link"+(x.k===uid?" me":"")+"' data-e='"+esc(users[x.k].emo||"🎂")+"' style='--i:"+i+"'><b>"+esc(x.name)+(x.k===uid?" <span class='tg so'>du</span>":"")+"<small>"+fmtD(x.b)+"</small></b><span class='tg "+(x.n===0?"ka":"so")+"'>"+(x.n===0?"heute 🎉":rel(x.n))+"</span></div>"}).join("");
+ if(!l.length){
+  $("bdnext").innerHTML="<div class='bd-empty-hero'><span>🎈</span><div><b>Hier wird bald gefeiert!</b><small>Tragt euren Geburtstag in eurem Profil ein.</small></div></div>";
+  $("bdchain").innerHTML="<div class='empty'>Noch keine Geburtstage eingetragen. Jeder trägt seinen im Profil ein.</div>";
+  return;
+ }
+ var f=l[0],todayCount=l.filter(function(x){return x.n===0}).length;
+ $("bdnext").innerHTML="<div class='bd-hero'><div class='bd-spark'>✦　✧　✦</div><div class='bd-hero-top'><span class='bd-kicker'>🎉 UNSERE NÄCHSTE PARTY</span><span class='bd-count'>"+l.length+" Geburtstage</span></div><div class='bd-feature'><div class='bd-avatar'>"+esc(users[f.k].emo||"🎂")+"</div><div class='bd-feature-copy'><small>"+(f.n===0?"HEUTE IST DEIN TAG!":"ALS NÄCHSTES WIRD GEFEIERT")+"</small><h3>"+(f.n===0?"Alles Gute, "+esc(f.name)+"!":" "+esc(f.name))+"</h3><p>"+(f.n===0?"Hoch sollst du leben! 🥳":rel(f.n)+" · "+f.date.getDate()+". "+MONF[f.date.getMonth()]+" · wird "+f.age)+"</p></div></div><div class='bd-hero-foot'><span>💜 Gemeinsam feiern wir jeden Geburtstag</span><span>"+(todayCount?todayCount+" heute 🎊":"🎁 Vorfreude liegt in der Luft")+"</span></div></div>";
+ $("bdchain").innerHTML="<div class='bd-list-head'><div><span class='bd-kicker'>DER GEBURTSTAGS-COUNTDOWN</span><h3 class='hand'>Unsere Geburtstagsrunde</h3></div><span class='bd-total'>"+l.length+" 🎂</span></div>"+l.map(function(x,i){var d=x.date.getDate();return "<div class='bd-person"+(x.k===uid?" me":"")+"' style='--i:"+i+"'><div class='bd-datebox'><b>"+d+"</b><small>"+MONF[x.date.getMonth()].slice(0,3)+"</small></div><div class='bd-person-emoji'>"+esc(users[x.k].emo||"🎂")+"</div><div class='bd-person-info'><b>"+esc(x.name)+(x.k===uid?" <span class='bd-you'>DU</span>":"")+"</b><small>"+fmtD(x.b)+(x.age?" · wird "+x.age:"")+"</small></div><span class='bd-when "+(x.n===0?"today":"")+"'>"+(x.n===0?"🎉 Heute":x.n===1?"Morgen": "In "+x.n+" Tagen")+"</span></div>"}).join("");
 }
 function renderSoon(){
  var l=D.te.filter(function(t){return diff(t.d)>=0}).sort(function(a,b){return a.d<b.d?-1:1}).slice(0,4),b=bdList()[0];
  $("soon").innerHTML="<div class='box'><h3 class='hand'>📅 Das steht an</h3>"+(l.length?"<ul class='mini'>"+l.map(function(x){var d=dt(x.d);return "<li>"+tag(x.k)+" <b>"+esc(x.t)+"</b><small>"+d.getDate()+". "+MON[d.getMonth()]+" · "+rel(diff(x.d))+"</small></li>"}).join("")+"</ul>":"<p class='lead' style='margin:0'>Im Moment ist nichts geplant.</p>")+(b?"<div class='facts'><span>🎂 Nächster Geburtstag: <b>"+esc(b.name)+"</b> ("+rel(b.n)+")</span></div>":"")+"</div>";
 }
-function renderProfile(){if(!pfilled&&loaded){pfilled=true;$("pn").value=NAME;$("pb").value=BDAY;$("pe").value=me().emo||""}}
+function renderProfile(){if(!pfilled&&loaded){pfilled=true;var u=me();$("pn").value=NAME;$("pb").value=BDAY;$("pe").value=u.emo||"🙂";$("poutfit").value=u.outfit||"👕 T-Shirt";$("pbio").value=u.bio||"";profilePreview()}}
 function setTab(t){atab=t;document.querySelectorAll("[data-at]").forEach(function(e){e.hidden=e.getAttribute("data-at")!==t});document.querySelectorAll("#atabs button").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-t")===t)});$("saveall").hidden=!(t==="plan"||t==="klasse")}
 function renderKL(){
  var r=lines(D.regeln),d=lines(D.dienste);
@@ -548,7 +739,7 @@ function R(){setTab(atab);renderSoon();renderBd();renderProfile();$("hwpanel").h
 
 function route(){
  var p=location.hash.slice(1)||"start";
- var ok=["start","hausaufgaben","stundenplan","termine","geburtstage","profil","klasse","admin","chat","themen","quiz","spiele","wwm","rang","duell","umfragen","ueben"];
+ var ok=["start","hausaufgaben","stundenplan","termine","geburtstage","profil","klasse","admin","chat","themen","quiz","spiele","wwm","rang","duell","umfragen","ueben","extras"];
  if(ok.indexOf(p)<0||(p==="admin"&&!isAdmin))p="start";
  document.querySelectorAll("main section").forEach(function(s){s.hidden=s.getAttribute("data-p")!==p});
  document.querySelectorAll("#nav a").forEach(function(a){a.classList.toggle("on",a.getAttribute("data-p")===p)});
@@ -621,7 +812,10 @@ function renderRole(){var t=isAdmin?"Admin":me().hw?"Hausaufgaben-Dienst":"";$("
 hello();$("gname").value=NAME;$("gbd").value=BDAY;$("gbd").max=new Date().toISOString().slice(0,10);$("gate").hidden=!!(NAME&&(BDAY||isAdmin));
 $("gform").addEventListener("submit",function(e){e.preventDefault();var v=$("gname").value.trim(),b=$("gbd").value;if(!v||!/^\d{4}-\d{2}-\d{2}$/.test(b))return;NAME=v;BDAY=b;store("6e-name",v);store("6e-bday",b);$("gate").hidden=true;register();R();location.hash="#start"});
 $("rename").addEventListener("click",function(){location.hash="#profil"});
-$("psave").addEventListener("click",function(){var v=$("pn").value.trim(),b=$("pb").value;if(!v||!/^\d{4}-\d{2}-\d{2}$/.test(b)){alert("Bitte Name und Geburtstag eintragen.");return}NAME=v;BDAY=b;store("6e-name",v);store("6e-bday",b);register();var em=$("pe").value.trim();if(users[uid])usersCol.doc(uid).update({emo:em});$("pstat").textContent="Gespeichert ✓";setTimeout(function(){$("pstat").textContent=""},2500);R()});
+function profilePreview(){var n=$("pn").value.trim()||"Dein Charakter",em=$("pe").value||"🙂",out=$("poutfit").value||"👕 T-Shirt";$("profileAvatar").textContent=em;$("profilePreviewName").textContent=n;$("profilePreviewOutfit").textContent=out}
+["pn","pe","poutfit"].forEach(function(id){$(id).addEventListener("input",profilePreview);$(id).addEventListener("change",profilePreview)});
+$("psave").addEventListener("click",function(){var v=$("pn").value.trim(),b=$("pb").value,em=$("pe").value||"🙂",out=$("poutfit").value,bio=$("pbio").value.trim();if(!v){alert("Bitte gib deinen Namen ein.");$("pn").focus();return}NAME=v;BDAY=b;store("6e-name",v);store("6e-bday",b);var data={name:v,bday:b,emo:em,outfit:out,bio:bio};if(!usersCol||!uid){alert("Das Profil kann gerade nicht gespeichert werden.");return}(users[uid]?usersCol.doc(uid).update(data):usersCol.doc(uid).set({name:v,last:Date.now(),banned:false,hw:false,admin:isAdmin,bday:b,emo:em,outfit:out,bio:bio})).then(function(){$("pstat").textContent="Profil gespeichert! 🎉";pfilled=false;R()}).catch(function(){alert("Speichern fehlgeschlagen. Bitte prüfe die Verbindung und versuche es erneut.")})});
+$("pdelete").addEventListener("click",function(){if(!confirm("Möchtest du dein Profil wirklich endgültig löschen? Dein Name und deine Profildaten werden entfernt."))return;if(!usersCol||!uid){alert("Das Profil kann gerade nicht gelöscht werden.");return}usersCol.doc(uid).delete().then(function(){NAME="";BDAY="";try{localStorage.removeItem("6e-name");localStorage.removeItem("6e-bday");localStorage.removeItem("6e-player-"+(uid||"local"))}catch(e){}alert("Dein Profil wurde gelöscht. Die Seite wird neu geladen.");location.reload()}).catch(function(){alert("Löschen fehlgeschlagen. Bitte prüfe die Verbindung und versuche es erneut.")})});
 var pcur=null;
 $("pg").addEventListener("click",function(e){var b=e.target.closest(".pc");if(!b)return;var r=+b.getAttribute("data-r"),c=+b.getAttribute("data-c"),o=cp($("p"+r+c).value),fs={};pcur=[r,c];
  $("pt").textContent=["Montag","Dienstag","Mittwoch","Donnerstag","Freitag"][c]+", "+(r+1)+". Stunde";$("pf").value=o.f;$("pr").value=o.r;$("pl").value=o.l;
@@ -853,6 +1047,7 @@ function openSheet(){
  var c=curP();
  $("sheet").innerHTML="<div><h3 class='hand'>Wohin?</h3><div class='g'>"+NV.filter(function(x){return x[0]!=="admin"||isAdmin}).map(function(x){return "<a href='#"+x[0]+"' class='"+(c===x[0]?"on":"")+"'><i>"+x[1]+"</i>"+x[2]+"</a>"}).join("")+"</div></div>";
  $("sheet").hidden=false;
+ var grid=$("sheet").querySelector(".g");if(grid)grid.scrollTop=0;
 }
 $("bnav").addEventListener("click",function(e){
  var b=e.target.closest("button");if(!b)return;
@@ -868,7 +1063,7 @@ var ME={xp:0,d:"",k:{},c:0,b:{}},AC=null;
 function today(){return new Date().toISOString().slice(0,10)}
 function lvOf(x){return Math.min(100,Math.floor(Math.sqrt(x/50))+1)}
 function lvStart(l){return 50*(l-1)*(l-1)}
-function saveME(){ME.n=NAME;if(FB_URL&&uid)fb("PUT","xp/"+uid+".json",ME).catch(function(){})}
+function saveME(){ME.n=NAME;try{localStorage.setItem("6e-player-"+(uid||"local"),JSON.stringify(ME))}catch(e){}if(FB_URL&&uid)fb("PUT","xp/"+uid+".json",ME).catch(function(){})}
 function loadME(){if(FB_URL&&uid)fb("GET","xp/"+uid+".json").then(function(r){if(r){ME=r;ME.k=ME.k||{};ME.b=ME.b||{};ME.c=ME.c||0}drawMe()}).catch(function(){})}
 function tone(f,d,t){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();var o=AC.createOscillator(),g=AC.createGain();o.frequency.value=f;o.type=t||"sine";g.gain.value=.08;o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+d)}catch(e){}}
 function overlay(h){var o=document.createElement("div");o.className="ov";o.innerHTML="<div>"+h+"</div>";o.onclick=function(){o.remove()};document.body.appendChild(o);setTimeout(function(){o.remove()},5000)}
@@ -1250,8 +1445,9 @@ var XPC={t:0,d:{}},MEL=false;
 function loadXPC(cb){if(Date.now()-XPC.t<30000||!FB_URL){cb();return}fb("GET","xp.json").then(function(r){XPC={t:Date.now(),d:r||{}};cb()}).catch(cb)}
 function toast(t){var d=document.createElement("div");d.className="xpt";d.textContent=t;document.body.appendChild(d);setTimeout(function(){d.remove()},2600)}
 loadME=function(){
- if(!FB_URL||!uid)return;
- fb("GET","xp/"+uid+".json").then(function(r){if(r){ME=r;ME.k=ME.k||{};ME.b=ME.b||{};ME.c=ME.c||0;ME.xp=ME.xp||0}MEL=true;drawMe();applyGrants()}).catch(function(){});
+ try{var local=JSON.parse(localStorage.getItem("6e-player-"+(uid||"local"))||"null");if(local){ME=local;ME.k=ME.k||{};ME.b=ME.b||{};ME.c=ME.c||0;ME.xp=ME.xp||0;ME.coins=Number(ME.coins)||0;ME.items=ME.items||[];ME.equip=ME.equip||{outfit:"👕 T-Shirt",cube:"🙂",trail:""}}}catch(e){}
+ if(!FB_URL||!uid){MEL=true;drawMe();return}
+ fb("GET","xp/"+uid+".json").then(function(r){if(r){ME=Object.assign(ME,r);ME.k=ME.k||{};ME.b=ME.b||{};ME.c=ME.c||0;ME.xp=ME.xp||0;ME.coins=Number(ME.coins)||0;ME.items=ME.items||[];ME.equip=ME.equip||{outfit:"👕 T-Shirt",cube:"🙂",trail:""};ME.equip.hair=ME.equip.hair||"";ME.equip.hat=ME.equip.hat||"";ME.equip.accessory=ME.equip.accessory||"";ME.equip.jump=ME.equip.jump||"";ME.equip.movement=ME.equip.movement||"";saveME()}MEL=true;drawMe();applyGrants()}).catch(function(){MEL=true;drawMe()});
 };
 function applyGrants(){
  if(!FB_URL||!uid||!MEL)return;
@@ -1598,5 +1794,216 @@ $("ubox").addEventListener("click",function(e){var t=e.target.closest("[data-t],
 home();
 })();
 </script>
+<script>
+(function(){
+var V="2026-11-12",KS="6e-seen",seen=null,ret=false,i=0,ov=null,prev=null;
+try{seen=localStorage.getItem(KS);ret=seen!==null||localStorage.length>0}catch(e){}
+var ST=[{h:"Hey, schön, dass du wieder da bist!",t:"Auf der Klassenseite hat sich etwas getan. Ich zeige dir kurz, was neu ist."},
+{h:"🎵 Musik üben",t:"Neuer Tab „Üben“ mit vier Themen: Töne c¹ bis c³, chromatische Tonleiter, Artikulationszeichen und Karneval der Tiere.",go:"#ueben"},
+{h:"🔁 Fehler kommen nochmal",t:"Nach jeder Antwort bekommst du eine Erklärung. Was du falsch hattest, kommt am Ende der Runde noch einmal.",go:"#ueben"},
+{h:"⭐ Sterne und Bestwert",t:"Pro Thema siehst du 0 bis 3 Sterne und deinen Bestwert. Das wird nur in deinem Browser gespeichert.",go:"#ueben"},
+{h:"Das war’s!",t:"Wenn du das noch einmal lesen willst: Auf der Startseite gibt es den Knopf „Was ist neu?“."}];
+var MAS="<svg viewBox='0 0 200 262' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='100' cy='102' r='48'/><path d='M66 52L82 24H118L134 52Z'/><path d='M58 52H142'/><path d='M94 38H108' stroke-width='6'/><ellipse cx='58' cy='96' rx='20' ry='28'/><ellipse cx='60' cy='98' rx='11' ry='20' fill='currentColor'/><ellipse cx='142' cy='96' rx='20' ry='28'/><ellipse cx='140' cy='98' rx='11' ry='20' fill='currentColor'/><path d='M84 126Q96 142 112 128'/><path d='M106 118H116' stroke-width='4'/><ellipse cx='100' cy='182' rx='26' ry='32'/><path d='M88 212V250H72M112 212V250H132'/><path d='M76 188L54 202M42 194L58 202M46 210L58 200'/><g class='nww'><path d='M124 172L146 150M134 128L160 150M158 126L142 146'/></g></svg>";
+function done(){try{localStorage.setItem(KS,V)}catch(e){}if(ov){ov.remove();ov=null;document.removeEventListener("keydown",key)}if(prev&&prev.focus)prev.focus()}
+function key(e){if(!ov)return;if(e.key==="Escape"){done();return}
+ if(e.key==="Tab"){var b=ov.querySelectorAll("button"),f=b[0],l=b[b.length-1];if(e.shiftKey&&document.activeElement===f){e.preventDefault();l.focus()}else if(!e.shiftKey&&document.activeElement===l){e.preventDefault();f.focus()}}}
+function draw(){var s=ST[i],last=i===ST.length-1,d="";
+ for(var k=0;k<ST.length;k++)d+="<span class='"+(k===i?"on":"")+"'></span>";
+ ov.innerHTML="<div class='nwc'><button type='button' class='nwx' data-n='x' aria-label='Schließen'>✕</button><div class='nwm'>"+MAS+"</div><div class='nwb' aria-live='polite'><b id='nwh' class='hand'>"+s.h+"</b><p>"+s.t+"</p></div><div class='nwd' aria-hidden='true'>"+d+"</div><div class='nwa'>"+(i?"<button type='button' class='sm' data-n='b'>Zurück</button>":"")+(s.go?"<button type='button' class='sm' data-n='g'>Gleich ansehen</button>":"")+"<button type='button' class='btn' data-n='"+(last?"x":"f")+"'>"+(last?"Fertig":"Weiter ➜")+"</button></div></div>";
+ ov.querySelector(".btn").focus()}
+function open(){if(ov)return;prev=document.activeElement;i=0;ov=document.createElement("div");ov.id="nw";ov.setAttribute("role","dialog");ov.setAttribute("aria-modal","true");ov.setAttribute("aria-labelledby","nwh");
+ ov.addEventListener("click",function(e){var t=e.target.closest("[data-n]");if(!t)return;var n=t.dataset.n;
+  if(n==="f"){i++;draw()}else if(n==="b"){i--;draw()}else if(n==="g"){var h=ST[i].go;done();location.hash=h}else done()});
+ document.body.appendChild(ov);document.addEventListener("keydown",key);draw()}
+var tl=document.getElementById("tiles");
+if(tl)tl.insertAdjacentHTML("afterend","<p><button type='button' class='sm' id='nwb'>🎧 Was ist neu?</button></p>");
+var nb=document.getElementById("nwb");if(nb)nb.addEventListener("click",open);
+if(seen!==V){if(ret)setTimeout(open,900);else{try{localStorage.setItem(KS,V)}catch(e){}}}
+})();
+</script>
+
+<script>
+/* ===== Update 11: Update-Assistent ===== */
+(function(){
+  var VERSION="11.0";
+  var KEY="klasse6e-update-seen";
+  try{
+    if(localStorage.getItem(KEY)===VERSION)return;
+    var layer=document.createElement("div");
+    layer.id="updateHelper";
+    layer.innerHTML="<div class='uh-card' role='dialog' aria-modal='true' aria-labelledby='uhTitle'>"+
+      "<div class='uh-man' aria-hidden='true'>🧑‍💻</div>"+
+      "<small style='font-weight:900;letter-spacing:1px;color:var(--ink2)'>KLASSE 6E · UPDATE "+VERSION+"</small>"+
+      "<h3 id='uhTitle'>Der Update-Assistent ist da!</h3>"+
+      "<p>Ich zeige dir kurz, was neu ist: Das Menü lässt sich jetzt auch auf kleinen Handys ganz nach oben und unten scrollen. Außerdem gibt es einen kleinen Update-Hinweis, wenn eine neue Version erscheint.</p>"+
+      "<button type='button' id='uhClose'>Alles klar! ✨</button></div>";
+    document.body.appendChild(layer);
+    function close(){
+      try{localStorage.setItem(KEY,VERSION)}catch(e){}
+      layer.remove();
+    }
+    layer.querySelector("#uhClose").addEventListener("click",close);
+    layer.addEventListener("click",function(e){if(e.target===layer)close()});
+  }catch(e){}
+})();
+</script>
+
+
+<script>
+/* UPDATE 13 – Profil-Editor und Outfits */
+(function(){
+"use strict";
+var $x=function(id){return document.getElementById(id)};
+var bank=[
+["Mathe","Wie viel ist 7 · 8?",["54","56","64","48"],1,"7 mal 8 ergibt 56."],
+["Mathe","Wie viel ist 3/4 von 20?",["5","10","15","18"],2,"20 : 4 = 5 und 5 · 3 = 15."],
+["Mathe","Was ist 2,5 + 1,75?",["3,25","4,25","4,75","3,75"],1,"2,50 + 1,75 = 4,25."],
+["Mathe","Welche Zahl ist eine Primzahl?",["21","27","29","33"],2,"29 ist nur durch 1 und 29 teilbar."],
+["Mathe","Wie groß ist der Umfang eines Quadrats mit 5 cm Seitenlänge?",["10 cm","15 cm","20 cm","25 cm"],2,"4 · 5 cm = 20 cm."],
+["Deutsch","Was ist ein Verb?",["laufen","schön","Tisch","gestern"],0,"Verben beschreiben Tätigkeiten oder Zustände."],
+["Deutsch","Welche Zeitform ist „ich hatte gespielt“?",["Präsens","Perfekt","Plusquamperfekt","Futur"],2,"„Hatte gespielt“ steht im Plusquamperfekt."],
+["Deutsch","Was ist das Gegenteil von „mutig“?",["tapfer","ängstlich","stark","frech"],1,"Das Gegenteil von mutig ist ängstlich oder feige."],
+["Deutsch","Welches Wort ist ein Adjektiv?",["springen","Freundschaft","freundlich","der"],2,"„Freundlich“ beschreibt eine Eigenschaft."],
+["Englisch","Was heißt „yesterday“?",["morgen","heute","gestern","später"],2,"Yesterday bedeutet gestern."],
+["Englisch","Was ist die Vergangenheit von „go“?",["goed","went","gone","going"],1,"Die Simple-Past-Form von go ist went."],
+["Englisch","Wie heißt „Hausaufgaben“ auf Englisch?",["homework","housework","schoolwork","lesson"],0,"Hausaufgaben heißt homework."],
+["Englisch","Ergänze: She ___ a dog.",["have","has","having","is have"],1,"Bei he/she/it steht has."],
+["Erdkunde","Auf welchem Kontinent liegt Deutschland?",["Asien","Europa","Afrika","Australien"],1,"Deutschland liegt in Europa."],
+["Erdkunde","Wie heißt die Hauptstadt von Frankreich?",["Rom","Madrid","Paris","Wien"],2,"Die Hauptstadt Frankreichs ist Paris."],
+["Erdkunde","In welche Richtung zeigt die Kompassnadel normalerweise?",["Süden","Norden","Westen","Osten"],1,"Die rote Spitze zeigt meist nach Norden."],
+["Biologie","Welches Organ pumpt Blut durch den Körper?",["Lunge","Magen","Herz","Leber"],2,"Das Herz pumpt Blut durch den Kreislauf."],
+["Biologie","Was brauchen Pflanzen für die Fotosynthese?",["Licht","Plastik","Sand allein","Salz"],0,"Pflanzen benötigen Licht, Wasser und Kohlenstoffdioxid."],
+["Biologie","Wie nennt man Tiere, die Pflanzen und Tiere fressen?",["Pflanzenfresser","Fleischfresser","Allesfresser","Zersetzer"],2,"Allesfresser ernähren sich pflanzlich und tierisch."],
+["Mathe","Wie viel sind 15 % von 100?",["5","10","15","20"],2,"15 Prozent von 100 sind 15."]
+];
+var quiz=[],qi=0,score=0,locked=false;
+function startExam(){
+ var subject=$x("examSubject").value,n=+$x("examCount").value;
+ var pool=bank.filter(function(q){return subject==="Alle"||q[0]===subject});
+ // Mix questions fairly, no external data or personal details.
+ pool.sort(function(){return Math.random()-.5});
+ quiz=pool.slice(0,Math.min(n,pool.length));qi=0;score=0;drawQ();
+}
+function drawQ(){
+ var box=$x("examPlay");if(!box)return;
+ if(qi>=quiz.length){box.innerHTML="<h3>🎉 Geschafft!</h3><p>Du hast <b>"+score+" von "+quiz.length+"</b> Fragen richtig beantwortet.</p><p>"+(score/quiz.length>=.8?"Super vorbereitet! 🌟":score/quiz.length>=.5?"Gute Arbeit! Übe die falschen Fragen noch einmal. 💪":"Bleib dran – mit Übung klappt das! 📚")+"</p><button class='ex-btn' id='examAgain'>Noch einmal üben</button>";$x("examAgain").onclick=startExam;return}
+ locked=false;var q=quiz[qi];
+ box.innerHTML="<small><b>"+q[0]+"</b> · Frage "+(qi+1)+" von "+quiz.length+" · Richtig: "+score+"</small><div class='exam-q'>"+q[1]+"</div>"+q[2].map(function(a,i){return "<button class='exam-answer' data-answer='"+i+"'>"+String.fromCharCode(65+i)+") "+a+"</button>"}).join("")+"<div id='examFeedback' class='exam-feedback' aria-live='polite'></div>";
+ box.querySelectorAll("[data-answer]").forEach(function(b){b.onclick=function(){if(locked)return;locked=true;var chosen=+b.dataset.answer,correct=q[3];box.querySelectorAll("[data-answer]").forEach(function(x){x.disabled=true;if(+x.dataset.answer===correct)x.classList.add("good")});if(chosen===correct)score++;else b.classList.add("bad");$x("examFeedback").textContent=(chosen===correct?"✅ Richtig! ":"❌ Leider nicht. ")+q[4];var next=document.createElement("button");next.className="ex-btn";next.textContent=qi===quiz.length-1?"Ergebnis ansehen":"Nächste Frage ➜";next.onclick=function(){qi++;drawQ()};$x("examFeedback").appendChild(document.createElement("br"));$x("examFeedback").appendChild(next)}});
+}
+function daily(){
+ var key="6e-daily-reward",today=new Date().toISOString().slice(0,10),claimed=localStorage.getItem(key)===today;
+ $x("dailyBtn").disabled=claimed;$x("dailyBtn").textContent=claimed?"Morgen wiederkommen 🌟":"Überraschung öffnen";
+ $x("dailyText").textContent=claimed?"Du hast deine Tagesbelohnung heute schon abgeholt.":"Jeden Tag wartet eine kleine Überraschung auf dich!";
+ $x("dailyBtn").onclick=function(){if(localStorage.getItem(key)===today)return;localStorage.setItem(key,today);var prize=["🌟 10 Glückspunkte!","🎉  Ein extra Motivationsstern!","🍀 Heute ist dein Glückstag!","🏅 Du bist heute ein Lernheld!"][Math.floor(Math.random()*4)];$x("dailyText").textContent=prize;$x("dailyBtn").disabled=true;$x("dailyBtn").textContent="Abgeholt! ✅"};
+}
+var petKey="6e-pet-xp",petXP=+(localStorage.getItem(petKey)||0);
+function petDraw(){var level=Math.floor(petXP/5)+1,faces=["🐣","🐥","🦊","🐼","🦄","🐉"];var face=faces[Math.min(faces.length-1,Math.floor((level-1)/2))];$x("petFace").textContent=face;$x("petText").textContent="Level "+level+" · "+(petXP%5)+" / 5 Kuschelpunkte bis zum nächsten Level";$x("petBar").style.width=((petXP%5)/5*100)+"%"}
+$x("petFeed").onclick=function(){petXP++;localStorage.setItem(petKey,petXP);petDraw();$x("petFeed").textContent="Lecker! 😋";setTimeout(function(){$x("petFeed").textContent="Maskottchen füttern 🍎"},1000)};
+var prizes=["🎯 3 Mathefragen üben","🍀 Glück gehabt!","⭐ Du bist spitze!","📚 5 Minuten Lernzeit","🎨 Kreativ-Pause","💪 Weiter so!"];
+$x("wheelBtn").onclick=function(){var f=$x("wheelFace");if(f.classList.contains("spin"))return;f.classList.add("spin");$x("wheelBtn").disabled=true;setTimeout(function(){f.classList.remove("spin");$x("wheelText").textContent=prizes[Math.floor(Math.random()*prizes.length)];$x("wheelBtn").disabled=false},1100)};
+function themeSet(t){document.documentElement.setAttribute("data-theme",t);localStorage.setItem("6e-theme",t);$x("themeBtn").textContent=t==="dark"?"☀️ Hellmodus einschalten":"🌙 Dunkelmodus einschalten"}
+var savedTheme=localStorage.getItem("6e-theme");if(savedTheme)themeSet(savedTheme);
+$x("themeBtn").onclick=function(){themeSet(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark")};
+$x("examStart").onclick=startExam;
+daily();petDraw();
+// Update assistant appears once for each release on this browser/device.
+var ver="13.0",key="6e-update-seen";
+if(localStorage.getItem(key)!==ver){
+ var layer=document.createElement("div");layer.id="updateHelper";
+ layer.innerHTML="<div class='uh-card' role='dialog' aria-modal='true'><div class='uh-man'>🤖</div><small style='font-weight:900;letter-spacing:1px;color:var(--ink2)'>KLASSE 6E · UPDATE "+ver+"</small><h3>Hallo! Ich bin wieder da!</h3><p>Neu in diesem Update: Tagesbelohnung 🎁, Klassenarbeits-Trainer mit 20 Fragen 🧠, dein Maskottchen 🐾, Glücksrad 🎡 und Dark Mode 🌙. Viel Spaß beim Entdecken!</p><button type='button' id='uhClose'>Los geht's! ✨</button></div>";
+ document.body.appendChild(layer);function close(){localStorage.setItem(key,ver);layer.remove()}
+ layer.querySelector("#uhClose").onclick=close;layer.onclick=function(e){if(e.target===layer)close()};
+}
+})();
+</script>
+
+
+<style>
+/* Update 14 – Avatar-Shop & Cube-Run */
+.home-hero{padding:clamp(22px,4vw,38px)!important;border-radius:28px!important;background:radial-gradient(circle at 85% 20%,#fef08a 0 8%,transparent 9%),linear-gradient(125deg,#312e81,#7c3aed 55%,#ec4899)!important;color:#fff!important;box-shadow:0 18px 40px #4338ca30!important}
+.home-hero h1,.home-hero h2{color:#fff!important;font-size:clamp(32px,6vw,52px)!important}.home-hero p{color:#f5f3ff!important}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin:12px 0}.shop-item{background:var(--bg);border:2px solid var(--line);border-radius:17px;padding:12px;text-align:center}.shop-item .look{font-size:36px}.shop-item button{margin-top:8px}
+#cubeCanvas{display:block;width:100%;max-width:650px;height:220px;background:linear-gradient(#172554,#312e81);border-radius:18px;touch-action:manipulation}
+.currency{font-weight:1000;color:#d97706}.shop-top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+</style>
+<script>
+(function(){
+var shop=[
+{id:"hoodie",name:"Neon-Hoodie",icon:"🧥",cost:35,type:"outfit"},
+{id:"ninja",name:"Ninja-Look",icon:"🥷",cost:60,type:"outfit"},
+{id:"space",name:"Space-Anzug",icon:"🚀",cost:90,type:"outfit"},
+{id:"crown",name:"Königs-Outfit",icon:"👑",cost:130,type:"outfit"},
+{id:"red",name:"Rubin-Würfel",icon:"🟥",cost:45,type:"cube"},
+{id:"gold",name:"Gold-Würfel",icon:"🟨",cost:100,type:"cube"},
+{id:"rainbow",name:"Regenbogen-Würfel",icon:"🌈",cost:160,type:"cube"},
+{id:"fire",name:"Feuerspur",icon:"🔥",cost:55,type:"trail"},
+{id:"stars",name:"Sternenspur",icon:"✨",cost:80,type:"trail"},
+{id:"pixel",name:"Pixelspur",icon:"💠",cost:110,type:"trail"},
+{id:"hair-blue",name:"Blaue Frisur",icon:"💙💇",cost:45,type:"hair"},
+{id:"hair-pink",name:"Pinkes Haar",icon:"💗💇",cost:65,type:"hair"},
+{id:"hair-spikes",name:"Stachelfrisur",icon:"🦔",cost:75,type:"hair"},
+{id:"hat-cap",name:"Basecap",icon:"🧢",cost:35,type:"hat"},
+{id:"hat-crown",name:"Krone",icon:"👑",cost:95,type:"hat"},
+{id:"hat-wizard",name:"Zauberhut",icon:"🧙",cost:80,type:"hat"},
+{id:"access-glasses",name:"Sonnenbrille",icon:"🕶️",cost:40,type:"accessory"},
+{id:"access-wings",name:"Flügel",icon:"🪽",cost:100,type:"accessory"},
+{id:"access-star",name:"Sternen-Amulett",icon:"⭐",cost:55,type:"accessory"},
+{id:"jump-spark",name:"Funken-Sprung",icon:"✨",cost:70,type:"jump"},
+{id:"jump-cloud",name:"Wolken-Sprung",icon:"☁️",cost:85,type:"jump"},
+{id:"move-neon",name:"Neon-Bewegung",icon:"🌈",cost:90,type:"movement"},
+{id:"move-shadow",name:"Schatten-Bewegung",icon:"🌑",cost:100,type:"movement"}
+];
+function init(){
+ if(!window.ME)return setTimeout(init,300);
+ ME.coins=Number(ME.coins)||0;ME.items=ME.items||[];ME.equip=ME.equip||{outfit:"👕 T-Shirt",cube:"🙂",trail:""};ME.equip.hair=ME.equip.hair||"";ME.equip.hat=ME.equip.hat||"";ME.equip.accessory=ME.equip.accessory||"";ME.equip.jump=ME.equip.jump||"";ME.equip.movement=ME.equip.movement||"";
+ var old=window.addXP;
+ window.addXP=function(a,key,max){var got=old.apply(this,arguments);if(got){ME.coins+=Math.max(1,Math.floor(got/5));saveME();shopDraw()}return got};
+ var sec=document.querySelector('section[data-p="extras"]');if(!sec)return;
+ var shopHTML='<article class="ex-card" style="margin:16px 0"><div class="shop-top"><div><span class="ex-kicker">DEIN AVATAR & DEIN INVENTAR</span><h3>🛍️ Avatar-Shop</h3><p>Kaufe Outfits, Frisuren, Hüte, Accessoires, Würfel-Skins, Sprung-Effekte und Bewegungsspuren mit Spielmünzen.</p></div><div class="currency" id="coinCount">🪙 0 Münzen</div></div><p><small>Dein Fortschritt, deine Münzen und gekaufte Gegenstände werden auf diesem Gerät gespeichert.</small></p><div id="shopInventory"></div><div class="shop-grid" id="shopItems"></div></article>'+
+ '<article class="ex-card" style="margin:16px 0"><h3>🟪 Cube Dash – Münzen sammeln & Hindernisse überspringen</h3><p>Springe über Hindernisse, sammle Münzen und kaufe damit neue Würfel und Spuren. Tippe auf das Spielfeld oder drücke Leertaste zum Springen.</p><canvas id="cubeCanvas" width="650" height="220"></canvas><p id="cubeScore">Münzen im Lauf: 0 · Bestleistung: 0</p><button class="ex-btn" id="cubeStart">▶️ Spiel starten</button></article>';
+ sec.insertAdjacentHTML("beforeend",shopHTML);
+ function shopDraw(){
+  $("coinCount").textContent="🪙 "+ME.coins+" Münzen";
+  $("shopInventory").innerHTML="<b>Ausgerüstet:</b> "+esc(ME.equip.outfit)+" · Würfel "+esc(ME.equip.cube)+" · Spur "+esc(ME.equip.trail||"Keine")+" · Frisur "+esc(ME.equip.hair||"Keine")+" · Hut "+esc(ME.equip.hat||"Keiner")+" · Accessoire "+esc(ME.equip.accessory||"Keines")+" · Sprung "+esc(ME.equip.jump||"Standard")+" · Bewegung "+esc(ME.equip.movement||"Standard")+"<p><small>Besitz: "+(ME.items.length?ME.items.map(function(id){var x=shop.find(function(a){return a.id===id});return x?x.icon+" "+x.name:""}).join(" · "):"Noch keine Extras")+"</small></p>";
+  $("shopItems").innerHTML=shop.map(function(x){var own=ME.items.indexOf(x.id)>=0,eq=ME.equip[x.type]===x.name;return '<div class="shop-item"><div class="look">'+x.icon+'</div><b>'+x.name+'</b><p class="currency">🪙 '+x.cost+'</p><button class="ex-btn" data-buy="'+x.id+'">'+(eq?"Ausgerüstet":own?"Anziehen":"Kaufen")+'</button></div>'}).join("");
+ }
+ $("shopItems").addEventListener("click",function(e){var b=e.target.closest("[data-buy]");if(!b)return;var x=shop.find(function(a){return a.id===b.dataset.buy});if(!x)return;
+  if(ME.items.indexOf(x.id)<0){if(ME.coins<x.cost){alert("Du brauchst noch "+(x.cost-ME.coins)+" Münzen.");return}ME.coins-=x.cost;ME.items.push(x.id)}
+  ME.equip[x.type]=x.name;if(x.type==="outfit"){$("poutfit").value=x.icon+" "+x.name;profilePreview()}
+  saveME();shopDraw();
+ });
+ shopDraw();
+ var c=$("cubeCanvas"),ctx=c.getContext("2d"),run=false,frame=0,score=0,best=Number(localStorage.getItem("6e-cubebest")||0),y=166,vy=0,obs=[],coins=[];
+ function jump(){if(run&&y>=165)vy=-11}
+ function paint(){ctx.clearRect(0,0,650,220);ctx.fillStyle="#818cf8";ctx.fillRect(0,188,650,32);ctx.fillStyle="#c4b5fd";for(var z=0;z<650;z+=32)ctx.fillRect(z,188,2,32);
+ ctx.fillStyle="#fff";ctx.font="14px Nunito";ctx.fillText("CUBE DASH",14,24);
+ var cube=ME.equip.cube==="Gold-Würfel"?"#facc15":ME.equip.cube==="Rubin-Würfel"?"#fb7185":ME.equip.cube==="Regenbogen-Würfel"?"#c084fc":"#22d3ee";
+ 
+ // Ausgerüstete Bewegungsspur und Bewegungseffekt
+ var trail=ME.equip.trail||"";
+ if(trail){ctx.globalAlpha=.75;ctx.fillStyle=trail==="Feuerspur"?"#fb923c":trail==="Sternenspur"?"#fde047":trail==="Pixelspur"?"#a78bfa":"#67e8f9";for(var ti=0;ti<4;ti++)ctx.fillRect(58-ti*9,y+5+(ti%2)*9,6,6);ctx.globalAlpha=1}
+ if(ME.equip.movement){ctx.shadowColor=ME.equip.movement==="Neon-Bewegung"?"#e879f9":"#64748b";ctx.shadowBlur=14}else{ctx.shadowBlur=0}
+ ctx.fillStyle=cube;ctx.fillRect(65,y,24,24);ctx.shadowBlur=0;ctx.fillStyle="#172554";ctx.fillRect(71,y+6,4,4);ctx.fillRect(80,y+6,4,4);
+ if(y<166&&ME.equip.jump){ctx.globalAlpha=.7;ctx.fillStyle=ME.equip.jump==="Funken-Sprung"?"#fbbf24":"#e0f2fe";ctx.beginPath();ctx.arc(77,y+30,7+(frame%3),0,Math.PI*2);ctx.fill();ctx.globalAlpha=1}
+ obs.forEach(function(o){ctx.fillStyle="#fb7185";ctx.fillRect(o.x,164,20,24)});
+ coins.forEach(function(o){ctx.fillStyle="#facc15";ctx.beginPath();ctx.arc(o.x,o.y,7,0,7);ctx.fill()});
+ if(!run){ctx.fillStyle="#fff";ctx.font="bold 20px Nunito";ctx.fillText("Tippe auf „Spiel starten“",205,112)}
+ }
+ function tick(){if(!run)return;frame++;vy+=.55;y=Math.min(166,y+vy);if(y>=166)vy=0;
+ if(frame%85===0)obs.push({x:660});if(frame%105===0)coins.push({x:660,y:135-Math.random()*45});
+ obs.forEach(function(o){o.x-=5});coins.forEach(function(o){o.x-=5});
+ obs=obs.filter(function(o){if(o.x<85&&o.x>48&&y>140){run=false;best=Math.max(best,score);localStorage.setItem("6e-cubebest",best);$("cubeStart").textContent="↻ Nochmal";return false}return o.x>-30});
+ coins=coins.filter(function(o){if(o.x<90&&o.x>50&&Math.abs(o.y-(y+10))<35){score++;ME.coins++;saveME();shopDraw();return false}return o.x>-20});
+ $("cubeScore").textContent="Münzen im Lauf: "+score+" · Bestleistung: "+best;paint();if(run)requestAnimationFrame(tick)
+ }
+ $("cubeStart").onclick=function(){if(run)return;run=true;frame=0;score=0;y=166;vy=0;obs=[];coins=[];tick()};
+ c.addEventListener("pointerdown",jump);window.addEventListener("keydown",function(e){if(e.code==="Space"&&location.hash==="#extras"){e.preventDefault();jump()}});
+ paint();
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+
 </body>
 </html>
