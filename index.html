@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFF6E3" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#16202A" media="(prefers-color-scheme: dark)">
+<title>LernFux</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF6E3;--surface:#FFFFFF;--ink:#1F2A37;--muted:#5A6472;--line:#E6D9BD;--mark:#FFC933;--accent:#0F7B6C;--card:#0F7B6C;--rand:#1F2A37;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16202A;--surface:#1F2C38;--ink:#F1F4F7;--muted:#A9B4C0;--line:#33434F;--mark:#FFC933;--accent:#5FD3BF;--card:#5FD3BF;--rand:#8FA3B5;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#16202A;--surface:#1F2C38;--ink:#F1F4F7;--muted:#A9B4C0;--line:#33434F;--mark:#FFC933;--accent:#5FD3BF;--card:#5FD3BF;--rand:#8FA3B5;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.125rem/1.6 "Nunito",system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:60rem;margin:0 auto;padding:0 1.25rem}
+header{padding:1.25rem 0;border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.logo{font-weight:700;font-size:1.125rem;color:var(--ink);text-decoration:none}
+main{padding:2.5rem 0 4rem}
+h1{font-size:clamp(2rem,6vw,3.25rem);line-height:1.1;margin:0 0 .75rem;font-weight:700;letter-spacing:-.02em}
+.lead{color:var(--muted);max-width:38rem;margin:0 0 2rem}
+.search{width:100%;max-width:24rem;padding:.7rem .9rem;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;margin-bottom:1.5rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));gap:1rem}
+.card{display:block;padding:1.25rem;background:var(--surface);border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink)}
+.card:hover{border-color:var(--accent)}
+.card h2{font-size:1.25rem;margin:0 0 .4rem}
+.card p{margin:0 0 1rem;color:var(--muted);font-size:.97rem}
+.bar{height:.6rem;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--mark)}
+.meta{font-size:.9rem;color:var(--muted);margin-top:.4rem}
+.empty{padding:2rem;background:var(--surface);border:2px dashed var(--line);border-radius:10px;max-width:38rem}
+.empty h2{margin:0 0 .5rem;font-size:1.25rem}
+.empty p{margin:0;color:var(--muted)}
+.lesson{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.5rem;margin:0 0 1rem;max-width:44rem}
+.lesson h2{margin:0 0 .75rem;font-size:1.35rem}
+.done{margin-top:1rem;font:inherit;font-weight:700;padding:.6rem 1rem;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.done[aria-pressed="true"]{background:var(--mark);border-color:var(--mark);color:#17233B}
+header{position:relative}
+.menubtn{display:flex;flex-direction:column;justify-content:center;gap:5px;width:2.75rem;height:2.75rem;padding:0 .65rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.menubtn span{display:block;height:2px;background:var(--ink);border-radius:2px}
+.menu{position:absolute;right:1.25rem;top:calc(100% - .4rem);z-index:5;min-width:15rem;max-width:calc(100vw - 2.5rem);padding:.5rem;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.18);display:flex;flex-direction:column}
+.menu[hidden]{display:none}
+.menu a,.menu button,.menu .leer{display:block;text-align:left;padding:.65rem .75rem;border-radius:6px;font:inherit;color:var(--ink);text-decoration:none;background:none;border:0;cursor:pointer}
+.menu a:hover,.menu button:hover{background:var(--bg)}
+.menu .leer{color:var(--muted);cursor:default}
+.menu hr{width:100%;border:0;border-top:1px solid var(--line);margin:.4rem 0}
+footer{border-top:1px solid var(--line);padding:1.25rem 0;color:var(--muted);font-size:.9rem}
+.lektionen{list-style:none;margin:0;padding:0;max-width:44rem}
+.lektionen li{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:.9rem 1.1rem;background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:.6rem}
+.lektionen a{font-weight:700;text-decoration:none;color:var(--ink)}
+.lektionen a:hover{color:var(--accent)}
+.lektionen .meta{margin:0}
+.quizbox{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--line)}
+.quiz{margin-bottom:1.25rem}
+.quiz h3{margin:0 0 .75rem;font-size:1.1rem}
+.opt{display:block;width:100%;text-align:left;margin:0 0 .5rem;padding:.65rem .9rem;font:inherit;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt:disabled{cursor:default}
+.opt.ok{background:var(--mark);border-color:var(--mark);color:#17233B}
+.opt.falsch{border-style:dashed;color:var(--muted);text-decoration:line-through}
+.fb{margin:.5rem 0 0;color:var(--muted)}
+.score{margin:0}
+.schritte{display:flex;justify-content:space-between;gap:1rem;max-width:44rem;margin-top:1.25rem}
+.btn{display:inline-block;padding:.65rem 1.1rem;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-weight:700;text-decoration:none}
+.btn:hover{border-color:var(--accent)}
+textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:.7rem}
+.karten{display:grid;grid-template-columns:repeat(auto-fill,minmax(12rem,1fr));gap:.6rem}
+.karte{min-height:6rem;padding:.9rem;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;cursor:pointer;text-align:left}
+.karte.um{background:var(--mark);border-color:var(--mark);color:#17233B}
+.merke{margin:1rem 0;padding:.9rem 1.1rem;border-left:4px solid var(--mark);background:var(--surface);border-radius:0 8px 8px 0;max-width:44rem}
+.merke ul{margin:.4rem 0 0;padding-left:1.2rem}
+.gesamt{max-width:24rem;margin:0 0 1.5rem}
+.glossar dt{font-weight:700;margin-top:1rem}
+.glossar dd{margin:.2rem 0 0;color:var(--muted);max-width:44rem}
+.lesson img,.lesson video{max-width:100%;height:auto;border-radius:8px}
+h1,h2,h3{font-weight:800}
+.logo{font-weight:800;font-size:1.3rem}
+header{border-bottom:3px solid var(--line)}
+.card{border:3px solid var(--line);border-top:8px solid var(--c,var(--card));border-radius:20px}
+.card .ico{font-size:2.4rem;line-height:1;display:block;margin-bottom:.4rem}
+.bar{height:1rem;border-radius:99px}.bar i{border-radius:99px}
+.lesson,.lektionen li,.merke,.empty,.blase{border-radius:18px}
+.lesson{border-width:3px}
+.opt{padding:.85rem 1.1rem;border-width:2px;border-radius:14px;font-weight:700;font-size:1.05rem}
+.opt.ok::before{content:"\2713  "}
+.btn,.done{border-radius:14px;border-width:2px;padding:.8rem 1.3rem;font-size:1.05rem}
+.menu a,.menu button{font-size:1.05rem;font-weight:700}
+.hallo{display:flex;gap:1rem;align-items:center;margin:0 0 1.5rem;max-width:44rem}
+.fuchs{font-size:3.5rem;line-height:1}
+.blase{background:var(--surface);border:3px solid var(--line);padding:.8rem 1.1rem;font-weight:700}
+.blase p{margin:.3rem 0 0}.gruss{font-size:1.4rem;margin:0}
+.sterne{display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 1.5rem}
+.chip{background:var(--surface);border:2px solid var(--line);border-radius:99px;padding:.35rem .9rem;font-weight:800}
+.chip.aus{opacity:.5;filter:grayscale(1)}
+.konf{position:fixed;top:-2rem;z-index:50;pointer-events:none;font-size:1.6rem}
+@media (prefers-reduced-motion:no-preference){.konf{animation:fall 1.8s ease-in forwards}@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}}
+@media (prefers-reduced-motion:reduce){.konf{display:none}}
+
+.card,.lesson,.lektionen li,.opt,.btn,.done,.karte,.search,.menubtn,.muenz,textarea{border:2.5px solid var(--rand)}
+.card,.lesson,.lektionen li,.btn,.done{box-shadow:0 4px 0 var(--rand)}
+.card:hover{border-color:var(--rand);transform:translateY(-2px);box-shadow:0 6px 0 var(--rand)}
+.card:active,.btn:active,.done:active{transform:translateY(3px);box-shadow:0 1px 0 var(--rand)}
+.opt{box-shadow:0 3px 0 var(--rand)}.opt:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 var(--rand)}.opt:disabled{box-shadow:none}
+.btn:hover{border-color:var(--rand)}.done{background:var(--surface)}
+.card .ico{display:grid;place-items:center;width:3.2rem;height:3.2rem;border-radius:14px;border:2.5px solid var(--rand);background:var(--c,var(--mark));font-size:1.7rem;margin-bottom:.7rem}
+.blase{position:relative;border:2.5px solid var(--rand)}
+.blase::before{content:"";position:absolute;left:-10px;top:1.5rem;width:16px;height:16px;background:var(--surface);border-left:2.5px solid var(--rand);border-bottom:2.5px solid var(--rand);transform:rotate(45deg)}
+.fuchs{width:5rem;height:5.3rem;flex:none}.fux{display:block}
+.logofux{display:inline-block;width:1.9rem;height:2rem;vertical-align:-.5rem;margin-right:.4rem}
+.fx-scarf{fill:var(--accent)}.fx-eyes{transform-box:fill-box;transform-origin:center}
+@media (prefers-reduced-motion:no-preference){.fx-eyes{animation:blink 4.5s infinite}@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}.bar i{animation:grow .9s ease-out}@keyframes grow{from{width:0}}}
+.coin{display:inline-block;position:relative;width:1.5rem;height:1.5rem;border-radius:50%;background:#FFC933;border:2.5px solid #3B2A24;flex:none}
+.coin::after{content:"";position:absolute;inset:3px;border:2px solid #B87900;border-radius:50%}
+.coin.flug{position:fixed;z-index:60;pointer-events:none;width:24px;height:24px}
+.muenz{margin-left:auto;display:flex;align-items:center;gap:.45rem;font-weight:800;font-size:1.15rem;background:var(--surface);border-radius:99px;padding:.2rem .85rem .2rem .4rem}
+.toast{position:fixed;left:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:flex-end;gap:.9rem;max-width:min(24rem,calc(100vw - 2rem));pointer-events:none}
+.toast[hidden]{display:none}.toast .fuchs{width:4rem;height:4.2rem}.toast .blase{font-size:.98rem}
+.konf{width:9px;height:14px;font-size:0;border-radius:2px}
+.lvl{max-width:30rem;margin:0 0 1.25rem}.lvl .bar{margin-top:.4rem;border:2px solid var(--rand)}
+.meds{list-style:none;margin:0 0 1.75rem;padding:0;display:flex;flex-wrap:wrap;gap:.9rem}
+.med{display:flex;flex-direction:column;align-items:center;width:5.2rem;text-align:center;font-size:.85rem;font-weight:700;line-height:1.2}
+.plakette{display:grid;place-items:center;width:3.2rem;height:3.2rem;border-radius:50%;background:var(--mark);border:2.5px solid var(--rand);box-shadow:0 3px 0 var(--rand);font-weight:800;color:#1F2A37;margin-bottom:.45rem}
+.med.aus{color:var(--muted)}.med.aus .plakette{background:var(--line);box-shadow:none;color:var(--muted)}
+.sr{position:absolute;left:-9999px}
+.still .bar i{animation:none!important}
+.zeile{display:flex;align-items:center;gap:.8rem;margin:.4rem 0;font-weight:700}
+.zeile span{min-width:5rem}
+.aufg,.rep{margin-bottom:1.4rem}
+.aufg h3,.rep h3{margin:0 0 .6rem;font-size:1.1rem}
+.antw,select{font:inherit;padding:.6rem .8rem;border-radius:12px;border:2.5px solid var(--rand);background:var(--surface);color:var(--ink);margin:.2rem .5rem .5rem 0}
+.gl{background:none;border:0;border-bottom:3px dotted var(--accent);font:inherit;color:inherit;padding:0;cursor:pointer}
+button.btn{font:inherit;font-weight:800;cursor:pointer}
+.menu{max-height:70vh;overflow-y:auto}
+.menu details{border-top:2px solid var(--line);margin-top:.3rem;padding-top:.3rem}
+.menu summary{display:flex;justify-content:space-between;align-items:center;padding:.65rem .75rem;border-radius:6px;font-weight:800;font-size:1.05rem;cursor:pointer;list-style:none}
+.menu summary::-webkit-details-marker{display:none}
+.menu summary::after{content:"";width:.6rem;height:.6rem;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:translateY(-3px) rotate(45deg)}
+.menu details[open] summary::after{transform:translateY(2px) rotate(-135deg)}
+.menu summary:hover{background:var(--bg)}
+.menu details a,.menu details button,.menu details .leer{padding-left:1.4rem}
+body.aus .menubtn,body.aus .muenz{display:none}
+.aufgtitel{font-size:1.6rem;margin:0 0 1rem;line-height:1.25}
+.code{font-size:2rem;font-weight:800;letter-spacing:.08em;margin:0 0 1rem;word-break:break-all}
+.qr{display:inline-block;background:#fff;padding:.5rem;border-radius:8px;border:2.5px solid var(--rand)}
+.qr svg{display:block;width:min(16rem,70vw);height:auto}
+.einst{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.4rem 0}
+.warn{background:var(--mark);color:#17233B;padding:.7rem 1.25rem;font-weight:700;text-align:center}
+.kal{display:grid;grid-template-columns:repeat(7,1fr);gap:.3rem;max-width:22rem}
+.kal span{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid var(--line)}
+.kal .d{background:var(--mark);border-color:var(--rand);font-weight:800;color:#17233B}
+.kal .k,.kal .e{border:0;font-weight:800;color:var(--muted)}
+.gesperrt{opacity:.55}
+body.ruhig *{animation:none!important;transition:none!important}
+.abschnitt{background:var(--surface);border:2.5px solid var(--rand);border-radius:16px;margin:0 0 1.25rem}
+.abschnitt>summary{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.2rem;cursor:pointer;list-style:none;font-weight:800;font-size:1.25rem}
+.abschnitt>summary::-webkit-details-marker{display:none}
+.abschnitt>summary .meta{margin:0 auto 0 0;font-weight:400;font-size:.95rem}
+.abschnitt>summary::after{content:"";flex:none;width:.7rem;height:.7rem;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:translateY(-3px) rotate(45deg)}
+.abschnitt[open]>summary::after{transform:translateY(2px) rotate(-135deg)}
+.abschnitt .inhalt{padding:0 1.2rem 1.2rem}
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;max-width:22rem}
+.ttt{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;max-width:18rem}
+.mk{aspect-ratio:1;border:2.5px solid var(--rand);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit;font-size:2rem;font-weight:800;cursor:pointer}
+.mk.auf,.mk:disabled{background:var(--mark);color:#17233B}
+@media print{header,footer,.schritte,.done{display:none}body{background:#fff;color:#000}}
+@media (prefers-reduced-motion:no-preference){.bar i{transition:width .25s}}
+.schnell{display:grid;grid-template-columns:repeat(auto-fit,minmax(8rem,1fr));gap:.7rem;margin:0 0 1.5rem}.schnell .card{text-align:center;padding:.9rem .5rem}.schnell .card h2{margin:.2rem 0 0;font-size:1.05rem}.schnell .ico{font-size:1.8rem}
+table{font-size:1rem}
+.voll{min-height:55vh;display:flex;flex-direction:column;justify-content:center}.voll .aufgtitel{font-size:1.7rem;margin-bottom:1rem}.voll .opt{font-size:1.15rem;padding:1rem}.voll #weiter{width:100%}
+.gross{font-size:1.15rem;padding:.9rem 1.6rem;background:var(--mark);color:#17233B}.lektionen .meta{white-space:nowrap}
+.vm{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;max-width:30rem}.vk{aspect-ratio:auto;min-height:5rem;font-size:1rem;padding:.3rem;word-break:break-word}
+.badge{display:inline-block;background:var(--mark);color:#17233B;border-radius:99px;padding:0 .55rem;font-size:.8rem;font-weight:800;vertical-align:middle}
+/* Feinschliff */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:29}
+.menu{z-index:31}
+body{background:radial-gradient(circle at 10% 0,rgba(255,201,51,.24),transparent 28rem),radial-gradient(circle at 100% 35%,rgba(15,123,108,.12),transparent 26rem),var(--bg);background-attachment:fixed}
+.bar i{background-image:linear-gradient(135deg,rgba(255,255,255,.35) 25%,transparent 25% 50%,rgba(255,255,255,.35) 50% 75%,transparent 75%);background-size:1.2rem 1.2rem}
+.card,.btn,.done,.opt,.karte,.menubtn{transition:transform .12s,box-shadow .12s,border-color .12s,background-color .12s}
+.card .ico{transition:transform .2s}.card:hover .ico{transform:rotate(-8deg) scale(1.08)}
+.fb.gut{color:var(--accent);font-weight:800}.fb.schlecht{color:#B4440E;font-weight:800}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .fb.schlecht{color:#FFB38A}}
+:root[data-theme="dark"] .fb.schlecht{color:#FFB38A}
+.opt:hover:not(:disabled){transform:translateY(-1px)}
+@media (prefers-reduced-motion:no-preference){
+#app:not(.still)>*{animation:rein .45s cubic-bezier(.2,.8,.3,1) backwards}
+#app:not(.still)>*:nth-child(2){animation-delay:.05s}#app:not(.still)>*:nth-child(3){animation-delay:.1s}#app:not(.still)>*:nth-child(n+4){animation-delay:.15s}
+@keyframes rein{from{opacity:0;transform:translateY(14px)}}
+.hallo .fuchs{animation:huepf 3.4s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes huepf{0%,100%{transform:none}50%{transform:translateY(-4px) rotate(-2deg)}}
+.opt.ok{animation:puls .4s}@keyframes puls{50%{transform:scale(1.04)}}
+.opt.falsch{animation:wackel .35s}@keyframes wackel{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+}
+.reihe{list-style:none;padding:0;margin:.5rem 0}.reihe li{display:flex;align-items:center;gap:.5rem;margin:.4rem 0;padding:.4rem .8rem;border:2.5px solid var(--rand);border-radius:12px;background:var(--surface);font-weight:700}.reihe li span{flex:1}.reihe .kl{padding:.2rem .7rem}
+.aufgbild{font-size:4rem;text-align:center;margin:.5rem 0;line-height:1}img.aufgbild{max-width:100%;max-height:14rem;display:block;margin:.5rem auto}
+.satz{font-size:1.25rem;font-weight:700}.luecke{border-bottom:3px solid var(--rand);padding:0 1.2rem}
+.zau{margin:.5rem 0;padding:.6rem .9rem;border:2px dashed var(--line);border-radius:12px;background:var(--surface)}.zau:empty{display:none}.zau ul{margin:.3rem 0 0;padding-left:1.2rem}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="logo" href="#"><span class="logofux" id="logoFux"></span>LernFux</a>
+<span class="muenz" id="muenz" title="Deine Münzen"><i class="coin"></i><b id="mz">0</b></span><button class="menubtn" id="menuBtn" type="button" aria-label="Menü" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button></div>
+<nav class="menu" id="menu" aria-label="Hauptmenü" hidden></nav></header>
+<main><div class="wrap" id="app"><noscript><p>LernFux braucht JavaScript. Bitte schalte es in deinem Browser ein.</p></noscript></div></main>
+<footer><div class="wrap">Dein Fortschritt wird nur in diesem Browser gespeichert.</div></footer>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+<script>
+/* Themen hier eintragen. Beispiel:
+{ id:"beispiel", icon:"🔬", farbe:"#FF6B6B", titel:"Beispielthema", beschreibung:"Kurze Beschreibung.",
+  lektionen:[ { id:"l1", titel:"Erste Lektion", inhalt:"<p>Text der Lektion.</p>",
+    quiz:[ { frage:"Frage?", optionen:["A","B","C"], richtig:1, erklaerung:"Warum B stimmt." } ] } ] }
+   IDs ohne Doppelstrich (--) schreiben, nicht "pruefung", "glossar", "merkliste", "wiederholen", "blitz", "kalender", "spiele" oder "einstellungen" verwenden. Optional pro Thema: nacheinander:true (Lektionen schalten sich der Reihe nach frei).
+   Optional pro Lektion: aufgaben:[{frage:"3 × 7 = ?", antwort:"21"} oder {typ:"zuordnen", frage:"..", paare:[["a","b"]]} oder {typ:"wahrfalsch", frage:"..", richtig:true} oder {typ:"reihenfolge", frage:"..", items:["erst","dann","zuletzt"]} oder {typ:"luecke", frage:"..", satz:"Der ___ bellt.", antwort:"Hund", woerter:["Hund","Katze"]}; bei jeder Aufgabe und jeder Quizfrage optional bild:"🐘" (Emoji oder Bild-Adresse) und bildalt:"Beschreibung"], ziele:["..."], karten:[{vorne:"...", hinten:"..."}]. Merkkasten im Inhalt: <div class="merke">...</div> */
+const THEMEN = [{
+  id:"einmaleins", icon:"✖️", farbe:"#FF8A5B", titel:"Einmaleins", beschreibung:"Die Malreihen Schritt für Schritt üben.",
+  lektionen:[
+    { id:"dreier", titel:"Die 3er-Reihe", ziele:["Die 3er-Reihe bis 30 aufsagen","Malaufgaben mit 3 schnell lösen"],
+      inhalt:`<p>Malnehmen heißt: dieselbe Zahl mehrmals zusammenzählen. <strong>3 × 4</strong> bedeutet 3 + 3 + 3 + 3 = 12. Das Ergebnis heißt <em>Produkt</em>.</p><div class="merke"><strong>Merke:</strong> Die 3er-Reihe geht in Dreierschritten: 3, 6, 9, 12, 15, 18, 21, 24, 27, 30.</div><p>Tipp: Zähle an den Fingern mit und sprich laut mit.</p>`,
+      karten:[{vorne:"3 × 3",hinten:"9"},{vorne:"3 × 6",hinten:"18"},{vorne:"3 × 8",hinten:"24"},{vorne:"Was ist ein Produkt?",hinten:"Das Ergebnis einer Malaufgabe."}],
+      aufgaben:[
+        {frage:"3 × 7 = ?", antwort:"21", erklaerung:"3 × 7 = 21."},
+        {frage:"Die 3er-Reihe: 3, 6, __, 12", antwort:"9"},
+        {typ:"zuordnen", frage:"Ordne die Ergebnisse zu.", paare:[["3 × 2","6"],["3 × 5","15"],["3 × 8","24"]]},
+        {typ:"wahrfalsch", frage:"3 × 6 = 18. Stimmt das?", richtig:true, erklaerung:"3 × 6 = 18."}
+      ],
+      quiz:[
+        {frage:"Was ist 3 × 5?", optionen:["12","15","18"], richtig:1, erklaerung:"3 + 3 + 3 + 3 + 3 = 15."},
+        {frage:"Welche Zahl kommt als Nächstes: 3, 6, 9, __ ?", optionen:["10","11","12"], richtig:2, erklaerung:"Es geht immer 3 weiter: 9 + 3 = 12."},
+        {frage:"Was ist 3 × 9?", optionen:["27","24","21"], richtig:0, erklaerung:"3 × 10 ist 30, und davon ziehst du 3 ab: 27."}
+      ] },
+    { id:"vierer", titel:"Die 4er-Reihe", ziele:["Die 4er-Reihe mit dem Doppelten rechnen"],
+      inhalt:`<p>Die 4er-Reihe ist ganz einfach: Du nimmst das <strong>Doppelte vom Doppelten</strong>. Bei 4 × 6 verdoppelst du 6 zu 12 und dann 12 zu 24.</p><div class="merke"><strong>Merke:</strong> 4, 8, 12, 16, 20, 24, 28, 32, 36, 40.</div>`,
+      karten:[{vorne:"4 × 5",hinten:"20"},{vorne:"4 × 6",hinten:"24"}],
+      aufgaben:[{frage:"4 × 5 = ?", antwort:"20", erklaerung:"Doppeltes von 5 ist 10, nochmal doppelt ist 20."},{typ:"reihenfolge", frage:"Bringe die 4er-Reihe in die richtige Reihenfolge.", items:["4","8","12","16","20"]}],
+      quiz:[
+        {frage:"Was ist 4 × 7?", optionen:["24","28","32"], richtig:1, erklaerung:"7 verdoppelt ist 14, noch einmal verdoppelt ist 28."},
+        {frage:"Wie rechnest du 4 × 6 mit dem Doppelten?", optionen:["6 verdoppeln, dann noch einmal verdoppeln","6 und 4 addieren","6 halbieren"], richtig:0, erklaerung:"6 → 12 → 24. Zweimal verdoppeln ist dasselbe wie mal 4."}
+      ] }
+    ,{ id:"zweier", fux:"Doppelt so viel: Das ist die ganze Zauberei der 2er-Reihe.", titel:"Die 2er-Reihe", ziele:["Die 2er-Reihe bis 20 aufsagen","Verdoppeln und Halbieren verstehen"],
+      inhalt:`<p>Malnehmen mit 2 heißt <strong>verdoppeln</strong>. 2 × 6 ist 6 + 6 = 12. Jedes <em>Produkt</em> der 2er-Reihe ist eine gerade Zahl.</p><div class="merke"><strong>Merke:</strong> 2, 4, 6, 8, 10, 12, 14, 16, 18, 20.</div><p>Tipp: Zwei Socken sind ein Paar. Wie viele Socken sind 7 Paare?</p>`,
+      karten:[{vorne:"2 × 4",hinten:"8"},{vorne:"2 × 7",hinten:"14"},{vorne:"2 × 9",hinten:"18"}],
+      aufgaben:[{frage:"2 × 8 = ?", antwort:"16", erklaerung:"8 + 8 = 16."},{frage:"Die 2er-Reihe: 2, 4, 6, __, 10", antwort:"8"}],
+      quiz:[{frage:"Was ist 2 × 6?", optionen:["10","12","14"], richtig:1, erklaerung:"6 + 6 = 12."},{frage:"Welche Zahl gehört nicht in die 2er-Reihe?", optionen:["14","16","15"], richtig:2, erklaerung:"15 ist ungerade."}] },
+    { id:"fuenfer", fux:"Schau auf die letzte Ziffer: Sie ist immer 0 oder 5.", titel:"Die 5er-Reihe", ziele:["Die 5er-Reihe bis 50 aufsagen","Das Muster der Endziffern erkennen"],
+      inhalt:`<p>Die 5er-Reihe hört immer auf <strong>0 oder 5</strong> auf. So kannst du schnell prüfen, ob ein Ergebnis stimmt.</p><div class="merke"><strong>Merke:</strong> 5, 10, 15, 20, 25, 30, 35, 40, 45, 50.</div><p>Tipp: Eine Hand hat 5 Finger. 3 Hände sind 15 Finger.</p>`,
+      karten:[{vorne:"5 × 3",hinten:"15"},{vorne:"5 × 6",hinten:"30"},{vorne:"5 × 8",hinten:"40"}],
+      aufgaben:[{frage:"5 × 7 = ?", antwort:"35", erklaerung:"7 × 5 = 35."},{typ:"zuordnen", frage:"Ordne die Ergebnisse zu.", paare:[["5 × 2","10"],["5 × 4","20"],["5 × 9","45"]]}],
+      quiz:[{frage:"Was ist 5 × 8?", optionen:["35","40","45"], richtig:1, erklaerung:"5 × 8 = 40."},{frage:"Auf welche Ziffern enden Ergebnisse der 5er-Reihe?", optionen:["0 und 5","2 und 5","5 und 6"], richtig:0, erklaerung:"Sie enden immer auf 0 oder 5."}] },
+    { id:"zehner", fux:"Mal 10 ist mein Lieblingstrick: einfach eine Null dran.", titel:"Die 10er-Reihe", ziele:["Mit 10 schnell malnehmen"],
+      inhalt:`<p>Mal 10 ist am leichtesten: Du hängst einfach eine <strong>Null</strong> an. 10 × 7 = 70.</p><div class="merke"><strong>Merke:</strong> 10, 20, 30, 40, 50, 60, 70, 80, 90, 100.</div>`,
+      karten:[{vorne:"10 × 4",hinten:"40"},{vorne:"10 × 9",hinten:"90"}],
+      aufgaben:[{frage:"10 × 6 = ?", antwort:"60", erklaerung:"Hänge eine Null an die 6."}],
+      quiz:[{frage:"Was ist 10 × 8?", optionen:["18","80","108"], richtig:1, erklaerung:"Eine Null anhängen: 80."},{frage:"Wie rechnest du 9 × 10?", optionen:["Eine Null an die 9 hängen","9 und 10 addieren","9 halbieren"], richtig:0, erklaerung:"9 und eine Null: 90."}] }
+  ] },
+  { id:"wortarten", icon:"📚", farbe:"#5B8DEF", titel:"Wortarten", beschreibung:"Nomen, Verben und Adjektive erkennen.", nacheinander:true,
+  lektionen:[
+    { id:"nomen", fux:"Frag dich: Kann ich der, die oder das davorsetzen?", titel:"Nomen", ziele:["Nomen erkennen","Nomen großschreiben"],
+      inhalt:`<p>Ein <strong>Nomen</strong> benennt Menschen, Tiere, Pflanzen und Dinge: der Hund, die Blume, das Haus. Nomen schreibst du immer <strong>groß</strong>.</p><div class="merke"><strong>Merke:</strong> Vor einem Nomen kannst du <em>der, die</em> oder <em>das</em> setzen.</div>`,
+      karten:[{vorne:"Was ist ein Nomen?",hinten:"Ein Wort für Menschen, Tiere, Pflanzen und Dinge."},{vorne:"Wie schreibt man Nomen?",hinten:"Immer groß."}],
+      aufgaben:[{frage:"Schreibe das Nomen richtig: tisch", antwort:"Tisch", erklaerung:"Nomen schreibt man groß."},{typ:"luecke", frage:"Setze das fehlende Nomen ein.", satz:"Der ___ bellt laut.", antwort:["Hund"], woerter:["Hund","laufen","schnell"], erklaerung:"Der Hund ist ein Tier, also ein Nomen."}],
+      quiz:[{frage:"Welches Wort ist ein Nomen?", optionen:["laufen","Katze","schnell"], richtig:1, erklaerung:"Die Katze: Man kann der, die oder das davorsetzen."},{frage:"Wie schreibst du Nomen?", optionen:["klein","groß","egal"], richtig:1, erklaerung:"Nomen werden immer großgeschrieben."}] },
+    { id:"verben", fux:"Wenn du es tun kannst, ist es ein Verb.", titel:"Verben", ziele:["Verben als Tunwörter erkennen"],
+      inhalt:`<p>Ein <strong>Verb</strong> sagt, was jemand tut oder was passiert: laufen, lachen, schlafen. Man nennt Verben auch <em>Tunwörter</em>. Verben schreibst du klein.</p><div class="merke"><strong>Merke:</strong> Verben ändern sich: ich lache, du lachst, er lacht.</div>`,
+      karten:[{vorne:"Was ist ein Verb?",hinten:"Ein Tunwort: Es sagt, was jemand tut."},{vorne:"Ich spiele, du ...",hinten:"spielst"}],
+      aufgaben:[{frage:"Ich lache, du __ (lachen).", antwort:"lachst", erklaerung:"Bei du endet das Verb auf -st."}],
+      quiz:[{frage:"Welches Wort ist ein Verb?", optionen:["Baum","singen","rot"], richtig:1, erklaerung:"Singen ist etwas, das man tut."},{frage:"Wie heißt ein Verb noch?", optionen:["Namenwort","Wiewort","Tunwort"], richtig:2, erklaerung:"Verben sind Tunwörter."}] },
+    { id:"adjektive", fux:"Mit Wiewörtern wird jede Geschichte bunter.", titel:"Adjektive", ziele:["Adjektive als Wiewörter erkennen","Gegenteile finden"],
+      inhalt:`<p>Ein <strong>Adjektiv</strong> beschreibt, wie etwas ist: groß, rot, leise. Man nennt Adjektive auch <em>Wiewörter</em>.</p><div class="merke"><strong>Merke:</strong> Viele Adjektive haben ein Gegenteil: groß und klein, laut und leise.</div>`,
+      karten:[{vorne:"Was ist ein Adjektiv?",hinten:"Ein Wiewort: Es beschreibt, wie etwas ist."},{vorne:"Gegenteil von laut",hinten:"leise"}],
+      aufgaben:[{frage:"Das Gegenteil von warm ist __.", antwort:"kalt"},{typ:"zuordnen", frage:"Ordne die Gegenteile zu.", paare:[["groß","klein"],["schnell","langsam"],["hell","dunkel"]]},{frage:"Wie ist der Elefant: groß oder klein?", bild:"🐘", bildalt:"Ein Elefant", antwort:["groß"], erklaerung:"Elefanten sind sehr groß."}],
+      quiz:[{frage:"Welches Wort ist ein Adjektiv?", optionen:["lesen","Tisch","freundlich"], richtig:2, erklaerung:"Freundlich beschreibt, wie jemand ist."},{frage:"Was ist das Gegenteil von schwer?", optionen:["leicht","dick","laut"], richtig:0, erklaerung:"Schwer und leicht sind Gegenteile."}] }
+  ] },
+{ id:"spanisch", icon:"🇪🇸", farbe:"#E0533D", titel:"Spanisch", beschreibung:"Grammatik mit ser und tener und Vokabeln für Klasse 6.",
+  lektionen:[
+    { id:"ser", fux:"Ser sagt, wer oder wie etwas ist. Es gehört zu den wichtigsten Wörtern im Spanischen.", titel:"Grammatik: ser (sein)", ziele:["Die sechs Formen von ser kennen","Sich und andere vorstellen"],
+      inhalt:`<p><strong>Ser</strong> heißt <em>sein</em>. Du brauchst es, um zu sagen, wer du bist, woher du kommst, was jemand von Beruf ist oder wie jemand ist. Es ist ein <em>unregelmäßiges Verb</em>: Die Formen musst du auswendig lernen.</p><ul><li>yo <strong>soy</strong> (ich bin)</li><li>tú <strong>eres</strong> (du bist)</li><li>él / ella / usted <strong>es</strong> (er / sie / Sie ist)</li><li>nosotros / nosotras <strong>somos</strong> (wir sind)</li><li>vosotros / vosotras <strong>sois</strong> (ihr seid)</li><li>ellos / ellas / ustedes <strong>son</strong> (sie sind)</li></ul><div class="merke"><strong>Merke:</strong> soy, eres, es, somos, sois, son. Beispiel: <em>Yo soy Ana. Somos amigos.</em></div>`,
+      karten:[{vorne:"yo ...",hinten:"soy (ich bin)"},{vorne:"tú ...",hinten:"eres (du bist)"},{vorne:"él / ella ...",hinten:"es (er / sie ist)"},{vorne:"nosotros ...",hinten:"somos (wir sind)"},{vorne:"vosotros ...",hinten:"sois (ihr seid)"},{vorne:"ellos / ellas ...",hinten:"son (sie sind)"}],
+      aufgaben:[{typ:"luecke", frage:"Setze die richtige Form von ser ein.", satz:"Yo ___ de Alemania.", antwort:["soy"]},{typ:"luecke", frage:"Setze die richtige Form von ser ein.", satz:"Nosotros ___ amigos.", antwort:["somos"]},{typ:"zuordnen", frage:"Ordne die Formen zu.", paare:[["yo","soy"],["tú","eres"],["ella","es"],["ellos","son"]]},{typ:"reihenfolge", frage:"Bringe die Formen von ser in die Reihenfolge yo, tú, él, nosotros, vosotros, ellos.", items:["soy","eres","es","somos","sois","son"]}],
+      quiz:[{frage:"Wie heißt „ich bin“ auf Spanisch?", optionen:["soy","eres","es"], richtig:0, erklaerung:"Yo soy = ich bin."},{frage:"Welche Form passt: Tú ___ mi amigo.", optionen:["es","eres","son"], richtig:1, erklaerung:"Zu tú gehört eres."},{frage:"Was heißt „sie sind“ (ellos)?", optionen:["somos","sois","son"], richtig:2, erklaerung:"Ellos son = sie sind."}] },
+    { id:"tener", fux:"Tengo, tienes, tiene: Merk dir, dass sich der Stamm bei fast allen Formen ändert.", titel:"Grammatik: tener (haben)", ziele:["Die sechs Formen von tener kennen","Sagen, was man hat und wie alt man ist"],
+      inhalt:`<p><strong>Tener</strong> heißt <em>haben</em>. Im Spanischen sagst du damit auch dein Alter: <em>Tengo once años</em> heißt wörtlich „Ich habe elf Jahre“. Auch tener ist unregelmäßig.</p><ul><li>yo <strong>tengo</strong> (ich habe)</li><li>tú <strong>tienes</strong> (du hast)</li><li>él / ella / usted <strong>tiene</strong> (er / sie hat)</li><li>nosotros / nosotras <strong>tenemos</strong> (wir haben)</li><li>vosotros / vosotras <strong>tenéis</strong> (ihr habt)</li><li>ellos / ellas / ustedes <strong>tienen</strong> (sie haben)</li></ul><div class="merke"><strong>Merke:</strong> tengo, tienes, tiene, tenemos, tenéis, tienen. Nur nosotros und vosotros behalten das e im Stamm: tenemos, tenéis.</div>`,
+      karten:[{vorne:"yo ...",hinten:"tengo (ich habe)"},{vorne:"tú ...",hinten:"tienes (du hast)"},{vorne:"él / ella ...",hinten:"tiene (er / sie hat)"},{vorne:"nosotros ...",hinten:"tenemos (wir haben)"},{vorne:"vosotros ...",hinten:"tenéis (ihr habt)"},{vorne:"ellos / ellas ...",hinten:"tienen (sie haben)"},{vorne:"Ich bin elf Jahre alt.",hinten:"Tengo once años."}],
+      aufgaben:[{typ:"luecke", frage:"Setze die richtige Form von tener ein.", satz:"Yo ___ un hermano.", antwort:["tengo"]},{typ:"luecke", frage:"Setze die richtige Form von tener ein.", satz:"Ella ___ una mochila.", antwort:["tiene"]},{typ:"luecke", frage:"Setze die richtige Form von tener ein.", satz:"Vosotros ___ un libro.", antwort:["tenéis","teneis"]},{typ:"zuordnen", frage:"Ordne die Formen zu.", paare:[["yo","tengo"],["tú","tienes"],["nosotros","tenemos"],["ellos","tienen"]]},{typ:"wahrfalsch", frage:"„Tenemos“ gehört zu nosotros. Stimmt das?", richtig:true, erklaerung:"Nosotros tenemos = wir haben."}],
+      quiz:[{frage:"Wie heißt „du hast“?", optionen:["tengo","tienes","tiene"], richtig:1, erklaerung:"Tú tienes = du hast."},{frage:"Wie sagst du „Ich bin zwölf Jahre alt“?", optionen:["Soy doce años.","Tengo doce años.","Tiene doce años."], richtig:1, erklaerung:"Das Alter sagt man mit tener: Tengo doce años."},{frage:"Welche Form passt: Ellos ___ una clase.", optionen:["tienen","tenemos","tiene"], richtig:0, erklaerung:"Zu ellos gehört tienen."}] },
+    { id:"vok-begruessung", fux:"¡Hola! Sag die Wörter laut, das hilft beim Merken.", titel:"Vokabeln: Begrüßen und Vorstellen", ziele:["Grüßen und sich verabschieden","Sagen, wie man heißt"],
+      inhalt:`<p>Diese Wörter brauchst du in jeder Spanischstunde. Sprich sie laut mit.</p><ul><li><strong>hola</strong> = hallo</li><li><strong>buenos días</strong> = guten Morgen</li><li><strong>buenas tardes</strong> = guten Tag (ab Mittag)</li><li><strong>buenas noches</strong> = guten Abend, gute Nacht</li><li><strong>adiós</strong> = tschüss</li><li><strong>hasta luego</strong> = bis später</li><li><strong>¿Cómo te llamas?</strong> = Wie heißt du?</li><li><strong>Me llamo ...</strong> = Ich heiße ...</li><li><strong>¿Qué tal?</strong> = Wie geht’s?</li><li><strong>gracias</strong> = danke</li><li><strong>por favor</strong> = bitte</li></ul><div class="merke"><strong>Merke:</strong> Fragen und Ausrufe beginnen mit einem umgedrehten Zeichen: ¿ und ¡.</div>`,
+      karten:[{vorne:"hola",hinten:"hallo"},{vorne:"buenos días",hinten:"guten Morgen"},{vorne:"buenas noches",hinten:"gute Nacht"},{vorne:"adiós",hinten:"tschüss"},{vorne:"¿Cómo te llamas?",hinten:"Wie heißt du?"},{vorne:"Me llamo ...",hinten:"Ich heiße ..."},{vorne:"gracias",hinten:"danke"},{vorne:"por favor",hinten:"bitte"}],
+      aufgaben:[{frage:"Was heißt „danke“ auf Spanisch?", antwort:["gracias"]},{frage:"Was heißt „hola“ auf Deutsch?", antwort:["hallo"]},{typ:"zuordnen", frage:"Ordne die Wörter zu.", paare:[["adiós","tschüss"],["por favor","bitte"],["buenos días","guten Morgen"],["¿Qué tal?","Wie geht’s?"]]}],
+      quiz:[{frage:"Was heißt „Me llamo Luis“?", optionen:["Ich heiße Luis.","Wie heißt du, Luis?","Tschüss, Luis."], richtig:0, erklaerung:"Me llamo = ich heiße."},{frage:"Was sagst du am Abend zum Abschied?", optionen:["buenos días","buenas noches","hola"], richtig:1, erklaerung:"Buenas noches = gute Nacht."},{frage:"Was heißt „por favor“?", optionen:["danke","bitte","tschüss"], richtig:1, erklaerung:"Por favor = bitte."}] },
+    { id:"vok-familie", fux:"Bei Familie hängt der Artikel am Geschlecht: el für Jungen, la für Mädchen.", titel:"Vokabeln: Familie", ziele:["Familienmitglieder benennen","el und la richtig benutzen"],
+      inhalt:`<p>Spanische Nomen haben einen Artikel: <strong>el</strong> (männlich) oder <strong>la</strong> (weiblich). Bei Familienmitgliedern ist das leicht.</p><ul><li><strong>la familia</strong> = die Familie</li><li><strong>el padre</strong> = der Vater, <strong>la madre</strong> = die Mutter</li><li><strong>los padres</strong> = die Eltern</li><li><strong>el hermano</strong> = der Bruder, <strong>la hermana</strong> = die Schwester</li><li><strong>el abuelo</strong> = der Opa, <strong>la abuela</strong> = die Oma</li><li><strong>el tío</strong> = der Onkel, <strong>la tía</strong> = die Tante</li><li><strong>el amigo</strong> = der Freund, <strong>la amiga</strong> = die Freundin</li></ul><div class="merke"><strong>Merke:</strong> Viele weibliche Wörter enden auf -a, viele männliche auf -o.</div>`,
+      karten:[{vorne:"la madre",hinten:"die Mutter"},{vorne:"el padre",hinten:"der Vater"},{vorne:"el hermano",hinten:"der Bruder"},{vorne:"la hermana",hinten:"die Schwester"},{vorne:"el abuelo",hinten:"der Opa"},{vorne:"la abuela",hinten:"die Oma"},{vorne:"el tío",hinten:"der Onkel"},{vorne:"la tía",hinten:"die Tante"}],
+      aufgaben:[{frage:"Was heißt „die Schwester“ auf Spanisch? (mit Artikel)", antwort:["la hermana"]},{typ:"zuordnen", frage:"Ordne die Wörter zu.", paare:[["la madre","die Mutter"],["el abuelo","der Opa"],["la tía","die Tante"],["el hermano","der Bruder"]]},{typ:"luecke", frage:"Setze el oder la ein.", satz:"___ padre de Ana es simpático.", antwort:["el"], woerter:["el","la"]}],
+      quiz:[{frage:"Was heißt „la abuela“?", optionen:["die Tante","die Oma","die Schwester"], richtig:1, erklaerung:"La abuela = die Oma."},{frage:"Welcher Artikel passt zu hermano?", optionen:["el","la","las"], richtig:0, erklaerung:"Hermano ist männlich, also el hermano."},{frage:"Was heißt „los padres“?", optionen:["die Großeltern","die Eltern","die Freunde"], richtig:1, erklaerung:"Los padres = die Eltern."}] },
+    { id:"vok-schule", fux:"Mit tener kannst du sagen, was in deiner Schultasche steckt.", titel:"Vokabeln: Schule", ziele:["Schulsachen benennen","Sagen, was man in der Schultasche hat"],
+      inhalt:`<p>Im Klassenzimmer begegnen dir diese Wörter. Mit <strong>tener</strong> kannst du sie gleich einsetzen: <em>Tengo un cuaderno.</em></p><ul><li><strong>el colegio</strong> = die Schule</li><li><strong>la clase</strong> = die Klasse, der Unterricht</li><li><strong>el profesor / la profesora</strong> = der Lehrer / die Lehrerin</li><li><strong>el libro</strong> = das Buch</li><li><strong>el cuaderno</strong> = das Heft</li><li><strong>el lápiz</strong> = der Bleistift</li><li><strong>el bolígrafo</strong> = der Kugelschreiber</li><li><strong>la mochila</strong> = die Schultasche</li><li><strong>el estuche</strong> = das Federmäppchen</li></ul><div class="merke"><strong>Merke:</strong> Ein, eine heißt <em>un</em> (männlich) und <em>una</em> (weiblich): un libro, una mochila.</div>`,
+      karten:[{vorne:"el colegio",hinten:"die Schule"},{vorne:"el libro",hinten:"das Buch"},{vorne:"el cuaderno",hinten:"das Heft"},{vorne:"el lápiz",hinten:"der Bleistift"},{vorne:"la mochila",hinten:"die Schultasche"},{vorne:"el estuche",hinten:"das Federmäppchen"},{vorne:"el profesor",hinten:"der Lehrer"}],
+      aufgaben:[{frage:"Was heißt „das Buch“ auf Spanisch? (mit Artikel)", antwort:["el libro"]},{typ:"luecke", frage:"Setze die richtige Form von tener ein.", satz:"Yo ___ una mochila.", antwort:["tengo"]},{typ:"zuordnen", frage:"Ordne die Wörter zu.", paare:[["el cuaderno","das Heft"],["el lápiz","der Bleistift"],["la mochila","die Schultasche"],["el colegio","die Schule"]]},{typ:"wahrfalsch", frage:"„La profesora“ heißt „die Lehrerin“. Stimmt das?", richtig:true, erklaerung:"La profesora = die Lehrerin."}],
+      quiz:[{frage:"Was heißt „el estuche“?", optionen:["das Federmäppchen","das Heft","die Schule"], richtig:0, erklaerung:"El estuche = das Federmäppchen."},{frage:"Wie sagst du „Ich habe ein Heft“?", optionen:["Soy un cuaderno.","Tengo un cuaderno.","Tienes un cuaderno."], richtig:1, erklaerung:"Yo tengo = ich habe."},{frage:"Was heißt „la mochila“?", optionen:["die Schultasche","der Bleistift","das Buch"], richtig:0, erklaerung:"La mochila = die Schultasche."}] },
+    { id:"vok-zahlen-farben", fux:"Zähle laut bis zehn, dann sitzen die Zahlen schnell.", titel:"Vokabeln: Zahlen und Farben", ziele:["Von 1 bis 10 zählen","Die wichtigsten Farben benennen"],
+      inhalt:`<p><strong>Zahlen:</strong> 1 uno, 2 dos, 3 tres, 4 cuatro, 5 cinco, 6 seis, 7 siete, 8 ocho, 9 nueve, 10 diez.</p><p><strong>Farben:</strong> rojo = rot, azul = blau, verde = grün, amarillo = gelb, negro = schwarz, blanco = weiß.</p><div class="merke"><strong>Merke:</strong> Farben stehen nach dem Nomen: <em>un libro rojo</em> (ein rotes Buch).</div>`,
+      karten:[{vorne:"uno",hinten:"1"},{vorne:"cinco",hinten:"5"},{vorne:"ocho",hinten:"8"},{vorne:"diez",hinten:"10"},{vorne:"rojo",hinten:"rot"},{vorne:"azul",hinten:"blau"},{vorne:"verde",hinten:"grün"},{vorne:"amarillo",hinten:"gelb"}],
+      aufgaben:[{frage:"Wie heißt 3 auf Spanisch?", antwort:["tres"]},{typ:"zuordnen", frage:"Ordne die Farben zu.", paare:[["rojo","rot"],["azul","blau"],["verde","grün"],["negro","schwarz"]]},{typ:"reihenfolge", frage:"Bringe die Zahlen in die richtige Reihenfolge.", items:["uno","dos","tres","cuatro","cinco"]}],
+      quiz:[{frage:"Was heißt „siete“?", optionen:["6","7","8"], richtig:1, erklaerung:"Siete = 7."},{frage:"Was heißt „amarillo“?", optionen:["gelb","grün","blau"], richtig:0, erklaerung:"Amarillo = gelb."},{frage:"Wie sagst du „ein rotes Buch“?", optionen:["un rojo libro","un libro rojo","rojo un libro"], richtig:1, erklaerung:"Die Farbe steht nach dem Nomen: un libro rojo."}] }
+  ] }];
+const GLOSSAR = [{begriff:"Unregelmäßiges Verb", text:"Ein Verb, dessen Formen sich nicht nach der Regel bilden. Du musst sie auswendig lernen, zum Beispiel ser und tener."},{begriff:"Produkt", text:"Das Ergebnis einer Malaufgabe."},{begriff:"Faktor", text:"Eine Zahl, die du bei einer Malaufgabe malnimmst."},{begriff:"Nomen", text:"Ein Wort für Menschen, Tiere, Pflanzen und Dinge. Es wird großgeschrieben."},{begriff:"Verb", text:"Ein Tunwort. Es sagt, was jemand tut."},{begriff:"Adjektiv", text:"Ein Wiewort. Es beschreibt, wie etwas ist."}]; /* { begriff:"Wort", text:"Erklärung" } */
+
+function stab(v){ return v && typeof v === "object" ? (Array.isArray(v) ? "[" + v.map(stab).join(",") + "]" : "{" + Object.keys(v).filter(k => v[k] !== undefined).sort().map(k => JSON.stringify(k) + ":" + stab(v[k])).join(",") + "}") : JSON.stringify(v); }
+function h53(s){ let a = 0xdeadbeef, b = 0x41c6ce57; for(let i = 0, c; i < s.length; i++){ c = s.charCodeAt(i); a = Math.imul(a ^ c, 2654435761); b = Math.imul(b ^ c, 1597334677); } a = Math.imul(a ^ (a >>> 16), 2246822507) ^ Math.imul(b ^ (b >>> 13), 3266489909); b = Math.imul(b ^ (b >>> 16), 2246822507) ^ Math.imul(a ^ (a >>> 13), 3266489909); return (4294967296 * (2097151 & b) + (a >>> 0)).toString(36); }
+function sig(p){ const q = Object.assign({}, p); delete q._s; return h53("LF§Sig1" + stab(q)); }
+function pinFrage(k){
+  const d = document.createElement("div"); d.style.cssText = "position:fixed;inset:0;z-index:999;background:#000c;display:flex;align-items:center;justify-content:center;padding:1rem";
+  d.innerHTML = '<div class="lesson" style="max-width:20rem;width:100%;background:var(--surface)"><h2>PIN für ' + esc(k.name) + '</h2><p><input id="pinQ" class="antw" type="password" inputmode="numeric" maxlength="8" autocomplete="off" aria-label="PIN"></p><p class="fb" id="pinQf" role="status"></p><p><button class="btn" id="pinOk" type="button">Weiter</button> <button class="btn" id="pinNo" type="button">Abbrechen</button></p></div>';
+  document.body.appendChild(d); const i = d.querySelector("#pinQ"); i.focus();
+  const go = () => { if(h53("PIN" + k.id + i.value) === k.pin){ d.remove(); anmelden(k, true); } else { d.querySelector("#pinQf").textContent = "Falsche PIN."; i.value = ""; i.focus(); } };
+  d.querySelector("#pinOk").onclick = go; i.onkeydown = e => { if(e.key === "Enter") go(); }; d.querySelector("#pinNo").onclick = () => d.remove();
+}
+let KEY = "lernfortschritt";
+function laden(){ try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; } }
+function warnSpeicher(){
+  if(document.getElementById("warn")) return;
+  const w = document.createElement("div"); w.id = "warn"; w.className = "warn"; w.setAttribute("role", "alert");
+  w.textContent = "Dein Browser kann nichts speichern, zum Beispiel im privaten Modus. Dein Fortschritt geht verloren, wenn du die Seite schließt.";
+  document.body.prepend(w);
+}
+function speichern(p){ try { p._s = sig(p); localStorage.setItem(KEY, JSON.stringify(p)); } catch(e){ warnSpeicher(); } }
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+const app = document.getElementById("app");
+let fortschritt = laden();
+const KKEY = "lernfux_konten";
+function kontenLaden(){ try { const d = JSON.parse(localStorage.getItem(KKEY)); if(d && Array.isArray(d.konten)) return d; } catch(e){} return { konten: [], zuletzt: null }; }
+let KD = kontenLaden(), konto = null;
+function kontenSpeichern(){ try { localStorage.setItem(KKEY, JSON.stringify(KD)); } catch(e){ warnSpeicher(); } }
+
+const LOB = ["Richtig! Super!","Stark gemacht!","Genau so!","Top, weiter so!"], FAST = ["Nicht schlimm, lies die Erklärung.","Fehler helfen beim Lernen.","Knapp daneben, das schaffst du!"];
+const zuf = a => a[Math.floor(Math.random() * a.length)];
+function konfetti(){ if(!bew()) return; for(let i = 0; i < 32; i++){ const e = document.createElement("span"); e.className = "konf"; e.setAttribute("aria-hidden", "true"); e.style.background = zuf(["#E8702A","#FFC933","#0F7B6C","#F29A8A","#1F2A37"]); e.style.left = Math.random() * 100 + "vw"; e.style.animationDelay = Math.random() * .6 + "s"; document.body.appendChild(e); setTimeout(() => e.remove(), 2800); } }
+function sterne(){ return Math.max(0, verdient() - (fortschritt._ausgegeben || 0)); }
+function verdient(){ let n = fortschritt._bonus || 0; THEMEN.forEach(t => t.lektionen.forEach(l => { const k = t.id + ":" + l.id; if(fortschritt[k] && (l.quiz || []).every((q, qi) => fortschritt[k + ":q" + qi] !== undefined)) n += 5; (l.quiz || []).forEach((q, qi) => { if(fortschritt[k + ":q" + qi] === q.richtig && !fortschritt["h:" + k + ":q" + qi]) n++; }); (l.aufgaben || []).forEach((a, ai) => { if(fortschritt[k + ":a" + ai] === 1 && !fortschritt["h:" + k + ":a" + ai]) n++; }); })); return n; }
+function chips(){
+  const d = THEMEN.flatMap(t => t.lektionen.map(l => t.id + ":" + l.id)).filter(k => fortschritt[k]).length, st = verdient(), se = fortschritt._serie, lv = stufe(st), ganz = THEMEN.some(t => t.lektionen.length && erledigt(t) === t.lektionen.length);
+  const p = lv < 5 ? (st % 25) * 4 : 100;
+  const b = [["1","Erste Lektion",d >= 1],["10","10 Münzen",st >= 10],["50","50 Münzen",st >= 50],["3","3 Tage in Folge",!!(se && se.anzahl >= 3)],["★","Thema geschafft",ganz],["7","7 Tage in Folge",!!(se && se.anzahl >= 7)],["100","100 Münzen",st >= 100]];
+  return '<div class="lvl"><strong>Stufe ' + (lv + 1) + ': ' + STUFEN[lv] + '</strong> <span class="meta">' + (lv < 5 ? (25 * (lv + 1) - st) + ' Münzen bis zur nächsten Stufe' : 'Höchste Stufe erreicht') + '</span><div class="bar" role="progressbar" aria-valuenow="' + p + '" aria-valuemin="0" aria-valuemax="100"><i style="width:' + p + '%"></i></div></div>' +
+    '<ul class="meds" aria-label="Abzeichen">' + b.map(x => '<li class="med' + (x[2] ? '' : ' aus') + '"><span class="plakette" aria-hidden="true">' + x[0] + '</span>' + x[1] + '<span class="sr">' + (x[2] ? ', geschafft' : ', noch offen') + '</span></li>').join("") + '</ul>';
+}
+function nameBind(){ const b = document.getElementById("nameBtn"); if(b) b.addEventListener("click", () => { const v = document.getElementById("nameIn").value.trim(); if(v){ fortschritt._name = v; speichern(fortschritt); startseite(""); } }); }
+function gruss(){ const n = fortschritt._name; return '<div class="hallo"><span class="fuchs">' + fuxSvg(n ? "froh" : "jubel") + '</span><div class="blase">' + (n ? '<h1 class="gruss">Hallo, ' + esc(n) + '! Was lernen wir heute?</h1><p>' + tipp() + '</p>' : '<h1 class="gruss">Hallo! Ich bin Fux.</h1><p>Wie heißt du? <input id="nameIn" class="search" style="margin:.4rem 0;max-width:12rem" aria-label="Dein Name" maxlength="20"> <button class="btn" id="nameBtn" type="button">Los!</button></p>') + '</div></div>'; }
+function fuxSvg(m){
+  m = m || "froh"; const D = "#3B2A24", K = "M60 106C30 106 14 84 18 60C22 42 40 34 60 34C80 34 98 42 102 60C106 84 90 106 60 106Z";
+  const mund = m === "jubel" ? '<path d="M50 92Q60 111 70 92Z" fill="#B5453A"/>' : m === "denk" ? '<path d="M53 95H67" fill="none" stroke-linecap="round"/>' : '<path d="M51 93Q60 101 69 93" fill="none" stroke-linecap="round"/>';
+  const augen = m === "jubel" ? '<path d="M38 70Q44 62 50 70M70 70Q76 62 82 70" fill="none" stroke-linecap="round"/>' : '<g class="fx-eyes" fill="' + D + '" stroke="none"><ellipse cx="44" cy="68" rx="4.5" ry="6"/><ellipse cx="76" cy="68" rx="4.5" ry="6"/><circle cx="45.6" cy="65.4" r="1.7" fill="#fff"/><circle cx="77.6" cy="65.4" r="1.7" fill="#fff"/></g>';
+  return '<svg class="fux" viewBox="0 0 120 128" width="100%" height="100%" aria-hidden="true" focusable="false"><g stroke="' + D + '" stroke-width="3" stroke-linejoin="round">' +
+    '<path d="M20 54L24 10L58 34Z M100 54L96 10L62 34Z" fill="#E8702A"/><path d="M29 42L30 22L45 33Z M91 42L90 22L75 33Z" fill="' + D + '" stroke="none"/>' +
+    '<path d="' + K + '" fill="#E8702A"/><path d="M19 64C32 66 46 84 60 106C34 106 18 86 19 64Z M101 64C88 66 74 84 60 106C86 106 102 86 101 64Z" fill="#FFF3E0" stroke="none"/><path d="' + K + '" fill="none"/>' +
+    '<circle cx="33" cy="82" r="5" fill="#F29A8A" stroke="none" opacity=".75"/><circle cx="87" cy="82" r="5" fill="#F29A8A" stroke="none" opacity=".75"/>' +
+    augen + '<ellipse cx="60" cy="87" rx="6" ry="4.5" fill="' + D + '" stroke="none"/>' + mund +
+    '<path class="fx-scarf" d="M28 102Q60 120 92 102L90 116Q60 128 30 116Z"/></g></svg>';
+}
+function fuxBox(t, m){ return '<div class="hallo"><span class="fuchs">' + fuxSvg(m) + '</span><div class="blase">' + t + '</div></div>'; }
+let toastT, angezeigt = 0, blitzT, spielT, kalM = 0;
+const bew = () => matchMedia("(prefers-reduced-motion: no-preference)").matches && !fortschritt._ruhig;
+function fuxSagt(text, m){
+  if(m === "jubel") ton("ok"); else if(m === "denk") ton("falsch");
+  let t = document.getElementById("toast");
+  if(!t){ t = document.createElement("div"); t.id = "toast"; t.className = "toast"; t.setAttribute("role", "status"); document.body.appendChild(t); }
+  t.innerHTML = '<span class="fuchs">' + fuxSvg(m) + '</span><div class="blase">' + esc(text) + '</div>'; t.hidden = false;
+  if(bew()) t.animate([{ transform: "translateY(130%)" }, { transform: "none" }], { duration: 350, easing: "cubic-bezier(.2,1.3,.4,1)" });
+  clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 3800);
+}
+function zaehlerSetzen(n){
+  const z = document.getElementById("mz"); if(!z) return; const von = angezeigt; angezeigt = n;
+  if(!bew() || von === n){ z.textContent = n; return; }
+  const t0 = performance.now(); (function f(t){ const q = Math.min(1, (t - t0) / 700); z.textContent = Math.round(von + (n - von) * q); if(q < 1) requestAnimationFrame(f); })(t0);
+  z.parentNode.animate([{ transform: "scale(1)" }, { transform: "scale(1.25)" }, { transform: "scale(1)" }], { duration: 400 });
+}
+function fliegen(el, d){
+  const a = el.getBoundingClientRect(), b = document.getElementById("muenz").getBoundingClientRect(), n = Math.min(d, 6); let fertig = 0;
+  for(let i = 0; i < n; i++){
+    const c = document.createElement("i"); c.className = "coin flug"; document.body.appendChild(c);
+    const x0 = a.left + a.width / 2 - 12, y0 = a.top + a.height / 2 - 12, dx = b.left + b.width / 2 - 12 - x0, dy = b.top + b.height / 2 - 12 - y0;
+    c.style.left = x0 + "px"; c.style.top = y0 + "px";
+    c.animate([{ transform: "translate(0,0) scale(.5)", opacity: 0 }, { transform: "translate(" + dx * .3 + "px," + (dy * .3 - 70) + "px) scale(1.2)", opacity: 1, offset: .3 }, { transform: "translate(" + dx + "px," + dy + "px) scale(.8)", opacity: 1 }], { duration: 800, delay: i * 120, easing: "ease-in", fill: "both" }).onfinish = () => { c.remove(); if(++fertig === n) zaehlerSetzen(sterne()); };
+  }
+}
+const STUFEN = ["Neuling","Entdecker","Forscher","Profi","Meister","Legende"], stufe = n => Math.min(Math.floor(n / 25), 5);
+function belohnung(el, ok, txt){
+  const neu = sterne(), alt = angezeigt, d = neu - alt;
+  if(d > 0 && bew()) fliegen(el, d); else zaehlerSetzen(neu);
+  let m = ok ? "jubel" : "denk", t = (txt || (ok ? zuf(LOB) : zuf(FAST))) + (ok && d > 0 ? " +" + d + (d === 1 ? " Münze" : " Münzen") : "");
+  if(stufe(verdient()) > stufe(verdient() - d)){ konfetti(); t = "Neue Stufe: " + STUFEN[stufe(verdient())] + "!"; m = "jubel"; }
+  fuxSagt(t, m);
+}
+function tipp(){ const st = verdient(); return st === 0 ? "Tippe auf ein Thema und starte mit der ersten Lektion. Für richtige Antworten bekommst du Münzen." : st < 25 ? "Mit Münzen steigst du Stufen auf. Bei 25 Münzen geht es los mit Stufe 2." : "Mach heute noch eine Lektion, dann bleibt deine Serie am Leben."; }
+function erledigt(t){ return t.lektionen.filter(l => fortschritt[t.id + ":" + l.id]).length; }
+
+const TAGE = [1, 3, 7, 14], tagStr = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+const heuteN = () => (fortschritt._heute && fortschritt._heute.d === tagStr(new Date()) ? fortschritt._heute.n : 0);
+let ac;
+function ton(art){
+  if(fortschritt._stumm) return;
+  try {
+    ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+    (art === "ok" ? [660, 880] : [220]).forEach((f, i) => { const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime + i * .12; o.frequency.value = f; g.gain.value = .08; o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t + .1); });
+  } catch(e){}
+}
+function schriftSetzen(){
+  const r = document.documentElement; r.style.fontSize = [100, 115, 130][fortschritt._schrift || 0] + "%";
+  if(fortschritt._theme) r.dataset.theme = fortschritt._theme; else delete r.dataset.theme;
+  document.body.classList.toggle("ruhig", !!fortschritt._ruhig);
+}
+function plan(key, ok, neu){
+  const w = fortschritt["w:" + key], s = ok ? (w && !neu ? Math.min(w.s + 1, 3) : 1) : 0, d = new Date();
+  d.setDate(d.getDate() + TAGE[s]); fortschritt["w:" + key] = { s: s, f: tagStr(d) }; speichern(fortschritt);
+}
+function faellig(){
+  const h = tagStr(new Date()), r = [];
+  THEMEN.forEach(t => t.lektionen.forEach(l => {
+    const k = t.id + ":" + l.id;
+    (l.quiz || []).forEach((q, i) => { const w = fortschritt["w:" + k + ":q" + i]; if(w && w.f <= h) r.push({ key: k + ":q" + i, q: q }); });
+    (l.aufgaben || []).forEach((a, i) => { const w = fortschritt["w:" + k + ":a" + i]; if(w && w.f <= h && a.typ !== "zuordnen") r.push({ key: k + ":a" + i, a: a }); });
+  }));
+  return r;
+}
+function tagesBlock(){
+  const f = faellig().length;
+  return '<div class="sterne"><span class="chip">' + (heuteN() >= 1 ? "✓ Tagesziel geschafft" : "Tagesziel: 1 Lektion") + '</span><span class="chip">Diese Woche: ' + woche() + '</span>' + (fortschritt._serie && fortschritt._serie.anzahl > 1 ? '<span class="chip">🔥 ' + fortschritt._serie.anzahl + ' Tage in Folge</span>' : '') + (THEMEN.some(t => t.lektionen.some(l => (l.quiz || []).length)) ? '<a class="chip" href="#tagesaufgabe" style="text-decoration:none;color:inherit">🎯 Tagesaufgabe' + (fortschritt._tag && fortschritt._tag.d === new Date().toDateString() ? " ✓" : "") + '</a>' : '') + (f ? '<a class="chip" href="#wiederholen" style="text-decoration:none;color:inherit">Wiederholen: ' + f + '</a>' : '') + '</div>';
+}
+function lektionExtras(l){
+  const v = document.getElementById("vorles");
+  if(!v) return;
+  if(!window.speechSynthesis){ v.parentNode.remove(); return; }
+  v.addEventListener("click", () => {
+    if(speechSynthesis.speaking){ speechSynthesis.cancel(); v.textContent = "Vorlesen"; return; }
+    const u = new SpeechSynthesisUtterance(l.titel + ". " + l.inhalt.replace(/<[^>]*>/g, " ")); u.lang = "de-DE"; u.onend = () => { v.textContent = "Vorlesen"; };
+    speechSynthesis.speak(u); v.textContent = "Stopp";
+  });
+}
+function glossarLinks(){
+  const box = app.querySelector(".inh");
+  if(!box) return;
+  GLOSSAR.forEach(g => {
+    const w = document.createTreeWalker(box, NodeFilter.SHOW_TEXT), liste = [];
+    while(w.nextNode()) liste.push(w.currentNode);
+    for(const n of liste){
+      if(n.parentNode.closest(".gl")) continue;
+      const i = n.nodeValue.toLowerCase().indexOf(g.begriff.toLowerCase());
+      if(i < 0) continue;
+      const b = document.createElement("button"); b.type = "button"; b.className = "gl"; b.textContent = n.nodeValue.substr(i, g.begriff.length);
+      b.addEventListener("click", () => fuxSagt(g.begriff + ": " + g.text, "froh"));
+      const rest = n.splitText(i); rest.nodeValue = rest.nodeValue.slice(g.begriff.length); n.parentNode.insertBefore(b, rest);
+      break;
+    }
+  });
+}
+const gesperrt = (t, i) => !!t.nacheinander && i > 0 && !fortschritt[t.id + ":" + t.lektionen[i - 1].id];
+const mischen = a => { a = a.slice(); for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+function geheZu(h){ if(location.hash === h || (h === "#" && !location.hash)) anzeigen(); else location.hash = h; }
+const lock = x => String(x).trim().toLowerCase().replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss").replace(/,/g, ".").replace(/\s+/g, " ").replace(/\.$/, "");
+function aehnlich(x, y){
+  if(x === y) return true;
+  if(x.length < 6 || Math.abs(x.length - y.length) > 1) return false;
+  let i = 0; while(i < x.length && x[i] === y[i]) i++;
+  if(x.length === y.length) return x.slice(i + 1) === y.slice(i + 1);
+  return x.length > y.length ? x.slice(i + 1) === y.slice(i) : y.slice(i + 1) === x.slice(i);
+}
+function textOk(a, v){
+  const w = lock(v), zahl = z => /^-?\d+(\.\d+)?$/.test(z);
+  return [].concat(a.antwort).some(r => { const x = lock(r); return zahl(x) && zahl(w) ? parseFloat(x) === parseFloat(w) : aehnlich(x, w); });
+}
+const lektionItems = (l, k) => (l.quiz || []).map((q, qi) => ({ q: q, key: k + ":q" + qi })).concat((l.aufgaben || []).map((a, ai) => ({ a: a, key: k + ":a" + ai })));
+const istRichtig = it => it.q ? fortschritt[it.key] === it.q.richtig : fortschritt[it.key] === 1;
+function endeSeite(titel, ok, n, knoepfe){
+  app.innerHTML = '<h1>' + esc(titel) + '</h1>' + fuxBox("<strong>" + ok + " von " + n + " richtig.</strong> " + (n ? "⭐".repeat(Math.round(ok / n * 3)) + "☆".repeat(3 - Math.round(ok / n * 3)) + " " : "") + (ok === n ? "Alles richtig!" : "Fehler helfen beim Lernen. Die falschen Aufgaben kannst du gleich noch einmal üben."), ok === n ? "jubel" : ok * 2 >= n ? "froh" : "denk") +
+    '<p>' + knoepfe.map((b, bi) => '<button class="btn" data-b="' + bi + '" type="button">' + esc(b[0]) + '</button>').join(" ") + '</p>';
+  app.querySelectorAll("[data-b]").forEach(b => b.onclick = () => knoepfe[+b.dataset.b][1]());
+  window.scrollTo(0, 0); zaehlerSetzen(sterne());
+}
+function bildHtml(x){
+  if(!x.bild) return "";
+  const alt = esc(x.bildalt || "Bild zur Aufgabe");
+  return /^(data:image\/|https?:)/.test(x.bild) ? '<img class="aufgbild" src="' + esc(x.bild) + '" alt="' + alt + '">' : '<p class="aufgbild" role="img" aria-label="' + alt + '">' + esc(x.bild) + '</p>';
+}
+function ueben(cfg){
+  const f = cfg.items; let i = 0, richtig = 0;
+  app.classList.add("still");
+  const zeige = () => {
+    const it = f[i], x = it.q || it.a, quiz = !!it.q, zu = !quiz && x.typ === "zuordnen", wf = !quiz && x.typ === "wahrfalsch", re = !quiz && x.typ === "reihenfolge", letzte = i === f.length - 1, el = id => document.getElementById(id);
+    const eing = quiz ? x.optionen.map((o, oi) => '<button type="button" class="opt" data-o="' + oi + '">' + esc(o) + '</button>').join("")
+      : wf ? '<button type="button" class="opt" data-w="1">Wahr</button><button type="button" class="opt" data-w="0">Falsch</button>'
+      : re ? '<ol class="reihe" id="reihe"></ol>'
+      : zu ? x.paare.map((p, pi) => '<div class="zeile"><span>' + esc(p[0]) + '</span><select data-p="' + pi + '" aria-label="' + esc(p[0]) + '"><option value="">Wähle</option>' + x.paare.map(y => y[1]).sort((a, b) => a.localeCompare(b, "de", { numeric: true })).map(o => '<option>' + esc(o) + '</option>').join("") + '</select></div>').join("")
+      : '<input class="antw" autocomplete="off" aria-label="Deine Antwort">';
+    let ord = [];
+    if(re){ const n = x.items.length; ord = x.items.map((_, k) => k); for(let t = 0; t < 8 && n > 1 && ord.every((v, k) => v === k); t++) ord = mischen(ord); }
+    const loes = quiz || zu ? "" : wf ? "Richtig wäre: " + (x.richtig ? "Wahr" : "Falsch") + ". " : re ? "Richtig wäre: " + x.items.join(" → ") + ". " : "Richtig wäre: " + [].concat(x.antwort)[0] + ". ";
+    app.innerHTML = '<p><button class="btn" id="abbr" type="button">Abbrechen</button></p><p class="meta">' + esc(cfg.titel) + ': Aufgabe ' + (i + 1) + ' von ' + f.length + '</p><div class="bar"><i style="width:' + Math.round(i / f.length * 100) + '%"></i></div>' +
+      '<article class="lesson voll"><h1 class="aufgtitel">' + esc(x.frage) + '</h1>' + (x.html || "") + bildHtml(x) + (x.satz ? '<p class="satz">' + esc(x.satz).replace(/_{3,}/g, '<span class="luecke" aria-label="Lücke">___</span>') + '</p>' : "") + (x.woerter ? '<p class="meta">Wörter zur Auswahl: ' + x.woerter.map(esc).join(" · ") + '</p>' : "") + eing + (quiz || wf ? "" : '<p><button class="btn" id="pruef" type="button">Prüfen</button></p>') +
+      '<p class="fb" role="status" hidden></p><p><button class="btn" id="vorl" type="button">Vorlesen</button> ' + (zu || wf || re ? "" : '<button class="btn" id="tipp" type="button">Tipp</button>') + '</p>' +
+      '<p><button class="btn gross" id="weiter" type="button" hidden>' + (letzte ? "Fertig" : "Weiter") + '</button></p></article>';
+    const fb = app.querySelector(".fb"); let tipp = false;
+    el("abbr").onclick = () => { if(window.speechSynthesis) speechSynthesis.cancel(); cfg.abbruch(); };
+    el("vorl").onclick = () => { if(!window.speechSynthesis) return; speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(x.frage + (quiz ? ". " + x.optionen.join(". ") : "")); u.lang = "de-DE"; speechSynthesis.speak(u); };
+    const fertig = (ok, wert) => {
+      app.querySelectorAll("input,select,.opt,#pruef,#tipp,.reihe button").forEach(b => b.disabled = true);
+      if(ok) richtig++;
+      fb.className = "fb " + (ok ? "gut" : "schlecht"); fb.textContent = (ok ? "Richtig. " : "Nicht ganz. ") + (!ok ? loes : "") + (x.erklaerung || ""); fb.hidden = false;
+      cfg.onAntwort(it, ok, wert, tipp, fb);
+      el("weiter").hidden = false; el("weiter").focus();
+    };
+    if(quiz) app.querySelectorAll(".opt").forEach(o => o.onclick = () => { const w = +o.dataset.o, ok = w === x.richtig; app.querySelectorAll(".opt")[x.richtig].classList.add("ok"); if(!ok) o.classList.add("falsch"); fertig(ok, w); });
+    else if(wf) app.querySelectorAll("[data-w]").forEach(o => o.onclick = () => { const ok = (o.dataset.w === "1") === !!x.richtig; app.querySelector('[data-w="' + (x.richtig ? 1 : 0) + '"]').classList.add("ok"); if(!ok) o.classList.add("falsch"); fertig(ok, ok ? 1 : 0); });
+    else {
+      const e = app.querySelector(".antw");
+      if(re){
+        const zeichne = fok => {
+          el("reihe").innerHTML = ord.map((o, k) => '<li><span>' + (k + 1) + '. ' + esc(x.items[o]) + '</span><button type="button" class="btn kl" data-k="' + k + '" data-d="-1" aria-label="' + esc(x.items[o]) + ' nach oben"' + (k === 0 ? " disabled" : "") + '>▲</button><button type="button" class="btn kl" data-k="' + k + '" data-d="1" aria-label="' + esc(x.items[o]) + ' nach unten"' + (k === ord.length - 1 ? " disabled" : "") + '>▼</button></li>').join("");
+          el("reihe").querySelectorAll("button").forEach(b => b.onclick = () => { const k = +b.dataset.k, d = +b.dataset.d, n = k + d; [ord[k], ord[n]] = [ord[n], ord[k]]; zeichne(); const nb = el("reihe").querySelector('[data-k="' + n + '"][data-d="' + d + '"]'); (nb && !nb.disabled ? nb : el("reihe").querySelector('[data-k="' + n + '"]:not(:disabled)')).focus(); });
+        };
+        zeichne();
+      }
+      if(e){ e.focus(); e.onkeydown = ev => { if(ev.key === "Enter") el("pruef").click(); }; }
+      el("pruef").onclick = () => { const ok = zu ? [...app.querySelectorAll("select")].every(s => s.value === x.paare[+s.dataset.p][1]) : re ? ord.every((o, k) => x.items[o] === x.items[k]) : textOk(x, e.value); fertig(ok, ok ? 1 : 0); };
+    }
+    if(el("tipp")) el("tipp").onclick = () => {
+      if(tipp) return; tipp = true;
+      if(quiz){ const fal = [...app.querySelectorAll(".opt")].filter((o, oi) => oi !== x.richtig && !o.disabled); if(fal.length > 1){ const o = zuf(fal); o.disabled = true; o.style.opacity = .35; } fb.textContent = "Eine falsche Antwort ist weg."; }
+      else { const r = String([].concat(x.antwort)[0]); fb.textContent = x.hinweis || ("Die Antwort beginnt mit „" + r[0] + "“ und hat " + r.length + " Zeichen."); }
+      fb.hidden = false; fuxSagt("Mit Tipp gibt es für diese Aufgabe keine Münze.", "froh");
+    };
+    if(quiz) document.onkeydown = e => { const o = app.querySelectorAll(".opt")[+e.key - 1]; if(o && !o.disabled && !/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) o.click(); };
+    el("weiter").onclick = () => { document.onkeydown = null; if(window.speechSynthesis) speechSynthesis.cancel(); i++; if(i < f.length){ zeige(); window.scrollTo(0, 0); } else cfg.onEnde(richtig, f.length); };
+  };
+  zeige(); window.scrollTo(0, 0);
+}
+function wiederholen(){
+  const f = faellig().slice(0, 10), kopfz = '<p><a href="#">Alle Themen</a></p><h1>Wiederholen</h1>';
+  if(!f.length){ app.innerHTML = kopfz + fuxBox("Heute ist nichts dran. Sobald Fragen wieder fällig sind, erscheinen sie hier."); return; }
+  app.innerHTML = kopfz + fuxBox("Diese Aufgaben hast du schon geübt. Wenn du sie jetzt weißt, kommen sie erst viel später wieder.") + '<p><button class="btn" id="go" type="button">' + f.length + ' Aufgaben starten</button></p>';
+  document.getElementById("go").onclick = () => ueben({ titel: "Wiederholen", items: f, abbruch: () => geheZu("#"),
+    onAntwort: (it, ok) => { plan(it.key, ok, false); fuxSagt(ok ? zuf(LOB) : zuf(FAST), ok ? "jubel" : "denk"); },
+    onEnde: (r, n) => endeSeite("Wiederholt!", r, n, [["Fertig", () => geheZu("#")]]) });
+}
+function pruefung(){
+  const alle = THEMEN.flatMap(t => t.lektionen.flatMap(l => (l.quiz || []).map(q => ({ q: q, key: null })))), kopfz = '<p><a href="#">Alle Themen</a></p><h1>Prüfung</h1>';
+  if(!alle.length){ app.innerHTML = kopfz + fuxBox("Noch keine Fragen. Sobald Lektionen Quizfragen haben, werden sie hier gemischt abgefragt."); return; }
+  const n = Math.min(10, alle.length);
+  app.innerHTML = kopfz + fuxBox("Jetzt wird alles gemischt: " + n + " Fragen aus allen Themen, wie in einer echten Prüfung. Du schaffst das!") + '<p><button class="btn" id="go" type="button">Prüfung starten</button></p>';
+  document.getElementById("go").onclick = () => ueben({ titel: "Prüfung", items: mischen(alle).slice(0, n), abbruch: () => geheZu("#"),
+    onAntwort: (it, ok) => fuxSagt(ok ? zuf(LOB) : zuf(FAST), ok ? "jubel" : "denk"),
+    onEnde: (ok, nn) => {
+      const alt = fortschritt._best || 0; fortschritt._best = Math.max(alt, ok); fortschritt._bonus = (fortschritt._bonus || 0) + Math.max(0, ok - alt) * 2; speichern(fortschritt); if(ok === nn) konfetti();
+      endeSeite(ok > alt ? "Neuer Bestwert!" : "Prüfung geschafft!", ok, nn, [["Neu mischen", pruefung], ["Fertig", () => geheZu("#")]]);
+    } });
+}
+function blitz(){
+  const alle = THEMEN.flatMap(t => t.lektionen.flatMap(l => l.quiz || [])), kopfz = '<p><a href="#">Zurück</a></p><h1>Blitzrunde</h1>';
+  if(!alle.length){ app.innerHTML = kopfz + fuxBox("Noch keine Fragen. Sobald Lektionen Quizfragen haben, kannst du hier üben."); return; }
+  app.innerHTML = kopfz + fuxBox("60 Sekunden Zeit: Beantworte so viele Fragen wie möglich! Dein Rekord: <strong>" + (fortschritt._blitz || 0) + "</strong>") + '<p><button class="btn" id="go" type="button">Start</button></p>';
+  document.getElementById("go").onclick = () => {
+    let zeit = 60, ok = 0, n = 0; const f = mischen(alle);
+    const ende = () => {
+      clearInterval(blitzT); const alt = fortschritt._blitz || 0; fortschritt._blitz = Math.max(alt, ok); speichern(fortschritt);
+      endeSeite(ok > alt ? "Neuer Rekord!" : "Zeit ist um!", ok, n, [["Nochmal", blitz], ["Fertig", () => geheZu("#")]]);
+    };
+    const frage = () => {
+      const q = f[n % f.length];
+      app.innerHTML = '<p><button class="btn" id="abbr" type="button">Abbrechen</button></p><p class="meta">Zeit: <strong id="zt">' + zeit + '</strong> Sekunden, richtig: <strong>' + ok + '</strong></p><article class="lesson"><h1 class="aufgtitel">' + esc(q.frage) + '</h1>' + q.optionen.map((o, oi) => '<button type="button" class="opt" data-o="' + oi + '">' + esc(o) + '</button>').join("") + '</article>';
+      document.getElementById("abbr").onclick = () => { clearInterval(blitzT); geheZu("#"); };
+      app.querySelectorAll(".opt").forEach(o => o.onclick = () => { const r = +o.dataset.o === q.richtig; if(r) ok++; n++; ton(r ? "ok" : "falsch"); frage(); });
+    };
+    blitzT = setInterval(() => { zeit--; const z = document.getElementById("zt"); if(z) z.textContent = zeit; if(zeit <= 0) ende(); }, 1000);
+    frage();
+  };
+}
+const woche = () => { const v = fortschritt._verlauf || {}; let w = 0; for(let n = 0; n < 7; n++){ const x = new Date(); x.setDate(x.getDate() - n); w += v[tagStr(x)] || 0; } return w; };
+function kalender(){
+  const h = new Date(), d = new Date(h.getFullYear(), h.getMonth() + kalM, 1), tage = fortschritt._tage || {}, v = fortschritt._verlauf || {}, anz = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+  let z = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"].map(x => '<span class="k">' + x + '</span>').join("") + '<span class="e"></span>'.repeat((d.getDay() + 6) % 7);
+  for(let n = 1; n <= anz; n++){ const t = tagStr(new Date(d.getFullYear(), d.getMonth(), n)), g = tage[t] || v[t]; z += '<span' + (g ? ' class="d"' : '') + '>' + n + (g ? '<span class="sr"> gelernt</span>' : '') + '</span>'; }
+  app.innerHTML = '<p><a href="#">Zurück</a></p><h1>Lernkalender</h1>' + fuxBox("Gelb sind die Tage, an denen du gelernt hast. In den letzten 7 Tagen hast du <strong>" + woche() + "</strong> Lektionen geschafft.") +
+    '<div class="lesson"><p><button class="btn" id="kz" type="button">Vorheriger Monat</button> <button class="btn" id="kv" type="button">Nächster Monat</button></p><h2>' + esc(d.toLocaleDateString("de-DE", { month: "long", year: "numeric" })) + '</h2><div class="kal">' + z + '</div></div>';
+  document.getElementById("kz").onclick = () => { kalM--; kalender(); }; document.getElementById("kv").onclick = () => { kalM++; kalender(); };
+}
+function qrSvg(text){
+  if(typeof qrcode === "undefined") return "";
+  try { if(qrcode.stringToBytesFuncs && qrcode.stringToBytesFuncs["UTF-8"]) qrcode.stringToBytes = qrcode.stringToBytesFuncs["UTF-8"]; const q = qrcode(0, "L"); q.addData(text); q.make(); return q.createSvgTag(4, 2); } catch(e){ return ""; }
+}
+function einstellungen(){
+  const sich = sicherungText(), qr = sich.length <= 1500 ? qrSvg(sich) : "";
+  const zeilen = [
+    ["Design", () => ["Automatisch", "Hell", "Dunkel"][["", "light", "dark"].indexOf(fortschritt._theme || "")], () => { const a = ["", "light", "dark"]; fortschritt._theme = a[(a.indexOf(fortschritt._theme || "") + 1) % 3]; }],
+    ["Schriftgröße", () => ["Normal", "Groß", "Sehr groß"][fortschritt._schrift || 0], () => { fortschritt._schrift = ((fortschritt._schrift || 0) + 1) % 3; }],
+    ["Töne", () => fortschritt._stumm ? "Aus" : "An", () => { fortschritt._stumm = !fortschritt._stumm; }],
+    ["Weniger Bewegung", () => fortschritt._ruhig ? "An" : "Aus", () => { fortschritt._ruhig = !fortschritt._ruhig; }]
+  ];
+  app.innerHTML = '<p><a href="#">Zurück</a></p><h1>Einstellungen</h1>' +
+    '<div class="lesson"><h2>Mein Konto</h2><p>Du bist als <strong>' + esc(konto.name) + '</strong> angemeldet.</p><p class="meta">Dein Code</p><p class="code">' + esc(konto.code) + '</p><p><button class="btn" id="eKop" type="button">Code kopieren</button> <button class="btn" id="eNeu" type="button">Neuen Code erzeugen</button></p><p class="fb" id="eFb" role="status"></p>' +
+    '<h3>QR-Code zum Mitnehmen</h3>' + (qr ? '<div class="qr">' + qr + '</div><p class="meta">Der QR-Code enthält deine Sicherung. Scanne ihn mit der Kamera-App deines neuen Geräts, kopiere den Text und füge ihn beim Anmelden bei „Neues Gerät?“ ein.</p>' : '<p class="meta">' + (typeof qrcode === "undefined" ? "Der QR-Code konnte nicht geladen werden. Nutze den Sicherungstext unten." : "Deine Sicherung ist für einen QR-Code zu groß. Nutze den Sicherungstext unten.") + '</p>') +
+    '<h3>PIN</h3><p class="meta">Mit einer PIN kommt niemand an dieses Konto, der dein Gerät benutzt.</p><p><input id="pinIn" class="antw" type="password" inputmode="numeric" maxlength="8" placeholder="4 bis 8 Ziffern" aria-label="Neue PIN"> <button class="btn" id="pinSet" type="button">PIN setzen</button> <button class="btn" id="pinWeg" type="button">PIN entfernen</button></p><p class="fb" id="pinFb" role="status">' + (konto.pin ? "Eine PIN ist aktiv." : "Noch keine PIN.") + '</p>' +
+    '<p><button class="btn" id="eAus" type="button">Abmelden</button> <button class="btn" id="eWeg" type="button">Konto löschen</button></p></div>' +
+    '<div class="lesson"><h2>Anzeige und Ton</h2>' + zeilen.map((z, zi) => '<div class="einst"><span>' + z[0] + '</span><button class="btn" data-z="' + zi + '" type="button">' + z[1]() + '</button></div>').join("") + '</div>' +
+    '<div class="lesson"><h2>Sicherung</h2><textarea id="sOut" rows="3" readonly aria-label="Sicherungstext"></textarea><p><button class="btn" id="sKop" type="button">Sicherung kopieren</button></p><h3>Sicherung einlesen</h3><textarea id="sIn" rows="3" aria-label="Sicherungstext einfügen"></textarea><p><button class="btn" id="sEin" type="button">Einlesen</button></p><p class="fb" id="sFb" role="status"></p></div>' +
+    '<div class="lesson"><h2>Daten</h2><p><button class="btn" id="eReset" type="button">Fortschritt löschen</button></p></div>' +
+    '<div class="lesson"><h2>Datenschutz</h2><p class="meta">Dein Name, dein Code, dein Fortschritt und deine Notizen werden nur in diesem Browser gespeichert und nicht an LernFux gesendet. Schriftart und QR-Code-Programm werden beim Öffnen der Seite von externen Servern geladen. Schreibe keine privaten Daten in Namen oder Notizen.</p></div>';
+  const el = id => document.getElementById(id), fb = el("eFb"), o = el("sOut"), sf = el("sFb"); o.value = sich;
+  el("pinSet").onclick = () => { const v = el("pinIn").value; if(!/^\d{4,8}$/.test(v)){ el("pinFb").textContent = "Bitte 4 bis 8 Ziffern."; return; } konto.pin = h53("PIN" + konto.id + v); kontenSpeichern(); el("pinIn").value = ""; el("pinFb").textContent = "PIN gesetzt. Merke sie dir gut."; };
+  el("pinWeg").onclick = () => { delete konto.pin; kontenSpeichern(); el("pinFb").textContent = "PIN entfernt."; };
+  const zwei = (b, text, fn) => b.onclick = () => { if(b.dataset.sicher) fn(); else { b.dataset.sicher = "1"; b.textContent = text; } };
+  el("eKop").onclick = () => kopieren(konto.code, fb);
+  zwei(el("eNeu"), "Alter Code wird ungültig. Nochmal tippen", () => { konto.code = neuerCode(); kontenSpeichern(); einstellungen(); el("eFb").textContent = "Neuer Code erzeugt. Schreib ihn auf!"; });
+  el("eAus").onclick = () => { konto = null; anzeigen(); };
+  zwei(el("eWeg"), "Wirklich löschen? Nochmal tippen", () => { try { localStorage.removeItem("lernfortschritt:" + konto.id); } catch(e){} KD.konten = KD.konten.filter(k => k.id !== konto.id); if(KD.zuletzt === konto.id) KD.zuletzt = null; kontenSpeichern(); konto = null; anzeigen(); });
+  zwei(el("eReset"), "Wirklich alles löschen? Nochmal tippen", () => { fortschritt = { _name: konto.name }; speichern(fortschritt); anzeigen(); });
+  app.querySelectorAll("[data-z]").forEach(b => b.onclick = () => { const z = zeilen[+b.dataset.z]; z[2](); speichern(fortschritt); schriftSetzen(); b.textContent = z[1](); });
+  el("sKop").onclick = () => { o.select(); kopieren(o.value, sf); };
+  el("sEin").onclick = () => { try { const k = ausSicherung(el("sIn").value); kontenSpeichern(); anmelden(k); fuxSagt("Sicherung eingelesen.", "jubel"); } catch(e){ sf.textContent = "Das hat nicht geklappt. Prüfe, ob du den ganzen Text eingefügt hast."; } };
+}
+
+const zufall = n => [...crypto.getRandomValues(new Uint8Array(n))].map(x => x.toString(16).padStart(2, "0")).join("");
+const normC = x => String(x).toUpperCase().replace(/[^A-Z0-9]/g, "");
+function neuerCode(){
+  const A = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let c;
+  do { c = [...crypto.getRandomValues(new Uint8Array(8))].map(x => A[x % 32]).join(""); c = c.slice(0, 4) + "-" + c.slice(4); } while(KD.konten.some(k => k.code === c));
+  return c;
+}
+function anmelden(k, ok){
+  if(k.pin && !ok){ pinFrage(k); return; }
+  konto = k; KD.zuletzt = k.id; kontenSpeichern(); KEY = "lernfortschritt:" + k.id; fortschritt = laden(); if(fortschritt._s !== undefined && fortschritt._s !== sig(fortschritt)){ fortschritt = {}; setTimeout(() => fuxSagt("Dein Spielstand wurde von außen verändert. Deshalb habe ich ihn zurückgesetzt.", "denk"), 800); } fortschritt._name = k.name; speichern(fortschritt);
+  angezeigt = 0; menuBauen(); anzeigen();
+}
+function sicherungText(){ fortschritt._sich = Date.now(); speichern(fortschritt); return JSON.stringify({ lernfux: 1, name: konto.name, code: konto.code, daten: fortschritt }); }
+function ausSicherung(text){
+  const d = JSON.parse(text);
+  if(!d || d.lernfux !== 1 || !d.daten || typeof d.daten !== "object" || !/^[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(d.code) || !d.name) throw 0;
+  let k = KD.konten.find(x => x.code === d.code);
+  if(!k){ k = { id: zufall(6), name: String(d.name).slice(0, 20), code: d.code }; KD.konten.push(k); }
+  localStorage.setItem("lernfortschritt:" + k.id, JSON.stringify(d.daten));
+  return k;
+}
+function kopieren(text, fb){
+  (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(() => { fb.textContent = "Kopiert."; }, () => { fb.textContent = "Das Kopieren hat nicht geklappt. Markiere den Text und kopiere ihn von Hand."; });
+}
+function kontoSeite(modus, info){
+  const letzter = KD.konten.find(k => k.id === KD.zuletzt);
+  modus = modus || (!KD.konten.length ? "neu" : letzter ? "frage" : "code");
+  const el = id => document.getElementById(id), los = (id, f) => el(id).addEventListener("click", f), enter = (a, b) => el(a).addEventListener("keydown", e => { if(e.key === "Enter") el(b).click(); });
+  if(modus === "frage"){
+    app.innerHTML = '<h1>Willkommen zurück!</h1>' + fuxBox("Bist du <strong>" + esc(letzter.name) + "</strong>?") + '<p><button class="btn" id="ja" type="button">Ja, das bin ich</button> <button class="btn" id="nein" type="button">Nein, ich habe einen Code</button></p><p><button class="btn" id="neu" type="button">Neues Konto erstellen</button></p>';
+    los("ja", () => anmelden(letzter)); los("nein", () => kontoSeite("code")); los("neu", () => kontoSeite("neu"));
+  } else if(modus === "code"){
+    app.innerHTML = '<h1>Anmelden</h1>' + fuxBox("Gib deinen Code ein, dann geht es weiter.") + '<div class="lesson"><label for="kc"><h2>Dein Code</h2></label><input id="kc" class="antw" placeholder="ABCD-EFGH" autocomplete="off" maxlength="12"><button class="btn" id="kok" type="button">Anmelden</button><p class="fb" id="kfb" role="status"></p><h2>Neues Gerät?</h2><p class="meta">Füge hier den Sicherungstext von deinem alten Gerät ein.</p><textarea id="ks" rows="3" aria-label="Sicherungstext"></textarea><p><button class="btn" id="kso" type="button">Mit Sicherung anmelden</button></p><p><button class="btn" id="kneu" type="button">Neues Konto erstellen</button>' + (letzter ? ' <button class="btn" id="kzur" type="button">Zurück</button>' : '') + '</p></div>';
+    el("kfb").textContent = info || ""; enter("kc", "kok");
+    los("kok", () => { const k = KD.konten.find(x => normC(x.code) === normC(el("kc").value)); if(k) anmelden(k); else el("kfb").textContent = "Diesen Code kenne ich auf diesem Gerät nicht. Auf einem neuen Gerät brauchst du die Sicherung von deinem alten Gerät."; });
+    los("kso", () => { try { const k = ausSicherung(el("ks").value); kontenSpeichern(); anmelden(k); } catch(e){ el("kfb").textContent = "Das hat nicht geklappt. Prüfe, ob du den ganzen Sicherungstext eingefügt hast."; } });
+    los("kneu", () => kontoSeite("neu")); if(letzter) los("kzur", () => kontoSeite("frage"));
+  } else if(modus === "neu"){
+    app.innerHTML = '<h1>Willkommen bei LernFux!</h1>' + fuxBox("Ich bin Fux. Erstelle dein Konto. Du bekommst einen Code, mit dem du dich später wieder anmeldest.") + '<div class="lesson"><label for="kn"><h2>Wie heißt du?</h2></label><p class="meta">Nimm deinen Vornamen oder einen Spitznamen. Schreibe hier keine anderen persönlichen Daten auf.</p><input id="kn" class="antw" maxlength="20" autocomplete="off"><button class="btn" id="kok" type="button">Konto erstellen</button><p class="fb" id="kfb" role="status"></p><p><button class="btn" id="kcode" type="button">Ich habe schon einen Code</button>' + (letzter ? ' <button class="btn" id="kzur" type="button">Zurück</button>' : '') + '</p></div>';
+    enter("kn", "kok");
+    los("kok", () => {
+      const n = el("kn").value.trim().slice(0, 20); if(!n){ el("kfb").textContent = "Bitte schreibe zuerst deinen Namen."; return; }
+      const k = { id: zufall(6), name: n, code: neuerCode() };
+      if(!KD.konten.length){ try { const alt = localStorage.getItem("lernfortschritt"); if(alt) localStorage.setItem("lernfortschritt:" + k.id, alt); } catch(e){} }
+      KD.konten.push(k); KD.zuletzt = k.id; kontenSpeichern(); kontoSeite("zeigen", k);
+    });
+    los("kcode", () => kontoSeite("code")); if(letzter) los("kzur", () => kontoSeite("frage"));
+  } else {
+    app.innerHTML = '<h1>Dein Konto ist fertig!</h1>' + fuxBox("Das ist dein Code. Schreib ihn auf, damit du dich wieder anmelden kannst.") + '<div class="lesson"><p style="font-size:2rem;font-weight:800;letter-spacing:.08em;margin:0 0 1rem">' + esc(info.code) + '</p><button class="btn" id="kkop" type="button">Code kopieren</button> <button class="btn" id="kgo" type="button">Los geht’s</button><p class="fb" id="kfb" role="status"></p></div>';
+    los("kkop", () => kopieren(info.code, el("kfb"))); los("kgo", () => anmelden(info));
+  }
+}
+function kopf(l){
+  const min = Math.max(1, Math.round(l.inhalt.replace(/<[^>]*>/g, " ").split(/\s+/).length / 180));
+  return '<p class="meta">' + min + ' Min. Lesezeit</p><p><button class="btn" id="vorles" type="button">Vorlesen</button></p>' + (l.ziele && l.ziele.length ? '<div class="merke"><strong>Das kannst du danach</strong><ul>' + l.ziele.map(z => '<li>' + esc(z) + '</li>').join("") + '</ul></div>' : "");
+}
+function kartenHtml(l){
+  return l.karten && l.karten.length ? '<div class="quizbox"><h2>Karteikarten</h2><p class="meta">Tippe auf eine Karte, um sie umzudrehen. So übst du Begriffe.</p><div class="karten">' + l.karten.map((c, ci) => '<button type="button" class="karte" data-ci="' + ci + '">' + esc(c.vorne) + '</button>').join("") + '</div></div>' : "";
+}
+function serie(){
+  const tag = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"), heute = tag(new Date()), s = fortschritt._serie || { anzahl: 0, letzter: "" };
+  if(s.letzter === heute) return;
+  (fortschritt._tage = fortschritt._tage || {})[heute] = 1;
+  const g = new Date(); g.setDate(g.getDate() - 1); const gestern = tag(g);
+  fortschritt._serie = { letzter: heute, anzahl: s.letzter === gestern ? s.anzahl + 1 : 1 };
+  speichern(fortschritt);
+}
+function gesamt(){
+  const alle = THEMEN.flatMap(t => t.lektionen.map(l => t.id + ":" + l.id)), d = alle.filter(k => fortschritt[k]).length, p = alle.length ? Math.round(d / alle.length * 100) : 0, s = fortschritt._serie;
+  return '<div class="gesamt"><div class="bar" role="progressbar" aria-valuenow="' + p + '" aria-valuemin="0" aria-valuemax="100"><i style="width:' + p + '%"></i></div><div class="meta">' + d + ' von ' + alle.length + ' Lektionen erledigt' + (s && s.anzahl > 1 ? ', ' + s.anzahl + ' Tage in Folge' : '') + '</div></div>';
+}
+function treffer(f){
+  f = (f || "").trim().toLowerCase();
+  if(!f) return "";
+  const r = THEMEN.flatMap(t => t.lektionen.filter(l => (l.titel + " " + l.inhalt.replace(/<[^>]*>/g, " ")).toLowerCase().includes(f)).map(l => '<li><a href="#' + esc(t.id) + '--' + esc(l.id) + '">' + esc(l.titel) + '</a><span class="meta">' + esc(t.titel) + '</span></li>'));
+  return '<h2>Lektionen</h2>' + (r.length ? '<ul class="lektionen">' + r.join("") + '</ul>' : '<p>Keine Lektion gefunden.</p>');
+}
+function merkliste(){
+  const r = THEMEN.flatMap(t => t.lektionen.filter(l => fortschritt["s:" + t.id + ":" + l.id]).map(l => '<li><a href="#' + esc(t.id) + '--' + esc(l.id) + '">' + esc(l.titel) + '</a><span class="meta">' + esc(t.titel) + '</span></li>'));
+  app.innerHTML = '<p><a href="#">Alle Themen</a></p><h1>Merkliste</h1>' + fuxBox('Hier liegen die Lektionen, die du mit „Merken“ markiert hast. So findest du sie schnell wieder.') + (r.length ? '<ul class="lektionen">' + r.join("") + '</ul>' : '<div class="empty"><h2>Noch nichts gemerkt</h2><p>Tippe in einer Lektion auf „Merken“, dann erscheint sie hier.</p></div>');
+}
+function glossar(){
+  const g = GLOSSAR.slice().sort((a, b) => a.begriff.localeCompare(b.begriff, "de"));
+  app.innerHTML = '<p><a href="#">Alle Themen</a></p><h1>Glossar</h1>' + fuxBox('Hier stehen alle Fachbegriffe von A bis Z. Wenn du ein Wort nicht kennst, schau einfach nach.') + (g.length ? '<dl class="glossar">' + g.map(x => '<dt>' + esc(x.begriff) + '</dt><dd>' + esc(x.text) + '</dd>').join("") + '</dl>' : '<div class="empty"><h2>Noch keine Begriffe</h2><p>Hier erscheinen alle Fachbegriffe von A bis Z.</p></div>');
+}
+function spielStart(fn){
+  if(sterne() < 1){ fuxSagt("Für ein Spiel brauchst du 1 Münze. Mit jeder erledigten Lektion bekommst du 5.", "denk"); return; }
+  fortschritt._ausgegeben = (fortschritt._ausgegeben || 0) + 1; speichern(fortschritt); zaehlerSetzen(sterne()); fn();
+}
+function spiele(){
+  const g = [["memory", "Memory", "Finde alle Paare."], ["tictac", "Drei gewinnt", "Spiele gegen Fux."], ["zahl", "Zahlenraten", "Errate die Zahl von 1 bis 20."]];
+  app.innerHTML = '<p><a href="#">Zurück</a></p><h1>Spiele</h1>' + fuxBox("Jedes Spiel kostet <strong>1 Münze</strong>. Für jede erledigte Lektion bekommst du 5 Münzen. Du hast gerade <strong>" + sterne() + "</strong>.") +
+    '<div class="grid">' + g.map(x => '<div class="card"><h2>' + x[1] + '</h2><p>' + x[2] + '</p><button class="btn" data-g="' + x[0] + '" type="button">Spielen (1 Münze)</button></div>').join("") + '</div>';
+  app.querySelectorAll("[data-g]").forEach(b => b.onclick = () => spielStart(() => spiel(b.dataset.g)));
+}
+function spielEnde(titel, text, id, sieg){
+  if(sieg) konfetti();
+  app.innerHTML = '<h1>' + esc(titel) + '</h1>' + fuxBox(text, sieg ? "jubel" : "froh") + '<p><button class="btn" id="nochmal" type="button">Nochmal (1 Münze)</button> <button class="btn" id="zs" type="button">Zu den Spielen</button></p>';
+  document.getElementById("nochmal").onclick = () => spielStart(() => spiel(id));
+  document.getElementById("zs").onclick = () => geheZu("#spiele");
+  window.scrollTo(0, 0);
+}
+function spiel(id){
+  const rahmen = (titel, inhalt) => { app.innerHTML = '<p><button class="btn" id="abbr" type="button">Abbrechen</button></p><h1>' + titel + '</h1>' + inhalt; document.getElementById("abbr").onclick = () => geheZu("#spiele"); };
+  if(id === "memory"){
+    const k = mischen(["🦊", "🐻", "🐼", "🐸", "🦉", "🐙"].concat(["🦊", "🐻", "🐼", "🐸", "🦉", "🐙"])); let offen = [], zuege = 0, paare = 0, sperre = false;
+    rahmen("Memory", '<p class="meta">Züge: <strong id="zg">0</strong></p><div class="mem">' + k.map((c, i) => '<button type="button" class="mk" data-i="' + i + '" aria-label="Karte ' + (i + 1) + '"></button>').join("") + '</div>');
+    app.querySelectorAll(".mk").forEach(b => b.onclick = () => {
+      if(sperre || b.classList.contains("auf")) return;
+      const i = +b.dataset.i; b.textContent = k[i]; b.classList.add("auf"); offen.push(b);
+      if(offen.length < 2) return;
+      zuege++; document.getElementById("zg").textContent = zuege;
+      const [a, c] = offen;
+      if(k[+a.dataset.i] === k[+c.dataset.i]){ a.disabled = c.disabled = true; offen = []; if(++paare === 6) spielT = setTimeout(() => spielEnde("Alle Paare gefunden!", "Du hast es in " + zuege + " Zügen geschafft.", "memory", true), 700); }
+      else { sperre = true; spielT = setTimeout(() => { offen.forEach(x => { x.textContent = ""; x.classList.remove("auf"); }); offen = []; sperre = false; }, 800); }
+    });
+  } else if(id === "tictac"){
+    const b = Array(9).fill(""), L = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]; let aus = false, denkt = false;
+    const sieg = z => L.some(l => l.every(i => b[i] === z)), frei = () => b.map((v, i) => v ? -1 : i).filter(i => i >= 0);
+    const zug = z => { for(const x of frei()){ b[x] = z; const w = sieg(z); b[x] = ""; if(w) return x; } return -1; };
+    rahmen("Drei gewinnt", '<p class="meta" id="ts" role="status">Du bist X, Fux ist O. Du bist dran.</p><div class="ttt">' + b.map((v, i) => '<button type="button" class="mk" data-i="' + i + '" aria-label="Feld ' + (i + 1) + '"></button>').join("") + '</div>');
+    const zeichne = () => app.querySelectorAll(".mk").forEach((m, i) => { m.textContent = b[i]; m.disabled = !!b[i]; });
+    const ende = (t, tx, s) => { aus = true; spielT = setTimeout(() => spielEnde(t, tx, "tictac", s), 800); };
+    app.querySelectorAll(".mk").forEach(m => m.onclick = () => {
+      const i = +m.dataset.i; if(aus || denkt || b[i]) return;
+      b[i] = "X"; zeichne();
+      if(sieg("X")) return ende("Du hast gewonnen!", "Stark gespielt, das war ein Sieg gegen Fux.", true);
+      if(!frei().length) return ende("Unentschieden", "Niemand hat gewonnen. Versuch es gleich noch einmal.", false);
+      denkt = true; const st = document.getElementById("ts"); if(st) st.textContent = "Fux überlegt … 🤔"; spielT = setTimeout(() => { denkt = false; if(st) st.textContent = "Du bist X, Fux ist O. Du bist dran."; let x = zug("O"); if(x < 0) x = zug("X"); if(x < 0) x = b[4] ? zuf(frei()) : 4;
+      b[x] = "O"; zeichne();
+      if(sieg("O")) return ende("Fux hat gewonnen", "Diesmal war ich schneller. Probier es noch einmal!", false);
+      if(!frei().length) ende("Unentschieden", "Niemand hat gewonnen. Versuch es gleich noch einmal.", false); }, 1000 + Math.random() * 1200);
+    });
+  } else {
+    const geheim = 1 + Math.floor(Math.random() * 20); let versuche = 5;
+    rahmen("Zahlenraten", '<p>Ich denke an eine Zahl von 1 bis 20. Du hast <strong id="vs">5</strong> Versuche.</p><input id="zz" class="antw" inputmode="numeric" aria-label="Deine Zahl"> <button class="btn" id="rat" type="button">Raten</button><p class="fb" id="zf" role="status"></p>');
+    const eing = document.getElementById("zz"); eing.focus(); eing.onkeydown = e => { if(e.key === "Enter") document.getElementById("rat").click(); };
+    document.getElementById("rat").onclick = () => {
+      const z = parseInt(eing.value, 10), f = document.getElementById("zf");
+      if(!(z >= 1 && z <= 20)){ f.textContent = "Schreibe eine Zahl von 1 bis 20."; return; }
+      if(z === geheim) return spielEnde("Richtig geraten!", "Die Zahl war " + geheim + ". Du hast " + (6 - versuche) + " Versuche gebraucht.", "zahl", true);
+      versuche--; document.getElementById("vs").textContent = versuche; eing.value = "";
+      if(versuche === 0) return spielEnde("Leider verloren", "Die Zahl war " + geheim + ". Beim nächsten Mal klappt es!", "zahl", false);
+      f.textContent = z < geheim ? "Meine Zahl ist größer." : "Meine Zahl ist kleiner."; eing.focus();
+    };
+  }
+}
+
+function weiterButton(){
+  const alle = THEMEN.flatMap(t => t.lektionen.map(l => ({ l, hash: t.id + "--" + l.id, k: t.id + ":" + l.id })));
+  const z = alle.findIndex(x => x.hash === fortschritt._zuletzt), s = Math.max(z, 0);
+  const offen = alle.slice(s).concat(alle.slice(0, s)).find(x => !fortschritt[x.k]);
+  if(!offen) return "";
+  return '<p><a class="btn" href="#' + esc(offen.hash) + '">' + (z >= 0 ? "Weitermachen" : "Loslegen") + ': ' + esc(offen.l.titel) + '</a></p>';
+}
+
+function schnell(){ return '<nav class="schnell" aria-label="Schnellzugriff">' + [["#vokabeln","🔤","Vokabeln"],["#spiele","🎮","Spiele"],["#wiederholen","🔁","Wiederholen"],["#blitz","⚡","Blitzrunde"]].map(x => '<a class="card" href="' + x[0] + '"><span class="ico" aria-hidden="true">' + x[1] + '</span><h2>' + x[2] + '</h2></a>').join("") + "</nav>"; }
+function startseite(filter){
+  let html = gruss() + schnell();
+  if(Object.keys(fortschritt).length > 5 && (!fortschritt._sich || Date.now() - fortschritt._sich > 12096e5)) html += fuxBox('Du hast lange keine Sicherung gemacht. Mach sie in den <a href="#einstellungen">Einstellungen</a>, dann geht nichts verloren.');
+  if(!THEMEN.length){
+    html += '<p class="lead">Hier entsteht deine Lernwebsite.</p>' +
+      '<div class="empty"><h2>Noch keine Themen</h2><p>Sobald Themen hinzugefügt sind, erscheinen sie hier als Karten mit Lektionen und Fortschrittsanzeige.</p></div>';
+    app.innerHTML = html; nameBind(); return;
+  }
+  const ab = fortschritt._abschn || { stand: false, lernen: true }, lv = stufe(verdient());
+  const sec = (id, titel, klein, inhalt) => '<details class="abschnitt" data-a="' + id + '"' + (ab[id] ? " open" : "") + '><summary><span>' + titel + '</span><span class="meta">' + klein + '</span></summary><div class="inhalt">' + inhalt + '</div></details>';
+  const liste = THEMEN.filter(t => (t.titel + " " + (t.beschreibung||"")).toLowerCase().includes((filter||"").toLowerCase()));
+  const lern = '<p class="lead">Wähle ein Thema und arbeite die Lektionen nacheinander durch.</p><input class="search" type="search" id="suche" placeholder="Thema oder Lektion suchen" aria-label="Thema oder Lektion suchen" value="' + esc(filter||"") + '">' +
+    '<div class="grid">' + (liste.length ? liste.map(t => {
+      const n = t.lektionen.length, d = erledigt(t), p = n ? Math.round(d / n * 100) : 0;
+      return '<a class="card"' + (t.farbe ? ' style="--c:' + esc(t.farbe) + '"' : '') + ' href="#' + esc(t.id) + '">' + (t.icon ? '<span class="ico" aria-hidden="true">' + esc(t.icon) + '</span>' : '') + '<h2>' + esc(t.titel) + '</h2><p>' + esc(t.beschreibung||"") + '</p>' +
+        '<div class="bar" role="progressbar" aria-valuenow="' + p + '" aria-valuemin="0" aria-valuemax="100"><i style="width:' + p + '%"></i></div>' +
+        '<div class="meta">' + d + ' von ' + n + ' Lektionen erledigt</div></a>';
+    }).join("") : '<p>Kein Thema gefunden.</p>') + "</div>" + treffer(filter);
+  html += sec("stand", "Mein Lernstand", "Stufe " + (lv + 1) + ": " + STUFEN[lv] + ", " + (heuteN() >= 1 ? "Tagesziel geschafft" : "Tagesziel offen"), weiterButton() + tagesBlock() + gesamt() + chips()) +
+    sec("lernen", "Lernen", THEMEN.length + (THEMEN.length === 1 ? " Thema" : " Themen"), lern);
+  app.innerHTML = html; nameBind();
+  app.querySelectorAll("details.abschnitt").forEach(d => d.addEventListener("toggle", () => { fortschritt._abschn = Object.assign({ stand: false, lernen: true }, fortschritt._abschn, { [d.dataset.a]: d.open }); speichern(fortschritt); }));
+  const s = document.getElementById("suche");
+  s.addEventListener("input", () => { const v = s.value; app.classList.add("still"); startseite(v); const n = document.getElementById("suche"); n.focus(); n.setSelectionRange(v.length, v.length); });
+}
+
+function themaSeite(t){
+  app.innerHTML = '<p><a href="#">Alle Themen</a></p><h1>' + esc(t.titel) + '</h1><p class="lead">' + esc(t.beschreibung || "") + '</p>' + fuxBox("Das sind die Lektionen. Fang oben an und arbeite dich Schritt für Schritt nach unten." + (t.nacheinander ? " Die nächste Lektion öffnet sich, wenn du die vorige als erledigt markiert hast." : "")) + (() => { const nx = t.lektionen.findIndex((l, i) => !fortschritt[t.id + ":" + l.id] && !gesperrt(t, i)); return nx >= 0 ? '<p><a class="btn gross" href="#' + esc(t.id) + '--' + esc(t.lektionen[nx].id) + '">' + (erledigt(t) ? "Weitermachen: " : "Starten: ") + esc(t.lektionen[nx].titel) + ' →</a></p>' : '<p class="meta">Alle Lektionen erledigt. Super!</p>'; })() + '<ul class="lektionen">' + t.lektionen.map((l, i) => {
+    const its = lektionItems(l, t.id + ":" + l.id), bw = its.filter(it => fortschritt[it.key] !== undefined).length, aufg = its.length ? ", " + bw + "/" + its.length + " Aufgaben" : "";
+    const an = !!fortschritt[t.id + ":" + l.id];
+    return gesperrt(t, i) ? '<li class="gesperrt"><span>' + esc(l.titel) + '</span><span class="meta">Gesperrt</span></li>' : '<li><a href="#' + esc(t.id) + '--' + esc(l.id) + '">' + (i + 1) + '. ' + esc(l.titel) + '</a><span class="meta">' + (an ? "✔ Erledigt" : "Offen") + aufg + '</span></li>';
+  }).join("") + '</ul>';
+}
+
+function lektionSeite(t, i){
+  const n = t.lektionen.length, l = t.lektionen[i], k = t.id + ":" + l.id, an = !!fortschritt[k], items = lektionItems(l, k);
+  const link = x => '#' + esc(t.id) + '--' + esc(t.lektionen[x].id);
+  fortschritt._zuletzt = t.id + "--" + l.id; speichern(fortschritt); serie();
+  const beantw = items.filter(it => fortschritt[it.key] !== undefined).length, ok = items.filter(istRichtig).length;
+  const ueb = items.length ? '<div class="quizbox"><h2>Üben</h2><p class="meta">' + items.length + ' Aufgaben, jede auf einer eigenen Seite. ' + (beantw === items.length ? ok + ' von ' + items.length + ' richtig.' : beantw ? beantw + ' schon beantwortet.' : '') + '</p><button class="btn gross" id="ueb" type="button">' + (beantw === 0 ? "Weiter zu Aufgabe 1 →" : beantw < items.length ? "Weiter üben" : ok < items.length ? "Falsche Aufgaben wiederholen" : "Nochmal üben") + '</button></div>' : "";
+  app.innerHTML = '<p><a href="#' + esc(t.id) + '">' + esc(t.titel) + '</a></p><h1>' + esc(l.titel) + '</h1><p class="meta">Lektion ' + (i + 1) + ' von ' + n + ': erst lesen' + (items.length ? ', dann ' + items.length + ' Aufgaben, jede auf einer eigenen Seite' : '') + '</p>' +
+    kopf(l) + fuxBox(esc(l.fux || "Lies die Lektion in Ruhe durch. Danach kannst du üben und bekommst dafür Münzen.")) + '<article class="lesson"><div class="inh">' + l.inhalt + '</div>' + kartenHtml(l) + ueb +
+    '<div class="quizbox"><label for="notiz"><h2>Notizen</h2></label><textarea id="notiz" rows="4"></textarea></div>' +
+    '<button class="done" aria-pressed="' + an + '">' + (an ? "Erledigt" : "Als erledigt markieren") + '</button> <button class="done" id="stern" aria-pressed="' + !!fortschritt["s:" + k] + '">' + (fortschritt["s:" + k] ? "Gemerkt" : "Merken") + '</button></article>' +
+    '<nav class="schritte">' + (i > 0 ? '<a class="btn" href="' + link(i - 1) + '">Zurück</a>' : '<span></span>') +
+    (items.length && beantw < items.length ? '<button class="btn gross" id="ueb2" type="button">Weiter zu den Aufgaben →</button>' : i < n - 1 ? '<a class="btn gross" href="' + link(i + 1) + '">Weiter</a>' : '<a class="btn gross" href="#' + esc(t.id) + '">Zur Übersicht</a>') + '</nav>';
+  const b = app.querySelector(".done"), sb = document.getElementById("stern"), nz = document.getElementById("notiz");
+  nz.value = fortschritt["n:" + k] || "";
+  nz.addEventListener("input", () => { fortschritt["n:" + k] = nz.value; speichern(fortschritt); });
+  sb.addEventListener("click", () => { const m = !fortschritt["s:" + k]; fortschritt["s:" + k] = m; speichern(fortschritt); sb.setAttribute("aria-pressed", m); sb.textContent = m ? "Gemerkt" : "Merken"; });
+  app.querySelectorAll(".karte").forEach(c => c.addEventListener("click", () => { const d = l.karten[+c.dataset.ci], um = c.classList.toggle("um"); c.textContent = um ? d.hinten : d.vorne; }));
+  b.addEventListener("click", () => {
+    fortschritt[k] = !fortschritt[k]; const a = !!fortschritt[k];
+    fortschritt._heute = { d: tagStr(new Date()), n: Math.max(0, heuteN() + (a ? 1 : -1)) }; (fortschritt._verlauf = fortschritt._verlauf || {})[tagStr(new Date())] = fortschritt._heute.n; speichern(fortschritt);
+    if(a){ konfetti(); belohnung(b, true, "Lektion geschafft!"); } else zaehlerSetzen(sterne());
+    b.setAttribute("aria-pressed", a); b.textContent = a ? "Erledigt" : "Als erledigt markieren";
+  });
+  const u = document.getElementById("ueb");
+  if(u) u.onclick = () => {
+    const offen = items.filter(it => fortschritt[it.key] === undefined), falsch = items.filter(it => fortschritt[it.key] !== undefined && !istRichtig(it));
+    ueben({ titel: l.titel, items: offen.length ? offen : falsch.length ? falsch : items, abbruch: () => anzeigen(),
+      onAntwort: (it, r, w, tipp, fb) => { fortschritt[it.key] = w; if(tipp) fortschritt["h:" + it.key] = 1; else delete fortschritt["h:" + it.key]; plan(it.key, r, true); belohnung(fb, r); },
+      onEnde: (r, nn) => { if(!fortschritt[k] && items.every(it => fortschritt[it.key] !== undefined)){ fortschritt[k] = true; const td = tagStr(new Date()); fortschritt._heute = { d: td, n: heuteN() + 1 }; (fortschritt._verlauf = fortschritt._verlauf || {})[td] = fortschritt._heute.n; speichern(fortschritt); } if(items.every(istRichtig)) konfetti(); endeSeite("Geschafft!", r, nn, [["Zur Lektion", () => anzeigen()]].concat(i < n - 1 ? [["Nächste Lektion", () => geheZu(link(i + 1))]] : [])); } });
+  };
+  const u2 = document.getElementById("ueb2"); if(u2) u2.onclick = () => u.click();
+  lektionExtras(l); glossarLinks();
+}
+
+function anzeigen(){
+  if(typeof zStop === "function") zStop(); clearInterval(blitzT); clearTimeout(spielT);
+  document.body.classList.toggle("aus", !konto);
+  if(!konto){ app.classList.remove("still"); kontoSeite(); window.scrollTo(0, 0); return; }
+  const [tid, lid] = location.hash.slice(1).split("--");
+  const t = THEMEN.find(x => x.id === tid);
+  const i = t && lid ? t.lektionen.findIndex(l => l.id === lid) : -1;
+  if(tid === "vokabeln") vokabeln(lid); else if(tid === "spiele") spiele(); else if(tid === "zusammen") zusammen(); else if(tid === "tagesaufgabe") tagesaufgabe(); else if(tid === "einstellungen") einstellungen(); else if(tid === "wiederholen") wiederholen(); else if(tid === "blitz") blitz(); else if(tid === "kalender") kalender(); else if(tid === "pruefung") pruefung(); else if(tid === "glossar") glossar(); else if(tid === "merkliste") merkliste(); else if(t && i >= 0 && !gesperrt(t, i)) lektionSeite(t, i); else if(t) themaSeite(t); else startseite("");
+  app.classList.remove("still"); schriftSetzen(); if(window.speechSynthesis) speechSynthesis.cancel(); window.scrollTo(0, 0); zaehlerSetzen(sterne());
+}
+const menuBtn = document.getElementById("menuBtn"), menu = document.getElementById("menu");
+function menuZu(){ menu.hidden = true; menuBtn.setAttribute("aria-expanded", "false"); }
+function menuBauen(){
+  const grp = (titel, inhalt) => '<details class="grp"><summary>' + titel + '</summary>' + inhalt + '</details>';
+  menu.innerHTML = '<a href="#">Startseite</a>' +
+    grp("Themen", THEMEN.length ? THEMEN.map(t => '<a href="#' + esc(t.id) + '">' + esc(t.titel) + '</a>').join("") : '<span class="leer">Noch keine Themen</span>') +
+    grp("Übungen", '<a href="#wiederholen">Wiederholen</a><a href="#pruefung">Prüfung</a><a href="#blitz">Blitzrunde</a>') +
+    grp("Meine Sachen", '<a href="#merkliste">Merkliste</a><a href="#glossar">Glossar</a><a href="#kalender">Lernkalender</a>') +
+    grp("Andere", '<a href="#vokabeln">Vokabeln</a><a href="#spiele">Spiele</a><a href="#zusammen">Zusammen lernen</a>') +
+    '<a href="#einstellungen">Einstellungen</a>';
+}
+menuBtn.addEventListener("click", () => {
+  const auf = menu.hidden; menu.hidden = !auf; menuBtn.setAttribute("aria-expanded", String(auf));
+});
+menu.addEventListener("click", e => { if(e.target.closest("a")) menuZu(); });
+document.addEventListener("keydown", e => { if(e.key === "Escape") menuZu(); });
+document.addEventListener("click", e => { if(!e.target.closest("header")) menuZu(); });
+menuBauen();
+try { localStorage.setItem("lf_test", "1"); localStorage.removeItem("lf_test"); } catch(e){ warnSpeicher(); }
+window.addEventListener("hashchange", () => { menuZu(); anzeigen(); });
+document.getElementById("logoFux").innerHTML = fuxSvg(); anzeigen();
+</script>
+<script>
+/* ===== Vokabeln ===== */
+const SPRACHEN = ["Deutsch","Englisch","Französisch","Spanisch","Italienisch","Latein","Türkisch","Polnisch","Russisch","Arabisch","Ukrainisch","Niederländisch"];
+const LC = { Deutsch:"de-DE", Englisch:"en-GB", Französisch:"fr-FR", Spanisch:"es-ES", Italienisch:"it-IT", Latein:"la", Türkisch:"tr-TR", Polnisch:"pl-PL", Russisch:"ru-RU", Arabisch:"ar-SA", Ukrainisch:"uk-UA", Niederländisch:"nl-NL" }, INT = [0, 1, 3, 7];
+function vd(){ return fortschritt._vok = fortschritt._vok || { listen: [] }; }
+const vfaellig = w => !w.f || w.f <= Date.now(), nFaellig = L => L.w.filter(vfaellig).length, nAlle = () => vd().listen.reduce((s, l) => s + nFaellig(l), 0);
+function sprich(t, sp){ if(!window.speechSynthesis) return; speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); if(LC[sp]) u.lang = LC[sp]; speechSynthesis.speak(u); }
+const kodieren = L => "LFV1:" + btoa(unescape(encodeURIComponent(JSON.stringify({ n: L.name, v: L.von, z: L.nach, w: L.w.map(w => [w.a, w.b]) }))));
+function dekodieren(t){ try { t = t.trim(); if(!/^LFV1:/.test(t)) return null; const d = JSON.parse(decodeURIComponent(escape(atob(t.slice(5))))); if(!d || !Array.isArray(d.w)) return null;
+  return { id: Date.now().toString(36), name: String(d.n || "Import").slice(0, 40), von: String(d.v || "?").slice(0, 30), nach: String(d.z || "?").slice(0, 30), rev: false, w: d.w.slice(0, 500).filter(p => Array.isArray(p) && p[0] && p[1]).map(p => ({ a: String(p[0]).slice(0, 60), b: String(p[1]).slice(0, 60), r: 0 })) }; } catch(e){ return null; } }
+function vokLeiste(){ return '<datalist id="spr">' + SPRACHEN.map(s => '<option value="' + s + '">').join("") + '</datalist>'; }
+function schnell(){ const n = nAlle(); return '<nav class="schnell" aria-label="Schnellzugriff">' + [["#vokabeln","🔤","Vokabeln" + (n ? ' <span class="badge">' + n + '</span>' : "")],["#spiele","🎮","Spiele"],["#wiederholen","🔁","Wiederholen"],["#blitz","⚡","Blitzrunde"]].map(x => '<a class="card" href="' + x[0] + '"><span class="ico" aria-hidden="true">' + x[1] + '</span><h2>' + x[2] + '</h2></a>').join("") + "</nav>"; }
+function vokabeln(id){ const L = id && vd().listen.find(x => x.id === id); if(L) vokListe(L); else vokUebersicht(); }
+function vokUebersicht(){
+  const ls = vd().listen;
+  app.innerHTML = '<p><a href="#">Zurück</a></p><h1>Vokabeln</h1>' + fuxBox(ls.length ? "Heute fällig: <strong>" + nAlle() + "</strong> Wörter. Was du weißt, kommt später wieder, was nicht, schon bald." : "Lege deine eigenen Vokabellisten an. Du bestimmst die Sprachen und trägst die Wörter selbst ein.") + vokLeiste() +
+    '<div class="grid">' + ls.map(l => { const g = l.w.filter(w => (w.r || 0) >= 3).length, p = l.w.length ? Math.round(g / l.w.length * 100) : 0, f = nFaellig(l);
+      return '<a class="card" href="#vokabeln--' + l.id + '"><h2>' + esc(l.name) + (f ? ' <span class="badge">' + f + ' fällig</span>' : "") + '</h2><p>' + esc(l.von) + ' → ' + esc(l.nach) + '</p><div class="bar"><i style="width:' + p + '%"></i></div><div class="meta">' + l.w.length + ' Wörter, ' + g + ' gekonnt</div></a>'; }).join("") + '</div>' +
+    '<article class="lesson" style="margin-top:1.5rem"><h2>Neue Liste</h2><p><label>Name<br><input id="vn" class="antw" maxlength="40" placeholder="z. B. Englisch Unit 3"></label></p>' +
+    '<p><label>Sprache der Wörter<br><input id="vv" class="antw" list="spr" value="Deutsch"></label> <label>Übersetzung in<br><input id="vz" class="antw" list="spr" placeholder="z. B. Englisch"></label></p>' +
+    '<p class="meta">Du kannst auch eine eigene Sprache eintippen.</p><p><button class="btn" id="vok" type="button">Liste anlegen</button></p></article>' +
+    '<article class="lesson"><h2>Liste importieren</h2><p class="meta">Füge hier den Code einer geteilten Liste ein.</p><textarea id="vi" rows="3" style="width:100%" aria-label="Listen-Code"></textarea><p><button class="btn" id="vio" type="button">Importieren</button></p><p class="fb" id="vif" role="status"></p></article>';
+  document.getElementById("vok").onclick = () => {
+    const n = vn.value.trim(), a = vv.value.trim(), b = vz.value.trim(); if(!n || !a || !b){ fuxSagt("Bitte fülle Name und beide Sprachen aus.", "denk"); return; }
+    const l = { id: Date.now().toString(36), name: n, von: a, nach: b, w: [], rev: false }; vd().listen.push(l); speichern(fortschritt); geheZu("#vokabeln--" + l.id); };
+  document.getElementById("vio").onclick = () => { const l = dekodieren(vi.value); if(!l || !l.w.length){ vif.textContent = "Mit diesem Code kann ich nichts anfangen."; return; } vd().listen.push(l); speichern(fortschritt); geheZu("#vokabeln--" + l.id); };
+}
+function vokListe(L){
+  const g = L.w.filter(w => (w.r || 0) >= 3).length, sf = L.rev ? L.nach : L.von, sb = L.rev ? L.von : L.nach, leer = !L.w.length, f = nFaellig(L), alle = f === 0, kn = f ? " (" + f + " fällig)" : " (alle)";
+  app.innerHTML = '<p><a href="#vokabeln">Alle Listen</a></p><h1>' + esc(L.name) + '</h1><p class="meta">' + esc(L.von) + ' → ' + esc(L.nach) + ', ' + L.w.length + ' Wörter, ' + g + ' gekonnt, ' + f + ' fällig</p>' + vokLeiste() +
+    '<article class="lesson"><h2>Üben</h2><p><button class="btn gross" id="k1" type="button"' + (leer ? " disabled" : "") + '>Karteikarten' + kn + '</button> <button class="btn gross" id="k2" type="button"' + (leer ? " disabled" : "") + '>Tippen' + kn + '</button></p><p><button class="btn" id="dr" type="button">Richtung: ' + esc(sf) + ' → ' + esc(sb) + '</button></p></article>' +
+    '<article class="lesson"><h2>Wort hinzufügen</h2><p><input id="wa" class="antw" placeholder="' + esc(L.von) + '" aria-label="' + esc(L.von) + '" maxlength="60"> <input id="wb" class="antw" placeholder="' + esc(L.nach) + '" aria-label="' + esc(L.nach) + '" maxlength="60"> <button class="btn" id="wok" type="button">Hinzufügen</button></p>' +
+    '<details><summary>Mehrere auf einmal</summary><p class="meta">Ein Wort pro Zeile, getrennt mit =, zum Beispiel: Haus = house</p><textarea id="wm" rows="5" style="width:100%" aria-label="Mehrere Wörter"></textarea><p><button class="btn" id="wmok" type="button">Alle hinzufügen</button></p></details></article>' +
+    '<article class="lesson"><h2>Wörter</h2>' + (leer ? '<p class="meta">Noch keine Wörter.</p>' : '<table style="width:100%;border-collapse:collapse">' + L.w.map((w, i) => '<tr style="border-top:1px solid var(--line)"><td style="padding:.4rem">' + esc(w.a) + '</td><td style="padding:.4rem">' + esc(w.b) + '</td><td class="meta">' + "●".repeat(w.r || 0) + "○".repeat(3 - (w.r || 0)) + '</td><td style="text-align:right;white-space:nowrap"><button class="done" data-e="' + i + '" type="button" aria-label="Bearbeiten">✏️</button> <button class="done" data-d="' + i + '" type="button" aria-label="Löschen">🗑️</button></td></tr>').join("") + '</table>') + '</article>' +
+    '<article class="lesson"><h2>Liste teilen</h2><p class="meta">Schicke den Code an andere. Sie fügen ihn bei „Liste importieren“ ein.</p><textarea id="tc" rows="3" readonly style="width:100%" aria-label="Listen-Code"></textarea><p><button class="btn" id="tk" type="button">Code kopieren</button></p><p class="fb" id="tf" role="status"></p></article>' +
+    '<p><button class="done" id="ld" type="button">Liste löschen</button></p>';
+  tc.value = kodieren(L); document.getElementById("tk").onclick = () => kopieren(tc.value, tf);
+  const neu = (a, b) => { a = a.trim(); b = b.trim(); if(a && b){ L.w.push({ a, b, r: 0 }); return 1; } return 0; };
+  const add = () => { if(neu(wa.value, wb.value)){ speichern(fortschritt); vokListe(L); document.getElementById("wa").focus(); } else fuxSagt("Trage beide Felder ein.", "denk"); };
+  document.getElementById("wok").onclick = add; wb.onkeydown = e => { if(e.key === "Enter") add(); };
+  document.getElementById("wmok").onclick = () => { let n = 0; wm.value.split("\n").forEach(z => { const p = z.split(/\s*[=\t]\s*/); if(p.length >= 2) n += neu(p[0], p.slice(1).join(" = ")); }); if(n){ speichern(fortschritt); vokListe(L); } else fuxSagt("Schreibe zum Beispiel: Haus = house", "denk"); };
+  document.getElementById("dr").onclick = () => { L.rev = !L.rev; speichern(fortschritt); vokListe(L); };
+  if(!leer){ document.getElementById("k1").onclick = () => vokUeben(L, "karte", alle); document.getElementById("k2").onclick = () => vokUeben(L, "tippen", alle); }
+  app.querySelectorAll("[data-d]").forEach(b => b.onclick = () => { L.w.splice(+b.dataset.d, 1); speichern(fortschritt); vokListe(L); });
+  app.querySelectorAll("[data-e]").forEach(b => b.onclick = () => wortBearbeiten(L, L.w[+b.dataset.e]));
+  document.getElementById("ld").onclick = () => { if(confirm("Liste „" + L.name + "“ wirklich löschen?")){ vd().listen = vd().listen.filter(x => x !== L); speichern(fortschritt); geheZu("#vokabeln"); } };
+}
+function wortBearbeiten(L, w){
+  const d = document.createElement("div"); d.style.cssText = "position:fixed;inset:0;z-index:999;background:#000c;display:flex;align-items:center;justify-content:center;padding:1rem";
+  d.innerHTML = '<div class="lesson" role="dialog" aria-modal="true" aria-label="Wort bearbeiten" style="max-width:24rem;width:100%;background:var(--surface)"><h2>Wort bearbeiten</h2><p><input id="ea" class="antw" maxlength="60" style="width:100%" aria-label="' + esc(L.von) + '"></p><p><input id="eb" class="antw" maxlength="60" style="width:100%" aria-label="' + esc(L.nach) + '"></p><p class="fb" id="ef" role="status"></p><p><button class="btn" id="eok" type="button">Speichern</button> <button class="btn" id="eno" type="button">Abbrechen</button></p></div>';
+  document.body.appendChild(d); const a = d.querySelector("#ea"), b = d.querySelector("#eb"); a.value = w.a; b.value = w.b; a.focus();
+  const ok = () => { if(a.value.trim() && b.value.trim()){ w.a = a.value.trim(); w.b = b.value.trim(); speichern(fortschritt); d.remove(); vokListe(L); } else d.querySelector("#ef").textContent = "Trage beide Felder ein."; };
+  d.querySelector("#eok").onclick = ok; d.querySelector("#eno").onclick = () => d.remove();
+  d.onkeydown = e => { if(e.key === "Enter") ok(); if(e.key === "Escape") d.remove(); };
+}
+function vokUeben(L, modus, alle){
+  const fr = w => L.rev ? w.b : w.a, ba = w => L.rev ? w.a : w.b, sf = L.rev ? L.nach : L.von, sb = L.rev ? L.von : L.nach, pool = alle ? L.w : L.w.filter(vfaellig);
+  if(!pool.length){ fuxSagt("Heute ist nichts fällig. Super!", "froh"); return; }
+  const q = pool.slice().sort((x, y) => (x.r || 0) - (y.r || 0) + (Math.random() - .5) * 1.5).slice(0, 10); let i = 0, ok = 0;
+  const wert = (w, r) => { w.r = r ? Math.min(3, (w.r || 0) + 1) : 0; w.f = Date.now() + INT[w.r] * 864e5; if(r) ok++; speichern(fortschritt); };
+  function step(){
+    if(i >= q.length){ if(ok === q.length) konfetti(); app.innerHTML = '<h1>Geschafft!</h1>' + fuxBox(ok + " von " + q.length + " gewusst. Noch fällig: <strong>" + nFaellig(L) + "</strong>.", ok === q.length ? "jubel" : "froh") + '<p><button class="btn gross" id="n1" type="button">' + (nFaellig(L) ? "Weiter üben" : "Nochmal") + '</button> <button class="btn" id="n2" type="button">Zur Liste</button></p>'; n1.onclick = () => vokUeben(L, modus, !nFaellig(L)); n2.onclick = () => vokListe(L); return; }
+    const w = q[i];
+    app.innerHTML = '<p><button class="btn" id="ab" type="button">Abbrechen</button></p><div class="bar"><i style="width:' + Math.round(i / q.length * 100) + '%"></i></div><article class="lesson voll"><p class="meta">Wort ' + (i + 1) + ' von ' + q.length + ', ' + esc(sf) + ' → ' + esc(sb) + '</p><h1 class="aufgtitel" style="text-align:center">' + esc(fr(w)) + ' <button class="done" id="vo" type="button" aria-label="Vorlesen">🔊</button></h1>' +
+      (modus === "karte" ? '<p class="fb" id="rk" hidden style="text-align:center;font-size:1.5rem"><strong>' + esc(ba(w)) + '</strong> <button class="done" id="vo2" type="button" aria-label="Vorlesen">🔊</button></p><p><button class="btn gross" id="dh" type="button" style="width:100%">Umdrehen</button></p><p id="wk" hidden style="display:none;gap:.6rem"><button class="btn gross" id="ja" type="button" style="flex:1">Gewusst ✓</button> <button class="btn" id="ne" type="button" style="flex:1">Noch nicht ✗</button></p>'
+        : '<p><input id="ta" class="antw" autocomplete="off" autocapitalize="off" aria-label="Übersetzung" style="width:100%;box-sizing:border-box"></p><p><button class="btn gross" id="pr" type="button" style="width:100%">Prüfen</button></p><p class="fb" id="fb" role="status"></p><p><button class="btn gross" id="wt" type="button" hidden style="width:100%">Weiter</button> <button class="done" id="vo2" type="button" hidden aria-label="Antwort vorlesen">🔊 Antwort</button></p>') + '</article>';
+    ab.onclick = () => vokListe(L); vo.onclick = () => sprich(fr(w), sf); vo2.onclick = () => sprich(ba(w), sb);
+    if(modus === "karte"){ dh.onclick = () => { rk.hidden = false; wk.hidden = false; wk.style.display = "flex"; dh.hidden = true; }; ja.onclick = () => { wert(w, 1); i++; step(); }; ne.onclick = () => { wert(w, 0); i++; step(); }; }
+    else { ta.focus(); let fertig = false; const pruef = () => { if(fertig) return; fertig = true; const r = textOk({ antwort: ba(w).split(/\s*[\/;]\s*/) }, ta.value); wert(w, r); ta.disabled = true; pr.hidden = true; fb.textContent = r ? "Richtig!" : "Nicht ganz. Richtig wäre: " + ba(w); wt.hidden = false; vo2.hidden = false; wt.focus(); };
+      pr.onclick = pruef; ta.onkeydown = e => { if(e.key === "Enter") pruef(); }; wt.onclick = () => { i++; step(); }; }
+  }
+  step();
+}
+/* Vokabel-Memory */
+function vokMemory(){
+  const ok = vd().listen.filter(l => l.w.length >= 4);
+  if(!ok.length){ fuxSagt("Für Vokabel-Memory brauchst du eine Liste mit mindestens 4 Wörtern.", "denk"); return; }
+  if(ok.length === 1){ spielStart(() => memStart(ok[0])); return; }
+  app.innerHTML = '<p><a href="#spiele">Zurück</a></p><h1>Vokabel-Memory</h1><p class="meta">Welche Liste? Das Spiel kostet 1 Münze.</p>' + ok.map((l, li) => '<p><button class="btn gross" data-l="' + li + '" type="button">' + esc(l.name) + '</button></p>').join("");
+  app.querySelectorAll("[data-l]").forEach(b => b.onclick = () => spielStart(() => memStart(ok[+b.dataset.l])));
+}
+function memStart(L){
+  const ws = mischen(L.w).slice(0, 6), cs = mischen(ws.flatMap((w, i) => [{ i, t: w.a, s: 0 }, { i, t: w.b, s: 1 }])); let auf = [], zuege = 0, paare = 0, sperre = false;
+  const zeichne = () => { app.innerHTML = '<p><a href="#spiele">Abbrechen</a></p><h1>Vokabel-Memory</h1><p class="meta">' + esc(L.name) + ', Züge: ' + zuege + ', Paare: ' + paare + ' von ' + ws.length + '</p><div class="vm">' + cs.map((c, ci) => { const o = c.f || auf.includes(ci); return '<button type="button" class="mk vk' + (o ? " auf" : "") + '" data-c="' + ci + '"' + (c.f ? " disabled" : "") + '>' + (o ? esc(c.t) : "?") + '</button>'; }).join("") + '</div>'; app.querySelectorAll("[data-c]").forEach(b => b.onclick = () => klick(+b.dataset.c)); };
+  const ende = () => { const b = fortschritt._best = fortschritt._best || {}, k = "vm" + L.id, neu = !b[k] || zuege < b[k]; if(neu) b[k] = zuege; speichern(fortschritt); konfetti();
+    app.innerHTML = '<h1>Geschafft!</h1>' + fuxBox("In <strong>" + zuege + "</strong> Zügen" + (neu ? ". Neuer Bestwert!" : ". Dein Bestwert: " + b[k] + " Züge."), "jubel") + '<p><button class="btn gross" id="m1" type="button">Nochmal (1 Münze)</button> <button class="btn" id="m2" type="button">Zu den Spielen</button></p>'; m1.onclick = () => spielStart(() => memStart(L)); m2.onclick = () => geheZu("#spiele"); };
+  const klick = ci => { if(sperre || auf.includes(ci) || cs[ci].f) return; auf.push(ci);
+    if(auf.length === 2){ zuege++; const x = cs[auf[0]], y = cs[auf[1]]; if(x.i === y.i && x.s !== y.s){ x.f = y.f = 1; paare++; auf = []; zeichne(); if(paare === ws.length) ende(); return; } sperre = true; zeichne(); spielT = setTimeout(() => { auf = []; sperre = false; zeichne(); }, 900); return; } zeichne(); };
+  zeichne();
+}
+function spiele(){
+  const g = [["memory","🧠","Memory","Finde alle Paare."],["tictac","❌","Drei gewinnt","Spiele gegen Fux."],["zahl","🔢","Zahlenraten","Errate die Zahl von 1 bis 20."]], m = sterne();
+  app.innerHTML = '<p><a href="#">Zurück</a></p><h1>Spiele</h1>' + fuxBox("Jedes Spiel kostet <strong>1 Münze</strong>. Für jede erledigte Lektion bekommst du Münzen. Du hast gerade <strong>" + m + "</strong>.") +
+    '<div class="grid">' + g.map(x => '<div class="card"><h2>' + x[1] + ' ' + x[2] + '</h2><p>' + x[3] + '</p><button class="btn" data-g="' + x[0] + '" type="button">Spielen (1 Münze)</button></div>').join("") +
+    '<div class="card"><h2>🔤 Vokabel-Memory</h2><p>Finde Wort und Übersetzung aus deinen eigenen Listen.</p><button class="btn" id="vmem" type="button">Spielen (1 Münze)</button></div></div>';
+  app.querySelectorAll("[data-g]").forEach(b => b.onclick = () => spielStart(() => spiel(b.dataset.g)));
+  document.getElementById("vmem").onclick = vokMemory;
+}
+
+/* Zusammen lernen: Quiz fuer 2 bis 3 Personen auf verschiedenen Geraeten (Nachrichten ueber ntfy.sh) */
+var zES, zT;
+function zStop(){ if(zES){ zES.close(); zES = null; } clearTimeout(zT); }
+function zusammen(){
+  zStop();
+  const alle = THEMEN.flatMap(t => t.lektionen.flatMap(l => l.quiz || [])), kopf = '<p><a href="#">Zurück</a></p><h1>Zusammen lernen</h1>';
+  if(alle.length < 4){ app.innerHTML = kopf + fuxBox("Dafür brauche ich mindestens 4 Quizfragen."); return; }
+  app.innerHTML = kopf + fuxBox("Lerne mit bis zu <strong>2 Freunden</strong> auf verschiedenen Geräten. Alle brauchen dieselbe LernFux-Datei und Internet.") +
+    '<article class="lesson"><p><label>Dein Spitzname<br><input id="zn" class="antw" maxlength="12" autocomplete="off"></label></p><p><button class="btn gross" id="zneu" type="button">Neuen Raum öffnen</button></p><h2>Oder beitreten</h2><p><label>Raum-Code<br><input id="zc" class="antw" maxlength="6" autocomplete="off" style="text-transform:uppercase"></label></p><p><button class="btn" id="zbei" type="button">Beitreten</button></p><p class="fb" id="zf" role="status"></p><p class="meta">Tipp: Nimm nur einen Spitznamen, keinen echten Namen.</p></article>';
+  const name = () => document.getElementById("zn").value.trim(), fe = t => { document.getElementById("zf").textContent = t; };
+  document.getElementById("zneu").onclick = () => { if(!name()) return fe("Trage zuerst deinen Spitznamen ein."); const A = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let c = ""; for(let i = 0; i < 6; i++) c += A[Math.floor(Math.random() * A.length)]; zRaum(c, true, name(), alle); };
+  document.getElementById("zbei").onclick = () => { const c = document.getElementById("zc").value.trim().toUpperCase(); if(!name()) return fe("Trage zuerst deinen Spitznamen ein."); if(!/^[A-HJ-NP-Z2-9]{6}$/.test(c)) return fe("Der Code hat 6 Zeichen."); zRaum(c, false, name(), alle); };
+}
+function zRaum(code, host, name, alle){
+  const me = Math.random().toString(36).slice(2, 8), url = "https://ntfy.sh/lernfux-" + code, kopf = '<p><button class="btn" id="zx" type="button">Verlassen</button></p><h1>Zusammen lernen</h1>';
+  const meta = THEMEN.flatMap(t => t.lektionen.flatMap(l => (l.quiz || []).map(() => t.id))), themen = THEMEN.filter(t => meta.includes(t.id)), EM = ["👍", "🎉", "😮", "😅"];
+  let sp = [], ix = [], q = -1, ant = {}, beantw = false, phase = "lobby", offen = false, t0 = 0, emOk = true;
+  const fe = t => { const f = document.getElementById("zf"); if(f) f.textContent = t; };
+  const pub = m => fetch(url, {method: "POST", body: JSON.stringify(m)}).catch(() => fe("Keine Verbindung."));
+  const pts = id => Object.values(ant).reduce((a, r) => a + (r[id] ? r[id].p : 0), 0);
+  const tafel = () => sp.map(p => esc(p.n) + (phase === "spiel" && ant[q] && ant[q][p.id] ? " ✓" : "") + ': <strong>' + pts(p.id) + '</strong>').join(" · ");
+  const bind = () => { document.getElementById("zx").onclick = () => geheZu("#"); };
+  app.innerHTML = kopf + fuxBox("Verbinde …") + '<p class="fb" id="zf" role="status"></p>'; bind();
+  const lobby = () => {
+    app.innerHTML = kopf + fuxBox('Raum-Code: <strong style="font-size:1.6em;letter-spacing:.15em">' + code + '</strong><br>Schicke den Code deinen Freunden.') + '<article class="lesson"><h2>Im Raum</h2><ul>' + sp.map(p => '<li>' + esc(p.n) + (p.id === me ? " (du)" : "") + '</li>').join("") + '</ul>' +
+      (host ? '<p><label>Thema<br><select id="zth"><option value="">Alle Themen</option>' + themen.map(t => '<option value="' + esc(t.id) + '">' + esc(t.titel) + '</option>').join("") + '</select></label></p><p><label>Fragen<br><select id="zan"><option>5</option><option selected>8</option><option>10</option></select></label></p><p><button class="btn gross" id="zgo" type="button"' + (sp.length < 2 ? " disabled" : "") + '>Los geht’s</button></p>' : '<p class="meta">Warte, bis der Gastgeber startet.</p>') + '<p class="fb" id="zf" role="status"></p></article>';
+    bind();
+    if(host) document.getElementById("zgo").onclick = () => { const th = document.getElementById("zth").value, pool = alle.map((_, i) => i).filter(i => !th || meta[i] === th); pub({t: "go", ix: mischen(pool).slice(0, Math.min(+document.getElementById("zan").value || 8, pool.length)), n: alle.length}); };
+  };
+  const frage = () => {
+    clearTimeout(zT); beantw = false; const f = alle[ix[q]];
+    app.innerHTML = kopf + '<p class="meta" id="ztf">' + tafel() + '</p><p class="meta">Frage ' + (q + 1) + ' von ' + ix.length + '</p><article class="lesson"><h1 class="aufgtitel">' + esc(f.frage) + '</h1>' + f.optionen.map((o, oi) => '<button type="button" class="opt" data-o="' + oi + '">' + esc(o) + '</button>').join("") + '<p class="fb" id="zf" role="status"></p></article><div class="zau" id="zau" aria-live="polite"></div><p class="meta" id="zre" aria-live="polite">&nbsp;</p><p>' + EM.map((e, i) => '<button type="button" class="btn" data-e="' + i + '" aria-label="Reaktion ' + e + '">' + e + '</button>').join(" ") + '</p>';
+    bind();
+    app.querySelectorAll("[data-e]").forEach(b => b.onclick = () => { if(!emOk) return; emOk = false; setTimeout(() => { emOk = true; }, 1500); pub({t: "e", id: me, e: +b.dataset.e}); });
+    app.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+      if(beantw) return; beantw = true; const ok = +b.dataset.o === f.richtig, ms = Date.now() - t0;
+      app.querySelectorAll(".opt").forEach(x => x.disabled = true); app.querySelectorAll(".opt")[f.richtig].classList.add("ok"); if(!ok) b.classList.add("falsch");
+      fe((ok ? "Richtig! " : "Nicht ganz. ") + (f.erklaerung ? f.erklaerung + " " : "") + "Warte auf die anderen."); pub({t: "a", id: me, q: q, ok: ok, ms: ms, o: +b.dataset.o});
+    });
+    t0 = Date.now(); if(host) zT = setTimeout(() => pub({t: "nx", q: q + 1}), 25000);
+  };
+  const ende = () => {
+    clearTimeout(zT); const r = sp.map(p => [p, pts(p.id)]).sort((a, b) => b[1] - a[1]), top = r[0][1], sieger = r.filter(x => x[1] === top).map(x => esc(x[0].n)).join(" und "), med = ["🥇", "🥈", "🥉"];
+    app.innerHTML = '<h1>Ergebnis</h1>' + fuxBox("Gewonnen hat <strong>" + sieger + "</strong> mit " + top + " Punkten!", "jubel") + '<article class="lesson"><ol>' + r.map((x, n) => '<li>' + med[n] + ' ' + esc(x[0].n) + ': <strong>' + x[1] + '</strong> Punkte</li>').join("") + '</ol><p class="meta">Richtig gibt 10 Punkte, schnell sein bringt bis zu 5 dazu.</p></article><p><button class="btn gross" id="zok" type="button">Fertig</button></p>';
+    document.getElementById("zok").onclick = () => geheZu("#"); if(pts(me) === top) konfetti();
+  };
+  const auswertung = () => {
+    const f = alle[ix[q]], e = document.getElementById("zau"); if(!e || !ant[q]) return;
+    e.innerHTML = '<strong>Richtig war: ' + esc(f.optionen[f.richtig]) + '</strong><ul>' + sp.map(p => { const a = ant[q][p.id]; return '<li>' + esc(p.n) + ': ' + (!a ? "keine Antwort" : (Number.isInteger(a.o) && f.optionen[a.o] !== undefined ? esc(f.optionen[a.o]) : "–") + (a.ok ? " ✓ (+" + a.p + ")" : " ✗")) + '</li>'; }).join("") + '</ul>';
+  };
+  const ein = m => {
+    if(!m || typeof m !== "object") return;
+    if(m.t === "hi" && host && phase === "lobby" && typeof m.id === "string" && typeof m.n === "string"){ if(!sp.some(p => p.id === m.id) && sp.length < 3) sp.push({id: m.id.slice(0, 8), n: m.n.slice(0, 12)}); pub({t: "r", p: sp}); }
+    else if(m.t === "r" && phase === "lobby" && Array.isArray(m.p)){ const n = m.p.filter(p => p && typeof p.id === "string" && typeof p.n === "string").slice(0, 3).map(p => ({id: p.id.slice(0, 8), n: p.n.slice(0, 12)})); if(n.some(p => p.id === me)){ sp = n; lobby(); } }
+    else if(m.t === "go" && phase === "lobby" && sp.some(p => p.id === me)){
+      if(m.n !== alle.length) return fe("Ihr habt unterschiedliche LernFux-Dateien.");
+      if(!Array.isArray(m.ix) || !m.ix.length || !m.ix.every(i => Number.isInteger(i) && i >= 0 && i < alle.length)) return;
+      ix = m.ix.slice(0, 10); phase = "spiel"; ant = {}; q = 0; frage();
+    }
+    else if(m.t === "a" && phase === "spiel" && typeof m.ok === "boolean" && Number.isFinite(m.ms) && Number.isInteger(m.q) && m.q >= 0 && m.q < ix.length && sp.some(p => p.id === m.id)){
+      ant[m.q] = ant[m.q] || {}; if(!ant[m.q][m.id]) ant[m.q][m.id] = {ok: m.ok, o: Number.isInteger(m.o) && m.o >= 0 && m.o < alle[ix[m.q]].optionen.length ? m.o : undefined, p: m.ok ? 10 + Math.max(0, Math.round(5 * (1 - Math.min(Math.max(m.ms, 0), 15000) / 15000))) : 0};
+      if(m.q === q){ const t = document.getElementById("ztf"); if(t) t.innerHTML = tafel(); if(sp.every(p => ant[q][p.id])){ auswertung(); if(host){ clearTimeout(zT); zT = setTimeout(() => pub({t: "nx", q: q + 1}), 4500); } } }
+    }
+    else if(m.t === "e" && phase === "spiel" && Number.isInteger(m.e) && m.e >= 0 && m.e < EM.length){ const p = sp.find(x => x.id === m.id), r = document.getElementById("zre"); if(p && r) r.textContent = p.n + " " + EM[m.e]; }
+    else if(m.t === "nx" && phase === "spiel" && m.q === q + 1){ q = m.q; if(q >= ix.length){ phase = "ende"; ende(); } else frage(); }
+  };
+  zES = new EventSource(url + "/sse");
+  zES.onmessage = e => { try { const d = JSON.parse(e.data); if(d.event === "message") ein(JSON.parse(d.message)); } catch(x){} };
+  zES.onerror = () => fe("Die Verbindung wackelt …");
+  zES.onopen = () => { if(offen) return; offen = true; if(host){ sp = [{id: me, n: name.slice(0, 12)}]; lobby(); } else { pub({t: "hi", id: me, n: name.slice(0, 12)}); zT = setTimeout(() => { if(!sp.some(p => p.id === me)) fe("Raum nicht gefunden oder schon voll."); }, 8000); } };
+}
+function tagesaufgabe(){
+  const alle = THEMEN.flatMap(t => t.lektionen.flatMap(l => l.quiz || [])), kopf = '<p><a href="#">Zurück</a></p><h1>Tagesaufgabe</h1>', heute = new Date().toDateString(), tg = fortschritt._tag;
+  if(!alle.length){ app.innerHTML = kopf + fuxBox("Noch keine Quizfragen."); return; }
+  if(tg && tg.d === heute){ app.innerHTML = kopf + fuxBox(tg.ok ? "Heute schon geschafft. Bis morgen!" : "Heute schon probiert. Morgen gibt es eine neue Aufgabe.", tg.ok ? "froh" : "denk"); return; }
+  const d = new Date(), f = alle[Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5) % alle.length];
+  app.innerHTML = kopf + fuxBox("Eine Aufgabe pro Tag. Du hast nur einen Versuch!") + '<article class="lesson"><h2 class="aufgtitel">' + esc(f.frage) + '</h2>' + f.optionen.map((o, oi) => '<button type="button" class="opt" data-o="' + oi + '">' + esc(o) + '</button>').join("") + '<p class="fb" role="status" id="tf" hidden></p></article>';
+  app.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+    const ok = +b.dataset.o === f.richtig; app.querySelectorAll(".opt").forEach(x => x.disabled = true); app.querySelectorAll(".opt")[f.richtig].classList.add("ok"); if(!ok) b.classList.add("falsch");
+    fortschritt._tag = {d: heute, ok: ok}; speichern(fortschritt);
+    const fb = document.getElementById("tf"); fb.className = "fb " + (ok ? "gut" : "schlecht"); fb.textContent = (ok ? "Richtig! " : "Nicht ganz. ") + (f.erklaerung || ""); fb.hidden = false; if(ok) konfetti();
+  });
+}
+</script>
+
+</body>
+</html>
